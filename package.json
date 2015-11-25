@@ -1,0 +1,38 @@
+{
+  "name": "pht-page-builder",
+  "version": "2.0",
+  "description": "A WordPress plugin. Back-end drag and drop page builder.",
+  "main": "phtpb.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/pehaa/pht-page-builder"
+  },
+  "keywords": [
+    "wordpress"
+  ],
+  "tested": "4.3.1",
+  "author": "PeHaa THEMES",
+  "author_url": "http://wptemplates.pehaa.com",
+  "license": "GPL",
+  "plugin_name": "PeHaa Themes Page Builder",
+  "download_url": "http://wp-plugins.pehaa.com/pht-page-builder/pht-page-builder.zip",
+  "changelog": "<strong>2.0.0</strong><p>Public Release</p>",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-compress": "^0.13.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-sass": "^0.7.3",
+    "grunt-contrib-uglify": "~0.3.3",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-curl": "*",
+    "grunt-json-replace": "^0.1.2",
+    "grunt-phpdocumentor": "~0.4.1",
+    "grunt-wp-i18n": "~0.4.0",
+    "grunt-wp-readme-to-markdown": "^0.8.0",
+    "grunt-zip": "~0.7.0"
+  }
+}

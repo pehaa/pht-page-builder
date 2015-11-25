@@ -1,0 +1,12 @@
+$spacing-unit:          $inuit-base-spacing-unit;
+$base-spacing-unit:          $inuit-base-spacing-unit;
+$half-spacing-unit: $inuit-base-spacing-unit--small;
+$spacing-unit--small:   $inuit-base-spacing-unit--small;
+$spacing-unit--large:   $inuit-base-spacing-unit--large;
+
+@mixin font-size($args...) {
+    @include inuit-font-size($args...);
+}
+
+//$primary-text:$body-font-color;
+//$primary:$body-background-color;

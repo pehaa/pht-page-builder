@@ -1,0 +1,31 @@
+/*------------------------------------*\
+    LIST (TITLE+DESCRIPTION+ATTRIBUTE)
+\*------------------------------------*/
+.phtpb_tlist {
+	margin:0;
+}
+
+.phtpb_tlist__item {
+	margin-bottom:1.5rem;
+	display:flex;
+	align-items:flex-end;
+	border-bottom:1px solid;
+}
+.phtpb_tlist__item:last-child {
+	margin-bottom:0;
+}
+.phtpb_tlist__decription {
+	font-style:italic;
+	font-size: 12px;
+  	line-height: 2;
+}
+.flexbox .phtpb_tlist__line {
+	flex:1;
+	padding-right:1.5rem;
+}
+.no-flexbox .phtpb_tlist__item {
+	text-align:right;
+}
+.no-flexbox .phtpb_tlist__line {
+	text-align:left;
+}

@@ -1,0 +1,9 @@
+/*------------------------------------*\
+    WIDGETS
+\*------------------------------------*/
+.pht-sidebar > :nth-child(n) {
+	margin-bottom:24px;
+	padding:24px;
+	background-color:#f7f7f7;
+	& > :last-child {margin-bottom:0}
+}

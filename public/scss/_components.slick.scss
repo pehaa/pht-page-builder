@@ -1,0 +1,35 @@
+.phtpb_slicks {
+	padding:0 0 24px;
+}
+
+.phtpb_slicks__btn {
+	position:absolute;
+	bottom:0;
+	height:32px;
+	background:transparent;
+	margin:0;
+	width:32px;
+	border:none;
+	outline:none;
+	padding:0;
+	color:inherit;
+	&:hover {
+		background:transparent;
+	}
+	&:before {
+		@extend %pht-ic;
+	}
+}
+	
+.phtpb_slicks__btn--prev {
+	left:calc(50% - 2.5rem);
+	&:before {
+		@extend .pht-ic-f1-arrow-left;
+	}
+}
+.phtpb_slicks__btn--next {
+	right:calc(50% - 2.5rem);
+	&:before {
+		@extend .pht-ic-f1-arrow-right;
+	}
+}

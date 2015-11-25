@@ -1,0 +1,61 @@
+/*------------------------------------*\
+    HELPERS
+\*------------------------------------*/
+.pht-transition {transition:.5s}
+
+.pht-nohover {
+	cursor: auto;
+	pointer-events:none;
+}
+.pht-truncate {
+	@include text-overflow();
+}
+
+.pht-pointer {
+	cursor:pointer;
+}
+
+.pht-parent {position:relative}
+.pht-hider {overflow:hidden}
+
+@each $direction in left, right, center {
+    .pht-text-#{$direction} {text-align:$direction!important}
+}
+
+.pht-rounded {border-radius:50%}
+.pht-rounded--2 {border-radius:2px}
+.pht-rounded--3 {border-radius:3px}
+.pht-rounded--5 {border-radius:5px}
+.pht-rounded--10 {border-radius:10px}
+
+@each $style in solid, dashed, dotted, double {
+	.pht-border--#{$style} {
+		border-style:#{$style};
+	}
+}
+
+@each $width in 1,2,3,4,5,8,16,24 {
+	.pht-border--#{$width} {
+		border-width:#{$width}px;
+	}
+}
+
+.pht-mb {
+	margin-bottom: 24px;
+}
+.pht-ml {
+	margin-left: 24px;
+}
+.pht-mt{
+	margin-top: 24px;
+}
+.pht-mb0 {
+	margin-bottom:0!important;
+}
+
+.pht-white {
+	color:#fff!important;
+}
+.pht-dark {
+	color:#303030!important;
+}

@@ -1,0 +1,34 @@
+$inuit-namespace:               null !default;
+
+$base-spacing-unit:24px;
+$inuit-base-spacing-unit:24px;
+$spacing-unit:24px;
+
+$body-font-color:#303030;
+$link-color:#818181;
+
+$breakpoints: (
+  "small"     "screen and (max-width: 480px)",
+    "palm"          "screen and (max-width: 799px)",
+    "lap"           "screen and (min-width: 800px) and (max-width: 1024px)",
+    "lap-and-up"    "screen and (min-width: 800px)",
+    "portable"      "screen and (max-width: 1024px)",
+    "desk"          "screen and (min-width: 1025px)",
+    "desk-wide"     "screen and (min-width: 1280px)",
+    "very-wide"		"screen and (min-width: 1400px)",
+    "below-wide"     "screen and (max-width: 1279px)",
+    "retina"        "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)"
+);
+
+$fa-font-path:        "../../font-awesome/fonts";
+$inuit-btn-namespace: 'pht-';
+$inuit-btn-color: $body-font-color;
+$inuit-btn-background:      transparent;
+$inuit-btn-border-color: #{''};
+$inuit-btn-radius:          0;
+$inuit-btn-border-width:    1px;
+$inuit-btn-padding--small: 8px;
+$inuit-enable-btn--small:   true;
+$inuit-enable-btn--large:   true;
+$inuit-enable-btn--full:    true;
+$inuit-enable-btn--pill:    true;

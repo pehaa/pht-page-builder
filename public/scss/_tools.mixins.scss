@@ -1,0 +1,19 @@
+@mixin text-overflow() {
+overflow : hidden;
+text-overflow : ellipsis;
+white-space : nowrap; }
+@mixin transition($transition) {
+    // defining prefixes so we can use them in mixins below
+
+  transition: $transition;
+}
+
+@mixin transform($transform) {
+    // defining prefixes so we can use them in mixins below
+    $prefixes:      ("-webkit");
+  @each $prefix in $prefixes {
+    #{$prefix}-transform: $transform;
+  }
+
+  transform: $transform;
+}

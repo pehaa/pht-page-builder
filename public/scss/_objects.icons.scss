@@ -1,0 +1,59 @@
+/*------------------------------------*\
+    ICONS
+\*------------------------------------*/
+.phtpb_section {.#{$inuit-btn-namespace}icon {
+    display: inline-block; /* [1] */
+    vertical-align: middle; /* [2] */
+    text-align: center; /* [4] */
+    border: 1px solid transparent; /* [4] */
+    margin:  0; /* [4] */
+    cursor: pointer; /* [5] */
+    overflow: visible; /* [6] */
+    width:3*16px;
+    height:3*16px;
+    text-decoration:none;
+    background-color: transparent;
+    transition:.5s;
+    &, &:hover,i {color:inherit;}
+    i {
+        display: block;
+        font-size:1.25*16px;
+        line-height: 46px;
+        transition:.5s;
+    }
+}
+
+.#{$inuit-btn-namespace}icon:hover i {
+    -ms-transform:scale(1.25);
+    -webkit-transform:scale(1.25);
+    transform:scale(1.25);
+}
+
+.#{$inuit-btn-namespace}icon--border {
+  border-color:currentColor;
+}
+
+.#{$inuit-btn-namespace}icon--tiny {
+    width:32px;
+    height:32px;
+    i {
+        font-size:14px; 
+        line-height: 30px;
+    }
+}
+.#{$inuit-btn-namespace}icon--large {
+    width:4.5*16px;
+    height:4.5*16px;
+    i {
+        font-size:2*16px;
+        line-height: (4.5*16 - 2)+0px;
+    }
+}
+.#{$inuit-btn-namespace}icon--huge {
+    width:6*16px;
+    height:6*16px;
+    i {
+        font-size:3*16px;
+        line-height: (6*16 - 2)+0px;}
+    }
+}

@@ -1,0 +1,12 @@
+/*------------------------------------*\
+    GOOGLE MAPS
+\*------------------------------------*/
+.pht-map-canvas {
+	width: 100%;
+	height:360px;
+	img {max-width: none!important}
+	@include media-query('palm') {
+		height:360px!important;
+	}
+}
+

@@ -1,0 +1,74 @@
+/*------------------------------------*\
+    ANIMATIONS
+\*------------------------------------*/
+.pht-waypoint {opacity:0;}
+.pht-animated {opacity:1}
+
+@-webkit-keyframes fadeLeft { 0% { opacity: 0; -webkit-transform: translateX(-10%); } 100% { opacity: 1; -webkit-transform: translateX(0); } }
+@-moz-keyframes fadeLeft { 0% { opacity: 0; -moz-transform: translateX(-10%); } 100% { opacity: 1; -moz-transform: translateX(0); } }
+@-o-keyframes fadeLeft { 0% { opacity: 0; -o-transform: translateX(-10%); } 100% { opacity: 1; -o-transform: translateX(0); } }
+@keyframes fadeLeft { 0% { opacity: 0; transform: translateX(-10%); } 100% { opacity: 1; transform: translateX(0); } }
+
+@-webkit-keyframes fadeRight { 0% { opacity: 0; -webkit-transform: translateX(10%); } 100% { opacity: 1; -webkit-transform: translateX(0); } }
+@-moz-keyframes fadeRight { 0% { opacity: 0; -moz-transform: translateX(10%); } 100% { opacity: 1; -moz-transform: translateX(0); } }
+@-o-keyframes fadeRight { 0% { opacity: 0; -o-transform: translateX(10%); } 100% { opacity: 1; -o-transform: translateX(0); } }
+@keyframes fadeRight { 0% { opacity: 0; transform: translateX(10%); } 100% { opacity: 1; transform: translateX(0); } }
+
+@-webkit-keyframes fadeBottom { 0% { opacity: 0; -webkit-transform: translateY(10%);} 100% { opacity: 1; -webkit-transform: translateY(0);} }
+@-moz-keyframes fadeBottom { 0% { opacity: 0; -moz-transform: translateY(10%); } 100% { opacity: 1; -moz-transform: translateY(0); } }
+@-o-keyframes fadeBottom { 0% { opacity: 0; -o-transform: translateY(10%); } 100% { opacity: 1; -o-transform: translateY(0); } }
+@keyframes fadeBottom { 0% { opacity: 0; transform: translateY(10%); } 100% { opacity: 1; transform: translateY(0); } }
+
+@-webkit-keyframes fadeTop { 0% { opacity: 0; -webkit-transform: translateY(-10%); } 100% { opacity: 1; -webkit-transform: translateX(0); } }
+@-moz-keyframes fadeTop { 0% { opacity: 0; -moz-transform: translateY(-10%); } 100% { opacity: 1; -moz-transform: translateX(0); } }
+@-o-keyframes fadeTop { 0% { opacity: 0; -o-transform: translateY(-10%); } 100% { opacity: 1; -o-transform: translateX(0); } }
+@keyframes fadeTop { 0% { opacity: 0; transform: translateY(-10%); } 100% { opacity: 1; transform: translateX(0); } }
+
+@-webkit-keyframes scaleIn { 0% { opacity: 0; webkit-transform:scaleX(0) scaleY(0); } 100% { opacity: 1; webkit-transform:scaleX(1) scaleY(1); } }
+@-moz-keyframes scaleIn { 0% { opacity: 0;  -moz-transform:scaleX(0) scaleY(0); } 100% { opacity: 1; -moz-transform:scaleX(1) scaleY(1); } }
+@-o-keyframes scaleIn { 0% { opacity: 0;  -o-transform:scaleX(0) scaleY(0); } 100% { opacity: 1; -o-transform:scaleX(1) scaleY(1); } }
+@keyframes scaleIn { 0% { opacity: 0; transform:scaleX(0) scaleY(0); } 100% { opacity: 1; transform:scaleX(1) scaleY(1); } }
+
+.pht-animated.pht-l2r { opacity: 1; -webkit-animation: fadeLeft 1s 1 cubic-bezier(0.77,0,.175,1); -moz-animation: fadeLeft 1s 1 cubic-bezier(0.77,0,.175,1); -o-animation: fadeLeft 1s 1 cubic-bezier(0.77,0,.175,1); animation: fadeLeft 1s 1 cubic-bezier(0.77,0,.175,1);}
+
+.pht-animated.pht-r2l { opacity: 1; -webkit-animation: fadeRight 1s 1 cubic-bezier(0.77,0,.175,1); -moz-animation: fadeRight 1s 1 cubic-bezier(0.77,0,.175,1); -o-animation: fadeRight 1s 1 cubic-bezier(0.77,0,.175,1); animation: fadeRight 1s 1 cubic-bezier(0.77,0,.175,1); }
+.pht-animated.pht-t2b { opacity: 1; -webkit-animation: fadeTop 1s 1 cubic-bezier(0.77,0,.175,1); -moz-animation: fadeTop 1s 1 cubic-bezier(0.77,0,.175,1); -o-animation: fadeTop 1s 1 cubic-bezier(0.77,0,.175,1); animation: fadeTop 1s 1 cubic-bezier(0.77,0,.175,1);}
+.pht-animated.pht-b2t { opacity: 1; -webkit-animation: fadeBottom 1s 1 cubic-bezier(0.77,0,.175,1); -moz-animation: fadeBottom 1s 1 cubic-bezier(0.77,0,.175,1); -o-animation: fadeBottom 1s 1 cubic-bezier(0.77,0,.175,1); animation: fadeBottom 1s 1 cubic-bezier(0.77,0,.175,1); }
+
+@-webkit-keyframes scaleInX { 0% { opacity: 0; webkit-transform:scaleX(0) scaleY(1); } 100% { opacity: 1; webkit-transform:scaleX(1) scaleY(1); } }
+@-moz-keyframes scaleInX { 0% { opacity: 0;  -moz-transform:scaleX(0) scaleY(1); } 100% { opacity: 1; -moz-transform:scaleX(1) scaleY(1); } }
+@-o-keyframes scaleInX { 0% { opacity: 0;  -o-transform:scaleX(0) scaleY(1); } 100% { opacity: 1; -o-transform:scaleX(1) scaleY(1); } }
+@keyframes scaleInX { 0% { opacity: 0; transform:scaleX(0) scaleY(1); } 100% { opacity: 1; transform:scaleX(1) scaleY(1); } }
+
+@-webkit-keyframes scaleInY { 0% { opacity: 0; webkit-transform:scaleX(1) scaleY(0); } 100% { opacity: 1; webkit-transform:scaleX(1) scaleY(1); } }
+@-moz-keyframes scaleInY { 0% { opacity: 0;  -moz-transform:scaleX(1) scaleY(0); } 100% { opacity: 1; -moz-transform:scaleX(1) scaleY(1); } }
+@-o-keyframes scaleInY { 0% { opacity: 0;  -o-transform:scaleX(1) scaleY(0); } 100% { opacity: 1; -o-transform:scaleX(1) scaleY(1); } }
+@keyframes scaleInY { 0% { opacity: 0; transform:scaleX(1) scaleY(0); } 100% { opacity: 1; transform:scaleX(1) scaleY(1); } }
+
+@-webkit-keyframes scaleIn { 0% { opacity: 0; webkit-transform:scaleX(0.6) scaleY(0.6); } 100% { opacity: 1; webkit-transform:scaleX(1) scaleY(1); } }
+@-moz-keyframes scaleIn { 0% { opacity: 0;  -moz-transform:scaleX(0.6) scaleY(0.6); } 100% { opacity: 1; -moz-transform:scaleX(1) scaleY(1); } }
+@-o-keyframes scaleIn { 0% { opacity: 0;  -o-transform:scaleX(0.6) scaleY(0.6); } 100% { opacity: 1; -o-transform:scaleX(1) scaleY(1); } }
+@keyframes scaleIn { 0% { opacity: 0; transform:scaleX(0.6) scaleY(.6); } 100% { opacity: 1; transform:scaleX(1) scaleY(1); } }
+
+.pht-animated.pht-scalein, .pht-animated.pht-scaleinx, .pht-animated.pht-scaleiny {
+	opacity: 1;
+	transform-origin:50% 50% 0;
+}
+.pht-animated.pht-scaleinx {
+	-webkit-animation: scaleInX 1s 1 cubic-bezier(0.77,0,.175,1);
+	-moz-animation: scaleInX 1s 1 cubic-bezier(0.77,0,.175,1);
+	-o-animation: scaleInX 1s 1 cubic-bezier(0.77,0,.175,1);
+	animation: scaleInX 1s 1 cubic-bezier(0.77,0,.175,1);
+}
+.pht-animated.pht-scaleiny {
+	-webkit-animation: scaleInY 1s 1 cubic-bezier(0.77,0,.175,1);
+	-moz-animation: scaleInY 1s 1 cubic-bezier(0.77,0,.175,1);
+	-o-animation: scaleInY 1s 1 cubic-bezier(0.77,0,.175,1);
+	animation: scaleInY 1s 1 cubic-bezier(0.77,0,.175,1);
+}
+.pht-animated.pht-scalein {
+	-webkit-animation: scaleIn 1s 1 cubic-bezier(0.77,0,.175,1);
+	-moz-animation: scaleIn 1s 1 cubic-bezier(0.77,0,.175,1);
+	-o-animation: scaleIn 1s 1 cubic-bezier(0.77,0,.175,1);
+	animation: scaleIn 1s 1 cubic-bezier(0.77,0,.175,1);
+}
