@@ -33,11 +33,11 @@ class PeHaa_Themes_Page_Builder_MB_Templates {
 	private function generate_modal_template() {
 
 		$return_string = '<script type="text/template" id="phtpb_builder-modal-template">';
-		$return_string .= '<a href="#" class="phtpb_cancel-modal-action phtpb_transition phtpbcss_icon--large" title=' . __( 'Close modal window', $this->name ) . '><i class= "fa fa-close"></i></a>';
+		$return_string .= '<a href="#" class="phtpb_cancel-modal-action phtpb_transition phtpbcss_icon--large" title=' . esc_html__( 'Close modal window', $this->name ) . '><i class= "fa fa-close"></i></a>';
 
 		$return_string .= "<% if ( typeof modal_window !== 'undefined' && ( modal_window === 'settings' ) ) { %>";
 		$return_string .= '<div class="phtpb_modal-bottom-container">';
-		$return_string .= '<a href="#" class="phtpb_do-modal-action phtpb_save-button phtpb_transition"><span>' . __( 'Save Changes & Exit', $this->name ) . '</span></a>';
+		$return_string .= '<a href="#" class="phtpb_do-modal-action phtpb_save-button phtpb_transition"><span>' . esc_html__( 'Save Changes & Exit', $this->name ) . '</span></a>';
 		$return_string .= '</div>';
 		$return_string .= '	<% } %>';
 		$return_string .= '</script>';
@@ -83,26 +83,26 @@ END;
 			break;
 		case 'find_address' :
 			$return_string .= "<input id='$key' class='$key regular-text phtpb_shortcode-attribute' type='text' value='$value' />";
-			$return_string .= '<input type="button"" class="button phtpb_address-to-geocode" value="' . __( 'Find', $this->name ) . '" />';
+			$return_string .= '<input type="button"" class="button phtpb_address-to-geocode" value="' . esc_html__( 'Find', $this->name ) . '" />';
 			break;
 		case 'wysiwyg' :
 			$return_string .= '<div id="phtpb_content_new"><%= typeof( phtpb_attributes.phtpb_content_new )!== "undefined" ? phtpb_attributes.phtpb_content_new : "" %></div>';
 			break;
 		case 'image' :
 			$return_string .= "<input id='$key' class='phtpb_upload-field phtpb_shortcode-attribute' type='hidden' value='$value' $data_default/>";
-			$return_string .= '<input type="button" class="button button-upload phtpb_upload-button" value="' . __( 'Upload an image', $this->name ) . '" data-choose="Choose an Image" data-update="Set As Image" data-type="image" />';
+			$return_string .= '<input type="button" class="button button-upload phtpb_upload-button" value="' . esc_html__( 'Upload an image', $this->name ) . '" data-choose="Choose an Image" data-update="Set As Image" data-type="image" />';
 			break;
 		case 'image_id' :
 			$return_string .= "<input id='$key' class='phtpb_upload-field-id phtpb_shortcode-attribute' type='hidden' value='$value' $data_default/>";
 			break;
 		case 'gallery' :
 			$return_string .= "<input id='$key' type='hidden' class='regular-text phtpb_gallery-ids-field phtpb_shortcode-attribute' value='$value' $data_default/>";
-			$return_string .= "<input type='button' class='button button-upload phtpb_upload-button phtpb_gallery-button' value='" . __( 'Create/Update Gallery', $this->name ) . "' />";
-			$return_string .= '<div class="phtpb_visual-feedback">' . __( 'Number of images in this gallery: ', $this->name ) . '<span class="phtpb_count">0</span></div>';
+			$return_string .= "<input type='button' class='button button-upload phtpb_upload-button phtpb_gallery-button' value='" . esc_html__( 'Create/Update Gallery', $this->name ) . "' />";
+			$return_string .= '<div class="phtpb_visual-feedback">' . esc_html__( 'Number of images in this gallery: ', $this->name ) . '<span class="phtpb_count">0</span></div>';
 			break;
 		case 'video' :
 			$return_string .= "<input id='$key' class='phtpb_upload-field phtpb_shortcode-attribute' type='hidden' value='$value' $data_default/>";
-			$return_string .= '<input type="button" class="button button-upload phtpb_upload-button" value="' . __( 'Upload a video', $this->name ) . '" data-choose="Choose a Video" data-update="Set As Video" data-type="video" />';
+			$return_string .= '<input type="button" class="button button-upload phtpb_upload-button" value="' . esc_html__( 'Upload a video', $this->name ) . '" data-choose="Choose a Video" data-update="Set As Video" data-type="video" />';
 			break;
 		case 'checkbox' :
 			$default_checkbox = isset( $default ) ? $default : '';
@@ -165,16 +165,16 @@ END;
 			if ( $unactivated_modules ) {
 				$unactivated_string = '<div class="phtpb-promo phtpb_border--small">';
 				$unactivated_string .= '<p class="phtpb-promo__text">';
-				$unactivated_string .= sprintf( __(  'Disabled modules: Posts Grid and Filtered Portfolio are available exlusively with <a href="%s">Yaga - our Multipurpose Premium Theme</a>', $this->name ), 'http://wptemplates.pehaa.com/yaga' );
+				$unactivated_string .= sprintf( esc_html__(  'Disabled modules: Posts Grid and Filtered Portfolio are available exlusively with <a href="%s">Yaga - our Multipurpose Premium Theme</a>', $this->name ), 'http://wptemplates.pehaa.com/yaga' );
 				$unactivated_string .= '</p>';
-				$unactivated_string .= '<a href="http://wptemplates.pehaa.com/buy-yaga" class="phtpb-promo__button phtpb_button--insert"><span><i class="fa fa-shopping-cart"></i> ' . __( 'Buy Yaga', $this->name ) . '</span></a>';
+				$unactivated_string .= '<a href="http://wptemplates.pehaa.com/buy-yaga" class="phtpb-promo__button phtpb_button--insert"><span><i class="fa fa-shopping-cart"></i> ' . esc_html__( 'Buy Yaga', $this->name ) . '</span></a>';
 				$unactivated_string .= '</div>';
 				$return_string .= $unactivated_string;
 			}
 			if ( $disabled_modules ) {
 				$unactivated_string = '<div class="phtpb-promo phtpb_border--small">';
 				$unactivated_string .= '<p class="phtpb-promo__text">';
-				$unactivated_string .= sprintf( __(  'To activate the disabled module Contact Form you have to install and activate the Contact Form 7 Plugin', $this->name ), 'http://wptemplates.pehaa.com/yaga' );
+				$unactivated_string .= sprintf( esc_html__(  'To activate the disabled module Contact Form you have to install and activate the Contact Form 7 Plugin', $this->name ), 'http://wptemplates.pehaa.com/yaga' );
 				$unactivated_string .= '</p>';
 				$unactivated_string .= '</div>';
 				$return_string =  $return_string . $unactivated_string;
@@ -186,7 +186,7 @@ END;
 				'4_4', '1_2,1_2', '1_3,2_3', '1_3,1_3,1_3', '2_3,1_3', '1_4,3_4', '3_4,1_4', '1_4,1_2,1_4', '1_4,1_4,1_2', '1_2,1_4,1_4', '1_4,1_4,1_4,1_4',
 			);
 			$nice_columns = array(
-				'4_4' => __( 'One column', $this->name ),
+				'4_4' => esc_html__( 'One column', $this->name ),
 				'1_2' => '1/2',
 				'1_3' => '1/3',
 				'1_4' => '1/4',
@@ -211,7 +211,7 @@ END;
 				$return_string .= '<ul class="phtpb_icons-list">';
 				$active_class = "<%= typeof( phtpb_attributes['$key'] ) !== 'undefined' && phtpb_attributes['$key'] === '' ?  ' phtpb_icons-list__icon--active' : '' %>";
 
-				$return_string .= "<li data-icon-class='' class='phtpb_icons-list__icon $active_class' title='" . __( 'None', $this->name ) . "'></li>";
+				$return_string .= "<li data-icon-class='' class='phtpb_icons-list__icon $active_class' title='" . esc_html__( 'None', $this->name ) . "'></li>";
 				foreach (  $this->fonts_data as $font_class => $font_name ) {
 					$active_class = "<%= typeof( phtpb_attributes['$key'] ) !== 'undefined' && phtpb_attributes['$key'] === '$font_class' ?  ' phtpb_icons-list__icon--active' : '' %>";
 					$return_string .= "<li data-icon-class='$font_class' class='phtpb_icons-list__icon phtpb_pointer phtpb_transition $font_class$active_class' title='$font_name'></li>";
@@ -247,7 +247,7 @@ END;
 		if ( isset( $element['phtpb_admin_mode'] ) && 'parent' === $element['phtpb_admin_mode'] ) {
 			$return_string .= '<div class="phtpb_option-advanced-module-settings" data-module_type="<%= phtpb_attributes.child %>">';
 			$return_string .= '<% if ( typeof phtpb_attributes.child !== "undefined" ) { %>';
-			$add_submodule =  isset( $element['add_submodule'] ) ? $element['add_submodule'] : __( 'Add Submodule', $this->name );
+			$add_submodule =  isset( $element['add_submodule'] ) ? $element['add_submodule'] : esc_html__( 'Add Submodule', $this->name );
 			$return_string .= '<a class="phtpb_do-inner-modal-action phtpb_button--insert phtpb_block" data-module_type="<%= phtpb_attributes.child %>"><span><i class= "fa fa-plus-circle"></i> ' . $add_submodule . '</span></a>';
 			$return_string .= '<% } %>';
 			$return_string .= '</div> <!-- .phtpb_option -->';
@@ -299,22 +299,22 @@ END;
 				switch ( $control_key ) {
 				case 'settings' :
 					if ( 'column' === $slug ) {
-						$return_string .= '<a href="#" class="phtpb_settings phtpb_drag_disabled phtpb_settings-' . $slug . ' phtpb_open-modal phtpb_button--insert" data-modal-window="settings" title="' . __( 'Column settings', $this->name ) . '"><span><i class="fa fa-cogs"></i></span></a> ';
+						$return_string .= '<a href="#" class="phtpb_settings phtpb_drag_disabled phtpb_settings-' . $slug . ' phtpb_open-modal phtpb_button--insert" data-modal-window="settings" title="' . esc_html__( 'Column settings', $this->name ) . '"><span><i class="fa fa-cogs"></i></span></a> ';
 					} else {
-						$return_string .= '<a href="#" class="phtpb_settings phtpb_drag_disabled phtpb_settings-' . $slug . ' phtpb_open-modal phtpbcss_icon" data-modal-window="settings" title="' . __( 'Settings', $this->name ) . '"><i class="fa fa-cogs"></i></a> ';
+						$return_string .= '<a href="#" class="phtpb_settings phtpb_drag_disabled phtpb_settings-' . $slug . ' phtpb_open-modal phtpbcss_icon" data-modal-window="settings" title="' . esc_html__( 'Settings', $this->name ) . '"><i class="fa fa-cogs"></i></a> ';
 					}
 					break;
 				case 'edit' :
-					$return_string .= '<a href="#" class="phtpb_settings phtpb_drag_disabled phtpb_settings-' . $slug . ' phtpb_open-modal phtpbcss_icon" data-modal-window="settings" title="' . __( 'Edit', $this->name ) . '"><i class="fa fa-edit"></i></a> ';
+					$return_string .= '<a href="#" class="phtpb_settings phtpb_drag_disabled phtpb_settings-' . $slug . ' phtpb_open-modal phtpbcss_icon" data-modal-window="settings" title="' . esc_html__( 'Edit', $this->name ) . '"><i class="fa fa-edit"></i></a> ';
 					break;
 				case 'clone' :
 					$return_string .= "<% if ( 'advanced_child' !== phtpb_admin_mode ) { %>";
-					$return_string .= '<a href="#" class="phtpb_clone phtpb_drag_disabled phtpbcss_icon" data-phtpb_cid="<%= phtpb_cid %>" title="' . __( 'Clone', $this->name ) . '"><i class="fa fa-files-o"></i></a> ';
+					$return_string .= '<a href="#" class="phtpb_clone phtpb_drag_disabled phtpbcss_icon" data-phtpb_cid="<%= phtpb_cid %>" title="' . esc_html__( 'Clone', $this->name ) . '"><i class="fa fa-files-o"></i></a> ';
 					$return_string .= '<% } %>';
 					break;
 				case 'delete' :
 					$return_string .= "<% if ( 'advanced_child' !== phtpb_admin_mode ) { %>";
-					$return_string .= '<a href="#" class="phtpb_remove phtpb_drag_disabled phtpbcss_icon" data-phtpb_cid="<%= phtpb_cid %>" title="' . __( 'Delete', $this->name ) .'"><i class="fa fa-trash-o"></i></a> ';
+					$return_string .= '<a href="#" class="phtpb_remove phtpb_drag_disabled phtpbcss_icon" data-phtpb_cid="<%= phtpb_cid %>" title="' . esc_html__( 'Delete', $this->name ) .'"><i class="fa fa-trash-o"></i></a> ';
 					$return_string .= '<% } %>';
 					break;
 				}
@@ -326,7 +326,7 @@ END;
 			$with_children = "<%= 'parent' === phtpb_admin_mode && typeof child !== 'undefined' ? 'phtpb_container-with-children' : '' %>";
 			$return_string .= '<div class="phtpb_' . $slug . '-content phtpb_container phtpb_js-container ' . $with_children . '" data-phtpb_cid="<%= phtpb_cid %>">';
 			if ( $insert_module ) {
-				$return_string .= '<a href="#" class="phtpb_insert-module phtpb_drag_disabled phtpb_open-modal phtpb_button--insert" title="' . __( 'Open modal window to insert Module(s)', $this->name ) . '" data-modal-window="all_modules"><span><i class="fa fa-plus-circle"></i> ' . __( 'Add Module', $this->name ) . '</span></a>';
+				$return_string .= '<a href="#" class="phtpb_insert-module phtpb_drag_disabled phtpb_open-modal phtpb_button--insert" title="' . esc_html__( 'Open modal window to insert Module(s)', $this->name ) . '" data-modal-window="all_modules"><span><i class="fa fa-plus-circle"></i> ' . esc_html__( 'Add Module', $this->name ) . '</span></a>';
 			}
 			$return_string .= '</div><!-- .phtpb_container -->';
 			$return_string .= 'module' === $slug ? '<%  } %>' : '';
@@ -340,7 +340,7 @@ END;
 			$return_string .= '<a class="phtpb_open-modal phtpb_insert-columns phtpb_drag_disabled phtpb_css-add-row phtpb_button--insert phtpb_drag_disabled" data-modal-window="columns_layout"><span>' . $insert_columns . '</span></a>';
 		}
 		if ( 'section' === $slug ) {
-			$return_string .= '<a href="#" class="phtpb_add-section phtpb_drag_disabled phtpb_css-add-section phtpb_button--insert"><span><i class="fa fa-plus-circle"></i> ' . __( 'Add Section', $this->name ) . '</span></a>';
+			$return_string .= '<a href="#" class="phtpb_add-section phtpb_drag_disabled phtpb_css-add-section phtpb_button--insert"><span><i class="fa fa-plus-circle"></i> ' . esc_html__( 'Add Section', $this->name ) . '</span></a>';
 		}
 		$return_string .= '</script>';
 		return $return_string;
@@ -363,13 +363,13 @@ END;
 		echo $this->phtpb_generate_element_template( 'app' );
 	}
 	public function phtpb_section_template() {
-		echo $this->phtpb_generate_element_template( 'section', true, array( 'settings', 'clone', 'delete' ), true, false, '<i class="fa fa-plus-circle"></i> ' . __( 'Add Row', $this->name )  );
+		echo $this->phtpb_generate_element_template( 'section', true, array( 'settings', 'clone', 'delete' ), true, false, '<i class="fa fa-plus-circle"></i> ' . esc_html__( 'Add Row', $this->name )  );
 	}
 	public function phtpb_row_template() {
 		echo $this->phtpb_generate_element_template( 'row', false, array( 'settings', 'clone', 'delete' ), true  );
 	}
 	public function phtpb_column_template() {
-		echo $this->phtpb_generate_element_template( 'column', false, array( 'settings' ), true, true, '<i class="fa fa-columns"></i> ' . __( 'Subdivision', $this->name )  );
+		echo $this->phtpb_generate_element_template( 'column', false, array( 'settings' ), true, true, '<i class="fa fa-columns"></i> ' . esc_html__( 'Subdivision', $this->name )  );
 	}
 
 	public function phtpb_module_template() {
@@ -380,10 +380,10 @@ END;
 		echo $this->generate_modal_template();
 	}
 	public function phtpb_all_modules_modal_template() {
-		echo $this->generate_modal_innertemplate( array( 'label' => 'all-modules', 'title' => __( 'All Modules', $this->name ), 'fields' => array( 'modules' => array( 'type' => 'modules' ) ) ) );
+		echo $this->generate_modal_innertemplate( array( 'label' => 'all-modules', 'title' => esc_html__( 'All Modules', $this->name ), 'fields' => array( 'modules' => array( 'type' => 'modules' ) ) ) );
 	}
 	public function phtpb_columns_modal_template() {
-		echo $this->generate_modal_innertemplate( array( 'label' => 'columns', 'title' => __( 'Columns Layout', $this->name ), 'fields' => array( 'columns' => array( 'type' => 'columns' ) ) ) );
+		echo $this->generate_modal_innertemplate( array( 'label' => 'columns', 'title' => esc_html__( 'Columns Layout', $this->name ), 'fields' => array( 'columns' => array( 'type' => 'columns' ) ) ) );
 	}
 
 	public function phtpb_modal_templates() {

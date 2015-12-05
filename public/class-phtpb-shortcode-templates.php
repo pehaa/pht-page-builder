@@ -98,7 +98,9 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	protected function phtpb_section() {
 
-		$output = $section_class = '';
+		$output = '';
+
+		$section_class = 'phtpb_section pht-parent';
 
 		$img_to_be_loaded = $this->img_to_be_loaded( $this->phtpb_id, 'force' === $this->phtpb_type );
 	
@@ -115,7 +117,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			$opacity = isset( $this->atts['opacity'] ) && ''!== trim( $this->atts['opacity'] ) ? 'opacity:' . esc_attr( $this->atts['opacity'] ) . ';' : '';
 			$style = $style_bg_size || $opacity ? "style='$style_bg_size $opacity'" : '';
 			$palm_class = 'force' === $this->phtpb_type ? 'js-force-palm' : 'hidden--palm';
-			$section_class .= 'force' === $this->phtpb_type ? ' phtpb_section--bg-force-palm' : ' phtpb_section--bg-hidden-palm';
+			$section_class .= 'force' === $this->phtpb_type ? ' phtpb_section--bg-force-palm' : ' phtpb_section--bg-hidden-palm';			
+
 			$output .= "<div class='js-pht-bg-ctnr pht-bg-ctnr $palm_class js-initial-hidden' $style>";
 			$output .= $img_to_be_loaded;
 			$output .= '</div><!-- .pht-bg-ctnr -->';
@@ -135,10 +138,10 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		}
 		
 		$layout_option = isset( $this->atts['layout_option'] ) ? esc_attr( $this->atts['layout_option'] ) : 'none';
-		$section_class = ' phtpb_section--padding-' . $layout_option;
+		$section_class .= ' phtpb_section--padding-' . $layout_option;
 		$section_class .= 'inherit' === $this->phtpb_type ? ' pht-inherit-colors-palm' : '';
 
-		return $this->container( $output, "phtpb_section pht-parent $section_class", '', 'section', array(), true, false );
+		return $this->container( $output, $section_class, '', 'section', array(), true, false );
 	}
 
 	protected function phtpb_row() {

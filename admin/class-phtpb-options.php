@@ -99,23 +99,23 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 		$this->option_name = $option_name;
 		$this->menu_slug = 'phtpb-admin'; 
 		$this ->option_group = 'phtpb_option_group';
-		$this->page_title = __( 'PeHaa Themes Page Builder', $this->name ); 
-		$this->menu_title = __( 'PHT Page Builder', $this->name );
+		$this->page_title = esc_html__( 'PeHaa Themes Page Builder', $this->name ); 
+		$this->menu_title = esc_html__( 'PHT Page Builder', $this->name );
 
 		$this->available_post_types = array(
-			'post' => __( 'Posts',  $this->name ),
-			'page' => __( 'Pages',  $this->name )
+			'post' => esc_html__( 'Posts',  $this->name ),
+			'page' => esc_html__( 'Pages',  $this->name )
 		);
 
 		$this->sections = array(
 			'main' => array(
 				'id' => 'phtpb_main',
-				'title' => __( 'Main Settings', $this->name ),
+				'title' => esc_html__( 'Main Settings', $this->name ),
 				'callback' => 'main_section_display'
 			),
 			'gmaps' => array(
 				'id' => 'phtpb_gmaps',
-				'title' => __( 'Google Maps Settings', $this->name ),
+				'title' => esc_html__( 'Google Maps Settings', $this->name ),
 				'callback' => 'gmaps_section_display'
 			)
 		);
@@ -131,13 +131,13 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 * @since    1.0.0
 	 * @var      array    $links       An array of links.
 	 */
-	public function add_action_links ( $links ) {
+	public function add_action_links( $links ) {
 
 		$admin_url = 'admin.php?page=' . $this->menu_slug;
-		$title_attr = __( 'View PeHaa Themes Page Builder Settings', $this->name );
+		$title_attr = esc_html__( 'View PeHaa Themes Page Builder Settings', $this->name );
 
 		$mylinks = array(
-			'<a href="' . admin_url( $admin_url ) .'" title="' . esc_attr( $title_attr ) . '">' . __( 'Settings', $this->name ) . '</a>'
+			'<a href="' . esc_url( admin_url( $admin_url ) ) .'" title="' . esc_attr( $title_attr ) . '">' . esc_html__( 'Settings', $this->name ) . '</a>'
 		);
 		return array_merge( $links, $mylinks );
 	}
@@ -203,7 +203,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 			add_settings_section(
 				$fields['id'],
 				$fields['title'],
-				array( $this, $fields['callback'], ), // Callback
+				array( $this, $fields['callback'], ),
 				$this->menu_slug
 			);
 		}
@@ -221,24 +221,24 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	private function set_fields() {
 
 		$this->available_post_types = apply_filters( $this->name . '_available_post_types', array(
-			'post' => __( 'Posts',  $this->name ),
-			'page' => __( 'Pages',  $this->name )
+			'post' => esc_html__( 'Posts',  $this->name ),
+			'page' => esc_html__( 'Pages',  $this->name )
 			) );
 
 		$this->fields[ PeHaa_Themes_Page_Builder::$post_types_field_slug ] = array(
-			'title' => __( 'Post Types', $this->name ),
+			'title' => esc_html__( 'Post Types', $this->name ),
 			'callback' => 'multicheck_callback',
 			'sanitize' => 'sanitize_multicheck_post_types',
-			'description' => __( 'Check the postypes that will be edited with PeHaa Themes Page Builder.', $this->name ),
+			'description' => esc_html__( 'Check the postypes that will be edited with PeHaa Themes Page Builder.', $this->name ),
 			'section' => $this->sections['main']['id'],
 			'options' => $this->available_post_types,
 		);
 		
 		$this->fields['gmaps_api_key'] = array(
-			'title' => __( 'Google Maps Api Key', $this->name ),
+			'title' => esc_html__( 'Google Maps Api Key', $this->name ),
 			'callback' => 'gmaps_input_callback',
 			'sanitize' => 'sanitize_gmaps_api_key',
-			'description' => __( 'Paste your Google Maps Api Key here.', $this->name ),
+			'description' => esc_html__( 'Paste your Google Maps Api Key here.', $this->name ),
 			'section' => $this->sections['gmaps']['id'],
 		);
 	
@@ -350,9 +350,9 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 */
 	public function gmaps_section_display() { ?>
 
-		<p><?php _e( 'This settings is optional. You can still display google maps without an API key.', $this->name ); ?></p>
+		<p><?php esc_html_e( 'This settings is optional. You can still display google maps without an API key.', $this->name ); ?></p>
 		<p>
-			<?php printf( __( 'Learn more about Google Maps JavaScript API <a href="%s">here.</a>', $this->name), 'https://developers.google.com/maps/documentation/javascript/tutorial#api_key' ); ?>
+			<a href="https://developers.google.com/maps/documentation/javascript/tutorial#api_key"><?php esc_html_e( 'Learn more about Google Maps JavaScript API', $this->name ); ?></a>
 		</p>
 
 	<?php }
@@ -365,7 +365,11 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 */
 	public function text_input_callback( $args ) {
 
-		printf( '<input type="text" class="regular-text" id="'.$args['id'].'" name="' . $this->option_name . '[' .$args['id'] . ']' .'" value="%s" />', isset( $this->options[ $args['id'] ] ) ? esc_attr( $this->options[ $args['id'] ]) : '' );
+		printf( '<input id="%1$s" type="text" class="regular-text" name="%2$s" value="%3$s" />',
+			esc_attr( $args['id'] ),
+			esc_attr( $this->option_name . '[' .$args['id'] . ']' ),
+			isset( $this->options[ $args['id'] ] ) ? esc_attr( $this->options[ $args['id'] ]) : '' 
+			);
 		$this->field_description( $args );
 	}
 
@@ -378,7 +382,11 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 */
 	public function gmaps_input_callback( $args ) {
 
-		printf( '<input type="text" size="64" maxlength="64" class="regular-text" id="'.$args['id'].'" name="' . $this->option_name . '[' .$args['id'] . ']' .'" value="%s" />', isset( $this->options[ $args['id'] ] ) ? esc_attr( $this->options[ $args['id'] ]) : '' );
+		printf( '<input type="text" size="64" maxlength="64" class="regular-text" id="%1$s" name="%2$s" value="%3$s" />',
+			esc_attr( $args['id'] ),
+			esc_attr( $this->option_name . '[' .$args['id'] . ']' ),
+			isset( $this->options[ $args['id'] ] ) ? esc_attr( $this->options[ $args['id'] ]) : '' 
+			);
 		$this->field_description( $args );
 	}
 
@@ -395,8 +403,8 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 		}
 		foreach ( $args['options'] as $key => $title ) { ?>
 			<div>
-				<input type="checkbox" id="phtpb_field_<?php echo $key;?>" name="<?php echo $this->option_name . '[' .$args['id'] . ']'?>[]" value="<?php echo $key;?>" <?php checked( in_array( $key, $this->options[ $args['id'] ] ) ) ?> />
-				<label for="phtpb_field_<?php echo $key;?>"><?php echo $title; ?></label>
+				<input type="checkbox" id="phtpb_field_<?php echo esc_attr( $key );?>" name="<?php echo esc_attr( $this->option_name . '[' .$args['id'] . ']' ); ?>[]" value="<?php echo esc_attr( $key );?>" <?php checked( in_array( $key, $this->options[ $args['id'] ] ) ) ?> />
+				<label for="phtpb_field_<?php echo esc_attr( $key );?>"><?php echo esc_html( $title ); ?></label>
 			</div>							
 		<?php }
 		

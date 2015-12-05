@@ -201,8 +201,8 @@ class PHTPB_Tiled_Gallery {
 					$output .= $image_html;
 					$link_class = $link_count_class . ' pht-fig__link--main pht-fig__link--hoverdir';
 					if ( $linked_to_posts ) {
-						$output .= "<a href='" . get_permalink( $post_ids[ $i ] ) . "' class='pht-fig__link pht-fig__link--main pht-fig__link--main $link_class'></a>";
-						$output .= '<figcaption class="pht-gallery__caption pht-transition">' . get_the_title( $post_ids[ $i ] ) . '</figcaption>';
+						$output .= "<a href='" . esc_url( get_permalink( $post_ids[ $i ] ) ) . "' class='pht-fig__link pht-fig__link--main pht-fig__link--main $link_class'></a>";
+						$output .= '<figcaption class="pht-gallery__caption pht-transition">' . esc_html( get_the_title( $post_ids[ $i ] ) ) . '</figcaption>';
 						$link_class = 'pht-fig__link--secondary';
 						$i++;
 					} else {

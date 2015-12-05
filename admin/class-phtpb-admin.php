@@ -121,8 +121,8 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 	function phtpb_revision_fields( $fields ) {
 
-		$fields[PeHaa_Themes_Page_Builder::$meta_field_name_content] = __( 'Page Builder Content', $this->name );
-		$fields[PeHaa_Themes_Page_Builder::$meta_field_name_state] = __( 'Page Builder Activated', $this->name );
+		$fields[PeHaa_Themes_Page_Builder::$meta_field_name_content] = esc_html__( 'Page Builder Content', $this->name );
+		$fields[PeHaa_Themes_Page_Builder::$meta_field_name_state] = esc_html__( 'Page Builder Activated', $this->name );
 		return $fields;
 
 	}
@@ -136,7 +136,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 	function phtpb_revision_field_state( $value, $field, $revision ) {
 
-		$page_builder_data = 'yes' === get_metadata( 'post', $revision->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true ) ? __( 'Page Builder is activated' , $this->name ) :  __( 'Page Builder is not activated' , $this->name );
+		$page_builder_data = 'yes' === get_metadata( 'post', $revision->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true ) ? esc_html__( 'Page Builder is activated' , $this->name ) :  esc_html__( 'Page Builder is not activated' , $this->name );
 
 		return $page_builder_data;
 
@@ -186,8 +186,8 @@ class PeHaa_Themes_Page_Builder_Admin {
 			array(
 				'elements' => $this->phtpb_config_data_js,
 				'gmaps_url' => $gmaps_url,
-				'confirmation' => __( 'Your content will be modified. Do you still want to switch? You have probably altered the shortcodes syntax.  Switching will reestablish it properly and is a recommended action. Saving your post will also reestablish the shortcodes syntax - your modification might be lost.', $this->name ),
-				'rmv_img' => __( 'Remove image', $this->name )
+				'confirmation' => esc_html__( 'Your content will be modified. Do you still want to switch? You have probably altered the shortcodes syntax.  Switching will reestablish it properly and is a recommended action. Saving your post will also reestablish the shortcodes syntax - your modification might be lost.', $this->name ),
+				'rmv_img' => esc_html__( 'Remove image', $this->name )
 			)
 		);
 
@@ -275,8 +275,8 @@ class PeHaa_Themes_Page_Builder_Admin {
 	private function meta_box_footer() {
 
 		$return_string = '<footer class="phtpb_mb_footer">';
-		$return_string .= '<p>' . sprintf( __( 'Copyright <a href="%s" title="PeHaa THEMES">PeHaa THEMES</a>', $this->name ), 'http://wptemplates.pehaa.com' ) .'</p>';
-		$return_string .= '<div>' . __( 'Version: ', $this->name ) . $this->version . '</div>';
+		$return_string .= '<p>' . esc_html__( 'Copyright', $this->name ) . sprintf( '<a href="%s" title="PeHaa THEMES">PeHaa THEMES</a>', esc_url( 'http://wptemplates.pehaa.com' ) ) .'</p>';
+		$return_string .= '<div>' . esc_html__( 'Version: ', $this->name ) . $this->version . '</div>';
 		$return_string .= '</footer>';
 		return $return_string;
 	}
@@ -320,9 +320,9 @@ class PeHaa_Themes_Page_Builder_Admin {
 		<?php }
 
 				printf( '<a href="#" id="phtpb_toggle_builder-meta" data-content-source="phtpb_secondeditor" class="js-phtpb_toggle_builder button phtpb_button phtpb_h-align--center %4$s"><span class="phtpb_use_default %6$s">%2$s</span> <span class="phtpb_activate_pb %5$s">%1$s</span> <span class="phtpb_use_pb js-hidden">%3$s</span></a>',
-					$is_content_inconsistency ? __( 'Hi! Let\'s restore the PHT Page Builder content.', $this->name ) : __( 'Hi! Let\'s use PeHaa Themes Page Builder content.', $this->name ),
-					__( 'Show me the default editor', $this->name ),
-					__( 'Take me back to the PHT Page Builder', $this->name ),
+					$is_content_inconsistency ? esc_html__( 'Hi! Let\'s restore the PHT Page Builder content.', $this->name ) : esc_html__( 'Hi! Let\'s use PeHaa Themes Page Builder content.', $this->name ),
+					esc_html__( 'Show me the default editor', $this->name ),
+					esc_html__( 'Take me back to the PHT Page Builder', $this->name ),
 					( $is_builder_used ? 'phtpb_builder_is_used' : 'button-primary' ) . ( $is_content_inconsistency ? ' phtpb_table--cell' : ''),
 					( $is_builder_used ? 'js-hidden' : '' ),
 					( $is_builder_used ? '' : 'js-hidden' )
@@ -334,9 +334,9 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 				<?php
 				printf( '<a href="#" id="phtpb_toggle_builder-content" data-content-source="content" class="js-phtpb_toggle_builder button phtpb_button phtpb_h-align--center phtpb_table--cell %4$s"><span class="phtpb_use_default %6$s">%2$s</span> <span class="phtpb_activate_pb %5$s">%1$s</span> <span class="phtpb_use_pb js-hidden">%3$s</span></a>',
-					__( 'Hi! Let\'s start with your current content.', $this->name ),
-					__( 'Show me the default editor', $this->name ),
-					__( 'Take me back to the PHT Page Builder', $this->name ),
+					esc_html__( 'Hi! Let\'s start with your current content.', $this->name ),
+					esc_html__( 'Show me the default editor', $this->name ),
+					esc_html__( 'Take me back to the PHT Page Builder', $this->name ),
 					( $is_builder_used ? 'phtpb_builder_is_used' : 'button-primary' ),
 					( $is_builder_used ? 'js-hidden' : '' ),
 					( $is_builder_used ? '' : 'js-hidden' )
