@@ -796,6 +796,9 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			if ( $this->phtpb_width >=0.75 ) {
 				$classes .= ' phtpb_width--075plus';
 			}
+			if ( $this->phtpb_width < 0.25 ) {
+				$classes .= ' phtpb_width--025less';
+			}
 			$classes .= ' phtpb_width--value' . round( 10*$this->phtpb_width );
 		}
 		

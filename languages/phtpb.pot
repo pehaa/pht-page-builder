@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PeHaa Themes Page Builder 2.0\n"
 "Report-Msgid-Bugs-To: info@pehaa.com\n"
-"POT-Creation-Date: 2015-11-25 20:48:08+00:00\n"
+"POT-Creation-Date: 2015-12-07 14:47:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,7 +58,7 @@ msgid "Active"
 msgstr ""
 
 #: admin/class-phtpb-admin.php:278
-msgid "Copyright <a href=\"%s\" title=\"PeHaa THEMES\">PeHaa THEMES</a>"
+msgid "Copyright"
 msgstr ""
 
 #: admin/class-phtpb-admin.php:279
@@ -247,7 +247,7 @@ msgid ""
 msgstr ""
 
 #: admin/class-phtpb-options.php:355
-msgid "Learn more about Google Maps JavaScript API <a href=\"%s\">here.</a>"
+msgid "Learn more about Google Maps JavaScript API"
 msgstr ""
 
 #: includes/phtpb-config.php:26
@@ -546,9 +546,9 @@ msgstr ""
 
 #: includes/phtpb-config.php:294
 msgid ""
-"If <i>Equal Columns</i> are checked in row settings you can choose the "
+"If \\\"Equal Columns\\\" are checked in row settings you can choose the "
 "vertical alignment for the column. This feature only works in modern "
-"browsers and is enabled for screens at least 1280px wide. "
+"browsers and is enabled for screens at least 1024px wide. "
 msgstr ""
 
 #: includes/phtpb-config.php:304
@@ -569,7 +569,7 @@ msgid ""
 "background color or borders to the columns. Equals heights have to be "
 "checked if you want change the vertical align of your column. Note that "
 "this feature only works in modern browsers and is enabled for screens at "
-"least 1280px wide."
+"least 1024px wide."
 msgstr ""
 
 #: includes/phtpb-config.php:316

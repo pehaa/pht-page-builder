@@ -10,10 +10,10 @@ $link-color:#818181;
 $breakpoints: (
   "small"     "screen and (max-width: 480px)",
     "palm"          "screen and (max-width: 799px)",
-    "lap"           "screen and (min-width: 800px) and (max-width: 1024px)",
+    "lap"           "screen and (min-width: 800px) and (max-width: 1023px)",
     "lap-and-up"    "screen and (min-width: 800px)",
-    "portable"      "screen and (max-width: 1024px)",
-    "desk"          "screen and (min-width: 1025px)",
+    "portable"      "screen and (max-width: 1023px)",
+    "desk"          "screen and (min-width: 1024px)",
     "desk-wide"     "screen and (min-width: 1280px)",
     "very-wide"		"screen and (min-width: 1400px)",
     "below-wide"     "screen and (max-width: 1279px)",

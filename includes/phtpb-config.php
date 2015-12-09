@@ -291,7 +291,7 @@ $column_settings = array(
 			'center' => esc_html__( 'Center', $this->plugin_name ),
 			'bottom' => esc_html__( 'Bottom', $this->plugin_name ),
 		),
-		'description' => esc_html__( 'If \"Equal Columns\" are checked in row settings you can choose the vertical alignment for the column. This feature only works in modern browsers and is enabled for screens at least 1280px wide. ', $this->plugin_name ),
+		'description' => esc_html__( 'If \"Equal Columns\" are checked in row settings you can choose the vertical alignment for the column. This feature only works in modern browsers and is enabled for screens at least 1024px wide. ', $this->plugin_name ),
 	),
 );
 
@@ -310,7 +310,7 @@ $row_settings = array(
 		'title' => esc_html__( 'Equal columns', $this->plugin_name ),
 		'type' => 'checkbox',
 		'default' => '',
-		'description' => esc_html__( 'If checked, columns will have equal heights - use it if you apply a background color or borders to the columns. Equals heights have to be checked if you want change the vertical align of your column. Note that this feature only works in modern browsers and is enabled for screens at least 1280px wide.', $this->plugin_name ),
+		'description' => esc_html__( 'If checked, columns will have equal heights - use it if you apply a background color or borders to the columns. Equals heights have to be checked if you want change the vertical align of your column. Note that this feature only works in modern browsers and is enabled for screens at least 1024px wide.', $this->plugin_name ),
 	),
 	'wrapper' => array(
 		'title' => esc_html__( 'Wrapper', $this->plugin_name ),

@@ -2133,7 +2133,7 @@
   margin-left: 0;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1024px) {
   .pht-layout--equals, .pht-layout--equals > .pht-layout__item {
     display: flex;
   }
@@ -2228,7 +2228,7 @@
   padding: 8px;
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1024px) {
   .pht-box--large {
     padding: 36px;
   }
@@ -2723,7 +2723,7 @@
   left: 0;
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1024px) {
   .pht-gallery--16 .pht-gallery__item--not1stt:after {
     border-top: 16px solid;
   }
@@ -3190,7 +3190,7 @@ html[xmlns] .phtpb_flexslider .slides {
   max-height: 600px;
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1024px) {
   .phtpb_flexslider--480 .phtpb_slides, .phtpb_flexslider--480 .phtpb_flexslider__slide {
     height: 480px;
   }
@@ -3744,6 +3744,29 @@ html[xmlns] .phtpb_flexslider .slides {
   animation: scaleIn 1s 1 cubic-bezier(0.77, 0, 0.175, 1);
 }
 
+.no-js .pht-waypoint {
+  opacity: 1;
+}
+
+.no-js .pht-waypoint.pht-animated {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  animation: none;
+}
+
+@media screen and (max-width: 799px) {
+  .pht-waypoint {
+    opacity: 1;
+  }
+
+  .pht-waypoint.pht-animated {
+    -webkit-animation: none;
+    -moz-animation: none;
+    -o-animation: none;
+    animation: none;
+  }
+}
 /*------------------------------------*\
     POPUPS
 \*------------------------------------*/
@@ -4508,7 +4531,7 @@ img.mfp-img {
     width: 83.33333% !important;
   }
 }
-@media screen and (min-width: 800px) and (max-width: 1024px) {
+@media screen and (min-width: 800px) and (max-width: 1023px) {
   .u-1-of-1-lap {
     width: 100% !important;
   }
@@ -4573,7 +4596,7 @@ img.mfp-img {
     width: 83.33333% !important;
   }
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
   .u-1-of-1-portable {
     width: 100% !important;
   }
@@ -4638,7 +4661,7 @@ img.mfp-img {
     width: 83.33333% !important;
   }
 }
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1024px) {
   .u-1-of-1-desk {
     width: 100% !important;
   }

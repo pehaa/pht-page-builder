@@ -46,7 +46,7 @@ $inuit-enable-layout--rev:      true;
 .pht-layout > .pht-layout, .pht-layout--rev > .pht-layout, .pht-layout > .pht-layout--rev, .pht-layout--rev > .pht-layout--rev {
   margin-left: 0; }
   
-@include media-query( desk-wide ) {
+@include media-query( desk ) {
   .pht-layout--equals, .pht-layout--equals > .pht-layout__item {display:flex;
     }
   .pht-layout--equals > .pht-layout__item {

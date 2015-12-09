@@ -72,3 +72,10 @@
 	-o-animation: scaleIn 1s 1 cubic-bezier(0.77,0,.175,1);
 	animation: scaleIn 1s 1 cubic-bezier(0.77,0,.175,1);
 }
+.no-js .pht-waypoint {opacity:1;}
+.no-js .pht-waypoint.pht-animated { -webkit-animation:none;-moz-animation:none;-o-animation:none;animation:none;}
+
+@include media-query( 'palm' ) {
+	.pht-waypoint {opacity:1;}
+	.pht-waypoint.pht-animated { -webkit-animation:none;-moz-animation:none;-o-animation:none;animation:none;}
+}
