@@ -75,15 +75,21 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 	public function check_post_for_pagebuilder( $post_type, $post ) {
 
-		if ( !isset( $post->ID ) ) return;
-		if ( !isset( $post->post_type ) ) return;
+		if ( !isset( $post->ID ) ) {
+			return;
+		}
+		if ( !isset( $post->post_type ) ) {
+			return;
+		}
 		$this->render_page_builder = $this->check_for_pagebuilder_by_id( $post->ID, $post_type );
 
 	}
 
 	private function check_for_pagebuilder_by_id( $id = NULL, $post_type = NULL ) {
 
-		if ( !$id ) return;
+		if ( !$id ) {
+			return;
+		}
 		if ( !$post_type ) {
 			$post_type = get_post_type( $id );
 			if ( 'revision' == $post_type ) {
@@ -94,8 +100,12 @@ class PeHaa_Themes_Page_Builder_Admin {
 				$post_type = get_post_type( $parent_id );
 			}
 		}
-		if ( !in_array( $post_type, $this->phtpb_post_types ) ) return;
-		if ( in_array( $id, PeHaa_Themes_Page_Builder::$phtpb_forbidden_ids ) ) return;
+		if ( !in_array( $post_type, $this->phtpb_post_types ) ) {
+			return;
+		}
+		if ( in_array( $id, PeHaa_Themes_Page_Builder::$phtpb_forbidden_ids ) ) {
+			return;
+		}
 		return true;
 	}
 
@@ -361,7 +371,9 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 		$is_builder_used = !$is_content_inconsistency && 'yes' === get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true ) ? true : false;
 
-		if ( ! in_array( $post->post_type, $this->phtpb_post_types ) ) return;
+		if ( ! in_array( $post->post_type, $this->phtpb_post_types ) ) {
+			return;
+		}
 		printf( '<div id="phtpb_main_editor_wrap" class="%s">',
 			$is_builder_used ? 'phtpb_hidden phtpb_activated' : 'phtpb_not_activated'
 		);

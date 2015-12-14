@@ -293,8 +293,14 @@ class PeHaa_Themes_Page_Builder {
 
 	private function get_phtpb_post_types() {
 
+		if ( false === self::$settings ) {
+			return;
+		}
+
 		if ( isset( self::$settings[ self::$post_types_field_slug ] ) && is_array( self::$settings[ self::$post_types_field_slug ] ) ) {
 			self::$phtpb_post_types = self::$settings[ self::$post_types_field_slug ];
+		} elseif ( isset( self::$settings ) ) {
+			self::$phtpb_post_types = array();
 		}
 		
 	}

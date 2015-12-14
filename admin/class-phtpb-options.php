@@ -397,10 +397,14 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 * @param array args
 	 */
 	public function multicheck_callback( $args ) {
-	
-		if ( ! isset( $this->options[ $args['id'] ] ) ) {
+
+		if ( false === $this->options ) {
+			$this->options = array();
+			$this->options[ $args['id'] ] = array( 'page' );
+		} elseif ( ! isset( $this->options[ $args['id'] ] ) ) {
 			$this->options[ $args['id'] ] = array();
 		}
+
 		foreach ( $args['options'] as $key => $title ) { ?>
 			<div>
 				<input type="checkbox" id="phtpb_field_<?php echo esc_attr( $key );?>" name="<?php echo esc_attr( $this->option_name . '[' .$args['id'] . ']' ); ?>[]" value="<?php echo esc_attr( $key );?>" <?php checked( in_array( $key, $this->options[ $args['id'] ] ) ) ?> />
