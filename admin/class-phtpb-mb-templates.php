@@ -165,7 +165,7 @@ END;
 			if ( $unactivated_modules ) {
 				$unactivated_string = '<div class="phtpb-promo phtpb_border--small">';
 				$unactivated_string .= '<p class="phtpb-promo__text">';
-				$unactivated_string .= sprintf( esc_html__(  'Disabled modules: Posts Grid and Filtered Portfolio are available exlusively with <a href="%s">Yaga - our Multipurpose Premium Theme</a>', $this->name ), 'http://wptemplates.pehaa.com/yaga' );
+				$unactivated_string .= sprintf( __(  'Disabled modules: Posts Grid and Filtered Portfolio are available exlusively with <a href="%s">Yaga - our Multipurpose Premium Theme</a>', $this->name ), 'http://wptemplates.pehaa.com/yaga' );
 				$unactivated_string .= '</p>';
 				$unactivated_string .= '<a href="http://wptemplates.pehaa.com/buy-yaga" class="phtpb-promo__button phtpb_button--insert"><span><i class="fa fa-shopping-cart"></i> ' . esc_html__( 'Buy Yaga', $this->name ) . '</span></a>';
 				$unactivated_string .= '</div>';

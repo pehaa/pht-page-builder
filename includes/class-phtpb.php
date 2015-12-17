@@ -51,6 +51,7 @@ class PeHaa_Themes_Page_Builder {
 	protected $option_name = 'phtpb_options';
 	protected static $config_data = null;
 
+	static $phtpb_available_post_types = array();
 	static $phtpb_config_data = array();
 	static $phtpb_config_data_js = array();
 	static $meta_field_name_content = '_phtpb_meta_content';
@@ -76,10 +77,12 @@ class PeHaa_Themes_Page_Builder {
 		}
 
 		$this->plugin_name = 'phtpb';
-		$this->version = '1.0.0';
+		$this->version = '2.1.1';
 
 		$this->load_dependencies();
-		$this->set_locale();
+		$this->set_locale();	
+
+		add_action( 'plugins_loaded', array( $this, 'get_available_phtpb_post_types' ) );
 
 		self::$settings = get_option( $this->option_name );
 		$this->get_phtpb_post_types();
@@ -288,6 +291,23 @@ class PeHaa_Themes_Page_Builder {
 		require_once PHTPB_PLUGIN_INCLUDES_DIR . 'phtpb-config.php';
 		self::$phtpb_config_data = $phtpb_config_data;
 		self::$phtpb_config_data_js = $phtpb_config_data_for_js;
+
+	}
+
+	public function get_available_phtpb_post_types() {
+
+		self::$phtpb_available_post_types = array(
+			'post' => esc_html__( 'Posts', $this->plugin_name ),
+			'page' => esc_html__( 'Pages', $this->plugin_name ),
+		);
+
+		if ( class_exists( 'PeHaaThemes_Simple_Post_Types' ) && isset( PeHaaThemes_Simple_Post_Types::$options['data']['post_type'] ) ) {
+			foreach ( PeHaaThemes_Simple_Post_Types::$options['data']['post_type'] as $key => $post_type_array ) {
+				self::$phtpb_available_post_types[ $key ] = $post_type_array['name'];
+			}
+			
+		}
+		self::$phtpb_available_post_types = apply_filters( 'phtpb_available_post_types', self::$phtpb_available_post_types );
 
 	}
 

@@ -1,11 +1,11 @@
 {
 	"name": "PeHaa Themes Page Builder",
 	"slug": "pht-page-builder",
-	"version": "2.1",
+	"version": "2.1.1",
 	"download_url": "http://wp-plugins.pehaa.com/pht-page-builder/pht-page-builder.zip",
 	"sections": {
 		"description": "A WordPress plugin. Back-end drag and drop page builder.",
-		"changelog": "<strong>2.1.0</strong><p>Fixed initial configuration</p><strong>2.0.0</strong><p>Public Release</p>"
+		"changelog": "<strong>2.1.1</strong><p>Fixed available post types</p><strong>2.1.0</strong><p>Fixed initial configuration</p><strong>2.0.0</strong><p>Public Release</p>"
 	},
 	"homepage": "http://github.com/pehaa/pht-page-builder",
 	"tested": "4.4",

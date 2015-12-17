@@ -156,7 +156,7 @@ class PeHaa_Themes_Page_Builder_Public {
 		$gmaps_url = $protocol . '://maps.googleapis.com/maps/api/js?v=3.exp' . $api_key_query . '&callback=phtpb_initialize';
 		
 		wp_localize_script( 
-			apply_filters( $this->name . '_load_public_scripts', true, $this->version ) ? $this->name . '-all' : 'all', 
+			apply_filters( $this->name . '_load_public_scripts', true, $this->version ) ? $this->name . '-all' : apply_filters( $this->name . '_theme_script_handler', 'all' ), 
 			'phtpb_data', 
 			array( 
 				'gmaps_url' => $gmaps_url,

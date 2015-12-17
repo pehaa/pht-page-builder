@@ -77,15 +77,6 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 */
 	private $fields = array();
 
-	/**
-	 * Post types available for the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      array    $available_post_types    Post types available for the plugin.
-	 */
-	private $available_post_types;
-
   	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -101,11 +92,6 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 		$this ->option_group = 'phtpb_option_group';
 		$this->page_title = esc_html__( 'PeHaa Themes Page Builder', $this->name ); 
 		$this->menu_title = esc_html__( 'PHT Page Builder', $this->name );
-
-		$this->available_post_types = array(
-			'post' => esc_html__( 'Posts',  $this->name ),
-			'page' => esc_html__( 'Pages',  $this->name )
-		);
 
 		$this->sections = array(
 			'main' => array(
@@ -220,10 +206,6 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 */
 	private function set_fields() {
 
-		$this->available_post_types = apply_filters( $this->name . '_available_post_types', array(
-			'post' => esc_html__( 'Posts',  $this->name ),
-			'page' => esc_html__( 'Pages',  $this->name )
-			) );
 
 		$this->fields[ PeHaa_Themes_Page_Builder::$post_types_field_slug ] = array(
 			'title' => esc_html__( 'Post Types', $this->name ),
@@ -231,7 +213,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 			'sanitize' => 'sanitize_multicheck_post_types',
 			'description' => esc_html__( 'Check the postypes that will be edited with PeHaa Themes Page Builder.', $this->name ),
 			'section' => $this->sections['main']['id'],
-			'options' => $this->available_post_types,
+			'options' => PeHaa_Themes_Page_Builder::$phtpb_available_post_types,
 		);
 		
 		$this->fields['gmaps_api_key'] = array(
@@ -326,8 +308,10 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	private function sanitize_multicheck_post_types( $values ) {
 
 		$return = array();
-		if ( !is_array( $this->available_post_types ) ) return $return;
-		$available_post_types_keys = array_keys( $this->available_post_types );
+		if ( !is_array( PeHaa_Themes_Page_Builder::$phtpb_available_post_types ) ) {
+			return $return;
+		}
+		$available_post_types_keys = array_keys( PeHaa_Themes_Page_Builder::$phtpb_available_post_types );
 		foreach ( $values as $v ) {
 			if ( in_array( $v, $available_post_types_keys ) ) {
 				$return[] = esc_attr( $v );
