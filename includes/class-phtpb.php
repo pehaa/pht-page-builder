@@ -77,12 +77,12 @@ class PeHaa_Themes_Page_Builder {
 		}
 
 		$this->plugin_name = 'phtpb';
-		$this->version = '2.1.1';
+		$this->version = '2.1.2';
 
 		$this->load_dependencies();
 		$this->set_locale();	
 
-		add_action( 'plugins_loaded', array( $this, 'get_available_phtpb_post_types' ) );
+		add_action( 'after_setup_theme', array( $this, 'get_available_phtpb_post_types' ) );
 
 		self::$settings = get_option( $this->option_name );
 		$this->get_phtpb_post_types();

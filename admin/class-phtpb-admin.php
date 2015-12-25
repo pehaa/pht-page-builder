@@ -69,6 +69,8 @@ class PeHaa_Themes_Page_Builder_Admin {
 		$this->settings = get_option( $this->option_name );
 		$this->phtpb_post_types = PeHaa_Themes_Page_Builder::$phtpb_post_types;
 		add_filter( 'pht_meta_content_into_editor', array( $this, 'replace_preview_img_srcs' ) );
+
+
 		
 
 	}
@@ -99,6 +101,10 @@ class PeHaa_Themes_Page_Builder_Admin {
 				}
 				$post_type = get_post_type( $parent_id );
 			}
+		}
+
+		if ( !array_key_exists( $post_type, PeHaa_Themes_Page_Builder::$phtpb_available_post_types ) ) {
+			return;
 		}
 		if ( !in_array( $post_type, $this->phtpb_post_types ) ) {
 			return;
