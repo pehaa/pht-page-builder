@@ -1,6 +1,6 @@
 {
   "name": "pht-page-builder",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "A WordPress plugin. Back-end drag and drop page builder.",
   "main": "phtpb.php",
   "scripts": {
@@ -19,7 +19,7 @@
   "license": "GPL",
   "plugin_name": "PeHaa Themes Page Builder",
   "download_url": "http://wp-plugins.pehaa.com/pht-page-builder/pht-page-builder.zip",
-  "changelog": "<strong>2.1.2</strong><p>Fixed modifying available post types in the theme</p><strong><strong>2.1.1</strong><p>Fixed available post types</p><strong>2.1.0</strong><p>Fixed initial configuration</p><strong>2.0.0</strong><p>Public Release</p>",
+  "changelog": "<strong>2.1.3</strong><p>Added the password protection for the page builder content</p><strong>2.1.2</strong><p>Fixed modifying available post types in the theme</p><strong>2.1.1</strong><p>Fixed available post types</p><strong>2.1.0</strong><p>Fixed initial configuration</p><strong>2.0.0</strong><p>Public Release</p>",
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-compress": "^0.13.0",

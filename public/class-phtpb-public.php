@@ -214,10 +214,18 @@ class PeHaa_Themes_Page_Builder_Public {
 		
 		global $post;
 		
-		if ( ! isset( $post->post_type ) || ! isset( $post->ID ) ) return;
-		if ( ! in_array( $post->post_type, PeHaa_Themes_Page_Builder::$phtpb_post_types ) ) return $content;
-		if ( in_array( $post->ID, PeHaa_Themes_Page_Builder::$phtpb_forbidden_ids ) ) return $content;
-		if ( 'yes' !== get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true ) ) return $content;
+		if ( ! isset( $post->post_type ) || ! isset( $post->ID ) ) {
+			return;
+		}
+		if ( ! in_array( $post->post_type, PeHaa_Themes_Page_Builder::$phtpb_post_types ) ) {
+			return $content;
+		}
+		if ( in_array( $post->ID, PeHaa_Themes_Page_Builder::$phtpb_forbidden_ids ) ) {
+			return $content;
+		}
+		if ( 'yes' !== get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true ) ) {
+			return $content;
+		}
 		remove_filter( 'the_content', 'wpautop' );
 		
 		if ( isset( $_GET['preview'] ) &&  isset( $_GET['preview_id'] ) && isset( $_GET['preview_nonce'] ) ) {
@@ -227,6 +235,11 @@ class PeHaa_Themes_Page_Builder_Public {
 			}
 			
 		}
+
+		if ( post_password_required() ) {
+			return '<div class="pht-wrapper">' . get_the_password_form() . '</div>';
+		}
+
 		return get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_content, true );
 
 	}
@@ -239,11 +252,20 @@ class PeHaa_Themes_Page_Builder_Public {
 	 * @return      string          The post excerpt.
 	 */
 	public function get_phtpb_excerpt( $excerpt ) {
+		
 		global $post;
-		if ( !isset( $post->post_type ) || !isset( $post->ID ) ) return;
-		if ( !in_array( $post->post_type, PeHaa_Themes_Page_Builder::$phtpb_post_types ) ) return $excerpt;
-		if ( in_array( $post->ID, PeHaa_Themes_Page_Builder::$phtpb_forbidden_ids ) ) return $excerpt;
-		if ( 'yes' !== get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true ) ) return $excerpt;
+		if ( !isset( $post->post_type ) || !isset( $post->ID ) ) {
+			return;
+		}
+		if ( !in_array( $post->post_type, PeHaa_Themes_Page_Builder::$phtpb_post_types ) ) {
+			return $excerpt;
+		}
+		if ( in_array( $post->ID, PeHaa_Themes_Page_Builder::$phtpb_forbidden_ids ) ) {
+			return $excerpt;
+		}
+		if ( 'yes' !== get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true ) ) {
+			return $excerpt;
+		}
 		return $post->post_excerpt;
 
 	}
