@@ -1,35 +1,35 @@
-# Copyright (C) 2015 PeHaa THEMES
+# Copyright (C) 2016 PeHaa THEMES
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: PeHaa Themes Page Builder 2.1.1\n"
+"Project-Id-Version: PeHaa Themes Page Builder 2.1.4\n"
 "Report-Msgid-Bugs-To: info@pehaa.com\n"
-"POT-Creation-Date: 2015-12-17 10:48:09+00:00\n"
+"POT-Creation-Date: 2016-01-02 14:39:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.4.9\n"
 
-#: admin/class-phtpb-admin.php:134
+#: admin/class-phtpb-admin.php:140
 msgid "Page Builder Content"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:135
+#: admin/class-phtpb-admin.php:141
 msgid "Page Builder Activated"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:149
+#: admin/class-phtpb-admin.php:155
 msgid "Page Builder is activated"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:149
+#: admin/class-phtpb-admin.php:155
 msgid "Page Builder is not activated"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:199
+#: admin/class-phtpb-admin.php:205
 msgid ""
 "Your content will be modified. Do you still want to switch? You have "
 "probably altered the shortcodes syntax.  Switching will reestablish it "
@@ -37,56 +37,60 @@ msgid ""
 "reestablish the shortcodes syntax - your modification might be lost."
 msgstr ""
 
-#: admin/class-phtpb-admin.php:200
+#: admin/class-phtpb-admin.php:206
 msgid "Remove image"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:218
+#: admin/class-phtpb-admin.php:224
 msgid "Page Builder"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:227
+#: admin/class-phtpb-admin.php:233
 msgid "PeHaa Themes Page Builder state"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:274
+#: admin/class-phtpb-admin.php:280
 msgid "Not active"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:278
+#: admin/class-phtpb-admin.php:284
 msgid "Active"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:288
-msgid "Copyright"
+#: admin/class-phtpb-admin.php:294
+msgid "Developed by "
 msgstr ""
 
-#: admin/class-phtpb-admin.php:289
+#: admin/class-phtpb-admin.php:295
 msgid "Version: "
 msgstr ""
 
-#: admin/class-phtpb-admin.php:333
+#: admin/class-phtpb-admin.php:339
 msgid "Hi! Let's restore the PHT Page Builder content."
 msgstr ""
 
-#: admin/class-phtpb-admin.php:333
-msgid "Hi! Let's use PeHaa Themes Page Builder content."
+#: admin/class-phtpb-admin.php:339
+msgid "Hi! Let's use PeHaa Themes Page Builder"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:334 admin/class-phtpb-admin.php:348
+#: admin/class-phtpb-admin.php:340 admin/class-phtpb-admin.php:354
 msgid "Show me the default editor"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:335 admin/class-phtpb-admin.php:349
-msgid "Take me back to the PHT Page Builder"
+#: admin/class-phtpb-admin.php:341
+msgid "Take me back to the Page Builder"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:343
+#: admin/class-phtpb-admin.php:349
 msgid "or"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:347
+#: admin/class-phtpb-admin.php:353
 msgid "Hi! Let's start with your current content."
+msgstr ""
+
+#: admin/class-phtpb-admin.php:355
+msgid "Take me back to the PHT Page Builder"
 msgstr ""
 
 #: admin/class-phtpb-mb-templates.php:36
@@ -546,7 +550,7 @@ msgstr ""
 
 #: includes/phtpb-config.php:294
 msgid ""
-"If \\\"Equal Columns\\\" are checked in row settings you can choose the "
+"If \"Equal Columns\" are checked in row settings you can choose the "
 "vertical alignment for the column. This feature only works in modern "
 "browsers and is enabled for screens at least 1024px wide. "
 msgstr ""

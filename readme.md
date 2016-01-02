@@ -3,7 +3,7 @@
 **Tags:** WordPress, plugin, page builder, wordpress plugin, grid  
 **Requires at least:** 3.8  
 **Tested up to:** 4.4  
-**Stable tag:** 2.1.3  
+**Stable tag:** 2.1.4  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -22,6 +22,11 @@ Coming soon
 Coming soon
 
 ## Changelog ##
+
+### 2.1.4 ###
+Some typo fixes
+Added PHTPB_PLUGIN_ABSOLUTE_PATH constant
+slick.js updated to 1.5.9
 
 ### 2.1.3 ###
 Added the password protection for the page builder content

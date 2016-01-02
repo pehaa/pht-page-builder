@@ -291,7 +291,7 @@ $column_settings = array(
 			'center' => esc_html__( 'Center', $this->plugin_name ),
 			'bottom' => esc_html__( 'Bottom', $this->plugin_name ),
 		),
-		'description' => esc_html__( 'If \"Equal Columns\" are checked in row settings you can choose the vertical alignment for the column. This feature only works in modern browsers and is enabled for screens at least 1024px wide. ', $this->plugin_name ),
+		'description' => esc_html__( 'If "Equal Columns" are checked in row settings you can choose the vertical alignment for the column. This feature only works in modern browsers and is enabled for screens at least 1024px wide. ', $this->plugin_name ),
 	),
 );
 

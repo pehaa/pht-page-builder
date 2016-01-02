@@ -291,7 +291,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 	private function meta_box_footer() {
 
 		$return_string = '<footer class="phtpb_mb_footer">';
-		$return_string .= '<p>' . esc_html__( 'Copyright', $this->name ) . sprintf( '<a href="%s" title="PeHaa THEMES">PeHaa THEMES</a>', esc_url( 'http://wptemplates.pehaa.com' ) ) .'</p>';
+		$return_string .= '<p>' . esc_html__( 'Developed by ', $this->name ) . sprintf( '<a href="%s" title="PeHaa THEMES">PeHaa THEMES</a>', esc_url( 'http://wptemplates.pehaa.com' ) ) .'</p>';
 		$return_string .= '<div>' . esc_html__( 'Version: ', $this->name ) . $this->version . '</div>';
 		$return_string .= '</footer>';
 		return $return_string;
@@ -336,9 +336,9 @@ class PeHaa_Themes_Page_Builder_Admin {
 		<?php }
 
 				printf( '<a href="#" id="phtpb_toggle_builder-meta" data-content-source="phtpb_secondeditor" class="js-phtpb_toggle_builder button phtpb_button phtpb_h-align--center %4$s"><span class="phtpb_use_default %6$s">%2$s</span> <span class="phtpb_activate_pb %5$s">%1$s</span> <span class="phtpb_use_pb js-hidden">%3$s</span></a>',
-					$is_content_inconsistency ? esc_html__( 'Hi! Let\'s restore the PHT Page Builder content.', $this->name ) : esc_html__( 'Hi! Let\'s use PeHaa Themes Page Builder content.', $this->name ),
+					$is_content_inconsistency ? esc_html__( 'Hi! Let\'s restore the PHT Page Builder content.', $this->name ) : esc_html__( 'Hi! Let\'s use PeHaa Themes Page Builder', $this->name ),
 					esc_html__( 'Show me the default editor', $this->name ),
-					esc_html__( 'Take me back to the PHT Page Builder', $this->name ),
+					esc_html__( 'Take me back to the Page Builder', $this->name ),
 					( $is_builder_used ? 'phtpb_builder_is_used' : 'button-primary' ) . ( $is_content_inconsistency ? ' phtpb_table--cell' : ''),
 					( $is_builder_used ? 'js-hidden' : '' ),
 					( $is_builder_used ? '' : 'js-hidden' )
