@@ -723,7 +723,7 @@ span.js-hidden {
   display: none;
 }
 
-#phtpb.phtpb_visible {
+#phtpb.phtpb_visible, #phtpb_state_mb {
   display: block;
 }
 

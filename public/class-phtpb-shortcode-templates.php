@@ -70,7 +70,6 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$this->common_attributes();
 
-
 		if ( method_exists( $this, $name ) ) {
 			return apply_filters( $name, $this->$name(), $atts, $content );
 		} else {

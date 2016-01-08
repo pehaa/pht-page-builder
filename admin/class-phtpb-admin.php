@@ -170,7 +170,9 @@ class PeHaa_Themes_Page_Builder_Admin {
 	 */
 	public function enqueue_styles() {
 
-		if ( !$this->render_page_builder ) return;
+		if ( !$this->render_page_builder ) {
+			return;
+		}
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( $this->name, plugin_dir_url( __FILE__ ) . 'css/screen.dev.css', array(), $this->version, 'all' );
 
@@ -190,10 +192,10 @@ class PeHaa_Themes_Page_Builder_Admin {
 		wp_enqueue_script( 'backbone' );
 		wp_register_script( $this->name, plugin_dir_url( __FILE__ ) . 'js/phtpb-admin.min.js' );
 
-		$api_key_query = isset( $this->settings['gmaps_api_key'] ) && '' !== $this->settings['gmaps_api_key'] ? '&key=' . $this->settings['gmaps_api_key'] : '';
+		$api_key_query = isset( $this->settings['gmaps_api_key'] ) && '' !== $this->settings['gmaps_api_key'] ? 'key=' . $this->settings['gmaps_api_key'] .'&' : '';
 
 		$protocol = is_ssl() ? 'https' : 'http';
-		$gmaps_url = $protocol . '://maps.googleapis.com/maps/api/js?v=3.exp' . $api_key_query . '&callback=initialize';
+		$gmaps_url = $protocol . '://maps.googleapis.com/maps/api/js?' . $api_key_query . 'callback=initialize';
 		wp_enqueue_script( $this->name, plugin_dir_url( __FILE__ ) . 'js/phtpb-admin.js', array( 'jquery', 'jquery-ui-core', 'underscore', 'jquery-ui-sortable', 'jquery-ui-droppable', 'backbone', 'wp-color-picker' ), $this->version, true );
 
 		wp_localize_script(

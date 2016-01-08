@@ -3,7 +3,7 @@ Contributors: pehaa
 Tags: WordPress, plugin, page builder, wordpress plugin, grid
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 2.1.4
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,12 @@ Coming soon
 Coming soon
 
 == Changelog ==
+
+= 2.2.0 =
+Fixed behavior on Posts page
+Fixed behavior when content editor is not defined
+Updated Google Maps api link
+Updated Waypoints to 4.0.0
 
 = 2.1.4 =
 Some typo fixes

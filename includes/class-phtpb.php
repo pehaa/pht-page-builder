@@ -77,7 +77,7 @@ class PeHaa_Themes_Page_Builder {
 		}
 
 		$this->plugin_name = 'phtpb';
-		$this->version = '2.1.4';
+		$this->version = '2.2.0';
 
 		$this->load_dependencies();
 		$this->set_locale();	
@@ -328,6 +328,12 @@ class PeHaa_Themes_Page_Builder {
 	public function get_forbidden_ids() {
 
 		$phtpb_forbidden_ids = array();
+
+		$page_for_posts = get_option( 'page_for_posts' );
+		
+		if ( $page_for_posts ) {
+			$phtpb_forbidden_ids[] = $page_for_posts;
+		}
 
 		if ( class_exists( 'woocommerce' ) ) {
 

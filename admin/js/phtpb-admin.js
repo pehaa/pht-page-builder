@@ -1163,7 +1163,7 @@ var
 		
 			var content_source = 'phtpb_secondeditor',
 				content,
-				content_raw = phtpb_get_content( 'content', true ),
+				content_raw,
 				contentIsEmpty,
 				shortcode;
 
@@ -1178,6 +1178,8 @@ var
 			this.removeAllSections();
 	
 			if ( contentIsEmpty ) {
+				
+				content_raw = phtpb_get_content( 'content', true );
 				if ( content_raw.indexOf( '[phtpb_section' ) === -1 ) {
 					if ( '' !== content_raw ) {
 					content = '[phtpb_row][phtpb_column layout="4_4"][phtpb_text phtpb_width="1"]' + content_raw + '[/phtpb_text][/phtpb_column][/phtpb_row]';
@@ -1550,6 +1552,10 @@ var
 		
 		content = typeof window.tinyMCE !== 'undefined' && window.tinyMCE.get( textarea_id ) && ! window.tinyMCE.get( textarea_id ).isHidden() ? window.tinyMCE.get( textarea_id ).getContent() : $( '#' + textarea_id ).val();
 
+		if ( 'undefined' === typeof content ) {
+			return '';
+		}
+
 		if ( fix_shortcodes && typeof window.tinyMCE !== 'undefined' ) {
 
 			content = content.replace( /<p>\[/g, '[' );
@@ -1561,12 +1567,16 @@ var
 	}
 
 	function phtpb_set_content( textarea_id, content ) {
+
 		if ( typeof window.tinyMCE !== 'undefined' && window.tinyMCE.get( textarea_id ) && ! window.tinyMCE.get( textarea_id ).isHidden() ) {
 			content = switchEditors.wpautop( content );
 			
 			window.tinyMCE.get( textarea_id ).setContent( content, { format : 'html'  } );
 			setTimeout( function() {
-				window.tinyMCE.get( 'content' ).focus();
+				if ( window.tinyMCE.get( 'content' ) ) {
+					window.tinyMCE.get( 'content' ).focus();
+				}
+				
 			}, 50);
 			
 		} else {
@@ -1574,8 +1584,8 @@ var
 		}				
 	}
 
-	$( document ).ready( function() {	
-				
+	$( document ).ready( function() {
+
 		var peHaaThemesPageBuilder_App,
 			$builder_toggle_button = $( 'body' ).find( '#phtpb_toggle_builder-meta' ),
 			isActivated = $builder_toggle_button.is('.phtpb_builder_is_used'), 
@@ -1584,10 +1594,11 @@ var
 			$page_builder_mb = $('#phtpb'),
 			$main_editor_wrap = $('#phtpb_main_editor_wrap'),
 			$hidden_editor = $( '#phtpb_hidden_editor' );
-		
+
+	
 		peHaaThemesPageBuilder.initial_content = $hidden_editor.html();	
 		$hidden_editor.remove();
-		
+	
 		if ( true === isActivated ) {		
 
 			peHaaThemesPageBuilder_App = new peHaaThemesPageBuilder.AppView( {
@@ -1603,9 +1614,9 @@ var
 		} else {
 			$page_builder_mb.addClass('phtpb_hidden');
 		}
+	
 		
-			
-		
+	
 		$( document ).on( 'click', '.js-phtpb_toggle_builder', function( event ) {
 			
 			event.preventDefault();
@@ -1660,9 +1671,13 @@ var
 
 			$page_builder_mb.toggleClass('phtpb_hidden').toggleClass('phtpb_visible');
 				
-		} );		
+		});
+
+	
+				
+	
 		
-	} );
+	});
 
 } )(jQuery);
 

@@ -585,7 +585,7 @@ span.js-hidden {display:none}
 
 #phtpb, #phtpb_state_mb, .phtpb_container-with-children .phtpb_clone {display:none}
 
-#phtpb.phtpb_visible {display:block}
+#phtpb.phtpb_visible, #phtpb_state_mb {display:block}
 #wp-phtpb_secondeditor-wrap, .phtpb_activated #postdivrich, .phtpb_activated #wp-content-wrap, .phtpb_activated #wp-content-wrap  {
 	display:none;
 }

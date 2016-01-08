@@ -98,14 +98,15 @@ class PeHaa_Themes_Page_Builder_Public {
 
 	public function check_post_for_pagebuilder() {
 
-		global $post;
-		if ( !isset( $post->ID ) ) {
+		$id = get_queried_object_id();
+		if ( !isset( $id ) ) {
 			return;
 		}
-		if ( !isset( $post->post_type ) ) {
+		$post_type = get_post_type( $id );
+		if ( !$post_type ) {
 			return;
 		}
-		$this->render_page_builder = $this->check_for_pagebuilder_by_id( $post->ID, $post->post_type );
+		$this->render_page_builder = $this->check_for_pagebuilder_by_id( $id, $post_type );
 
 	}
 
@@ -124,7 +125,7 @@ class PeHaa_Themes_Page_Builder_Public {
 			return false;
 		}
 		if ( in_array( $id, PeHaa_Themes_Page_Builder::$phtpb_forbidden_ids ) ) {
-			return;
+			return false;
 		}
 		return true;
 	
@@ -194,7 +195,9 @@ class PeHaa_Themes_Page_Builder_Public {
 		$shortcode = new PeHaa_Themes_Page_Builder_Shortcode( 'phtpb_row_inner' );
 		
 		foreach ( PeHaa_Themes_Page_Builder::$phtpb_config_data as $key => $values ) {
-			if ( 'module' !== $values['phtpb_admin_type'] ) continue;
+			if ( 'module' !== $values['phtpb_admin_type'] ) {
+				continue;
+			}
 			if ( isset( $values['widget'] ) ) {
 				$shortcode = new PeHaa_Themes_Page_Builder_WP_Widget_Shortcode( $key, $values['widget'] );
 			} else {
