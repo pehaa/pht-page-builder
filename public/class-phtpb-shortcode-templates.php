@@ -373,9 +373,10 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 	protected function phtpb_accordion() {
 
 		$data_collapsible = $this->is_checked( 'collapsible' ) ? 'true' : 'false';
+		$data_active = !$this->is_checked( 'inactive' ) ? 'on' : 'off';
 		$class = 'phtpb_accordion phtpb_item phtpb_item--module';
 		
-		return $this->container( do_shortcode( $this->content ), $class, '', 'div', array( 'data-collapsible' => $data_collapsible ) );
+		return $this->container( do_shortcode( $this->content ), $class, '', 'div', array( 'data-collapsible' => $data_collapsible, 'data-toggle-state' => $data_active ) );
 
 	}
 
@@ -525,6 +526,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$phtpb_query = isset( $this->atts['phtpb_query'] ) ? htmlspecialchars_decode( $this->atts['phtpb_query'] ) : '';
 		$query_args_with_phtpb_query = wp_parse_args( $phtpb_query, $query_args );
+
+		$query_args_with_phtpb_query = $this->remove_unallowed_query_args( $query_args_with_phtpb_query );
 
 		$query_args_with_phtpb_query['paged'] = is_front_page() ? get_query_var( 'page' ) : get_query_var( 'paged' );
 
@@ -1008,6 +1011,31 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$this->herited_color = isset( $this->atts['herited_color'] ) && trim( $this->atts['herited_color'] ) ? esc_attr( $this->atts['herited_color'] ) : '';		
 		
+	}
+
+	protected function remove_unallowed_query_args( $query ) {
+
+		if ( is_array( $query ) ) {
+			unset( $query['author_in'] );
+			unset( $query['author__not_in'] );
+			unset( $query['category__and'] );
+			unset( $query['category__in'] );
+			unset( $query['category__not_in'] );
+			unset( $query['tag__and'] );
+			unset( $query['tag__in'] );
+			unset( $query['tag__not_in'] );
+			unset( $query['tag_slug__and'] );
+			unset( $query['tag_slug__in'] );
+			unset( $query['tax_query'] );
+			unset( $query['post_parent__in'] );
+			unset( $query['post_parent__not_in'] );
+			unset( $query['post__in'] );
+			unset( $query['post__not_in'] );
+			unset( $query['post_name__in'] );
+			unset( $query['date_query'] );
+			unset( $query['meta_query'] );
+		}
+		return $query;
 	}
 
 

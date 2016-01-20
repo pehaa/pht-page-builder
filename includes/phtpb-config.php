@@ -853,6 +853,12 @@ $phtpb_config_data['phtpb_accordion'] = array(
 			'default' => '',
 			'description' => esc_html__( 'Allows collapsing the active tab (all tabs can be closed).', $this->plugin_name )
 		),
+		'inactive' => array(
+			'title' => esc_html__( 'Panels closed', $this->plugin_name ),
+			'type' => 'checkbox',
+			'default' => '',
+			'description' => esc_html__( 'All panels are closed on page load. Make sure that "Collapsible" is checked as well.', $this->plugin_name )
+		),
 		'margin_b' => $margin_b_item,
 	),
 	'create_with_settings' => true,
