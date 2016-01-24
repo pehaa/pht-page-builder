@@ -167,9 +167,9 @@ class PeHaa_Themes_Page_Builder_Public {
 			wp_enqueue_script( $this->name . '-all', plugin_dir_url( __FILE__ ) . 'js/all.min.js', array( 'jquery', 'jquery-ui-accordion', 'jquery-ui-tabs' ), $this->version, true );
 		}
 
-		$api_key_query = isset( $this->settings['gmaps_api_key'] ) && ''!== $this->settings['gmaps_api_key'] ? '&key=' . $this->settings['gmaps_api_key'] : '';
+		$api_key_query = isset( $this->settings['gmaps_api_key'] ) && ''!== trim( $this->settings['gmaps_api_key'] ) ? 'key=' . $this->settings['gmaps_api_key'] . '&': '';
 		$protocol = is_ssl() ? 'https' : 'http';
-		$gmaps_url = $protocol . '://maps.googleapis.com/maps/api/js?v=3.exp' . $api_key_query . '&callback=phtpb_initialize';
+		$gmaps_url = $protocol . '://maps.googleapis.com/maps/api/js?' . $api_key_query . 'callback=phtpb_initialize';
 		
 		wp_localize_script( 
 			apply_filters( $this->name . '_load_public_scripts', true, $this->version ) ? $this->name . '-all' : apply_filters( $this->name . '_theme_script_handler', 'all' ), 

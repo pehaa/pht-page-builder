@@ -19,6 +19,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.pht-ic-f1-behance-alt2:before {
+  content: "\e900";
+}
+
+.pht-ic-f1-behance-alt:before {
+  content: "\e901";
+}
+
+.pht-ic-f1-behance:before {
+  content: "\e902";
+}
+
 .pht-ic-f1-arrow-up:before {
   content: "\21";
 }

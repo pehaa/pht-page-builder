@@ -1038,5 +1038,4 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		return $query;
 	}
 
-
 }

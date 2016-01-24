@@ -810,12 +810,14 @@ var
 				$content_textarea_container,
 				$upload_button,
 				$gallery_button,
-				$color_picker;
+				$color_picker,
+				$date_picker;
 
 			$content_textarea = this.$el.find( '#phtpb_content_new' );
 			$upload_button = this.$el.find('.phtpb_upload-button');
 			$gallery_button = this.$el.find('.phtpb_gallery-button');
 			$color_picker = this.$el.find('.phtpb_color-picker-hex');
+			$date_picker = this.$el.find('.phtpb_datepicker');
 			$color_picker.wpColorPicker();
 
 			$upload_button.siblings( '.phtpb_upload-field' ).on( 'input', function() {
@@ -1594,8 +1596,7 @@ var
 			$page_builder_mb = $('#phtpb'),
 			$main_editor_wrap = $('#phtpb_main_editor_wrap'),
 			$hidden_editor = $( '#phtpb_hidden_editor' );
-
-	
+			
 		peHaaThemesPageBuilder.initial_content = $hidden_editor.html();	
 		$hidden_editor.remove();
 	

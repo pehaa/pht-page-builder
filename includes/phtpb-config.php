@@ -1048,7 +1048,6 @@ $phtpb_config_data['phtpb_divider'] = array(
 	'create_with_settings' => true
 );
 
-
 $phtpb_config_data['phtpb_posts'] = array(
 	'label' =>  'phtpb_posts',
 	'title' => esc_html__( 'Posts Grid', $this->plugin_name ),
