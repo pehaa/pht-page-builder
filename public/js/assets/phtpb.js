@@ -46,6 +46,7 @@ jQuery(document).ready(function ($) {
 			self.activateWaypoints();
 			self.activateTabs();
 			self.activateAccordion();
+			self.doCountDown();
 						
 		},
 
@@ -189,10 +190,92 @@ jQuery(document).ready(function ($) {
 				});
 			});
 		},
+		doCountDown: function () {
+
+			var self = this;
+
+			var count = function ( display ) {
+			
+				setTimeout(function () {
+					requestAnimationFrame( function(){ count( display ); } );
+					var now = new Date();
+
+					$( '.js-phtpb_timer--' + display ).each( function( index, element ) {
+						var secondsDiff = Math.floor( ( $(element).data('counter-date')*1000 - now.getTime() ) / 1000),
+						time = [],
+						items = [ 'days', 'hours', 'mins', 'secs' ],
+						quit_condition = 'since' === display ? ( secondsDiff > 0 ) : ( secondsDiff < 0 ),
+						$container = $(element).parent();
+
+
+
+						if ( quit_condition ) {
+							$(element).removeClass( 'js-phtpb_timer--' + display );
+							$container.removeClass( 'js-phtpb_countdown-activated' );
+							return;
+						}
+
+						time.secs = secondsDiff;
+						time.mins = Math.floor( time.secs / 60 );
+						time.hours = Math.floor( time.mins / 60 );
+						time.days = Math.floor( time.hours / 24 );
+						time.hours %= 24;
+						time.mins %= 60;
+						time.secs %= 60;
+
+						items.forEach( function( el ) {
+							
+							var selector = '.js-phtpb_' + el;
+							$(element).find( selector ).html( Math.abs( time[ el ] ) );
+
+						});
+						if ( !$container.is( '.js-phtpb_countdown-activated' ) ) {
+							$container.addClass( 'js-phtpb_countdown-activated' );
+						}
+					});
+				}, 1000);
+			};
+
+			count( 'since' );
+			count( 'until');
+
+		},
 
 	};
 
 	phtpb.init();
+
+	// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+	// http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating 
+	// requestAnimationFrame polyfill by Erik Möller
+	// fixes from Paul Irish and Tino Zijdel
+	(function () {
+		var lastTime = 0;
+		var vendors = ['ms', 'moz', 'webkit', 'o'];
+		for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+			window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+			window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+		}
+
+		if (!window.requestAnimationFrame) {
+			window.requestAnimationFrame = function (callback, element) {
+				var currTime = new Date().getTime();
+				var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+				var id = window.setTimeout(function () {
+					callback(currTime + timeToCall);
+				},
+			timeToCall);
+			lastTime = currTime + timeToCall;
+			return id;
+			};
+		}
+
+		if (!window.cancelAnimationFrame) {
+			window.cancelAnimationFrame = function (id) {
+				clearTimeout(id);
+			};
+		}
+	}());
 
 	$( window ).load(function() {
 

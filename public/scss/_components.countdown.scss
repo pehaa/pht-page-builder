@@ -1,0 +1,54 @@
+.phtpb_countdown {
+	opacity:0;
+	visibility: hidden;
+	transition: .5s;
+	overflow:hidden;
+	max-height:0;
+}
+.js-phtpb_countdown-activated {
+	opacity:1;
+	visibility: visible;
+	max-height:320px;
+}
+.phtpb_timer {
+	display:flex;
+	
+}
+.phtpb_timer--large {
+	font-size: 24px;
+	line-height:1.5;
+}
+.phtpb_timer--huge {
+	font-size: 72px;
+	line-height:1.3333333;
+}
+.phtpb_timer--center {
+	justify-content: center;
+}
+.phtpb_timer--right {
+	justify-content: flex-end;
+}
+.phtpb_timer__module {
+	display:inline-block;
+	display:flex;
+	flex-direction: column;
+	text-align:center;
+	padding:0 8px;
+
+}
+.phtpb_timer__module__unit {
+	font-size:25%;
+	line-height:2;
+}
+.phtpb_timer__module__value:after {
+content:'99';
+position:relative;
+z-index:-1;
+height:0;
+display:block;
+overflow:hidden;
+visibility:hidden;
+}
+.phtpb_days:after {
+content:'999';
+}

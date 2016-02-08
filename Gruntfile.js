@@ -78,6 +78,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'admin/js/phtpb-admin.min.js' : [
+                        'admin/js/datetimepicker.js',
                         'admin/js/phtpb-admin.js'
                     ]
                 }

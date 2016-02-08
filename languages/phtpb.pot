@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PeHaa Themes Page Builder 2.3.0\n"
 "Report-Msgid-Bugs-To: info@pehaa.com\n"
-"POT-Creation-Date: 2016-01-24 18:41:35+00:00\n"
+"POT-Creation-Date: 2016-02-08 12:37:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -101,102 +101,102 @@ msgstr ""
 msgid "Save Changes & Exit"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:86
+#: admin/class-phtpb-mb-templates.php:91
 msgid "Find"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:93
+#: admin/class-phtpb-mb-templates.php:98
 msgid "Upload an image"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:100
+#: admin/class-phtpb-mb-templates.php:105
 msgid "Create/Update Gallery"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:101
+#: admin/class-phtpb-mb-templates.php:106
 msgid "Number of images in this gallery: "
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:105
+#: admin/class-phtpb-mb-templates.php:110
 msgid "Upload a video"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:168
+#: admin/class-phtpb-mb-templates.php:173
 msgid ""
 "Disabled modules: Posts Grid and Filtered Portfolio are available "
 "exlusively with <a href=\"%s\">Yaga - our Multipurpose Premium Theme</a>"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:170
+#: admin/class-phtpb-mb-templates.php:175
 msgid "Buy Yaga"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:177
+#: admin/class-phtpb-mb-templates.php:182
 msgid ""
 "To activate the disabled module Contact Form you have to install and "
 "activate the Contact Form 7 Plugin"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:189
+#: admin/class-phtpb-mb-templates.php:194
 msgid "One column"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:214 includes/phtpb-config.php:100
+#: admin/class-phtpb-mb-templates.php:219 includes/phtpb-config.php:100
 #: includes/phtpb-config.php:255 includes/phtpb-config.php:272
 #: includes/phtpb-config.php:424 includes/phtpb-config.php:627
 #: includes/phtpb-config.php:1016
 msgid "None"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:250
+#: admin/class-phtpb-mb-templates.php:255
 msgid "Add Submodule"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:302
+#: admin/class-phtpb-mb-templates.php:307
 msgid "Column settings"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:304 admin/class-phtpb-options.php:126
+#: admin/class-phtpb-mb-templates.php:309 admin/class-phtpb-options.php:126
 msgid "Settings"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:308
+#: admin/class-phtpb-mb-templates.php:313
 msgid "Edit"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:312
+#: admin/class-phtpb-mb-templates.php:317
 msgid "Clone"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:317
+#: admin/class-phtpb-mb-templates.php:322
 msgid "Delete"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:329
+#: admin/class-phtpb-mb-templates.php:334
 msgid "Open modal window to insert Module(s)"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:329
+#: admin/class-phtpb-mb-templates.php:334
 msgid "Add Module"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:343
+#: admin/class-phtpb-mb-templates.php:348
 msgid "Add Section"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:366
+#: admin/class-phtpb-mb-templates.php:371
 msgid "Add Row"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:372
+#: admin/class-phtpb-mb-templates.php:377
 msgid "Subdivision"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:383
+#: admin/class-phtpb-mb-templates.php:388
 msgid "All Modules"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:386
+#: admin/class-phtpb-mb-templates.php:391
 msgid "Columns Layout"
 msgstr ""
 
@@ -541,6 +541,7 @@ msgstr ""
 
 #: includes/phtpb-config.php:291 includes/phtpb-config.php:441
 #: includes/phtpb-config.php:493 includes/phtpb-config.php:562
+#: includes/phtpb-config.php:1124
 msgid "Center"
 msgstr ""
 
@@ -706,12 +707,12 @@ msgid "Image alignment"
 msgstr ""
 
 #: includes/phtpb-config.php:442 includes/phtpb-config.php:494
-#: includes/phtpb-config.php:563
+#: includes/phtpb-config.php:563 includes/phtpb-config.php:1125
 msgid "Left"
 msgstr ""
 
 #: includes/phtpb-config.php:443 includes/phtpb-config.php:495
-#: includes/phtpb-config.php:564
+#: includes/phtpb-config.php:564 includes/phtpb-config.php:1126
 msgid "Right"
 msgstr ""
 
@@ -719,11 +720,11 @@ msgstr ""
 msgid "Gallery"
 msgstr ""
 
-#: includes/phtpb-config.php:464 includes/phtpb-config.php:1090
+#: includes/phtpb-config.php:464 includes/phtpb-config.php:1175
 msgid "Images separation"
 msgstr ""
 
-#: includes/phtpb-config.php:468 includes/phtpb-config.php:1094
+#: includes/phtpb-config.php:468 includes/phtpb-config.php:1179
 msgid "No separation"
 msgstr ""
 
@@ -776,7 +777,7 @@ msgstr ""
 msgid "Icon size"
 msgstr ""
 
-#: includes/phtpb-config.php:587
+#: includes/phtpb-config.php:587 includes/phtpb-config.php:1085
 msgid "Normal"
 msgstr ""
 
@@ -784,7 +785,7 @@ msgstr ""
 msgid "Tiny"
 msgstr ""
 
-#: includes/phtpb-config.php:589
+#: includes/phtpb-config.php:589 includes/phtpb-config.php:1084
 msgid "Large"
 msgstr ""
 
@@ -1079,199 +1080,280 @@ msgid ""
 msgstr ""
 
 #: includes/phtpb-config.php:1053
-msgid "Posts Grid"
+msgid "Countdown"
 msgstr ""
 
-#: includes/phtpb-config.php:1068
-msgid "Gallery Portfolio"
-msgstr ""
-
-#: includes/phtpb-config.php:1073
-msgid "Post type"
-msgstr ""
-
-#: includes/phtpb-config.php:1076
-msgid "Choose the query."
-msgstr ""
-
-#: includes/phtpb-config.php:1079
-msgid "Posts count"
-msgstr ""
-
-#: includes/phtpb-config.php:1082
-msgid "Number of posts. Set -1 to display all posts."
-msgstr ""
-
-#: includes/phtpb-config.php:1085
-msgid "Custom query"
-msgstr ""
-
-#: includes/phtpb-config.php:1087
-msgid "You can modify the query here, e.g. orderby=title&order=ASC"
-msgstr ""
-
-#: includes/phtpb-config.php:1093
-msgid "6px - default"
-msgstr ""
-
-#: includes/phtpb-config.php:1095
-msgid "16px"
-msgstr ""
-
-#: includes/phtpb-config.php:1096
-msgid "24px - large separation"
-msgstr ""
-
-#: includes/phtpb-config.php:1108
-msgid "Filtered Portfolio"
-msgstr ""
-
-#: includes/phtpb-config.php:1125
-msgid "Sidebar"
-msgstr ""
-
-#: includes/phtpb-config.php:1130
-msgid "Choose sidebar"
-msgstr ""
-
-#: includes/phtpb-config.php:1142
-msgid "WP -  Calendar"
-msgstr ""
-
-#: includes/phtpb-config.php:1148 includes/phtpb-config.php:1168
-#: includes/phtpb-config.php:1204 includes/phtpb-config.php:1223
-#: includes/phtpb-config.php:1242 includes/phtpb-config.php:1266
-#: includes/phtpb-config.php:1303 includes/phtpb-config.php:1335
-#: includes/phtpb-config.php:1359 includes/phtpb-config.php:1386
-msgid "Title"
-msgstr ""
-
-#: includes/phtpb-config.php:1151 includes/phtpb-config.php:1171
-#: includes/phtpb-config.php:1207 includes/phtpb-config.php:1226
-#: includes/phtpb-config.php:1245 includes/phtpb-config.php:1269
-#: includes/phtpb-config.php:1306 includes/phtpb-config.php:1338
-#: includes/phtpb-config.php:1362 includes/phtpb-config.php:1389
-msgid "What text use as a widget title. Leave blank to use default widget title."
-msgstr ""
-
-#: includes/phtpb-config.php:1162
-msgid "WP -  Pages"
-msgstr ""
-
-#: includes/phtpb-config.php:1174
-msgid "Sort by"
-msgstr ""
-
-#: includes/phtpb-config.php:1177
-msgid "Page order"
-msgstr ""
-
-#: includes/phtpb-config.php:1178
-msgid "Page title"
-msgstr ""
-
-#: includes/phtpb-config.php:1179
-msgid "Page ID"
-msgstr ""
-
-#: includes/phtpb-config.php:1184
-msgid "Exclude"
-msgstr ""
-
-#: includes/phtpb-config.php:1187
-msgid "Page IDs, separated by commas."
-msgstr ""
-
-#: includes/phtpb-config.php:1198
-msgid "WP -  Search"
-msgstr ""
-
-#: includes/phtpb-config.php:1217
-msgid "WP -  Meta"
-msgstr ""
-
-#: includes/phtpb-config.php:1236
-msgid "WP -  Recent Comments"
-msgstr ""
-
-#: includes/phtpb-config.php:1248
-msgid "Number of comments to show"
-msgstr ""
-
-#: includes/phtpb-config.php:1260
-msgid "WP -  Recent Posts"
-msgstr ""
-
-#: includes/phtpb-config.php:1272
-msgid "Number of posts to show"
-msgstr ""
-
-#: includes/phtpb-config.php:1277
-msgid "Display post date?"
-msgstr ""
-
-#: includes/phtpb-config.php:1297
-msgid "WP -  Tags"
-msgstr ""
-
-#: includes/phtpb-config.php:1309
-msgid "Taxonomy"
-msgstr ""
-
-#: includes/phtpb-config.php:1329
-msgid "WP -  Custom Menu"
-msgstr ""
-
-#: includes/phtpb-config.php:1341
-msgid "Select menu"
-msgstr ""
-
-#: includes/phtpb-config.php:1353
-msgid "WP -  Archives"
-msgstr ""
-
-#: includes/phtpb-config.php:1365 includes/phtpb-config.php:1392
-msgid "Display as dropdown"
-msgstr ""
-
-#: includes/phtpb-config.php:1369 includes/phtpb-config.php:1396
-msgid "Show post counts"
-msgstr ""
-
-#: includes/phtpb-config.php:1380
-msgid "WP -  Categories"
-msgstr ""
-
-#: includes/phtpb-config.php:1400
-msgid "Show hierarchy"
-msgstr ""
-
-#: includes/phtpb-config.php:1425
-msgid "No contact forms found"
-msgstr ""
-
-#: includes/phtpb-config.php:1430
-msgid "Contact Form"
-msgstr ""
-
-#: includes/phtpb-config.php:1463
-msgid "Page Builder Label"
-msgstr ""
-
-#: includes/phtpb-config.php:1466
-msgid "Add a custom label for your module."
-msgstr ""
-
-#: secret.php:34
-msgid "Counter"
-msgstr ""
-
-#: secret.php:39
+#: includes/phtpb-config.php:1058
 msgid "Date"
 msgstr ""
 
-#: secret.php:41
+#: includes/phtpb-config.php:1060
 msgid "Choose the date."
+msgstr ""
+
+#: includes/phtpb-config.php:1064 includes/phtpb-config.php:1233
+#: includes/phtpb-config.php:1253 includes/phtpb-config.php:1289
+#: includes/phtpb-config.php:1308 includes/phtpb-config.php:1327
+#: includes/phtpb-config.php:1351 includes/phtpb-config.php:1388
+#: includes/phtpb-config.php:1420 includes/phtpb-config.php:1444
+#: includes/phtpb-config.php:1471
+msgid "Title"
+msgstr ""
+
+#: includes/phtpb-config.php:1067
+msgid "Set a title here (optional)."
+msgstr ""
+
+#: includes/phtpb-config.php:1070
+msgid "Display options."
+msgstr ""
+
+#: includes/phtpb-config.php:1074
+msgid "Until."
+msgstr ""
+
+#: includes/phtpb-config.php:1075
+msgid "Since."
+msgstr ""
+
+#: includes/phtpb-config.php:1077 includes/phtpb-config.php:1098
+msgid "Which units should be displayed."
+msgstr ""
+
+#: includes/phtpb-config.php:1080
+msgid "Size."
+msgstr ""
+
+#: includes/phtpb-config.php:1087
+msgid "How large the countdown will be displayed."
+msgstr ""
+
+#: includes/phtpb-config.php:1090
+msgid "Displayed units."
+msgstr ""
+
+#: includes/phtpb-config.php:1094
+msgid "Days, hours, minutes and seconds."
+msgstr ""
+
+#: includes/phtpb-config.php:1095
+msgid "Days, hours, minutes"
+msgstr ""
+
+#: includes/phtpb-config.php:1096
+msgid "Only days and hours"
+msgstr ""
+
+#: includes/phtpb-config.php:1101
+msgid "Days label"
+msgstr ""
+
+#: includes/phtpb-config.php:1103
+msgid "Day(s)"
+msgstr ""
+
+#: includes/phtpb-config.php:1106
+msgid "Hours label"
+msgstr ""
+
+#: includes/phtpb-config.php:1108
+msgid "Hour(s)"
+msgstr ""
+
+#: includes/phtpb-config.php:1111
+msgid "Minutes label"
+msgstr ""
+
+#: includes/phtpb-config.php:1113
+msgid "Min"
+msgstr ""
+
+#: includes/phtpb-config.php:1116
+msgid "Seconds label"
+msgstr ""
+
+#: includes/phtpb-config.php:1118
+msgid "Sec"
+msgstr ""
+
+#: includes/phtpb-config.php:1121
+msgid "Alignment"
+msgstr ""
+
+#: includes/phtpb-config.php:1138
+msgid "Posts Grid"
+msgstr ""
+
+#: includes/phtpb-config.php:1153
+msgid "Gallery Portfolio"
+msgstr ""
+
+#: includes/phtpb-config.php:1158
+msgid "Post type"
+msgstr ""
+
+#: includes/phtpb-config.php:1161
+msgid "Choose the query."
+msgstr ""
+
+#: includes/phtpb-config.php:1164
+msgid "Posts count"
+msgstr ""
+
+#: includes/phtpb-config.php:1167
+msgid "Number of posts. Set -1 to display all posts."
+msgstr ""
+
+#: includes/phtpb-config.php:1170
+msgid "Custom query"
+msgstr ""
+
+#: includes/phtpb-config.php:1172
+msgid "You can modify the query here, e.g. orderby=title&order=ASC"
+msgstr ""
+
+#: includes/phtpb-config.php:1178
+msgid "6px - default"
+msgstr ""
+
+#: includes/phtpb-config.php:1180
+msgid "16px"
+msgstr ""
+
+#: includes/phtpb-config.php:1181
+msgid "24px - large separation"
+msgstr ""
+
+#: includes/phtpb-config.php:1193
+msgid "Filtered Portfolio"
+msgstr ""
+
+#: includes/phtpb-config.php:1210
+msgid "Sidebar"
+msgstr ""
+
+#: includes/phtpb-config.php:1215
+msgid "Choose sidebar"
+msgstr ""
+
+#: includes/phtpb-config.php:1227
+msgid "WP -  Calendar"
+msgstr ""
+
+#: includes/phtpb-config.php:1236 includes/phtpb-config.php:1256
+#: includes/phtpb-config.php:1292 includes/phtpb-config.php:1311
+#: includes/phtpb-config.php:1330 includes/phtpb-config.php:1354
+#: includes/phtpb-config.php:1391 includes/phtpb-config.php:1423
+#: includes/phtpb-config.php:1447 includes/phtpb-config.php:1474
+msgid "What text use as a widget title. Leave blank to use default widget title."
+msgstr ""
+
+#: includes/phtpb-config.php:1247
+msgid "WP -  Pages"
+msgstr ""
+
+#: includes/phtpb-config.php:1259
+msgid "Sort by"
+msgstr ""
+
+#: includes/phtpb-config.php:1262
+msgid "Page order"
+msgstr ""
+
+#: includes/phtpb-config.php:1263
+msgid "Page title"
+msgstr ""
+
+#: includes/phtpb-config.php:1264
+msgid "Page ID"
+msgstr ""
+
+#: includes/phtpb-config.php:1269
+msgid "Exclude"
+msgstr ""
+
+#: includes/phtpb-config.php:1272
+msgid "Page IDs, separated by commas."
+msgstr ""
+
+#: includes/phtpb-config.php:1283
+msgid "WP -  Search"
+msgstr ""
+
+#: includes/phtpb-config.php:1302
+msgid "WP -  Meta"
+msgstr ""
+
+#: includes/phtpb-config.php:1321
+msgid "WP -  Recent Comments"
+msgstr ""
+
+#: includes/phtpb-config.php:1333
+msgid "Number of comments to show"
+msgstr ""
+
+#: includes/phtpb-config.php:1345
+msgid "WP -  Recent Posts"
+msgstr ""
+
+#: includes/phtpb-config.php:1357
+msgid "Number of posts to show"
+msgstr ""
+
+#: includes/phtpb-config.php:1362
+msgid "Display post date?"
+msgstr ""
+
+#: includes/phtpb-config.php:1382
+msgid "WP -  Tags"
+msgstr ""
+
+#: includes/phtpb-config.php:1394
+msgid "Taxonomy"
+msgstr ""
+
+#: includes/phtpb-config.php:1414
+msgid "WP -  Custom Menu"
+msgstr ""
+
+#: includes/phtpb-config.php:1426
+msgid "Select menu"
+msgstr ""
+
+#: includes/phtpb-config.php:1438
+msgid "WP -  Archives"
+msgstr ""
+
+#: includes/phtpb-config.php:1450 includes/phtpb-config.php:1477
+msgid "Display as dropdown"
+msgstr ""
+
+#: includes/phtpb-config.php:1454 includes/phtpb-config.php:1481
+msgid "Show post counts"
+msgstr ""
+
+#: includes/phtpb-config.php:1465
+msgid "WP -  Categories"
+msgstr ""
+
+#: includes/phtpb-config.php:1485
+msgid "Show hierarchy"
+msgstr ""
+
+#: includes/phtpb-config.php:1510
+msgid "No contact forms found"
+msgstr ""
+
+#: includes/phtpb-config.php:1515
+msgid "Contact Form"
+msgstr ""
+
+#: includes/phtpb-config.php:1548
+msgid "Page Builder Label"
+msgstr ""
+
+#: includes/phtpb-config.php:1551
+msgid "Add a custom label for your module."
 msgstr ""
 
 #. Plugin URI of the plugin/theme

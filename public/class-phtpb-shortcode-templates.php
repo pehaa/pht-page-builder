@@ -670,6 +670,61 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	}
 
+	protected function phtpb_countdown() {
+
+		$time = strtotime( $this->atts['date'] );
+
+		if ( !$time ) {
+			return;
+		}
+
+		$display = $this->select_attribute( 'display' );
+		$size = $this->select_attribute( 'size' );
+
+		$output = '';
+
+		if ( $this->title ) {
+			$output = '<h2 class="phtpb_countdown__title">' . esc_html( $this->title ) .'</h2>'; 
+		}
+		
+		$output .= "<div class='phtpb_timer js-phtpb_timer js-phtpb_timer--$display phtpb_timer--$this->h_align pht-$size phtpb_timer--$size' data-counter-date='$time'>";
+		$display_units = $this->select_attribute( 'display_units' );
+	
+		foreach ( array( 'days', 'hours', 'mins', 'secs' ) as  $unit ) {
+			$output .= $this->countdown_item( $unit, $display_units );
+		}
+		$output .= '</div>';
+		
+		return $this->container( $output, "phtpb_item phtpb_countdown pht-text-$this->h_align", '', 'div', array( 'data-display' => $this->select_attribute( 'display' ) ) );
+
+	}
+
+	protected function countdown_item( $item, $display_units ) {
+
+		if ( !in_array( $item, array( 'days', 'hours', 'mins', 'secs' ) ) ) {
+			return;
+		}
+		
+
+		if ( 'secs' === $item && 'dhms' !== $display_units ) {
+			return;
+		}
+
+		if ( 'mins' === $item && 'dh' === $display_units ) {
+			return;
+		}
+
+		$output = '<div class="phtpb_timer__module">';
+		$output .=  "<span class='phtpb_timer__module__value phtpb_$item js-phtpb_$item'></span>";
+		$label = $item . '_label';
+		$output .=  '<span class="phtpb_timer__module__unit">' . $this->atts[ $label ] . '</span>';
+		$output .= '</div>';
+
+		return $output;
+
+	}
+
+
 	protected function phtpb_google_map() {
 
 		if ( ! $this->lat ) {

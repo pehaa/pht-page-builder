@@ -1048,6 +1048,91 @@ $phtpb_config_data['phtpb_divider'] = array(
 	'create_with_settings' => true
 );
 
+$phtpb_config_data['phtpb_countdown'] = array(
+	'label' =>  'phtpb_countdown',
+	'title' => esc_html__( 'Countdown', $this->plugin_name ),
+	'icon' => 'fa fa-clock-o',
+	'phtpb_admin_type' => 'module',
+	'fields' => array(
+		'date' => array(
+			'title' => esc_html__( 'Date', $this->plugin_name ),
+			'type' => 'datepicker',
+			'description' => esc_html__( 'Choose the date.', $this->plugin_name ),
+			'default' => 'Choose the date and time, UTC.'
+		),
+		'title' => array(
+			'title' => esc_html__( 'Title', $this->plugin_name ),
+			'type' => 'text',
+			'default' => '',
+			'description' => esc_html__( 'Set a title here (optional).', $this->plugin_name )
+		),
+		'display' => array(
+			'title' => esc_html__( 'Display options.', $this->plugin_name ),
+			'type' => 'select',
+			'default' => 'until',
+			'options' => array(
+				'until' => esc_html__( 'Until.', $this->plugin_name ),
+				'since' => esc_html__( 'Since.', $this->plugin_name ),
+			),
+			'description' => esc_html__( 'Which units should be displayed.', $this->plugin_name )
+		),
+		'size' => array(
+			'title' => esc_html__( 'Size.', $this->plugin_name ),
+			'type' => 'select',
+			'default' => 'alpha',
+			'options' => array(
+				'alpha' => esc_html__( 'Large', $this->plugin_name ),
+				'epsilon' => esc_html__( 'Normal', $this->plugin_name ),
+			),
+			'description' => esc_html__( 'How large the countdown will be displayed.', $this->plugin_name )
+		),
+		'display_units' => array(
+			'title' => esc_html__( 'Displayed units.', $this->plugin_name ),
+			'type' => 'select',
+			'default' => 'dhms',
+			'options' => array(
+				'dhms' => esc_html__( 'Days, hours, minutes and seconds.', $this->plugin_name ),
+				'dhm' => esc_html__( 'Days, hours, minutes', $this->plugin_name ),
+				'dh' => esc_html__( 'Only days and hours', $this->plugin_name ),
+			),
+			'description' => esc_html__( 'Which units should be displayed.', $this->plugin_name )
+		),
+		'days_label' => array(
+			'title' => esc_html__( 'Days label', $this->plugin_name ),
+			'type' => 'text',
+			'default' => __( 'Day(s)', $this->plugin_name )
+		),
+		'hours_label' => array(
+			'title' => esc_html__( 'Hours label', $this->plugin_name ),
+			'type' => 'text',
+			'default' => __( 'Hour(s)', $this->plugin_name )
+		),
+		'mins_label' => array(
+			'title' => esc_html__( 'Minutes label', $this->plugin_name ),
+			'type' => 'text',
+			'default' => __( 'Min', $this->plugin_name )
+		),
+		'secs_label' => array(
+			'title' => esc_html__( 'Seconds label', $this->plugin_name ),
+			'type' => 'text',
+			'default' => __( 'Sec', $this->plugin_name )
+		),
+		'h_align' => array(
+			'title' => esc_html__( 'Alignment', $this->plugin_name ),
+			'type' => 'select',
+			'options' => array(
+				'center' => esc_html__( 'Center', $this->plugin_name ),
+				'left' => esc_html__( 'Left', $this->plugin_name ),
+				'right' => esc_html__( 'Right', $this->plugin_name ),
+			),
+			'default' => 'center',
+		),
+		'margin_b' => $margin_b_item,
+	),
+	'phtpb_admin_mode' => 'simple',
+	'create_with_settings' => true
+);
+
 $phtpb_config_data['phtpb_posts'] = array(
 	'label' =>  'phtpb_posts',
 	'title' => esc_html__( 'Posts Grid', $this->plugin_name ),

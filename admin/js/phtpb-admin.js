@@ -819,7 +819,8 @@ var
 			$color_picker = this.$el.find('.phtpb_color-picker-hex');
 			$date_picker = this.$el.find('.phtpb_datepicker');
 			$color_picker.wpColorPicker();
-
+			$date_picker.datetimepicker();
+			
 			$upload_button.siblings( '.phtpb_upload-field' ).on( 'input', function() {
 				
 				that.previewImage( $(this).siblings( '.phtpb_upload-button' ) );

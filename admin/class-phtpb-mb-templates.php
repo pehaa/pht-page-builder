@@ -75,6 +75,11 @@ class PeHaa_Themes_Page_Builder_MB_Templates {
 			<input id='$key' class='$key regular-text phtpb_shortcode-attribute' type='text' value="$value" $data_default/>
 END;
 			break;
+		case 'datepicker' :
+			$return_string .= <<<END
+			<input id='$key' class='$key regular-text phtpb_datepicker phtpb_shortcode-attribute' type='text' value="$value" $data_default/>
+END;
+			break;
 		case 'hidden' :
 			$return_string .= "<input id='$key' class='$key phtpb_shortcode-attribute' type='hidden' value='$value' $data_default/>";
 			break;
