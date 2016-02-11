@@ -803,6 +803,42 @@ $phtpb_config_data['phtpb_slide'] = array(
 	'create_with_settings' => true,
 	'add_submodule' => esc_html__( 'Add Slide', $this->plugin_name ),
 );
+
+$phtpb_config_data['phtpb_img_carousel'] = array(
+	'label' => 'phtpb_img_carousel',
+	'title' => esc_html__( 'Images Carousel', $this->plugin_name ),
+	'icon' => 'fa fa-exchange',
+	'phtpb_admin_type' => 'module',
+	'phtpb_admin_mode' => 'simple',
+	'fields' => array(
+		'phtpb_ids' => array(
+			'title' => esc_html__( 'Image Source', $this->plugin_name ),
+			'type' => 'gallery',
+		),
+		'hoption' => array(
+			'title' => esc_html__( 'Slider Height', $this->plugin_name ),
+			'type' => 'select',
+			'default' => '480',
+			'options' => array(
+				'480' => '480px',
+				'300' => '300px',
+				'600' => '600px',
+				//'full' => esc_html__( 'Full window height', $this->plugin_name ),
+			),
+			'description' => esc_html__( 'Animate slider automatically.', $this->plugin_name )
+		),
+		'auto' => array(
+			'title' => esc_html__( 'Auto slideshow', $this->plugin_name ),
+			'type' => 'checkbox',
+			'default' => '',
+			'description' => esc_html__( 'Animate slider automatically.', $this->plugin_name )
+		),
+		'lightbox' => $lightbox_item,
+		'margin_b' => $margin_b_item,
+	),
+	'create_with_settings' => true
+);
+
 $phtpb_config_data['phtpb_tlist'] = array(
 	'label' => 'phtpb_tlist',
 	'title' => esc_html__( 'Tabbled List', $this->plugin_name ),

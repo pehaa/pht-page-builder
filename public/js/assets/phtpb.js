@@ -135,13 +135,40 @@ jQuery(document).ready(function ($) {
 
 			var self = this;
 
-			$( '.phtpb_slicks' ).each( function( index, element ) {
+			$( '.phtpb_slicks--img' ).each( function( index, element ) {
+				var autoplay = true === $( element ).data( 'auto' );
+				
+				$( element ).slick( {
+					autoplay: autoplay,
+					dots: false,
+					prevArrow: '<div data-role="none" class="phtpb_slicks--img__btn phtpb_slicks__btn phtpb_slicks__btn--prev pht-pointer" aria-label="previous"></div>',
+					nextArrow: '<div data-role="none" class="phtpb_slicks--img__btn phtpb_slicks__btn phtpb_slicks__btn--next pht-pointer" aria-label="next"></div>',
+					infinite: true,
+					speed: 300,
+					slidesToShow: 1,
+					centerMode: true,
+					variableWidth: true,
+					lazyLoad: 'ondemand',
+					responsive: [
+						{
+							breakpoint: 480,
+							settings: {
+								variableWidth: false,
+								centerMode: false,
+								adaptiveHeight: false,
+							}
+						}
+					]
+				});
+			});
+
+			$( '.phtpb_slicks--c' ).each( function( index, element ) {
 				var autoplay = true === $( element ).data( 'auto' ),
 					fade = true === $( element ).data( 'fade' );
 				
 				$( element ).slick( {
-					prevArrow: '<button type="button" data-role="none" class="pht-gamma phtpb_slicks__btn phtpb_slicks__btn--prev pht-pointer " aria-label="previous"></button>',
-					nextArrow: '<button type="button" data-role="none" class="pht-gamma phtpb_slicks__btn phtpb_slicks__btn--next pht-pointer" aria-label="next"></button>',
+					prevArrow: '<button type="button" data-role="none" class="phtpb_slicks--c__btn pht-gamma phtpb_slicks__btn phtpb_slicks__btn--prev pht-pointer " aria-label="previous"></button>',
+					nextArrow: '<button type="button" data-role="none" class="phtpb_slicks--c__btn pht-gamma phtpb_slicks__btn phtpb_slicks__btn--next pht-pointer" aria-label="next"></button>',
 					autoplay: autoplay,
 					dots: false,
 					fade : fade
