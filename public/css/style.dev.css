@@ -3471,10 +3471,23 @@ html[xmlns] .phtpb_flexslider .slides {
 }
 
 .phtpb_timer__module__unit {
-  font-size: 25%;
+  font-size: 40%;
   line-height: 2;
 }
 
+.phtpb_timer--alpha .phtpb_timer__module__unit {
+  font-size: 25%;
+}
+
+@media screen and (max-width: 480px) {
+  .phtpb_timer--alpha .phtpb_timer__module__value {
+    font-size: 75%;
+  }
+
+  .phtpb_timer--alpha .phtpb_timer__module__unit {
+    font-size: 20%;
+  }
+}
 .phtpb_timer__module__value:after {
   content: '99';
   position: relative;
