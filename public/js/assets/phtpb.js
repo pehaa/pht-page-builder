@@ -184,12 +184,18 @@ jQuery(document).ready(function ($) {
 						namespace: "pht-flex-",
 						animation: $elem.data('anim'),
 						slideshow: $elem.data('slideshow'),
+						slideshowSpeed: $elem.data('slideshowspeed') ? $elem.data('slideshowspeed') : 7000,
+						animationSpeed: $elem.data('animationspeed') ? $elem.data('animationspeed') : 600,
+						initDelay: $elem.data('initdelay') ? $elem.data('initdelay') : 0,
+						randomize : $elem.data('randomize') ? true : false,
+						fadeFirstSlide : typeof $elem.data('fadefirstslide') != 'undefined' && !$elem.data('fadefirstslide') ? false : true,
 						controlNav: false,
+						directionNav : typeof $elem.data('directionnav') != 'undefined' && !$elem.data('directionnav') ? false : true,
 						smoothHeight:false,
 						useCSS: 'fade' === $elem.data('anim'),
 						prevText: "",
 						nextText: "",
-						animationLoop: 'fade' === $elem.data('anim'),
+						animationLoop: 'fade' === $elem.data('anim') || $elem.data('slideshow'),
 						start: function( slider ) {
 							
 							setTimeout( function() {

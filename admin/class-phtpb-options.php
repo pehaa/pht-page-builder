@@ -103,7 +103,12 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 				'id' => 'phtpb_gmaps',
 				'title' => esc_html__( 'Google Maps Settings', $this->name ),
 				'callback' => 'gmaps_section_display'
-			)
+			),
+			'deactivation' => array(
+				'id' => 'phtpb_deactivation',
+				'title' => esc_html__( 'Deactivation', $this->name ),
+				'callback' => 'deactivation_section_display'
+			),
 		);
 
 		add_filter( 'plugin_action_links_' . PHTPB_PLUGIN_BASENAME, array( $this, 'add_action_links' ) );
@@ -129,7 +134,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	}
 
 	/**
-	 * Adds options page fot the plugin.
+	 * Adds options page for the plugin.
 	 *
 	 * @since    1.0.0
 	 */
@@ -223,6 +228,14 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 			'description' => esc_html__( 'Paste your Google Maps Api Key here.', $this->name ),
 			'section' => $this->sections['gmaps']['id'],
 		);
+
+		$this->fields['deactivation'] = array(
+			'title' => esc_html__( 'Deactivate on all pages.', $this->name ),
+			'callback' => 'checkbox_callback',
+			'sanitize' => 'sanitize_checkbox',
+			'description' => esc_html__( 'This setting affects the re-activation behavior. If checked the page builder content will be deactivated on all pages. When re-activated the page builder content will be still available but the pages will not display it. You will have to edit each page to re-activate the page builder on it.', $this->name ),
+			'section' => $this->sections['deactivation']['id'],
+		);
 	
 	}
 
@@ -238,6 +251,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 		
 		foreach ( $this->fields as $key => $field ) {
 			$args = array(
+				'title' => isset( $field['title'] ) ? $field['title'] : '',
 				'id' => $key,
 				'description' => isset( $field['description'] ) ? $field['description'] : '',
 			);
@@ -321,6 +335,23 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	}
 
 	/**
+	 * Sanitize checkbox
+	 *
+	 * @since    2.4.0
+	 * @access private
+	 * @param array $values
+	 * @return array sanitized input
+	 */
+	private function sanitize_checkbox( $values ) {
+
+		if ( 'yes' !== $values ) {
+			return;
+		}
+
+		return $values;
+	}
+
+	/**
 	 * Displays section content
 	 *
 	 * @since    1.0.0
@@ -340,6 +371,13 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 		</p>
 
 	<?php }
+
+	/**
+	 * Displays section content
+	 *
+	 * @since    1.0.0
+	 */
+	public function deactivation_section_display() {}
 
 	/**
 	 * Prints input fields
@@ -399,6 +437,27 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 		$this->field_description( $args );
 		
 	}
+
+	/**
+	 * Prints checkbox field
+	 *
+	 * @since    2.4.0
+	 * @param array args
+	 */
+	public function checkbox_callback( $args ) {
+
+		?>
+		<div>
+			<input type="checkbox" id="phtpb_field_<?php echo esc_attr( $args['id'] );?>" name="<?php echo esc_attr( $this->option_name . '[' .$args['id'] . ']' ); ?>" value="yes" <?php checked( isset( $this->options[ $args['id'] ] ) && 'yes' === $this->options[ $args['id'] ] ); ?> />
+			<label for="phtpb_field_<?php echo esc_attr( $args['id'] );?>"><?php echo esc_html( $args['title'] ); ?></label>
+		</div>							
+		<?php 
+		
+		$this->field_description( $args );
+		
+	}
+
+	
 
 	/**
 	 * Prints field description

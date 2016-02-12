@@ -430,8 +430,10 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				'data-anim' => $this->select_attribute( 'anim' )
 			);
 
+			$data_attrs = apply_filters( 'phtpb_flexslider_data_attributes', $data_attrs, $this->module_id );
+
 			$hoption = $this->select_attribute( 'hoption', 'full' );
-			return $this->container( $output, "phtpb_flexslider phtpb_flexslider--$hoption phtpb_item", '', 'div', $data_attrs  );
+			return $this->container( $output, "phtpb_flexslider phtpb_flexslider--$hoption phtpb_item", '', 'div', $data_attrs );
 		
 		}
 
@@ -939,7 +941,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		if ( count( $args_array ) ) {
 			foreach ( $args_array as $args_key => $args_value ) {
-				$args .= "$args_key=$args_value ";
+
+				$args .= esc_attr( $args_key ) . '="' . esc_attr( $args_value ) . '" ';
 			}
 		}
 

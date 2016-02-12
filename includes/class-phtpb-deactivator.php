@@ -23,16 +23,18 @@
 class PeHaa_Themes_Page_Builder_Deactivator {
 
 	/**
-	 * Unsets "use PeHaa Themes Page Builder" for all posts.
+	 * Unsets "use PeHaa Themes Page Builder" for all posts on option.
 	 *
-	 * Otherwise the old meta content coulde be dislayed after plugin re-activate
+	 * If not checked the old meta content will be dislayed after plugin re-activate
 	 *
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
 
-		delete_metadata( 'post', 1, '_phtpb_state_meta_value_key', '', true );
 
+		if ( isset( PeHaa_Themes_Page_Builder::$settings['deactivation'] ) && 'yes' === PeHaa_Themes_Page_Builder::$settings['deactivation'] ) {
+			delete_metadata( 'post', 1, '_phtpb_state_meta_value_key', '', true );
+		}
 	}
 
 }
