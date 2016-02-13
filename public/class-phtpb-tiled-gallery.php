@@ -153,6 +153,8 @@ class PHTPB_Tiled_Gallery {
 
 		$linked_to_posts = count( $post_ids );
 		$grouper = $this->pht_talavera( $srcs, $width );
+		$skip_resize_array = apply_filters( 'phtpb_do_not_resize_in_gallery', array( 'image/gif' ) );
+
 		$output = '';
 		$i = 0;
 		if ( $container ) {
@@ -188,9 +190,9 @@ class PHTPB_Tiled_Gallery {
 					$orig_file = wp_get_attachment_url( $image->ID );
 					$link = $this->get_attachment_link( $image->ID, $orig_file );
  					if ( $image->width < 400 ) {
-						$img_src = $this->resizer->resize_image(  $image->ID, '' , 2*$image->width, 2*$image->height, true );
+						$img_src = $this->resizer->resize_image(  $image->ID, '' , 2*$image->width, 2*$image->height, true, $skip_resize_array );
 					} else {
-						$img_src = $this->resizer->resize_image(  $image->ID, '' ,$image->width, $image->heigh, true ); 
+						$img_src = $this->resizer->resize_image(  $image->ID, '' ,$image->width, $image->heigh, true, $skip_resize_array ); 
 					}
 					$original_image = wp_get_attachment_image_src( $image->ID, 'full' );
 					$original_image_url = $original_image[0];

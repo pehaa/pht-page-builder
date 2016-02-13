@@ -68,7 +68,7 @@ class PHTPB_Resize_Image {
 		return self::$instance;
 	}
 
-	public function resize_image( $attach_id = NULL, $img_url = NULL, $width, $height = 0, $crop = true ) {
+	public function resize_image( $attach_id = NULL, $img_url = NULL, $width, $height = 0, $crop = true, $skip_mime_types = array() ) {
 
 		$image_src = array( $img_url, 0, 0 );
 
@@ -84,6 +84,20 @@ class PHTPB_Resize_Image {
 			$file_path = parse_url( $img_url );
 			$file_path = $_SERVER['DOCUMENT_ROOT'] . $file_path['path'];
 		}
+
+		if ( !empty( $skip_mime_types ) ) {
+ 			
+ 			$filetype = wp_check_filetype( $img_url );
+ 			
+ 			if ( in_array( $filetype['type'], $skip_mime_types ) ) {
+ 				return array (
+					'url' => $img_url,
+					'width' => isset( $image_src ) ? $image_src[1] : '',
+					'height' => isset( $image_src ) ? $image_src[2] : '',
+				);
+ 			}
+ 			
+ 		}
 
 		// Look for Multisite Path
 		if ( file_exists( $file_path ) === false ) {
