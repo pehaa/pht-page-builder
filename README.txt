@@ -24,8 +24,10 @@ Coming soon
 == Changelog ==
 
 = 2.4.0 =
+Fixed ids for rows and columns
 More flexibility for Slider module via filter
 Deactivation option added
+
 
 = 2.3.0 =
 Added Behance icon

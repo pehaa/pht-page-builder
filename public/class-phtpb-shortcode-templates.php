@@ -158,7 +158,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			);
 		}
 
-		return sprintf( '<div class="%1$s pht-parent"><div class="%2$s"><!-- %3$s --></div></div>',
+		return sprintf( '<div %1$s class="%2$s pht-parent"><div class="%3$s"><!-- %4$s --></div></div>',
+			$this->module_id,
 			'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper,
 			esc_attr( $layout_class ),
 			do_shortcode( $this->content )
@@ -170,7 +171,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$layout_class = $this->gutter ? 'pht-layout ' : 'pht-layout--flush ';
 		$layout_class .= $this->equals ? 'pht-layout--equals' : '';
 
-		return sprintf( '<div class="%1$s"><!-- %2$s --></div>',
+		return sprintf( '<div %1$s class="%2$s"><!-- %3$s --></div>',
+			$this->module_id,
 			esc_attr( $layout_class ),
 			do_shortcode( $this->content )
 		);
@@ -235,12 +237,14 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			
 		}		
 		if ( '' === trim( $this->content ) ) {
-			return sprintf( '--><div class="%1$s"></div><!--',
+			return sprintf( '--><div %1$s class="%2$s"></div><!--',
+				$this->module_id,
 				'pht-layout__item ' . $layout_class
 			);
 		}
 		if ( $margins ) {
-			return sprintf( '--><div class="%1$s"><div class="pht-colorbox %3$s" style="%4$s"><div class="%5$s">%2$s</div></div></div><!--',
+			return sprintf( '--><div %1$s class="%2$s"><div class="pht-colorbox %4$s" style="%5$s"><div class="%6$s">%3$s</div></div></div><!--',
+				$this->module_id,
 				'pht-layout__item ' . $layout_class,
 				do_shortcode( $this->content ),
 				$colorbox_class,
@@ -250,7 +254,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		}
 
 		
-		return sprintf( '--><div class="%1$s"><div class="pht-colorbox %3$s" style="%4$s">%2$s</div></div><!--',
+		return sprintf( '--><div %1$s class="%2$s"><div class="pht-colorbox %4$s" style="%5$s">%3$s</div></div><!--',
+			$this->module_id,
 			'pht-layout__item ' . $layout_class,
 			do_shortcode( $this->content ),
 			"$colorbox_class $box_class",
@@ -430,7 +435,9 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				'data-anim' => $this->select_attribute( 'anim' )
 			);
 
-			$data_attrs = apply_filters( 'phtpb_flexslider_data_attributes', $data_attrs, $this->module_id );
+			$id = isset( $this->atts['module_id'] ) && '' !== trim( $this->atts['module_id'] ) ? trim( $this->atts['module_id'] ) : NULL;
+
+			$data_attrs = apply_filters( 'phtpb_flexslider_data_attributes', $data_attrs, $id );
 
 			$hoption = $this->select_attribute( 'hoption', 'full' );
 			return $this->container( $output, "phtpb_flexslider phtpb_flexslider--$hoption phtpb_item", '', 'div', $data_attrs );
