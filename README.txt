@@ -24,6 +24,7 @@ Coming soon
 == Changelog ==
 
 = 2.4.0 =
+Gifs are not resized in gallery
 Fixed ids for rows and columns
 More flexibility for Slider module via filter
 Deactivation option added
