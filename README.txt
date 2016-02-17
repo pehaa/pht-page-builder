@@ -24,6 +24,9 @@ Coming soon
 == Changelog ==
 
 = 2.4.0 =
+New Images carousel module
+New Countdown Module
+Disable new modules if PeHaa THEMES theme is not up to date
 Gifs are not resized in gallery
 Fixed ids for rows and columns
 More flexibility for Slider module via filter

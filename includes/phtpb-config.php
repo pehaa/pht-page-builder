@@ -816,16 +816,14 @@ $phtpb_config_data['phtpb_img_carousel'] = array(
 			'type' => 'gallery',
 		),
 		'hoption' => array(
-			'title' => esc_html__( 'Slider Height', $this->plugin_name ),
+			'title' => esc_html__( 'Slides Height', $this->plugin_name ),
 			'type' => 'select',
 			'default' => '480',
 			'options' => array(
 				'480' => '480px',
-				'300' => '300px',
+				'360' => '360px',
 				'600' => '600px',
-				//'full' => esc_html__( 'Full window height', $this->plugin_name ),
 			),
-			'description' => esc_html__( 'Animate slider automatically.', $this->plugin_name )
 		),
 		'auto' => array(
 			'title' => esc_html__( 'Auto slideshow', $this->plugin_name ),
@@ -1093,8 +1091,8 @@ $phtpb_config_data['phtpb_countdown'] = array(
 		'date' => array(
 			'title' => esc_html__( 'Date', $this->plugin_name ),
 			'type' => 'datepicker',
-			'description' => esc_html__( 'Choose the date.', $this->plugin_name ),
-			'default' => 'Choose the date and time, UTC.'
+			'description' => esc_html__( 'Choose the date and time, UTC.', $this->plugin_name ),
+			'default' => ''
 		),
 		'title' => array(
 			'title' => esc_html__( 'Title', $this->plugin_name ),
@@ -1110,7 +1108,7 @@ $phtpb_config_data['phtpb_countdown'] = array(
 				'until' => esc_html__( 'Until.', $this->plugin_name ),
 				'since' => esc_html__( 'Since.', $this->plugin_name ),
 			),
-			'description' => esc_html__( 'Which units should be displayed.', $this->plugin_name )
+			'description' => esc_html__( 'If you choose "Until" the slider will be displayed only until the specified date. "Since" will count the time passed since the specified date.', $this->plugin_name )
 		),
 		'size' => array(
 			'title' => esc_html__( 'Size.', $this->plugin_name ),
@@ -1120,7 +1118,7 @@ $phtpb_config_data['phtpb_countdown'] = array(
 				'alpha' => esc_html__( 'Large', $this->plugin_name ),
 				'epsilon' => esc_html__( 'Normal', $this->plugin_name ),
 			),
-			'description' => esc_html__( 'How large the countdown will be displayed.', $this->plugin_name )
+			'description' => esc_html__( 'Define how large the counter will be displayed.', $this->plugin_name )
 		),
 		'display_units' => array(
 			'title' => esc_html__( 'Displayed units.', $this->plugin_name ),
@@ -1168,6 +1166,7 @@ $phtpb_config_data['phtpb_countdown'] = array(
 	'phtpb_admin_mode' => 'simple',
 	'create_with_settings' => true
 );
+
 
 $phtpb_config_data['phtpb_posts'] = array(
 	'label' =>  'phtpb_posts',

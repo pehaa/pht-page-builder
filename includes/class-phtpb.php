@@ -93,8 +93,10 @@ class PeHaa_Themes_Page_Builder {
 		// priority = 1 to be hooked before config_data 
 		add_action( 'init', array( $this, 'defaults' ), 1 );
 		// priority = 2 to be hooked after widgets_init that has priority = 1
+		add_action( 'init', array( $this, 'pehaathemes_theme_compability' ), 2 );
 		add_action( 'init', array( $this, 'config_data' ), 2 );
 		add_action( 'init', array( $this, 'get_forbidden_ids' ), 2 );
+		
 
 	}
 
@@ -359,6 +361,36 @@ class PeHaa_Themes_Page_Builder {
 		}
 
 		self::$phtpb_forbidden_ids = apply_filters( $this->plugin_name . '_forbidden_ids', $phtpb_forbidden_ids );
+
+	}
+
+
+	public function pehaathemes_theme_compability() {
+
+		if ( !class_exists( 'PeHaaThemes_Theme_Start' ) ) {
+			return;
+		}
+		if ( !isset( PeHaaThemes_Theme_Start::$theme_name ) || !isset( PeHaaThemes_Theme_Start::$theme_version ) ) {
+			return;
+		}
+		add_filter( 'phtpb_config_data', array( $this, 'pehaathemes_compat_phtpb_config_data' ) );
+	}
+
+	public function pehaathemes_compat_phtpb_config_data( $config_data ) {
+
+		if ( !class_exists( 'PeHaaThemes_Theme_Start' ) ) {
+			return;
+		}
+		if ( !isset( PeHaaThemes_Theme_Start::$theme_name ) || !isset( PeHaaThemes_Theme_Start::$theme_version ) ) {
+			return;
+		}
+
+		if ( 'Yaga' === PeHaaThemes_Theme_Start::$theme_name && version_compare( PeHaaThemes_Theme_Start::$theme_version, '2.0', '<' ) ) {
+			unset( $config_data['phtpb_countdown'] );
+			unset( $config_data['phtpb_img_carousel'] );
+		}
+
+		return $config_data;
 
 	}
 

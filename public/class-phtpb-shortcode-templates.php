@@ -832,7 +832,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		
 		$output = '<div>';
 		$output .= '<figure class="pht-fig pht-white" style="width:'. $display_image[ $width_index ] . 'px">';
-		$output .= sprintf( '<img data-lazy="%1$s" alt="%2$s" %3$s/>',
+		$output .= sprintf( '<img src="" data-lazy="%1$s" alt="%2$s" %3$s/>',
 			$display_image[ $url_index ],
 			self::image_alt(  $this->phtpb_id ), 
 			$this->d_w ? 'width="' . $this->d_w .'"' : ''
@@ -840,7 +840,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		
 		if ( $this->lightbox ) {
 			$full_image = wp_get_attachment_image_src( $image_id, apply_filters( 'phtpb_lightbox_image', 'full' ) );
-			$output .= "<a href='$full_image[0]' class='pht-fig__link--hoverdir pht-fig__link js-pht-magnific_popup pht-fig__link--main a-a a-a--no-h'><i class='pht-fig__link__string pht-ic-f1-arrow-expand-alt pht-gamma'></i></a>";
+			$output .= "<a href='$full_image[0]' class='pht-fig__link--hoverdir pht-fig__link pht-fig__link--main a-a a-a--no-h'><i class='pht-fig__link__string pht-ic-f1-arrow-expand-alt pht-gamma'></i></a>";
 		}
 		$output .= '</figure>';
 		$output .= '</div>';

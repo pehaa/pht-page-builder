@@ -89,6 +89,16 @@ jQuery(document).ready(function ($) {
 		
 		openGallery: function () {
 
+			$('.phtpb_slicks--img').each(function() { // the containers for all your galleries
+				$(this).magnificPopup({
+					delegate: '.slick-slide:not(.slick-cloned) a', // the selector for gallery item
+					type: 'image',
+					gallery: {
+						enabled:true
+					}
+				});
+			});
+
 			$('.js-pht-magnific_popup').magnificPopup( {
 				type: 'image',
 				gallery:{

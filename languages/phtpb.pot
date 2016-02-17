@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PeHaa Themes Page Builder 2.4.0\n"
 "Report-Msgid-Bugs-To: info@pehaa.com\n"
-"POT-Creation-Date: 2016-02-12 13:16:28+00:00\n"
+"POT-Creation-Date: 2016-02-17 09:57:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -144,7 +144,7 @@ msgstr ""
 #: admin/class-phtpb-mb-templates.php:219 includes/phtpb-config.php:100
 #: includes/phtpb-config.php:255 includes/phtpb-config.php:272
 #: includes/phtpb-config.php:424 includes/phtpb-config.php:627
-#: includes/phtpb-config.php:1052
+#: includes/phtpb-config.php:1050
 msgid "None"
 msgstr ""
 
@@ -262,11 +262,11 @@ msgstr ""
 msgid "Learn more about Google Maps JavaScript API"
 msgstr ""
 
-#: includes/class-phtpb.php:300
+#: includes/class-phtpb.php:302
 msgid "Posts"
 msgstr ""
 
-#: includes/class-phtpb.php:301
+#: includes/class-phtpb.php:303
 msgid "Pages"
 msgstr ""
 
@@ -551,17 +551,17 @@ msgstr ""
 msgid "Vertical Align"
 msgstr ""
 
-#: includes/phtpb-config.php:290 includes/phtpb-config.php:1065
+#: includes/phtpb-config.php:290 includes/phtpb-config.php:1063
 msgid "Top"
 msgstr ""
 
 #: includes/phtpb-config.php:291 includes/phtpb-config.php:441
 #: includes/phtpb-config.php:493 includes/phtpb-config.php:562
-#: includes/phtpb-config.php:1160
+#: includes/phtpb-config.php:1158
 msgid "Center"
 msgstr ""
 
-#: includes/phtpb-config.php:292 includes/phtpb-config.php:1066
+#: includes/phtpb-config.php:292 includes/phtpb-config.php:1064
 msgid "Bottom"
 msgstr ""
 
@@ -641,7 +641,7 @@ msgstr ""
 
 #: includes/phtpb-config.php:372 includes/phtpb-config.php:662
 #: includes/phtpb-config.php:706 includes/phtpb-config.php:798
-#: includes/phtpb-config.php:915 includes/phtpb-config.php:945
+#: includes/phtpb-config.php:913 includes/phtpb-config.php:943
 msgid "Content"
 msgstr ""
 
@@ -654,7 +654,7 @@ msgid "Image"
 msgstr ""
 
 #: includes/phtpb-config.php:389 includes/phtpb-config.php:460
-#: includes/phtpb-config.php:815 includes/phtpb-config.php:1019
+#: includes/phtpb-config.php:815 includes/phtpb-config.php:1017
 msgid "Image Source"
 msgstr ""
 
@@ -723,12 +723,12 @@ msgid "Image alignment"
 msgstr ""
 
 #: includes/phtpb-config.php:442 includes/phtpb-config.php:494
-#: includes/phtpb-config.php:563 includes/phtpb-config.php:1161
+#: includes/phtpb-config.php:563 includes/phtpb-config.php:1159
 msgid "Left"
 msgstr ""
 
 #: includes/phtpb-config.php:443 includes/phtpb-config.php:495
-#: includes/phtpb-config.php:564 includes/phtpb-config.php:1162
+#: includes/phtpb-config.php:564 includes/phtpb-config.php:1160
 msgid "Right"
 msgstr ""
 
@@ -736,11 +736,11 @@ msgstr ""
 msgid "Gallery"
 msgstr ""
 
-#: includes/phtpb-config.php:464 includes/phtpb-config.php:1211
+#: includes/phtpb-config.php:464 includes/phtpb-config.php:1210
 msgid "Images separation"
 msgstr ""
 
-#: includes/phtpb-config.php:468 includes/phtpb-config.php:1215
+#: includes/phtpb-config.php:468 includes/phtpb-config.php:1214
 msgid "No separation"
 msgstr ""
 
@@ -793,7 +793,7 @@ msgstr ""
 msgid "Icon size"
 msgstr ""
 
-#: includes/phtpb-config.php:587 includes/phtpb-config.php:1121
+#: includes/phtpb-config.php:587 includes/phtpb-config.php:1119
 msgid "Normal"
 msgstr ""
 
@@ -801,7 +801,7 @@ msgstr ""
 msgid "Tiny"
 msgstr ""
 
-#: includes/phtpb-config.php:589 includes/phtpb-config.php:1120
+#: includes/phtpb-config.php:589 includes/phtpb-config.php:1118
 msgid "Large"
 msgstr ""
 
@@ -832,15 +832,15 @@ msgid "Tabs"
 msgstr ""
 
 #: includes/phtpb-config.php:649 includes/phtpb-config.php:668
-#: includes/phtpb-config.php:901
+#: includes/phtpb-config.php:899
 msgid "Add Tab"
 msgstr ""
 
-#: includes/phtpb-config.php:653 includes/phtpb-config.php:906
+#: includes/phtpb-config.php:653 includes/phtpb-config.php:904
 msgid "Tab"
 msgstr ""
 
-#: includes/phtpb-config.php:658 includes/phtpb-config.php:911
+#: includes/phtpb-config.php:658 includes/phtpb-config.php:909
 msgid "Tab Title"
 msgstr ""
 
@@ -854,13 +854,12 @@ msgid "Content Slider"
 msgstr ""
 
 #: includes/phtpb-config.php:681 includes/phtpb-config.php:735
-#: includes/phtpb-config.php:831
+#: includes/phtpb-config.php:829
 msgid "Auto slideshow"
 msgstr ""
 
 #: includes/phtpb-config.php:684 includes/phtpb-config.php:732
-#: includes/phtpb-config.php:738 includes/phtpb-config.php:828
-#: includes/phtpb-config.php:834
+#: includes/phtpb-config.php:738 includes/phtpb-config.php:832
 msgid "Animate slider automatically."
 msgstr ""
 
@@ -890,7 +889,7 @@ msgstr ""
 msgid "Slider"
 msgstr ""
 
-#: includes/phtpb-config.php:724 includes/phtpb-config.php:819
+#: includes/phtpb-config.php:724
 msgid "Slider Height"
 msgstr ""
 
@@ -902,143 +901,147 @@ msgstr ""
 msgid "Images Carousel"
 msgstr ""
 
-#: includes/phtpb-config.php:844
+#: includes/phtpb-config.php:819
+msgid "Slides Height"
+msgstr ""
+
+#: includes/phtpb-config.php:842
 msgid "Tabbled List"
 msgstr ""
 
-#: includes/phtpb-config.php:853 includes/phtpb-config.php:875
+#: includes/phtpb-config.php:851 includes/phtpb-config.php:873
 msgid "Add Item"
 msgstr ""
 
-#: includes/phtpb-config.php:857
+#: includes/phtpb-config.php:855
 msgid "Tabbled List Item"
 msgstr ""
 
-#: includes/phtpb-config.php:862
+#: includes/phtpb-config.php:860
 msgid "List item title"
 msgstr ""
 
-#: includes/phtpb-config.php:866
+#: includes/phtpb-config.php:864
 msgid "List item description"
 msgstr ""
 
-#: includes/phtpb-config.php:870
+#: includes/phtpb-config.php:868
 msgid "List item attribute (e.g. price)"
 msgstr ""
 
-#: includes/phtpb-config.php:880
+#: includes/phtpb-config.php:878
 msgid "Accordion"
 msgstr ""
 
-#: includes/phtpb-config.php:887
+#: includes/phtpb-config.php:885
 msgid "Collapsible"
 msgstr ""
 
-#: includes/phtpb-config.php:890
+#: includes/phtpb-config.php:888
 msgid "Allows collapsing the active tab (all tabs can be closed)."
 msgstr ""
 
-#: includes/phtpb-config.php:893
+#: includes/phtpb-config.php:891
 msgid "Panels closed"
 msgstr ""
 
-#: includes/phtpb-config.php:896
+#: includes/phtpb-config.php:894
 msgid ""
 "All panels are closed on page load. Make sure that \"Collapsible\" is "
 "checked as well."
 msgstr ""
 
-#: includes/phtpb-config.php:917
+#: includes/phtpb-config.php:915
 msgid "This is the accordion content"
 msgstr ""
 
-#: includes/phtpb-config.php:925
+#: includes/phtpb-config.php:923
 msgid "Toggle"
 msgstr ""
 
-#: includes/phtpb-config.php:931
+#: includes/phtpb-config.php:929
 msgid "Toggle Title"
 msgstr ""
 
-#: includes/phtpb-config.php:935
+#: includes/phtpb-config.php:933
 msgid "Initial state"
 msgstr ""
 
-#: includes/phtpb-config.php:938
+#: includes/phtpb-config.php:936
 msgid "Opened"
 msgstr ""
 
-#: includes/phtpb-config.php:939
+#: includes/phtpb-config.php:937
 msgid "Closed"
 msgstr ""
 
-#: includes/phtpb-config.php:942
+#: includes/phtpb-config.php:940
 msgid "Choose if you want your toggle section to be opened or closed by default."
 msgstr ""
 
-#: includes/phtpb-config.php:947
+#: includes/phtpb-config.php:945
 msgid "This is the toggle content"
 msgstr ""
 
-#: includes/phtpb-config.php:957
+#: includes/phtpb-config.php:955
 msgid "Google Map"
 msgstr ""
 
-#: includes/phtpb-config.php:964
+#: includes/phtpb-config.php:962
 msgid "Map Center"
 msgstr ""
 
-#: includes/phtpb-config.php:981
+#: includes/phtpb-config.php:979
 msgid "Map styling"
 msgstr ""
 
-#: includes/phtpb-config.php:984
+#: includes/phtpb-config.php:982
 msgid "Default"
 msgstr ""
 
-#: includes/phtpb-config.php:985
+#: includes/phtpb-config.php:983
 msgid "Grayscale"
 msgstr ""
 
-#: includes/phtpb-config.php:986
+#: includes/phtpb-config.php:984
 msgid "Very Light"
 msgstr ""
 
-#: includes/phtpb-config.php:987
+#: includes/phtpb-config.php:985
 msgid "Dark Shades of Grey"
 msgstr ""
 
-#: includes/phtpb-config.php:988
+#: includes/phtpb-config.php:986
 msgid "Light Beige and Blue"
 msgstr ""
 
-#: includes/phtpb-config.php:991
+#: includes/phtpb-config.php:989
 msgid ""
 "Choose colors variant for your map. Note that the admin area displays the "
 "default colors, you need to preview the page to see your changes."
 msgstr ""
 
-#: includes/phtpb-config.php:994 includes/phtpb-config.php:1043
+#: includes/phtpb-config.php:992 includes/phtpb-config.php:1041
 msgid "Height"
 msgstr ""
 
-#: includes/phtpb-config.php:996
+#: includes/phtpb-config.php:994
 msgid "Set the height of map (in pixels)"
 msgstr ""
 
-#: includes/phtpb-config.php:1001 includes/phtpb-config.php:1011
+#: includes/phtpb-config.php:999 includes/phtpb-config.php:1009
 msgid "Add Marker"
 msgstr ""
 
-#: includes/phtpb-config.php:1006
+#: includes/phtpb-config.php:1004
 msgid "Map Marker"
 msgstr ""
 
-#: includes/phtpb-config.php:1015
+#: includes/phtpb-config.php:1013
 msgid "Marker Title"
 msgstr ""
 
-#: includes/phtpb-config.php:1021
+#: includes/phtpb-config.php:1019
 msgid ""
 "You can add a custom icon for this marker. Make sure to upload it double "
 "sized as it will be scaled down for crispy retina displays. (Eg. if you "
@@ -1047,334 +1050,341 @@ msgid ""
 "page to see your changes."
 msgstr ""
 
-#: includes/phtpb-config.php:1038
+#: includes/phtpb-config.php:1036
 msgid "Divider"
 msgstr ""
 
-#: includes/phtpb-config.php:1045
+#: includes/phtpb-config.php:1043
 msgid "Set the height of your divider (in pixels)."
 msgstr ""
 
-#: includes/phtpb-config.php:1049
+#: includes/phtpb-config.php:1047
 msgid "Divider Type"
 msgstr ""
 
-#: includes/phtpb-config.php:1053
+#: includes/phtpb-config.php:1051
 msgid "Solid line (1px)"
 msgstr ""
 
-#: includes/phtpb-config.php:1054
+#: includes/phtpb-config.php:1052
 msgid "Solid line (2px)"
 msgstr ""
 
-#: includes/phtpb-config.php:1055
+#: includes/phtpb-config.php:1053
 msgid "Double line"
 msgstr ""
 
-#: includes/phtpb-config.php:1056
+#: includes/phtpb-config.php:1054
 msgid "Dashed line"
 msgstr ""
 
-#: includes/phtpb-config.php:1061
+#: includes/phtpb-config.php:1059
 msgid "Position"
 msgstr ""
 
-#: includes/phtpb-config.php:1064
+#: includes/phtpb-config.php:1062
 msgid "Middle"
 msgstr ""
 
-#: includes/phtpb-config.php:1071
+#: includes/phtpb-config.php:1069
 msgid "Screen options."
 msgstr ""
 
-#: includes/phtpb-config.php:1075
+#: includes/phtpb-config.php:1073
 msgid "Always display"
 msgstr ""
 
-#: includes/phtpb-config.php:1076
+#: includes/phtpb-config.php:1074
 msgid "Only on screens 800px and more"
 msgstr ""
 
-#: includes/phtpb-config.php:1078
+#: includes/phtpb-config.php:1076
 msgid ""
 "Note that on small screens the divider height will be reduced to 48px "
 "maximum."
 msgstr ""
 
-#: includes/phtpb-config.php:1089
+#: includes/phtpb-config.php:1087
 msgid "Countdown"
 msgstr ""
 
-#: includes/phtpb-config.php:1094
+#: includes/phtpb-config.php:1092
 msgid "Date"
 msgstr ""
 
-#: includes/phtpb-config.php:1096
-msgid "Choose the date."
+#: includes/phtpb-config.php:1094
+msgid "Choose the date and time, UTC."
 msgstr ""
 
-#: includes/phtpb-config.php:1100 includes/phtpb-config.php:1269
-#: includes/phtpb-config.php:1289 includes/phtpb-config.php:1325
-#: includes/phtpb-config.php:1344 includes/phtpb-config.php:1363
-#: includes/phtpb-config.php:1387 includes/phtpb-config.php:1424
-#: includes/phtpb-config.php:1456 includes/phtpb-config.php:1480
-#: includes/phtpb-config.php:1507
+#: includes/phtpb-config.php:1098 includes/phtpb-config.php:1268
+#: includes/phtpb-config.php:1288 includes/phtpb-config.php:1324
+#: includes/phtpb-config.php:1343 includes/phtpb-config.php:1362
+#: includes/phtpb-config.php:1386 includes/phtpb-config.php:1423
+#: includes/phtpb-config.php:1455 includes/phtpb-config.php:1479
+#: includes/phtpb-config.php:1506
 msgid "Title"
 msgstr ""
 
-#: includes/phtpb-config.php:1103
+#: includes/phtpb-config.php:1101
 msgid "Set a title here (optional)."
 msgstr ""
 
-#: includes/phtpb-config.php:1106
+#: includes/phtpb-config.php:1104
 msgid "Display options."
 msgstr ""
 
-#: includes/phtpb-config.php:1110
+#: includes/phtpb-config.php:1108
 msgid "Until."
 msgstr ""
 
-#: includes/phtpb-config.php:1111
+#: includes/phtpb-config.php:1109
 msgid "Since."
 msgstr ""
 
-#: includes/phtpb-config.php:1113 includes/phtpb-config.php:1134
-msgid "Which units should be displayed."
+#: includes/phtpb-config.php:1111
+msgid ""
+"If you choose \"Until\" the slider will be displayed only until the "
+"specified date. \"Since\" will count the time passed since the specified "
+"date."
 msgstr ""
 
-#: includes/phtpb-config.php:1116
+#: includes/phtpb-config.php:1114
 msgid "Size."
 msgstr ""
 
-#: includes/phtpb-config.php:1123
-msgid "How large the countdown will be displayed."
+#: includes/phtpb-config.php:1121
+msgid "Define how large the counter will be displayed."
 msgstr ""
 
-#: includes/phtpb-config.php:1126
+#: includes/phtpb-config.php:1124
 msgid "Displayed units."
 msgstr ""
 
-#: includes/phtpb-config.php:1130
+#: includes/phtpb-config.php:1128
 msgid "Days, hours, minutes and seconds."
 msgstr ""
 
-#: includes/phtpb-config.php:1131
+#: includes/phtpb-config.php:1129
 msgid "Days, hours, minutes"
 msgstr ""
 
-#: includes/phtpb-config.php:1132
+#: includes/phtpb-config.php:1130
 msgid "Only days and hours"
 msgstr ""
 
-#: includes/phtpb-config.php:1137
+#: includes/phtpb-config.php:1132
+msgid "Which units should be displayed."
+msgstr ""
+
+#: includes/phtpb-config.php:1135
 msgid "Days label"
 msgstr ""
 
-#: includes/phtpb-config.php:1139
+#: includes/phtpb-config.php:1137
 msgid "Day(s)"
 msgstr ""
 
-#: includes/phtpb-config.php:1142
+#: includes/phtpb-config.php:1140
 msgid "Hours label"
 msgstr ""
 
-#: includes/phtpb-config.php:1144
+#: includes/phtpb-config.php:1142
 msgid "Hour(s)"
 msgstr ""
 
-#: includes/phtpb-config.php:1147
+#: includes/phtpb-config.php:1145
 msgid "Minutes label"
 msgstr ""
 
-#: includes/phtpb-config.php:1149
+#: includes/phtpb-config.php:1147
 msgid "Min"
 msgstr ""
 
-#: includes/phtpb-config.php:1152
+#: includes/phtpb-config.php:1150
 msgid "Seconds label"
 msgstr ""
 
-#: includes/phtpb-config.php:1154
+#: includes/phtpb-config.php:1152
 msgid "Sec"
 msgstr ""
 
-#: includes/phtpb-config.php:1157
+#: includes/phtpb-config.php:1155
 msgid "Alignment"
 msgstr ""
 
-#: includes/phtpb-config.php:1174
+#: includes/phtpb-config.php:1173
 msgid "Posts Grid"
 msgstr ""
 
-#: includes/phtpb-config.php:1189
+#: includes/phtpb-config.php:1188
 msgid "Gallery Portfolio"
 msgstr ""
 
-#: includes/phtpb-config.php:1194
+#: includes/phtpb-config.php:1193
 msgid "Post type"
 msgstr ""
 
-#: includes/phtpb-config.php:1197
+#: includes/phtpb-config.php:1196
 msgid "Choose the query."
 msgstr ""
 
-#: includes/phtpb-config.php:1200
+#: includes/phtpb-config.php:1199
 msgid "Posts count"
 msgstr ""
 
-#: includes/phtpb-config.php:1203
+#: includes/phtpb-config.php:1202
 msgid "Number of posts. Set -1 to display all posts."
 msgstr ""
 
-#: includes/phtpb-config.php:1206
+#: includes/phtpb-config.php:1205
 msgid "Custom query"
 msgstr ""
 
-#: includes/phtpb-config.php:1208
+#: includes/phtpb-config.php:1207
 msgid "You can modify the query here, e.g. orderby=title&order=ASC"
 msgstr ""
 
-#: includes/phtpb-config.php:1214
+#: includes/phtpb-config.php:1213
 msgid "6px - default"
 msgstr ""
 
-#: includes/phtpb-config.php:1216
+#: includes/phtpb-config.php:1215
 msgid "16px"
 msgstr ""
 
-#: includes/phtpb-config.php:1217
+#: includes/phtpb-config.php:1216
 msgid "24px - large separation"
 msgstr ""
 
-#: includes/phtpb-config.php:1229
+#: includes/phtpb-config.php:1228
 msgid "Filtered Portfolio"
 msgstr ""
 
-#: includes/phtpb-config.php:1246
+#: includes/phtpb-config.php:1245
 msgid "Sidebar"
 msgstr ""
 
-#: includes/phtpb-config.php:1251
+#: includes/phtpb-config.php:1250
 msgid "Choose sidebar"
 msgstr ""
 
-#: includes/phtpb-config.php:1263
+#: includes/phtpb-config.php:1262
 msgid "WP -  Calendar"
 msgstr ""
 
-#: includes/phtpb-config.php:1272 includes/phtpb-config.php:1292
-#: includes/phtpb-config.php:1328 includes/phtpb-config.php:1347
-#: includes/phtpb-config.php:1366 includes/phtpb-config.php:1390
-#: includes/phtpb-config.php:1427 includes/phtpb-config.php:1459
-#: includes/phtpb-config.php:1483 includes/phtpb-config.php:1510
+#: includes/phtpb-config.php:1271 includes/phtpb-config.php:1291
+#: includes/phtpb-config.php:1327 includes/phtpb-config.php:1346
+#: includes/phtpb-config.php:1365 includes/phtpb-config.php:1389
+#: includes/phtpb-config.php:1426 includes/phtpb-config.php:1458
+#: includes/phtpb-config.php:1482 includes/phtpb-config.php:1509
 msgid "What text use as a widget title. Leave blank to use default widget title."
 msgstr ""
 
-#: includes/phtpb-config.php:1283
+#: includes/phtpb-config.php:1282
 msgid "WP -  Pages"
 msgstr ""
 
-#: includes/phtpb-config.php:1295
+#: includes/phtpb-config.php:1294
 msgid "Sort by"
 msgstr ""
 
-#: includes/phtpb-config.php:1298
+#: includes/phtpb-config.php:1297
 msgid "Page order"
 msgstr ""
 
-#: includes/phtpb-config.php:1299
+#: includes/phtpb-config.php:1298
 msgid "Page title"
 msgstr ""
 
-#: includes/phtpb-config.php:1300
+#: includes/phtpb-config.php:1299
 msgid "Page ID"
 msgstr ""
 
-#: includes/phtpb-config.php:1305
+#: includes/phtpb-config.php:1304
 msgid "Exclude"
 msgstr ""
 
-#: includes/phtpb-config.php:1308
+#: includes/phtpb-config.php:1307
 msgid "Page IDs, separated by commas."
 msgstr ""
 
-#: includes/phtpb-config.php:1319
+#: includes/phtpb-config.php:1318
 msgid "WP -  Search"
 msgstr ""
 
-#: includes/phtpb-config.php:1338
+#: includes/phtpb-config.php:1337
 msgid "WP -  Meta"
 msgstr ""
 
-#: includes/phtpb-config.php:1357
+#: includes/phtpb-config.php:1356
 msgid "WP -  Recent Comments"
 msgstr ""
 
-#: includes/phtpb-config.php:1369
+#: includes/phtpb-config.php:1368
 msgid "Number of comments to show"
 msgstr ""
 
-#: includes/phtpb-config.php:1381
+#: includes/phtpb-config.php:1380
 msgid "WP -  Recent Posts"
 msgstr ""
 
-#: includes/phtpb-config.php:1393
+#: includes/phtpb-config.php:1392
 msgid "Number of posts to show"
 msgstr ""
 
-#: includes/phtpb-config.php:1398
+#: includes/phtpb-config.php:1397
 msgid "Display post date?"
 msgstr ""
 
-#: includes/phtpb-config.php:1418
+#: includes/phtpb-config.php:1417
 msgid "WP -  Tags"
 msgstr ""
 
-#: includes/phtpb-config.php:1430
+#: includes/phtpb-config.php:1429
 msgid "Taxonomy"
 msgstr ""
 
-#: includes/phtpb-config.php:1450
+#: includes/phtpb-config.php:1449
 msgid "WP -  Custom Menu"
 msgstr ""
 
-#: includes/phtpb-config.php:1462
+#: includes/phtpb-config.php:1461
 msgid "Select menu"
 msgstr ""
 
-#: includes/phtpb-config.php:1474
+#: includes/phtpb-config.php:1473
 msgid "WP -  Archives"
 msgstr ""
 
-#: includes/phtpb-config.php:1486 includes/phtpb-config.php:1513
+#: includes/phtpb-config.php:1485 includes/phtpb-config.php:1512
 msgid "Display as dropdown"
 msgstr ""
 
-#: includes/phtpb-config.php:1490 includes/phtpb-config.php:1517
+#: includes/phtpb-config.php:1489 includes/phtpb-config.php:1516
 msgid "Show post counts"
 msgstr ""
 
-#: includes/phtpb-config.php:1501
+#: includes/phtpb-config.php:1500
 msgid "WP -  Categories"
 msgstr ""
 
-#: includes/phtpb-config.php:1521
+#: includes/phtpb-config.php:1520
 msgid "Show hierarchy"
 msgstr ""
 
-#: includes/phtpb-config.php:1546
+#: includes/phtpb-config.php:1545
 msgid "No contact forms found"
 msgstr ""
 
-#: includes/phtpb-config.php:1551
+#: includes/phtpb-config.php:1550
 msgid "Contact Form"
 msgstr ""
 
-#: includes/phtpb-config.php:1584
+#: includes/phtpb-config.php:1583
 msgid "Page Builder Label"
 msgstr ""
 
-#: includes/phtpb-config.php:1587
+#: includes/phtpb-config.php:1586
 msgid "Add a custom label for your module."
 msgstr ""
 
