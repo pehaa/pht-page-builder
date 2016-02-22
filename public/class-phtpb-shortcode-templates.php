@@ -486,7 +486,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			$width = $this->r_w ? $this->r_w : ( 24 + $this->content_width )*$this->phtpb_width - 24;
 			$height = $this->r_h ? $this->r_h : 0;
 			$resizer = PHTPB_Resize_Image::get_instance();
-			$display_image = $resizer->resize_image( $this->phtpb_id, '' , $width, $height, true );
+			$skip_array = apply_filters( 'phtpb_do_not_resize_in_image', array( 'image/gif' ), $this->atts['module_id'] );
+			$display_image = $resizer->resize_image( $this->phtpb_id, '' , $width, $height, true, $skip_array );
 		} else {
 			$display_image = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
 			$display_image['url'] = $display_image[0];

@@ -23,6 +23,9 @@ Coming soon
 
 == Changelog ==
 
+= 2.4.1 =
+Gifs are not resized in image
+
 = 2.4.0 =
 New Images carousel module
 New Countdown Module
