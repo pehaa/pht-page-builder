@@ -77,7 +77,7 @@ class PeHaa_Themes_Page_Builder {
 		}
 
 		$this->plugin_name = 'phtpb';
-		$this->version = '2.4.0';
+		$this->version = '2.5.0';
 
 		$this->load_dependencies();
 		$this->set_locale();	
@@ -203,8 +203,10 @@ class PeHaa_Themes_Page_Builder {
 		$this->loader->add_filter( '_wp_post_revision_field_' . self::$meta_field_name_content, $plugin_admin, 'phtpb_revision_field', 10, 3 );
 		$this->loader->add_filter( '_wp_post_revision_field_' . self::$meta_field_name_state, $plugin_admin, 'phtpb_revision_field_state', 10, 3 );
 
-		$plugin_options = new PeHaa_Themes_Page_Builder_Options_Page( $this->get_plugin_name(), $this->get_option_name() );
+		$plugin_options = new PeHaa_Themes_Page_Builder_Options_Page( $this->get_plugin_name(), $this->get_version(), $this->get_option_name() );
 
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_options, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_options, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_options, 'add_plugin_options_page' );
 		$this->loader->add_action( 'admin_init', $plugin_options, 'page_init' );
 
@@ -228,7 +230,7 @@ class PeHaa_Themes_Page_Builder {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts', 11 );
 		$this->loader->add_action( 'init', $plugin_public, 'get_content_width' );
 		$this->loader->add_action( 'init', $plugin_public, 'add_shortcodes' );
-		$this->loader->add_filter( 'the_content', $plugin_public, 'get_meta_content', 1 );
+		$this->loader->add_filter( 'the_content', $plugin_public, 'get_phtpb_content', 1 );
 		$this->loader->add_filter( 'get_the_excerpt', $plugin_public, 'get_phtpb_excerpt' );
 		$this->loader->add_filter( 'pht-simple-widget-areas_widget_tag', $plugin_public, 'widget_tag' );
 	}

@@ -21,7 +21,6 @@
 
 class PeHaa_Themes_Page_Builder_Options_Page {
 
-	
 	/**
 	 * The ID of this plugin.
 	 *
@@ -77,6 +76,15 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 */
 	private $fields = array();
 
+	/**
+	 * Slug of the plugin screen.
+	 *
+	 * @since    2.5.0
+	 *
+	 * @var      string
+	 */
+	private $plugin_screen_hook_suffix = null;
+
   	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -84,9 +92,11 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 * @var      string    $name       The name of the plugin.
 	 * @var      string    $option_name       The options field slug.
 	 */
- 	public function __construct( $name, $option_name ) {
+ 	public function __construct( $name, $version, $option_name ) {
+
 
  		$this->name = $name;
+ 		$this->version = $version;
 		$this->option_name = $option_name;
 		$this->menu_slug = 'phtpb-admin'; 
 		$this ->option_group = 'phtpb_option_group';
@@ -96,7 +106,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 		$this->sections = array(
 			'main' => array(
 				'id' => 'phtpb_main',
-				'title' => esc_html__( 'Main Settings', $this->name ),
+				'title' => esc_html__( 'General Settings', $this->name ),
 				'callback' => 'main_section_display'
 			),
 			'gmaps' => array(
@@ -104,15 +114,32 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 				'title' => esc_html__( 'Google Maps Settings', $this->name ),
 				'callback' => 'gmaps_section_display'
 			),
-			'deactivation' => array(
-				'id' => 'phtpb_deactivation',
-				'title' => esc_html__( 'Deactivation', $this->name ),
-				'callback' => 'deactivation_section_display'
-			),
 		);
 
 		add_filter( 'plugin_action_links_' . PHTPB_PLUGIN_BASENAME, array( $this, 'add_action_links' ) );
 		
+	}
+
+	/**
+	 * Check if viewing one of this plugin's admin pages.
+	 *
+	 * @since   2.5.0.
+	 *
+	 * @return  bool
+	 */
+	private function viewing_this_plugin() {
+
+		if ( ! isset( $this->plugin_screen_hook_suffix ) )
+			return false;
+
+		$screen = get_current_screen();
+
+		if ( !isset( $screen->id ) ) return false;
+
+		if ( in_array( $screen->id, $this->plugin_screen_hook_suffix ) )
+			return true;
+		else
+			return false;
 	}
 	
 
@@ -140,7 +167,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 */
 	public function add_plugin_options_page() {
     
-    	add_menu_page(
+    	$this->plugin_screen_hook_suffix[] = add_menu_page(
         	$this->page_title,
         	$this->menu_title,
         	'manage_options', 
@@ -149,6 +176,26 @@ class PeHaa_Themes_Page_Builder_Options_Page {
     	);
 
     }
+
+    /**
+	 * Register the stylesheets for the admin area.
+	 *
+	 * @since    2.5.0
+	 */
+	public function enqueue_styles() {
+
+		if ( $this->viewing_this_plugin() ) {
+			wp_enqueue_style( $this->name . '-options-style', plugin_dir_url( __FILE__ ) . 'css/options.css', array(), $this->version, 'all' );
+		}
+
+	}
+
+	/**
+	 * Register the stylesheets for the admin area.
+	 *
+	 * @since    2.5.0
+	 */
+	public function enqueue_scripts() {}
 
 	/**
 	 * Callback for the add_plugin_options_page(). Displays the options page. Uses Settings API.
@@ -163,15 +210,19 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 
 			<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
-			<form method="post" action="options.php">
+			<div class="phtpb-options">
 
-				<?php settings_fields( $this->option_group );
+				<form method="post" action="options.php">
 
-				do_settings_sections( $this->menu_slug );
+					<?php settings_fields( $this->option_group );
 
-				submit_button(); ?>
+					do_settings_sections( $this->menu_slug );
 
-			</form>
+					submit_button(); ?>
+
+				</form>
+
+			</div>
 
 		</div>
 
@@ -213,28 +264,38 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 
 
 		$this->fields[ PeHaa_Themes_Page_Builder::$post_types_field_slug ] = array(
-			'title' => esc_html__( 'Post Types', $this->name ),
+			'title' => esc_html__( 'Activated Post Types', $this->name ),
 			'callback' => 'multicheck_callback',
 			'sanitize' => 'sanitize_multicheck_post_types',
-			'description' => esc_html__( 'Check the postypes that will be edited with PeHaa Themes Page Builder.', $this->name ),
+			'description' => esc_html__( 'Make PeHaa Themes Page Builder available for the checked post types.', $this->name ),
 			'section' => $this->sections['main']['id'],
 			'options' => PeHaa_Themes_Page_Builder::$phtpb_available_post_types,
 		);
-		
+
+		$this->fields['deactivation'] = array(
+			'title' => esc_html__( 'On Plugin Deactivation ', $this->name ),
+			'label' => esc_html__( 'Deactivate on all pages', $this->name ),
+			'callback' => 'checkbox_callback',
+			'sanitize' => 'sanitize_checkbox',
+			'description' => esc_html__( 'This setting affects the re-activation behavior. If "Deactivate on all pages" is checked when you deactivate this plugin, the page builder content will be deactivated on all pages. If you decide to reactivate the plugin, your pages will not display the page builder content. If "Deactivate on all pages" is left unchecked, your pages will display the page builder content after reactivation.', $this->name ),
+			'section' => $this->sections['main']['id'],
+		);
+
+		$this->fields['save_to_content'] = array(
+			'title' => esc_html__( 'Storing', $this->name ),
+			'label' => esc_html__( 'Save to Content', $this->name ),
+			'callback' => 'checkbox_callback',
+			'sanitize' => 'sanitize_checkbox',
+			'description' => esc_html__( 'Define how to store the page builder content in the database. If "Save to Content" is not checked, the page builder content is stored as post meta data. Only the content of the Text Modules is retrieved and saved to as the post content. That means that when you uninstall the plugin, ther will be no unrendered shortcodes in your pages. You will not have the page builder layout, but you will keep all the text that you entered into the Text Modules. If you check "Save to Content" the page builder content is saved to the database as the post content.', $this->name ),
+			'section' => $this->sections['main']['id'],
+		);
+
 		$this->fields['gmaps_api_key'] = array(
 			'title' => esc_html__( 'Google Maps Api Key', $this->name ),
 			'callback' => 'gmaps_input_callback',
 			'sanitize' => 'sanitize_gmaps_api_key',
 			'description' => esc_html__( 'Paste your Google Maps Api Key here.', $this->name ),
 			'section' => $this->sections['gmaps']['id'],
-		);
-
-		$this->fields['deactivation'] = array(
-			'title' => esc_html__( 'Deactivate on all pages.', $this->name ),
-			'callback' => 'checkbox_callback',
-			'sanitize' => 'sanitize_checkbox',
-			'description' => esc_html__( 'This setting affects the re-activation behavior. If checked the page builder content will be deactivated on all pages. When re-activated the page builder content will be still available but the pages will not display it. You will have to edit each page to re-activate the page builder on it.', $this->name ),
-			'section' => $this->sections['deactivation']['id'],
 		);
 	
 	}
@@ -253,6 +314,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 			$args = array(
 				'title' => isset( $field['title'] ) ? $field['title'] : '',
 				'id' => $key,
+				'label' => isset( $field['label'] ) ? $field['label'] : '',
 				'description' => isset( $field['description'] ) ? $field['description'] : '',
 			);
 			if ( isset( $field['options'] ) ) {
@@ -365,19 +427,12 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 */
 	public function gmaps_section_display() { ?>
 
-		<p><?php esc_html_e( 'This settings is optional. You can still display google maps without an API key.', $this->name ); ?></p>
-		<p>
+		<p><?php esc_html_e( 'This settings is optional. You can still display google maps without an API key.', $this->name ); ?>
 			<a href="https://developers.google.com/maps/documentation/javascript/tutorial#api_key"><?php esc_html_e( 'Learn more about Google Maps JavaScript API', $this->name ); ?></a>
 		</p>
 
 	<?php }
 
-	/**
-	 * Displays section content
-	 *
-	 * @since    1.0.0
-	 */
-	public function deactivation_section_display() {}
 
 	/**
 	 * Prints input fields
@@ -403,12 +458,13 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 * @param array args
 	 */
 	public function gmaps_input_callback( $args ) {
-
+		echo '<div class="phtpb-options__fields">';
 		printf( '<input type="text" size="64" maxlength="64" class="regular-text" id="%1$s" name="%2$s" value="%3$s" />',
 			esc_attr( $args['id'] ),
 			esc_attr( $this->option_name . '[' .$args['id'] . ']' ),
 			isset( $this->options[ $args['id'] ] ) ? esc_attr( $this->options[ $args['id'] ]) : '' 
 			);
+		echo '</div>';
 		$this->field_description( $args );
 	}
 
@@ -426,14 +482,14 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 		} elseif ( ! isset( $this->options[ $args['id'] ] ) ) {
 			$this->options[ $args['id'] ] = array();
 		}
-
+		echo '<div class="phtpb-options__fields">';
 		foreach ( $args['options'] as $key => $title ) { ?>
-			<div>
+			<div class="phtpb-options__multicheck">
 				<input type="checkbox" id="phtpb_field_<?php echo esc_attr( $key );?>" name="<?php echo esc_attr( $this->option_name . '[' .$args['id'] . ']' ); ?>[]" value="<?php echo esc_attr( $key );?>" <?php checked( in_array( $key, $this->options[ $args['id'] ] ) ) ?> />
 				<label for="phtpb_field_<?php echo esc_attr( $key );?>"><?php echo esc_html( $title ); ?></label>
 			</div>							
 		<?php }
-		
+		echo '</div>';
 		$this->field_description( $args );
 		
 	}
@@ -447,9 +503,9 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	public function checkbox_callback( $args ) {
 
 		?>
-		<div>
+		<div class="phtpb-options__fields">
 			<input type="checkbox" id="phtpb_field_<?php echo esc_attr( $args['id'] );?>" name="<?php echo esc_attr( $this->option_name . '[' .$args['id'] . ']' ); ?>" value="yes" <?php checked( isset( $this->options[ $args['id'] ] ) && 'yes' === $this->options[ $args['id'] ] ); ?> />
-			<label for="phtpb_field_<?php echo esc_attr( $args['id'] );?>"><?php echo esc_html( $args['title'] ); ?></label>
+			<label for="phtpb_field_<?php echo esc_attr( $args['id'] );?>"><?php echo esc_html( $args['label'] ); ?></label>
 		</div>							
 		<?php 
 		

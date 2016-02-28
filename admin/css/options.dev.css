@@ -1,0 +1,41 @@
+.phtpb-options {
+  border: 1px solid #ccc;
+  background: white;
+  padding: 24px;
+}
+
+.phtpb-options table + h2 {
+  border-top: 2px solid;
+  padding-top: 22px;
+}
+
+.phtpb-options tr {
+  border: 1px dashed #ddd;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  padding: 24px;
+}
+.phtpb-options tr th {
+  padding: 0;
+}
+.phtpb-options tr td {
+  display: flex;
+  padding: 24px 0 0;
+  margin: 0;
+  align-items: center;
+}
+
+.phtpb-options__fields {
+  margin-right: 48px;
+}
+
+.phtpb-options__multicheck {
+  padding: 5px;
+}
+
+.phtpb_description {
+  flex: 1;
+}
+
+/*# sourceMappingURL=options.dev.css.map */

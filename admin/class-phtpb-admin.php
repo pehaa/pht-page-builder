@@ -52,7 +52,11 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 	private $render_page_builder = false;
 
-	private $check;
+	private $check_content_inconsistency = false;
+
+	private $state = false;
+
+	private $meta_content = false;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -66,12 +70,11 @@ class PeHaa_Themes_Page_Builder_Admin {
 		$this->name = $name;
 		$this->version = $version;
 		$this->option_name = $option_name;
+		$this->post_id = NULL;
 		$this->settings = get_option( $this->option_name );
+		$this->save_to_content = isset( PeHaa_Themes_Page_Builder::$settings['save_to_content'] ) && 'yes' === PeHaa_Themes_Page_Builder::$settings['save_to_content'];
 		$this->phtpb_post_types = PeHaa_Themes_Page_Builder::$phtpb_post_types;
 		add_filter( 'pht_meta_content_into_editor', array( $this, 'replace_preview_img_srcs' ) );
-
-
-		
 
 	}
 
@@ -83,7 +86,12 @@ class PeHaa_Themes_Page_Builder_Admin {
 		if ( !isset( $post->post_type ) ) {
 			return;
 		}
+		$this->post_id = $post->ID;
 		$this->render_page_builder = $this->check_for_pagebuilder_by_id( $post->ID, $post_type );
+		$this->state = 'yes' === get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true );
+		$this->meta_content = get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_content, true );
+		$this->check_content_inconsistency = $this->check_content_inconsistency( $post );
+		$this->is_builder_used = !$this->check_content_inconsistency && $this->state;
 
 	}
 
@@ -118,6 +126,10 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 	function restore_post_revision( $post_id, $revision_id ) {
 
+		if ( $this->save_to_content ) {
+			return;
+		}
+
 		$meta_content = get_metadata( 'post', $revision_id, PeHaa_Themes_Page_Builder::$meta_field_name_content, true );
 		if ( false !== $meta_content ) {
 			update_post_meta( $post_id, PeHaa_Themes_Page_Builder::$meta_field_name_content, $meta_content );
@@ -137,6 +149,10 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 	function phtpb_revision_fields( $fields ) {
 
+		if ( $this->save_to_content ) {
+			return $fields;
+		}
+
 		$fields[PeHaa_Themes_Page_Builder::$meta_field_name_content] = esc_html__( 'Page Builder Content', $this->name );
 		$fields[PeHaa_Themes_Page_Builder::$meta_field_name_state] = esc_html__( 'Page Builder Activated', $this->name );
 		return $fields;
@@ -145,12 +161,20 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 	function phtpb_revision_field( $value, $field, $revision ) {
 
+		if ( $this->save_to_content ) {
+			return $value;
+		}
+
 		$page_builder_data = get_metadata( 'post', $revision->ID, PeHaa_Themes_Page_Builder::$meta_field_name_content, true );
 		return $page_builder_data;
 
 	}
 
 	function phtpb_revision_field_state( $value, $field, $revision ) {
+
+		if ( $this->save_to_content ) {
+			return $value;
+		}
 
 		$page_builder_data = 'yes' === get_metadata( 'post', $revision->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true ) ? esc_html__( 'Page Builder is activated' , $this->name ) :  esc_html__( 'Page Builder is not activated' , $this->name );
 
@@ -185,7 +209,9 @@ class PeHaa_Themes_Page_Builder_Admin {
 	 */
 	public function enqueue_scripts( $hook ) {
 
-		if ( !$this->render_page_builder ) return;
+		if ( !$this->render_page_builder ) {
+			return;
+		}
 
 		wp_enqueue_script( 'wp-color-picker' );
 		wp_enqueue_script( 'underscore' );
@@ -199,11 +225,11 @@ class PeHaa_Themes_Page_Builder_Admin {
 		$protocol = is_ssl() ? 'https' : 'http';
 		$gmaps_url = $protocol . '://maps.googleapis.com/maps/api/js?' . $api_key_query . 'callback=initialize';
 		wp_enqueue_script( $this->name, plugin_dir_url( __FILE__ ) . 'js/phtpb-admin.js', array( 'jquery', 'jquery-ui-core', 'underscore', 'jquery-ui-sortable', 'jquery-ui-droppable', 'backbone', 'wp-color-picker', 'jquery-ui-datepicker' ), $this->version, true );
-
 		wp_localize_script(
 			'jquery',
 			'phtpb_data',
 			array(
+				'save_to' => ( $this->save_to_content && !$this->meta_content ) ? 'content' : 'phtpb_secondeditor',
 				'elements' => $this->phtpb_config_data_js,
 				'gmaps_url' => $gmaps_url,
 				'confirmation' => esc_html__( 'Your content will be modified. Do you still want to switch? You have probably altered the shortcodes syntax.  Switching will reestablish it properly and is a recommended action. Saving your post will also reestablish the shortcodes syntax - your modification might be lost.', $this->name ),
@@ -221,7 +247,9 @@ class PeHaa_Themes_Page_Builder_Admin {
 	 */
 	public function add_meta_box( $post_type ) {
 
-		if ( !$this->render_page_builder ) return;
+		if ( !$this->render_page_builder ) {
+			return;
+		}
 
 		add_meta_box(
 			'phtpb',
@@ -232,6 +260,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 			'high'
 		);
 
+		
 		add_meta_box(
 			'phtpb_state_mb',
 			__( 'PeHaa Themes Page Builder state', $this->name ),
@@ -273,11 +302,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 	public function render_meta_box_content( $post ) {
 
 		wp_nonce_field( 'phtpb_inner_custom_box', 'phtpb_inner_custom_box_nonce' );
-		$value = get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true );
-		
-		if ( ! in_array( $value, array( 'no', 'yes' ) ) ) {
-			$value = 'no';
-		}?>
+		$value = $this->state ? 'yes' : 'no';?>
     	<p>
         <label for="phtpb_state-no">
             <input type="radio" name="phtpb_state" id="phtpb_state-no" value="no" <?php checked( $value, 'no' ); ?>>
@@ -303,16 +328,22 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 	private function check_content_inconsistency( $post ) {
 
-		$meta_content = get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_content, true );
+		if ( $this->save_to_content && !$this->state ) {
+			return false;
+		}
 
-		if ( $meta_content && 'yes' !== get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true ) ) {
+		if ( $this->save_to_content && $this->meta_content ) {
+			return false;
+		}
+
+		if ( $this->meta_content && !$this->state ) {
 			return true;
 		}
 		
-		$cleaned_meta_content = trim( strip_tags( $this->cleaned_content( $meta_content ) ) );
+		$cleaned_meta_content = trim( strip_tags( $this->cleaned_content( $this->meta_content ) ) );
 		$content = trim( strip_tags( $post->post_content ) );
 
-		if ( $meta_content && ( $content !==  $cleaned_meta_content ) && ( trim( strip_tags( $meta_content ) ) !== $content ) ) {
+		if ( $this->meta_content && ( $content !==  $cleaned_meta_content ) && ( trim( strip_tags( $this->meta_content ) ) !== $content ) ) {
 			return true;
 		}
 			
@@ -327,28 +358,26 @@ class PeHaa_Themes_Page_Builder_Admin {
 	 */
 	public function add_toggle_button( $post ) {
 
-		if ( !$this->render_page_builder ) return;
+		if ( !$this->render_page_builder ) {
+			return;
+		}
 
-		$is_content_inconsistency = $this->check_content_inconsistency( $post );
-
-		$is_builder_used = !$is_content_inconsistency && 'yes' === get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true );
-
-		if ( $is_content_inconsistency ) { ?>
+		if ( $this->check_content_inconsistency ) { ?>
 			
 			<div class="phtpb_table">
 		
 		<?php }
-
-				printf( '<a href="#" id="phtpb_toggle_builder-meta" data-content-source="phtpb_secondeditor" class="js-phtpb_toggle_builder button phtpb_button phtpb_h-align--center %4$s"><span class="phtpb_use_default %6$s">%2$s</span> <span class="phtpb_activate_pb %5$s">%1$s</span> <span class="phtpb_use_pb js-hidden">%3$s</span></a>',
-					$is_content_inconsistency ? esc_html__( 'Hi! Let\'s restore the PHT Page Builder content.', $this->name ) : esc_html__( 'Hi! Let\'s use PeHaa Themes Page Builder', $this->name ),
+				printf( '<a href="#" id="phtpb_toggle_builder-meta" data-content-source="%7$s" class="js-phtpb_toggle_builder button phtpb_button phtpb_h-align--center %4$s"><span class="phtpb_use_default %6$s">%2$s</span> <span class="phtpb_activate_pb %5$s">%1$s</span> <span class="phtpb_use_pb js-hidden">%3$s</span></a>',
+					$this->check_content_inconsistency ? esc_html__( 'Hi! Let\'s restore the PHT Page Builder content.', $this->name ) : esc_html__( 'Hi! Let\'s use PeHaa Themes Page Builder', $this->name ),
 					esc_html__( 'Show me the default editor', $this->name ),
 					esc_html__( 'Take me back to the Page Builder', $this->name ),
-					( $is_builder_used ? 'phtpb_builder_is_used' : 'button-primary' ) . ( $is_content_inconsistency ? ' phtpb_table--cell' : ''),
-					( $is_builder_used ? 'js-hidden' : '' ),
-					( $is_builder_used ? '' : 'js-hidden' )
+					( $this->is_builder_used ? 'phtpb_builder_is_used' : 'button-primary' ) . ( $this->check_content_inconsistency ? ' phtpb_table--cell' : ''),
+					( $this->is_builder_used ? 'js-hidden' : '' ),
+					( $this->is_builder_used ? '' : 'js-hidden' ),
+					( $this->save_to_content && !$this->meta_content ) ? 'content' : 'phtpb_secondeditor'
 				);
 
-			if ( $is_content_inconsistency ) { ?>
+			if ( $this->check_content_inconsistency ) { ?>
 
 				<span class="phtpb_table--cell"><?php _e( 'or', $this->name ); ?></span>
 
@@ -357,9 +386,9 @@ class PeHaa_Themes_Page_Builder_Admin {
 					esc_html__( 'Hi! Let\'s start with your current content.', $this->name ),
 					esc_html__( 'Show me the default editor', $this->name ),
 					esc_html__( 'Take me back to the PHT Page Builder', $this->name ),
-					( $is_builder_used ? 'phtpb_builder_is_used' : 'button-primary' ),
-					( $is_builder_used ? 'js-hidden' : '' ),
-					( $is_builder_used ? '' : 'js-hidden' )
+					( $this->is_builder_used ? 'phtpb_builder_is_used' : 'button-primary' ),
+					( $this->is_builder_used ? 'js-hidden' : '' ),
+					( $this->is_builder_used ? '' : 'js-hidden' )
 				); ?>
 
 			</div>
@@ -375,25 +404,29 @@ class PeHaa_Themes_Page_Builder_Admin {
 	 */
 	public function open_editor_wrap( $post ) {
 
-		if ( !$this->render_page_builder ) return;
-
-		$is_content_inconsistency = $this->check_content_inconsistency( $post );
-
-		$is_builder_used = !$is_content_inconsistency && 'yes' === get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true ) ? true : false;
+		if ( !$this->render_page_builder ) {
+			return;
+		}
 
 		if ( ! in_array( $post->post_type, $this->phtpb_post_types ) ) {
 			return;
 		}
 		printf( '<div id="phtpb_main_editor_wrap" class="%s">',
-			$is_builder_used ? 'phtpb_hidden phtpb_activated' : 'phtpb_not_activated'
+			$this->is_builder_used ? 'phtpb_hidden phtpb_activated' : 'phtpb_not_activated'
 		);
 	}
 
 	public function my_second_editor( $post ) {
 
-		if ( !$this->render_page_builder ) return;
+		if ( $this->save_to_content && !$this->meta_content ) {
+			return;
+		}
+ 
+		if ( !$this->render_page_builder ) {
+			return;
+		}
 		
-		$content = apply_filters( 'pht_meta_content_into_editor', get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_content, true ) );
+		$content = apply_filters( 'pht_meta_content_into_editor', $this->meta_content );
 		
 		wp_editor( $content, 'phtpb_secondeditor' );
 	}
@@ -420,6 +453,10 @@ class PeHaa_Themes_Page_Builder_Admin {
 	}
 
 	public function store_meta_fields_revision( $post_id ) {
+
+		if ( $this->save_to_content ) {
+			return;
+		}
 
 		$parent_id = wp_is_post_revision( $post_id );
 
@@ -476,6 +513,11 @@ class PeHaa_Themes_Page_Builder_Admin {
 			return;
 		}
 
+		if ( $this->save_to_content ) {
+			update_post_meta( $post_id, PeHaa_Themes_Page_Builder::$meta_field_name_content, '' );
+			return;
+		}
+
 		if ( isset( $_POST['phtpb_secondeditor'] ) ) {
 			$meta_content = wp_kses_post( $_POST['phtpb_secondeditor'] );
 			update_post_meta( $post_id, PeHaa_Themes_Page_Builder::$meta_field_name_content, $meta_content );
@@ -489,7 +531,11 @@ class PeHaa_Themes_Page_Builder_Admin {
 	 * @since    1.0.0
 	 */
 
-	private function cleaned_content( $content ) { 
+	private function cleaned_content( $content ) {
+
+		if ( $this->save_to_content ) {
+			return $content;
+		}
 
 		$tagregexp = 'phtpb_text';
 		$pattern =

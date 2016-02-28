@@ -213,7 +213,7 @@ class PeHaa_Themes_Page_Builder_Public {
 	 * @var      string    $content
 	 * @return      string    $content       The post content.
 	 */
-	public function get_meta_content( $content ) {
+	public function get_phtpb_content( $content ) {
 		
 		global $post;
 		
@@ -241,6 +241,14 @@ class PeHaa_Themes_Page_Builder_Public {
 
 		if ( post_password_required() ) {
 			return '<div class="pht-wrapper">' . get_the_password_form() . '</div>';
+		}
+
+		if ( isset( PeHaa_Themes_Page_Builder::$settings['save_to_content'] ) && 'yes' === PeHaa_Themes_Page_Builder::$settings['save_to_content'] && !get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_content, true ) ) {
+			return $content;
+		}
+
+		if ( !get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_content, true ) ) {
+			return $content;
 		}
 
 		return get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_content, true );

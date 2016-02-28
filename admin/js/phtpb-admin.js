@@ -1,6 +1,7 @@
 var 
 	peHaaThemesPageBuilder = peHaaThemesPageBuilder || {}, 
-	peHaaThemesPageBuilder_Events = _.extend( {}, Backbone.Events );
+	peHaaThemesPageBuilder_Events = _.extend( {}, Backbone.Events ),
+	contentSource = phtpb_data.save_to;
 	
 ( function($) {
 
@@ -543,6 +544,7 @@ var
 				$('label[for=' + $(this).attr('id') + ']').trigger('click');
 			});
 			if ( this.$( '#phtpb_content_new' ).length ) {
+
 				if ( !_.isUndefined( window.switchEditors ) ) {
 					window.switchEditors.go( 'phtpb_content_new', 'tinymce' );
 				}
@@ -553,7 +555,12 @@ var
 						window.tinyMCE.remove( '#phtpb_content_new' );
 					}
 				}
+				
+					//window.switchEditors.go( 'content','tinymce' );
+					//window.wpActiveEditor = 'content';
+				
 			}
+			
 			
 		},
 
@@ -1164,7 +1171,7 @@ var
 
 		reInitialize : function( withoutShortcodesUpdated, start_data ) {
 		
-			var content_source = 'phtpb_secondeditor',
+			var content_source = contentSource,
 				content,
 				content_raw,
 				contentIsEmpty,
@@ -1422,7 +1429,7 @@ var
 					
 			var content = this.generateModuleShortcode();
 
-			phtpb_set_content( 'phtpb_secondeditor', content );
+			phtpb_set_content( contentSource, content );
 
 			phtpb_set_content( 'content', content );
 			
@@ -1588,7 +1595,17 @@ var
 	}
 
 	$( document ).ready( function() {
-
+		
+		if ( typeof qTranslateConfig !== 'undefined' ) {
+			qTranslateConfig.qtx.removeContentHook( document.getElementById('phtpb_content_new') );
+			qTranslateConfig.qtx.addLanguageSwitchAfterListener(
+					function(){
+						qTranslateConfig.qtx.removeContentHook( document.getElementById( 'phtpb_content_new' ) );
+						peHaaThemesPageBuilder_App.remove();
+						peHaaThemesPageBuilder_App.initialize();
+					}
+				);
+		}
 		var peHaaThemesPageBuilder_App,
 			$builder_toggle_button = $( 'body' ).find( '#phtpb_toggle_builder-meta' ),
 			isActivated = $builder_toggle_button.is('.phtpb_builder_is_used'), 
@@ -1606,7 +1623,7 @@ var
 			peHaaThemesPageBuilder_App = new peHaaThemesPageBuilder.AppView( {
 				model : peHaaThemesPageBuilder.Module,
 				collection : new peHaaThemesPageBuilder.Modules(),
-				start_data : 'phtpb_secondeditor'
+				start_data : contentSource
 			} );
 			
 			$page_builder_mb.addClass('phtpb_visible');
@@ -1616,14 +1633,13 @@ var
 		} else {
 			$page_builder_mb.addClass('phtpb_hidden');
 		}
-	
-		
-	
+
 		$( document ).on( 'click', '.js-phtpb_toggle_builder', function( event ) {
 			
 			event.preventDefault();
 
-			var start_data = $(this).data( 'content-source' );
+			var start_data = $(this).data( 'content-source' ),
+				showClass = 'content' === start_data ? 'phtpb_show_content_editor' : 'phtpb_show_second_editor';
 
 			if ( !start_data ) {
 				return false;
@@ -1636,7 +1652,7 @@ var
 				currentState = false;
 				$('.phtpb_use_default, .phtpb_use_pb').toggleClass('js-hidden');
 				$(this).toggleClass('button-primary');
-				$main_editor_wrap.addClass('phtpb_hide_pd phtpb_show_second_editor');
+				$main_editor_wrap.addClass( 'phtpb_hide_pd ' + showClass );
 
 			} else {
 
@@ -1665,7 +1681,7 @@ var
 					
 					$('.phtpb_use_default, .phtpb_use_pb').toggleClass('js-hidden');
 					$(this).toggleClass('button-primary');
-					$main_editor_wrap.removeClass('phtpb_hide_pd phtpb_show_second_editor');
+					$main_editor_wrap.removeClass( 'phtpb_hide_pd ' + showClass );
 					currentState = true;
 									
 				}
@@ -1675,10 +1691,6 @@ var
 				
 		});
 
-	
-				
-	
-		
 	});
 
 } )(jQuery);

@@ -589,9 +589,12 @@ span.js-hidden {display:none}
 #wp-phtpb_secondeditor-wrap, .phtpb_activated #postdivrich, .phtpb_activated #wp-content-wrap, .phtpb_activated #wp-content-wrap  {
 	display:none;
 }
-.phtpb_show_second_editor #wp-phtpb_secondeditor-wrap, .phtpb_visible + #phtpb_state_mb {
+.phtpb_show_second_editor #wp-phtpb_secondeditor-wrap,
+.phtpb_visible + #phtpb_state_mb,
+.phtpb_show_content_editor #wp-content-wrap, .phtpb_show_content_editor #postdivrich {
 	display:block;
 }
+
 
 #phtpb {
 	border:1px solid $section_color;

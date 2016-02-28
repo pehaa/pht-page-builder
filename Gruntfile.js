@@ -44,6 +44,7 @@ module.exports = function(grunt) {
                 },
                 files: {                         // Dictionary of files
                     'admin/css/screen.css': 'admin/scss/screen.scss',
+                    'admin/css/options.css': 'admin/scss/options.scss',
                     'public/css/style.css':'public/scss/style.scss'
                 }
             },
@@ -53,6 +54,7 @@ module.exports = function(grunt) {
                 },
             files: {                         // Dictionary of files
                     'admin/css/screen.dev.css': 'admin/scss/screen.scss',
+                    'admin/css/options.dev.css': 'admin/scss/options.scss',
                     'public/css/style.dev.css':'public/scss/style.scss'
                   }
             }
