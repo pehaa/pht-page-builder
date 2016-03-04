@@ -3,7 +3,7 @@ Contributors: pehaa
 Tags: WordPress, plugin, page builder, wordpress plugin, grid
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 2.4.0
+Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,6 +23,11 @@ Coming soon
 
 == Changelog ==
 
+= 2.5.0 =
+Compatibility with the qtranslate-x plugin
+Added Save to Content on option
+Improved Options Page
+
 = 2.4.1 =
 Gifs are not resized in image
 
@@ -34,7 +39,6 @@ Gifs are not resized in gallery
 Fixed ids for rows and columns
 More flexibility for Slider module via filter
 Deactivation option added
-
 
 = 2.3.0 =
 Added Behance icon
