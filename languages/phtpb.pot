@@ -2,9 +2,9 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: PeHaa Themes Page Builder 2.5.0\n"
+"Project-Id-Version: PeHaa Themes Page Builder 2.6.0\n"
 "Report-Msgid-Bugs-To: info@pehaa.com\n"
-"POT-Creation-Date: 2016-03-03 18:11:24+00:00\n"
+"POT-Creation-Date: 2016-03-09 07:21:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,23 +13,23 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.4.9\n"
 
-#: admin/class-phtpb-admin.php:156
+#: admin/class-phtpb-admin.php:159
 msgid "Page Builder Content"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:157
+#: admin/class-phtpb-admin.php:160
 msgid "Page Builder Activated"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:179
+#: admin/class-phtpb-admin.php:182
 msgid "Page Builder is activated"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:179
+#: admin/class-phtpb-admin.php:182
 msgid "Page Builder is not activated"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:235
+#: admin/class-phtpb-admin.php:247
 msgid ""
 "Your content will be modified. Do you still want to switch? You have "
 "probably altered the shortcodes syntax.  Switching will reestablish it "
@@ -37,166 +37,166 @@ msgid ""
 "reestablish the shortcodes syntax - your modification might be lost."
 msgstr ""
 
-#: admin/class-phtpb-admin.php:236
+#: admin/class-phtpb-admin.php:248
 msgid "Remove image"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:256
+#: admin/class-phtpb-admin.php:268
 msgid "Page Builder"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:266
+#: admin/class-phtpb-admin.php:278
 msgid "PeHaa Themes Page Builder state"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:309
+#: admin/class-phtpb-admin.php:325
 msgid "Not active"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:313
+#: admin/class-phtpb-admin.php:329
 msgid "Active"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:323
+#: admin/class-phtpb-admin.php:339
 msgid "Developed by "
 msgstr ""
 
-#: admin/class-phtpb-admin.php:324
+#: admin/class-phtpb-admin.php:340
 msgid "Version: "
 msgstr ""
 
-#: admin/class-phtpb-admin.php:371
+#: admin/class-phtpb-admin.php:387
 msgid "Hi! Let's restore the PHT Page Builder content."
 msgstr ""
 
-#: admin/class-phtpb-admin.php:371
+#: admin/class-phtpb-admin.php:387
 msgid "Hi! Let's use PeHaa Themes Page Builder"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:372 admin/class-phtpb-admin.php:387
+#: admin/class-phtpb-admin.php:388 admin/class-phtpb-admin.php:403
 msgid "Show me the default editor"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:373
+#: admin/class-phtpb-admin.php:389
 msgid "Take me back to the Page Builder"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:382
+#: admin/class-phtpb-admin.php:398
 msgid "or"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:386
+#: admin/class-phtpb-admin.php:402
 msgid "Hi! Let's start with your current content."
 msgstr ""
 
-#: admin/class-phtpb-admin.php:388
+#: admin/class-phtpb-admin.php:404
 msgid "Take me back to the PHT Page Builder"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:36
+#: admin/class-phtpb-mb-templates.php:34
 msgid "Close modal window"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:40
+#: admin/class-phtpb-mb-templates.php:38
 msgid "Save Changes & Exit"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:91
+#: admin/class-phtpb-mb-templates.php:89
 msgid "Find"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:98
+#: admin/class-phtpb-mb-templates.php:96
 msgid "Upload an image"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:105
+#: admin/class-phtpb-mb-templates.php:103
 msgid "Create/Update Gallery"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:106
+#: admin/class-phtpb-mb-templates.php:104
 msgid "Number of images in this gallery: "
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:110
+#: admin/class-phtpb-mb-templates.php:108
 msgid "Upload a video"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:173
+#: admin/class-phtpb-mb-templates.php:171
 msgid ""
 "Disabled modules: Posts Grid and Filtered Portfolio are available "
 "exlusively with <a href=\"%s\">Yaga - our Multipurpose Premium Theme</a>"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:175
+#: admin/class-phtpb-mb-templates.php:173
 msgid "Buy Yaga"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:182
+#: admin/class-phtpb-mb-templates.php:180
 msgid ""
 "To activate the disabled module Contact Form you have to install and "
 "activate the Contact Form 7 Plugin"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:194
+#: admin/class-phtpb-mb-templates.php:192
 msgid "One column"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:219 includes/phtpb-config.php:100
+#: admin/class-phtpb-mb-templates.php:217 includes/phtpb-config.php:100
 #: includes/phtpb-config.php:255 includes/phtpb-config.php:272
 #: includes/phtpb-config.php:424 includes/phtpb-config.php:627
 #: includes/phtpb-config.php:1050
 msgid "None"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:255
+#: admin/class-phtpb-mb-templates.php:253
 msgid "Add Submodule"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:307
+#: admin/class-phtpb-mb-templates.php:305
 msgid "Column settings"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:309 admin/class-phtpb-options.php:158
+#: admin/class-phtpb-mb-templates.php:307 admin/class-phtpb-options.php:158
 msgid "Settings"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:313
+#: admin/class-phtpb-mb-templates.php:311
 msgid "Edit"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:317
+#: admin/class-phtpb-mb-templates.php:315
 msgid "Clone"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:322
+#: admin/class-phtpb-mb-templates.php:320
 msgid "Delete"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:334
+#: admin/class-phtpb-mb-templates.php:332
 msgid "Open modal window to insert Module(s)"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:334
+#: admin/class-phtpb-mb-templates.php:332
 msgid "Add Module"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:348
+#: admin/class-phtpb-mb-templates.php:346
 msgid "Add Section"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:371
+#: admin/class-phtpb-mb-templates.php:369
 msgid "Add Row"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:377
+#: admin/class-phtpb-mb-templates.php:375
 msgid "Subdivision"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:388
+#: admin/class-phtpb-mb-templates.php:386
 msgid "All Modules"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:391
+#: admin/class-phtpb-mb-templates.php:389
 msgid "Columns Layout"
 msgstr ""
 

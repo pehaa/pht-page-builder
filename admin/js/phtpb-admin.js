@@ -1617,6 +1617,10 @@ var
 			
 		peHaaThemesPageBuilder.initial_content = $hidden_editor.html();	
 		$hidden_editor.remove();
+
+		if ( phtpb_data.is_always_active ) {
+			isActivated = true;
+		}
 	
 		if ( true === isActivated ) {		
 

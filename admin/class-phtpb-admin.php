@@ -52,6 +52,8 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 	private $render_page_builder = false;
 
+	private $add_page_builder_scripts_and_styles = false;
+
 	private $check_content_inconsistency = false;
 
 	private $state = false;
@@ -88,6 +90,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 		}
 		$this->post_id = $post->ID;
 		$this->render_page_builder = $this->check_for_pagebuilder_by_id( $post->ID, $post_type );
+		$this->add_page_builder_scripts_and_styles = $this->render_page_builder;
 		$this->state = 'yes' === get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true );
 		$this->meta_content = get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_content, true );
 		$this->check_content_inconsistency = $this->check_content_inconsistency( $post );
@@ -194,9 +197,12 @@ class PeHaa_Themes_Page_Builder_Admin {
 	 */
 	public function enqueue_styles() {
 
-		if ( !$this->render_page_builder ) {
+		$this->add_page_builder_scripts_and_styles = $this->render_page_builder || apply_filters( 'phtpb_add_page_builder_scripts_and_styles', $this->render_page_builder );
+
+		if ( !$this->add_page_builder_scripts_and_styles ) {
 			return;
 		}
+
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( $this->name, plugin_dir_url( __FILE__ ) . 'css/screen.dev.css', array(), $this->version, 'all' );
 
@@ -209,7 +215,9 @@ class PeHaa_Themes_Page_Builder_Admin {
 	 */
 	public function enqueue_scripts( $hook ) {
 
-		if ( !$this->render_page_builder ) {
+		$this->add_page_builder_scripts_and_styles = $this->render_page_builder || apply_filters( 'phtpb_add_page_builder_scripts_and_styles', $this->render_page_builder );
+
+		if ( !$this->add_page_builder_scripts_and_styles ) {
 			return;
 		}
 
@@ -225,13 +233,17 @@ class PeHaa_Themes_Page_Builder_Admin {
 		$protocol = is_ssl() ? 'https' : 'http';
 		$gmaps_url = $protocol . '://maps.googleapis.com/maps/api/js?' . $api_key_query . 'callback=initialize';
 		wp_enqueue_script( $this->name, plugin_dir_url( __FILE__ ) . 'js/phtpb-admin.js', array( 'jquery', 'jquery-ui-core', 'underscore', 'jquery-ui-sortable', 'jquery-ui-droppable', 'backbone', 'wp-color-picker', 'jquery-ui-datepicker' ), $this->version, true );
+
+		$save_to = ( $this->save_to_content && !$this->meta_content ) ? 'content' : 'phtpb_secondeditor';
+		$save_to = apply_filters( 'phtpb_save_to', $save_to );
 		wp_localize_script(
 			'jquery',
 			'phtpb_data',
 			array(
-				'save_to' => ( $this->save_to_content && !$this->meta_content ) ? 'content' : 'phtpb_secondeditor',
+				'save_to' => esc_attr( $save_to ),
 				'elements' => $this->phtpb_config_data_js,
 				'gmaps_url' => $gmaps_url,
+				'is_always_active' => ( boolean ) apply_filters( 'phtpb_is_always_active', false ),
 				'confirmation' => esc_html__( 'Your content will be modified. Do you still want to switch? You have probably altered the shortcodes syntax.  Switching will reestablish it properly and is a recommended action. Saving your post will also reestablish the shortcodes syntax - your modification might be lost.', $this->name ),
 				'rmv_img' => esc_html__( 'Remove image', $this->name )
 			)
@@ -274,7 +286,12 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 	public function render_page_builder_meta_box() {
 
-		$templates = new PeHaa_Themes_Page_Builder_MB_Templates( $this->name );
+		self::render_page_builder();
+		echo $this->meta_box_footer();
+	}
+
+	public static function render_page_builder() {
+		$templates = new PeHaa_Themes_Page_Builder_MB_Templates();
 		do_action( 'phtpb_before_page_builder' );
 		echo '<div class="phtpb_preloader phtpb_h-align--center pht-transition"><i class="fa fa-cog fa-spin"></i></div>';
 		echo '<div id="phtpb_hidden_editor" class="phtpb_hidden_editor">';
@@ -291,7 +308,6 @@ class PeHaa_Themes_Page_Builder_Admin {
 		$templates->phtpb_modal_templates();
 		$templates->phtpb_all_modules_modal_template();
 		do_action( 'phtpb_after_page_builder' );
-		echo $this->meta_box_footer();
 	}
 
 	/**
@@ -519,7 +535,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 		}
 
 		if ( isset( $_POST['phtpb_secondeditor'] ) ) {
-			$meta_content = wp_kses_post( $_POST['phtpb_secondeditor'] );
+			$meta_content = $_POST['phtpb_secondeditor'];
 			update_post_meta( $post_id, PeHaa_Themes_Page_Builder::$meta_field_name_content, $meta_content );
 		}
 

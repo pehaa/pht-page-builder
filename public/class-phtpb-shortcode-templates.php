@@ -1071,9 +1071,10 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				);
 
 		} else {
-			return sprintf( '<img class="js-image-container js-pht-img-loader" alt="" src="%s" data-imgurl="%s">',
+			return sprintf( '<img class="js-image-container js-pht-img-loader" src="%1$s" data-imgurl="%2$s" alt="%3$s" >',
 				esc_url( $img ), 
-				esc_url( $img ) 
+				esc_url( $img ),
+				self::image_alt(  $this->phtpb_id ) 
 				);
 		}
 

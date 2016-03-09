@@ -3,7 +3,7 @@ Contributors: pehaa
 Tags: WordPress, plugin, page builder, wordpress plugin, grid
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 2.5.0
+Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,11 @@ Coming soon
 Coming soon
 
 == Changelog ==
+
+= 2.6.0 =
+Removed wp_kses_post filter on page builder meta content
+Filter enabling using page builder otherwise than a meta box
+Fixed empty alt on preloaded images
 
 = 2.5.0 =
 Compatibility with the qtranslate-x plugin
