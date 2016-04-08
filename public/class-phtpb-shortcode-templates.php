@@ -405,6 +405,10 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		if ( 'fade' === $this->select_attribute( 'anim' ) ) {
 			$args_array['data-fade'] = "true";
 		}
+
+		$id = isset( $this->atts['module_id'] ) && '' !== trim( $this->atts['module_id'] ) ? trim( $this->atts['module_id'] ) : NULL;
+
+		$args_array = apply_filters( 'phtpb_cslider_data_attributes', $args_array, $id );
 		
 		return $this->container( do_shortcode( $this->content ), 'phtpb_slicks phtpb_slicks--c phtpb_item', '', 'div', $args_array  );
 
@@ -495,17 +499,19 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$output = '<span class="pht-fig__inner">';
 
-		$output .= sprintf( '<img src="%1$s" alt="%2$s" %3$s/>',
+		$rounded_class = $this->is_checked( 'rounded' ) ? ' pht-rounded' : '';
+		$output .= sprintf( '<img src="%1$s" alt="%2$s" %3$s %4$s/>',
 			$display_image['url'],
 			self::image_alt(  $this->phtpb_id ), 
-			$this->d_w ? 'width="' . $this->d_w .'"' : ''
+			$this->d_w ? 'width="' . $this->d_w .'"' : '',
+			$rounded_class ? 'class="' . esc_attr( $rounded_class ) .'"' : ''
 		);
 		if ( isset( $this->atts['link_type'] ) ) {
 			if ( 'url' === $this->atts['link_type'] && $this->link ) {
-				$output .= "<a href='$this->link' class='pht-fig__link--hoverdir pht-fig__link pht-fig__link--main' $this->target></a>";
+				$output .= "<a href='$this->link' class='pht-fig__link--hoverdir pht-fig__link pht-fig__link--main $rounded_class' $this->target></a>";
 			} elseif ( 'lightbox' === $this->atts['link_type'] ) {
 				$full_image = wp_get_attachment_image_src( $this->phtpb_id, apply_filters( 'phtpb_lightbox_image', 'full' ) );
-				$output .= "<a href='$full_image[0]' class='pht-fig__link--hoverdir pht-fig__link js-pht-magnific_popup pht-fig__link--main'></a>";
+				$output .= "<a href='$full_image[0]' class='pht-fig__link--hoverdir pht-fig__link js-pht-magnific_popup pht-fig__link--main $rounded_class'></a>";
 			}
 		}
 		
@@ -515,6 +521,58 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		return $this->container( $output, "phtpb_item phtpb_item--module phtpb_image pht-fig $h_align_class", '', 'figure' );
 		
+	}
+
+	protected function phtpb_inline_images() {
+		$output = do_shortcode( $this->content );
+		if ( $output ) {
+			return $this->container(
+				$output,
+				'phtpb_item phtpb_inline_images phtpb_inline_images--' . $this->h_align . ' pht-text-' . $this->h_align,
+				'',
+				'div',
+				array(),
+				false
+			);
+		}
+		return;
+	}
+
+	protected function phtpb_inline_image() {
+
+		if ( !$this->phtpb_id ) {
+			return;
+		}
+
+		if ( !wp_attachment_is_image( $this->phtpb_id ) ) {
+			return;
+		}
+
+		if ( $this->is_checked( 'resize' ) ) {
+			$width = $this->r_w ? $this->r_w : ( 24 + $this->content_width )*$this->phtpb_width - 24;
+			$height = $this->r_h ? $this->r_h : 0;
+			$resizer = PHTPB_Resize_Image::get_instance();
+			$skip_array = apply_filters( 'phtpb_do_not_resize_in_image', array( 'image/gif' ), $this->atts['module_id'] );
+			$display_image = $resizer->resize_image( $this->phtpb_id, '' , $width, $height, true, $skip_array );
+		} else {
+			$display_image = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
+			$display_image['url'] = $display_image[0];
+		}
+
+		$output = sprintf( '<img src="%1$s" alt="%2$s" %3$s class="pht-mb0 %4$s" %5$s/>',
+			$display_image['url'],
+			self::image_alt(  $this->phtpb_id ), 
+			$this->d_w ? 'width="' . $this->d_w .'"' : '',
+			$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
+			$this->title ? 'title="' . esc_attr( $this->title ) . '"' : ''
+		);
+		
+		if ( $this->link ) {
+			$output .= "<a href='$this->link' class='pht-fig__link--main' $this->target></a>";
+		}	
+	
+		return $this->container( $output, "phtpb_item phtpb_item--module phtpb_inline_image", '', 'span' );
+
 	}
 
 
@@ -734,6 +792,68 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	}
 
+	protected function phtpb_timetable() {
+
+		global $wp_locale;
+
+		$ts = current_time( 'timestamp' );
+		$date = gmdate( 'Y/m/d H:m', $ts);
+		
+		$check_start = $check_end = true;
+
+		if ( isset( $this->atts['start'] ) && $this->atts['start'] ) {
+			
+			$check_start = $this->atts['start'] <= $date;
+			
+		}
+
+		if ( isset( $this->atts['end'] ) && $this->atts['end'] ) {
+			
+			$check_end = $this->atts['end'] >= $date;
+			
+		}
+
+		if ( !( $check_start && $check_end ) ) {
+			return;
+		}
+
+		$output = '';
+
+		if ( $this->title ) {
+			$output .= '<h3 class="phtpb_timetable_title">' . esc_html( $this->title ) .'</h3>'; 
+		}
+
+		$output .= '<div class="phtpb_timetable__table">';
+		
+		$days = array( 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday' );
+		
+		for ( $i = 0; $i <= 6; $i++ ) {
+
+			$class = 'phtpb_timetable__day phtpb_timetable__day--' . $days[ $i ];
+
+			$day_number = ( $i + 1 ) % 7;
+
+			if ( $day_number === (int) gmdate( 'w', $ts ) ) {
+				$class .= ' phtpb_timetable__day--today';
+			}
+
+			$wd = $wp_locale->get_weekday( $day_number );
+
+			$class .= preg_match( "/\d/", $this->atts[$days[ $i ] . '_hours'] ) ? '' : ' phtpb_timetable__day--closed';
+
+			$output .= sprintf( '<div class="%s"><span class="phtpb_timetable__day__label">%s</span> <span class="phtpb_timetable__day__value">%s</span></div>',
+				esc_attr( $class ),
+				$this->is_checked( 'abbrev_day' ) ? $wp_locale->get_weekday_abbrev( $wd ) : $wd,
+				$this->atts[$days[ $i ] . '_hours'] ? esc_html( $this->atts[$days[ $i ] . '_hours'] ) : ''
+			);
+			 
+		}
+		$output .= '</div>';
+
+		return $this->container( $output, 'phtpb_item phtpb_timetable' );
+
+	}
+
 
 	protected function phtpb_google_map() {
 
@@ -796,6 +916,10 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		if ( 'fade' === $this->select_attribute( 'anim' ) ) {
 			$args_array['data-fade'] = "true";
 		}
+
+		$id = isset( $this->atts['module_id'] ) && '' !== trim( $this->atts['module_id'] ) ? trim( $this->atts['module_id'] ) : NULL;
+
+		$args_array = apply_filters( 'phtpb_img_carousel_data_attributes', $args_array, $id );
 
 		$hoption = $this->select_attribute( 'hoption' );
 

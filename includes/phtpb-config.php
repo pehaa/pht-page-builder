@@ -416,6 +416,12 @@ $phtpb_config_data['phtpb_image'] = array(
 			'type' => 'text',
 			'default' => esc_html__( '', $this->plugin_name ),
 		),
+		'rounded' => array(
+			'title' => esc_html__( 'Rounded Corners', $this->plugin_name ),
+			'description' => esc_html__( 'Use with care - make sure that your image is square.', $this->plugin_name ),
+			'type' => 'checkbox',
+			'default' => ''
+		),
 		'link_type' => array(
 			'title' => esc_html__( 'Link Type', $this->plugin_name ),
 			'type' => 'select',
@@ -464,8 +470,8 @@ $phtpb_config_data['phtpb_gallery'] = array(
 			'title' => esc_html__( 'Images separation', $this->plugin_name ),
 			'type' => 'select',
 			'options' => array(
-				'6' => '6px',
 				'0' => esc_html__( 'No separation', $this->plugin_name ),
+				'6' => '6px',
 				'16' => '16px',
 				'24' => '24px',
 			),
@@ -475,6 +481,90 @@ $phtpb_config_data['phtpb_gallery'] = array(
 		'margin_b' => $margin_b_item,
 	),
 	'phtpb_admin_mode' => 'simple',
+	'create_with_settings' => true
+);
+
+$phtpb_config_data['phtpb_inline_images'] = array(
+	'label' => 'phtpb_inline_images',
+	'title' => esc_html__( 'Inline Images', $this->plugin_name ),
+	'icon' => 'fa fa-ellipsis-h',
+	'phtpb_admin_type' => 'module',
+	'phtpb_admin_mode' => 'parent',
+	'child' => 'phtpb_inline_image',
+	'fields' => array(
+		'h_align' => array(
+			'title' => esc_html__( 'Images alignment', $this->plugin_name ),
+			'type' => 'select',
+			'options' => array(
+				'center' => esc_html__( 'Center', $this->plugin_name ),
+				'left' => esc_html__( 'Left', $this->plugin_name ),
+				'right' => esc_html__( 'Right', $this->plugin_name ),
+			),
+			'default' => 'center',
+			'description' => esc_html__( 'This module allows you to add more than one image in a row. The images will be displayed in a row(s) (useful for pictos and logos). You can choose the horizontal alignement here.', $this->plugin_name )
+		),
+		'margin_b' => $margin_b_item,
+	),
+	'create_with_settings' => true,
+	'add_submodule' => esc_html__( 'Add Image', $this->plugin_name ),
+);
+
+$phtpb_config_data['phtpb_inline_image'] = array(
+	'label' =>  'phtpb_inline_image',
+	'title' => esc_html__( 'Inline_Image', $this->plugin_name ),
+	'phtpb_admin_type' => 'module',
+	'fields' => array(
+		'src' => array(
+			'title' => esc_html__( 'Image Source', $this->plugin_name ),
+			'type' => 'image',
+		),
+		'phtpb_id' => array(
+			'type' => 'image_id',
+		),
+		'resize' => array(
+			'title' => esc_html__( 'Resize', $this->plugin_name ),
+			'description' => esc_html__( 'Resize to fit the column size (recommended).', $this->plugin_name ),
+			'type' => 'checkbox',
+			'default' => 'yes'
+		),
+		'r_w' => array(
+			'title' => esc_html__( 'Resize Width', $this->plugin_name ),
+			'description' => esc_html__( 'Resize width, auto (or leave empty) is recommended.', $this->plugin_name ),
+			'type' => 'text',
+			'default' => esc_html__( 'Auto', $this->plugin_name ),
+		),
+		'r_h' => array(
+			'title' => esc_html__( 'Resize Height', $this->plugin_name ),
+			'description' => esc_html__( 'Resize height, auto (or leave empty) is recommended.', $this->plugin_name ),
+			'type' => 'text',
+			'default' => esc_html__( 'Auto', $this->plugin_name ),
+		),
+		'd_w' => array(
+			'title' => esc_html__( 'Display Width', $this->plugin_name ),
+			'description' => esc_html__( 'You can change here the width that will be use to display the image. If left empty (recommended) the default value will be applied.', $this->plugin_name ),
+			'type' => 'text',
+			'default' => esc_html__( '', $this->plugin_name ),
+		),
+		'rounded' => array(
+			'title' => esc_html__( 'Rounded Corners', $this->plugin_name ),
+			'description' => esc_html__( 'Use with care - make sure that your image is square.', $this->plugin_name ),
+			'type' => 'checkbox',
+			'default' => ''
+		),
+		'title' => array(
+			'title' => esc_html__( 'Image Title', $this->plugin_name ),
+			'description' => esc_html__( 'This one will not be displayed directly, it will be added as a title attribute to your image.', $this->plugin_name ),
+			'type' => 'text',
+		),
+		'link' => array(
+			'title' => esc_html__( 'Link URL', $this->plugin_name ),
+			'type' => 'text',
+			'default' => '',
+			'description' => esc_html__( '(Optional) If you would like your image to be a link, input your destination URL here.', $this->plugin_name )
+		),
+		'target' => $target_item,
+	),
+	'phtpb_admin_mode' => 'advanced_twin',
 	'create_with_settings' => true
 );
 
@@ -1168,6 +1258,76 @@ $phtpb_config_data['phtpb_countdown'] = array(
 );
 
 
+$phtpb_config_data['phtpb_timetable'] = array(
+	'label' =>  'phtpb_timetable',
+	'title' => esc_html__( 'Timetable', $this->plugin_name ),
+	'icon' => 'fa  fa-th-list',
+	'phtpb_admin_type' => 'module',
+	'fields' => array(
+		'start' => array(
+			'title' => esc_html__( 'Start Date', $this->plugin_name ),
+			'type' => 'datepicker',
+			'description' => esc_html__( 'Sometimes you may want to display the timetable only for a limited period of time. Choose the date and time when it should start be displayed. Leave empty if there is no date limitation.', $this->plugin_name ),
+			'default' => ''
+		),
+		'end' => array(
+			'title' => esc_html__( 'End Date', $this->plugin_name ),
+			'type' => 'datepicker',
+			'description' => esc_html__( 'Sometimes you may want to display the timetable only for a limited period of time. Choose the date and time when it should no longer be displayed. Leave empty if there is no date limitation.', $this->plugin_name ),
+			'default' => ''
+		),
+		'title' => array(
+			'title' => esc_html__( 'Title', $this->plugin_name ),
+			'type' => 'text',
+			'default' => '',
+			'description' => esc_html__( 'Set a title here (optional).', $this->plugin_name )
+		),
+		'abbrev_day' => array(
+			'title' => esc_html__( 'Abbreviated days labels', $this->plugin_name  ),
+			'type' => 'checkbox',
+		),
+		'monday_hours' => array(
+			'title' => esc_html__( 'Monday Hours', $this->plugin_name ),
+			'type' => 'text',
+			'default' => __( '10am - 6pm', $this->plugin_name )
+		),
+		'tuesday_hours' => array(
+			'title' => esc_html__( 'Tuesday Hours', $this->plugin_name ),
+			'type' => 'text',
+			'default' => __( '10am - 6pm', $this->plugin_name )
+		),
+		'wednesday_hours' => array(
+			'title' => esc_html__( 'Wednesday Hours', $this->plugin_name ),
+			'type' => 'text',
+			'default' => __( '10am - 6pm', $this->plugin_name )
+		),
+		'thursday_hours' => array(
+			'title' => esc_html__( 'Thursday Hours', $this->plugin_name ),
+			'type' => 'text',
+			'default' => __( '10am - 6pm', $this->plugin_name )
+		),
+		'friday_hours' => array(
+			'title' => esc_html__( 'Friday Hours', $this->plugin_name ),
+			'type' => 'text',
+			'default' => __( '10am - 6pm', $this->plugin_name )
+		),
+		'saturday_hours' => array(
+			'title' => esc_html__( 'Saturday Hours', $this->plugin_name ),
+			'type' => 'text',
+			'default' => __( '10am - 6pm', $this->plugin_name )
+		),
+		'sunday_hours' => array(
+			'title' => esc_html__( 'Sunday Hours', $this->plugin_name ),
+			'type' => 'text',
+			'default' => __( 'Closed', $this->plugin_name )
+		),
+		'margin_b' => $margin_b_item,
+	),
+	'phtpb_admin_mode' => 'simple',
+	'create_with_settings' => true
+);
+
+
 $phtpb_config_data['phtpb_posts'] = array(
 	'label' =>  'phtpb_posts',
 	'title' => esc_html__( 'Posts Grid', $this->plugin_name ),
@@ -1209,9 +1369,9 @@ $phtpb_config_data['phtpb_gallery_portfolio'] = array(
 		'border_width' => array(
 			'title' => esc_html__( 'Images separation', $this->plugin_name ),
 			'type' => 'select',
-			'options' => array(
-				'6' => esc_html__( '6px - default', $this->plugin_name ),
+			'options' => array(			
 				'0' => esc_html__( 'No separation', $this->plugin_name ),
+				'6' => esc_html__( '6px - default', $this->plugin_name ),
 				'16' => esc_html__( '16px', $this->plugin_name ),
 				'24' => esc_html__( '24px - large separation', $this->plugin_name ),
 			),

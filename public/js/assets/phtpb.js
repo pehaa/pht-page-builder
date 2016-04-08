@@ -154,7 +154,8 @@ jQuery(document).ready(function ($) {
 					prevArrow: '<div data-role="none" class="phtpb_slicks--img__btn phtpb_slicks__btn phtpb_slicks__btn--prev pht-pointer" aria-label="previous"></div>',
 					nextArrow: '<div data-role="none" class="phtpb_slicks--img__btn phtpb_slicks__btn phtpb_slicks__btn--next pht-pointer" aria-label="next"></div>',
 					infinite: true,
-					speed: 300,
+					autoplaySpeed : $( element ).data( 'autoplayspeed' ) ? $( element ).data( 'autoplayspeed' ) : 3000,
+					speed : $( element ).data( 'speed' ) ? $( element ).data( 'speed' ) : 300,
 					slidesToShow: 1,
 					centerMode: true,
 					variableWidth: true,
@@ -181,7 +182,9 @@ jQuery(document).ready(function ($) {
 					nextArrow: '<button type="button" data-role="none" class="phtpb_slicks--c__btn pht-gamma phtpb_slicks__btn phtpb_slicks__btn--next pht-pointer" aria-label="next"></button>',
 					autoplay: autoplay,
 					dots: false,
-					fade : fade
+					fade : fade,
+					autoplaySpeed : $( element ).data( 'autoplayspeed' ) ? $( element ).data( 'autoplayspeed' ) : 3000,
+					speed : $( element ).data( 'speed' ) ? $( element ).data( 'speed' ) : 500
 				});
 			});
 

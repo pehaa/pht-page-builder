@@ -86,6 +86,7 @@ $inuit-enable-box--small:   true;
 @import "components.dividers";//
 @import "components.tabs";//
 @import "components.images";//
+@import "components.inlineimages";//
 @import "components.googlemaps";//
 @import "components.tiles";//
 @import "library.slick";
@@ -95,6 +96,7 @@ $inuit-enable-box--small:   true;
 @import "components.buttons";
 @import "components.cforms";
 @import "components.countdown";
+@import "components.timetable";
 @import "components.waypoints";
 
 @import "library.popups";

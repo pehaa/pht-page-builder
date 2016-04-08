@@ -1,0 +1,53 @@
+.phtpb_timetable__day {
+	display:flex;
+	padding:0.75rem 0;
+	position:relative;
+	transition:1s;
+	&:before, &:after {
+		content:'';
+		position:absolute;
+		top:0;
+		bottom:0;
+		left:0;
+		right:0;
+		opacity:0;
+		transition:.5s .25s;
+		
+	}
+	&:before {
+		background:currentColor;
+	}
+	&:after {
+		border:1px solid;
+	}
+
+}
+.phtpb_timetable__day--today:after {
+	border:1px solid;
+}
+.phtpb_timetable__day:hover,
+.phtpb_timetable__day--today {
+	padding:12px;
+}
+.phtpb_timetable__day:hover:before {
+	opacity:.1;
+}
+.phtpb_timetable__day--today:after {
+	opacity:1;
+}
+.phtpb_timetable__day--closed {
+	opacity:.6;
+}
+.phtpb_timetable__day__value{
+	flex:1;
+	text-align:right;
+}
+
+.no-flexbox .phtpb_timetable__day {
+	overflow:hidden;
+	clear:both;
+}
+.no-flexbox .phtpb_timetable__day__value, .no-flexbox .phtpb_timetable__day__label {
+	width:50%;
+	float:left;
+}

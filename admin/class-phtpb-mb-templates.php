@@ -123,19 +123,21 @@ END;
 			$return_string .= "<input id='$key' type='checkbox' name='$key' class='phtpb_shortcode-attribute' value='$key' $checked $data_default/>";
 			break;
 		case 'select' :
-			$default_select = isset( $default ) ? $default : '';
-			$select_class = "<%= typeof( phtpb_attributes['$key'] ) !== 'undefined' ? phtpb_attributes['$key'] : '' %>";
-
+			$default_select = isset( $default ) ? $default : '';		
 			$select_class = "<% if ( typeof( phtpb_attributes['$key'] ) !== 'undefined' ) { %>";
 			$select_class .= "<%= phtpb_attributes['$key'] %>";
 			$select_class .= "<% } else { %>";
 			$select_class .= $default_select;
 			$select_class .= "<% } %>";
 			$start_string = "<div class='phtpb_option phtpb_$key-option $custom_class $with_label select-$select_class'>";
-
 			$return_string .= sprintf( '<select name="%1$s" id="%1$s" class="phtpb_shortcode-attribute" %2$s>', $key, $data_default );
 			foreach ( $field['options'] as $option_key => $option_value ) {
-				$return_string .= "<option value='$option_key' <%= typeof( phtpb_attributes['$key'] ) !== 'undefined' && '$option_key' === phtpb_attributes['$key'] ?  ' selected=selected' : '' %>>$option_value</option>";
+				$selected = "<% if ( typeof( phtpb_attributes['$key'] ) !== 'undefined' ) { %>";
+				$selected .= "<%= '$option_key' === phtpb_attributes['$key'] ?  'selected=selected' : '' %>";
+				$selected .= "<% } else { %>";
+				$selected .= "<%= '$option_key' === '$default_select' ?  'selected=selected' : '' %>";
+				$selected .= "<% } %>";
+				$return_string .= "<option value='$option_key' $selected>$option_value</option>";
 			}
 			$return_string .= '</select>';
 			break;

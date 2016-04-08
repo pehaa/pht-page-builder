@@ -42,10 +42,11 @@ var
 		},
 
 		getChildViews : function( parent_id ) {
+				
 			var views = this.views,
 				child_views = {};
 			_.each( views, function( view, key ) {
-				if ( view.model.attributes.parent === parent_id ) {
+				if ( !_.isUndefined( view ) && view.model.attributes.parent === parent_id ) {
 					child_views[key] = view;
 				}						
 			} );
@@ -90,13 +91,16 @@ var
 		},
 
 		getNumberOfModules : function( module_name ) {
+
 			var views = this.views,
 				num = 0;
+
 			_.each( views, function( view ) {
-				if ( view.model.attributes.phtpb_admin_type === module_name ) {
+
+				if ( !_.isUndefined( view ) && view.model.attributes.phtpb_admin_type === module_name ) {
 					num++;
 				}		
-			} );
+			});
 			return num;
 		},
 		selfReset : function() {
@@ -233,10 +237,12 @@ var
 			}			
 		},
 		
-		removeMe : function( event ) {			
+		removeMe : function( event ) {	
+
 			var mychildren = this.collection.getChildViews( this.model.get('phtpb_cid') ), 
 				force = false, 
 				event_origin = false;
+
 			if ( event ) {
 				event.preventDefault();	
 				event_origin = this.checkEventOrigin( event );
@@ -348,6 +354,14 @@ var
 	
 	peHaaThemesPageBuilder.SectionView = peHaaThemesPageBuilder.ElementView.extend( {
 
+		
+		events: function(){
+			return _.extend({},peHaaThemesPageBuilder.ElementView.prototype.events,{
+				'click .phtpb_add-section' : 'addSection',
+			'click .phtpb_js_handlediv' : 'toggleSection'
+			});
+		},
+
 		sortableElement : '.phtpb_section-content',
 		connectWith : '.phtpb_section-content, .phtpb_column-content',
 		cancelDrag : 'phtpb_column-content, .phtpb_drag_disabled, .phtpb_drag_disabled--hard',
@@ -359,8 +373,7 @@ var
 		},
 
 		addEventsAndListeners : function() {
-			_.extend( this.events, { 'click .phtpb_add-section' : 'addSection' } );
-			_.extend( this.events, { 'click .phtpb_js_handlediv' : 'toggleSection' } );
+			
 			this.listenTo( this.model, 'change:admin_label', this.renameElement );
 		},
 
@@ -395,6 +408,12 @@ var
 	/*----------------- View - Row ---------------------*/
 	
 	peHaaThemesPageBuilder.RowLayoutView = peHaaThemesPageBuilder.ElementView.extend( {
+
+		events: function(){
+			return _.extend({},peHaaThemesPageBuilder.ElementView.prototype.events,{
+				'click .phtpb_js_handlediv' : 'toggleRow'
+			});
+		},
 		
 		addMoreClassesToEl : function() {
 			if ( -1 !== this.model.attributes.module_type.indexOf( '_inner' ) ) {
@@ -405,7 +424,7 @@ var
 		},
 
 		addEventsAndListeners : function() {
-			_.extend( this.events, { 'click .phtpb_js_handlediv' : 'toggleRow' } );
+			//_.extend( this.events, { 'click .phtpb_js_handlediv' : 'toggleRow' } );
 			this.listenTo( this.model, 'change:admin_label', this.renameElement );
 		},
 
@@ -442,6 +461,12 @@ var
 
 	peHaaThemesPageBuilder.ModuleView = peHaaThemesPageBuilder.ElementView.extend( {
 
+		events: function(){
+			return _.extend({},peHaaThemesPageBuilder.ElementView.prototype.events,{
+				'click .phtpb_add-child' : 'addChild'
+			});
+		},
+
 		sortableElement : '.phtpb_js-container',
 		connectWith : false,
 		sortableItems : ".phtpb_advanced_twin:not('.phtpb_not-sortable')",
@@ -472,7 +497,7 @@ var
 		},
 
 		addEventsAndListeners : function() {
-			_.extend( this.events, { 'click .phtpb_add-child' : 'addChild' } );
+			//_.extend( this.events, { 'click .phtpb_add-child' : 'addChild' } );
 			this.listenTo( this.model, 'change:admin_label', this.renameElement );
 		},
 
@@ -610,16 +635,20 @@ var
 	
 	/*----------------- View - Settings ----------------*/
 	
-	peHaaThemesPageBuilder.ModalSettingsView = peHaaThemesPageBuilder.ModalView.extend( {			
+	peHaaThemesPageBuilder.ModalSettingsView = peHaaThemesPageBuilder.ModalView.extend( {
 
-		initialize : function() {
-			_.extend( this.events, 
-				{ 'click .phtpb_address-to-geocode' : 'addressToGeocode',
+		events: function() {
+			return _.extend({},peHaaThemesPageBuilder.ModalView.prototype.events,{
+				'click .phtpb_address-to-geocode' : 'addressToGeocode',
 				'click .phtpb_upload-button' : 'openMediaFrame',
 				'click .phtpb_icons-list__icon' : 'chooseIcon',
 				'change :checkbox' : 'conditionalFields',
 				'change select' : 'conditionalFields',
-			} );
+			});
+		},		
+
+		initialize : function() {
+			
 			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_map-marker:modified', this.rerenderMap );
 			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_module:afterDelete', this.rerenderMap );
 			
@@ -656,7 +685,7 @@ var
 		openMediaFrame : function( event ) {
 			
 			event.preventDefault();
-			
+
 			function remove_unneeded_gallery_settings( $el ) {
 				setTimeout(function(){
 					$el.find( '.gallery-settings' ).remove();

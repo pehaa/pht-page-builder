@@ -138,7 +138,7 @@ class PeHaa_Themes_Page_Builder_Public {
 	 */
 	public function enqueue_styles() {
 
-		if ( ! $this->render_page_builder ) {
+		if ( ! apply_filters( $this->name . '_maybe_enqueue_public_styles', $this->render_page_builder, $this->version ) ) {
 			return;
 		}
 
@@ -154,7 +154,7 @@ class PeHaa_Themes_Page_Builder_Public {
 	 */
 	public function enqueue_scripts() {
 
-		if ( ! $this->render_page_builder ) {
+		if ( ! apply_filters( $this->name . '_maybe_enqueue_public_scripts', $this->render_page_builder, $this->version ) ) {
 			return;
 		}
 

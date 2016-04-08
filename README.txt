@@ -2,8 +2,8 @@
 Contributors: pehaa
 Tags: WordPress, plugin, page builder, wordpress plugin, grid
 Requires at least: 3.8
-Tested up to: 4.4
-Stable tag: 2.6.0
+Tested up to: 4.5
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,16 @@ Coming soon
 Coming soon
 
 == Changelog ==
+
+= 2.7.0 =
+Added Timetable module
+Added Inline Images module
+Rounded images within Image module
+Filters ebabling changing speed parameters for content slider and image carousel
+Filters enabling adding styles/scripts on pages that do no use page builder directly
+Compatibility fixes with the latest Backbones.js and Underscore.js versions
+Fixed default select value
+Updated Plugin Update Checker
 
 = 2.6.0 =
 Removed wp_kses_post filter on page builder meta content
