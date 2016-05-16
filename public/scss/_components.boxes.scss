@@ -15,10 +15,10 @@
 	padding:8px;
 }
 @include media-query( desk ) {
-	.pht-box--large {
+	.pht-box.pht-box--large {
 		padding:2.25*16px;
 	}
-	.pht-box--huge {
+	.pht-box.pht-box--huge {
 		padding:3*16px;
 	}
 	@each $width in 1,2,3 {

@@ -91,7 +91,7 @@ jQuery(document).ready(function ($) {
 
 			$('.phtpb_slicks--img').each(function() { // the containers for all your galleries
 				$(this).magnificPopup({
-					delegate: '.slick-slide:not(.slick-cloned) a', // the selector for gallery item
+					delegate: '.slick-slide a', // the selector for gallery item
 					type: 'image',
 					gallery: {
 						enabled:true
@@ -159,6 +159,7 @@ jQuery(document).ready(function ($) {
 					slidesToShow: 1,
 					centerMode: true,
 					variableWidth: true,
+					centerPadding : 0,
 					lazyLoad: 'ondemand',
 					responsive: [
 						{
@@ -185,7 +186,7 @@ jQuery(document).ready(function ($) {
 					fade : fade,
 					autoplaySpeed : $( element ).data( 'autoplayspeed' ) ? $( element ).data( 'autoplayspeed' ) : 3000,
 					speed : $( element ).data( 'speed' ) ? $( element ).data( 'speed' ) : 500
-				});
+				}).slideDown(600);
 			});
 
 			$('.phtpb_flexslider').each( function( index, element )  {

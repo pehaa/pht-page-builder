@@ -244,7 +244,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 				'elements' => $this->phtpb_config_data_js,
 				'gmaps_url' => $gmaps_url,
 				'is_always_active' => ( boolean ) apply_filters( 'phtpb_is_always_active', false ),
-				'confirmation' => esc_html__( 'Your content will be modified. Do you still want to switch? You have probably altered the shortcodes syntax.  Switching will reestablish it properly and is a recommended action. Saving your post will also reestablish the shortcodes syntax - your modification might be lost.', $this->name ),
+				'confirmation' => esc_html__( 'Your content will be modified. You have probably altered the shortcodes syntax.  We will reestablish it properly.', $this->name ),
 				'rmv_img' => esc_html__( 'Remove image', $this->name )
 			)
 		);

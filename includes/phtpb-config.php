@@ -1328,6 +1328,21 @@ $phtpb_config_data['phtpb_timetable'] = array(
 );
 
 
+if ( class_exists( 'PeHaa_Themes_Events_Calendar' ) ) {
+	$phtpb_config_data['phtpb_events_calendar'] = array(
+		'label' =>  'phtpb_events_calendar',
+		'title' => esc_html__( 'Events Calendar', $this->plugin_name ),
+		'icon' => 'fa fa-calendar',
+		'phtpb_admin_type' => 'module',
+		'fields' => array(
+			'margin_b' => $margin_b_item,
+		),
+		'phtpb_admin_mode' => 'simple',
+		'create_with_settings' => true
+	);
+}
+
+
 $phtpb_config_data['phtpb_posts'] = array(
 	'label' =>  'phtpb_posts',
 	'title' => esc_html__( 'Posts Grid', $this->plugin_name ),
@@ -1338,7 +1353,6 @@ $phtpb_config_data['phtpb_posts'] = array(
 	'create_with_settings' => true,
 	'pht_themes_only' => true,
 );
-
 
 $options_array = PeHaa_Themes_Page_Builder::$phtpb_available_post_types;
 unset( $options_array['page'] );

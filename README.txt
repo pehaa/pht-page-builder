@@ -3,7 +3,7 @@ Contributors: pehaa
 Tags: WordPress, plugin, page builder, wordpress plugin, grid
 Requires at least: 3.8
 Tested up to: 4.5
-Stable tag: 2.7.0
+Stable tag: 2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,9 @@ Coming soon
 Coming soon
 
 == Changelog ==
+
+= 2.7.1 =
+Added compatibility with upcoming theme
 
 = 2.7.0 =
 Added Timetable module

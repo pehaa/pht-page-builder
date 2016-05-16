@@ -853,6 +853,21 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		return $this->container( $output, 'phtpb_item phtpb_timetable' );
 
 	}
+	
+
+
+	protected function phtpb_events_calendar() {
+
+		if ( !class_exists( 'PeHaa_Themes_Events_Calendar' ) ) {
+			return;
+		}
+
+		$calendar = PeHaa_Themes_Events_Calendar::get_instance();
+		
+		$output = $calendar->pht_get_calendar();
+		
+		return $this->container( $output, 'phtpb_events_calendar', '', 'div' );
+	}
 
 
 	protected function phtpb_google_map() {

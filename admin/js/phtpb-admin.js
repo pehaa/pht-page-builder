@@ -659,8 +659,7 @@ var
 		conditionalFields : function( event ) {
 			var $target = $(event.target), dataValue;
 			if ( $target.is(':checkbox') ) {
-				
-				
+
 				$target.parent().toggleClass('checked').toggleClass('unchecked');
 				
 			} else if ( $target.is('select') ) {
