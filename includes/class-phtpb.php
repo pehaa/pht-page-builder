@@ -381,10 +381,10 @@ class PeHaa_Themes_Page_Builder {
 	public function pehaathemes_compat_phtpb_config_data( $config_data ) {
 
 		if ( !class_exists( 'PeHaaThemes_Theme_Start' ) ) {
-			return;
+			return $config_data;
 		}
 		if ( !isset( PeHaaThemes_Theme_Start::$theme_name ) || !isset( PeHaaThemes_Theme_Start::$theme_version ) ) {
-			return;
+			return $config_data;
 		}
 
 		if ( 'Yaga' === PeHaaThemes_Theme_Start::$theme_name && version_compare( PeHaaThemes_Theme_Start::$theme_version, '2.0', '<' ) ) {
