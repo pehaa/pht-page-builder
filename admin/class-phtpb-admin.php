@@ -226,13 +226,11 @@ class PeHaa_Themes_Page_Builder_Admin {
 		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 
-		wp_register_script( $this->name, plugin_dir_url( __FILE__ ) . 'js/phtpb-admin.min.js' );
-
 		$api_key_query = isset( $this->settings['gmaps_api_key'] ) && '' !== $this->settings['gmaps_api_key'] ? 'key=' . $this->settings['gmaps_api_key'] .'&' : '';
 
 		$protocol = is_ssl() ? 'https' : 'http';
 		$gmaps_url = $protocol . '://maps.googleapis.com/maps/api/js?' . $api_key_query . 'callback=initialize';
-		wp_enqueue_script( $this->name, plugin_dir_url( __FILE__ ) . 'js/phtpb-admin.js', array( 'jquery', 'jquery-ui-core', 'underscore', 'jquery-ui-sortable', 'jquery-ui-droppable', 'backbone', 'wp-color-picker', 'jquery-ui-datepicker' ), $this->version, true );
+		wp_enqueue_script( $this->name, plugin_dir_url( __FILE__ ) . 'js/phtpb-admin.min.js', array( 'jquery', 'jquery-ui-core', 'underscore', 'jquery-ui-sortable', 'jquery-ui-droppable', 'backbone', 'wp-color-picker', 'jquery-ui-datepicker' ), $this->version, true );
 
 		$save_to = ( $this->save_to_content && !$this->meta_content ) ? 'content' : 'phtpb_secondeditor';
 		$save_to = apply_filters( 'phtpb_save_to', $save_to );
