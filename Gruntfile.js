@@ -81,6 +81,18 @@ module.exports = function(grunt) {
                 files: {
                     'admin/js/phtpb-admin.min.js' : [
                         'admin/js/datetimepicker.js',
+                        'admin/js/models/element.js',
+                        'admin/js/collections/elements.js',
+                        'admin/js/views/element-view.js',
+                        'admin/js/views/section-view.js',
+                        'admin/js/views/row-view.js',
+                        'admin/js/views/column-view.js',
+                        'admin/js/views/module-view.js',
+                        'admin/js/views/modal-view.js',
+                        'admin/js/views/modal-settings-view.js',
+                        'admin/js/views/modal-all-modules-view.js',
+                        'admin/js/views/modal-columns-layout-view.js',
+                        'admin/js/views/app-view.js',
                         'admin/js/phtpb-admin.js'
                     ]
                 }
