@@ -34,13 +34,12 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 			this.$el.sortable( {
 				cancel : '.add-row-layout, .phtpb_modal-bottom-container, .phtpb_row, #phtpb_layout_controls, .phtpb_drag_disabled, .phtpb_drag_disabled--hard',
 				placeholder: "sortable-placeholder",
-				//forcePlaceholderSize: true,
 				tolerance: "pointer",
-				//cursorAt: { left: 5 },
 				update : function() {
 					peHaaThemesPageBuilder_Events.trigger( 'phtpb_module:triggerUpdatePostContent' );
 				}
-			} );
+			});
+
 			return this;
 		
 		},

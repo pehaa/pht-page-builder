@@ -61,7 +61,7 @@ module.exports = function(grunt) {
         },
         jshint: {
             files: [
-                'admin/js/phtpb-admin.js', 'public/js/assets/phtpb.js'
+                'admin/js/assets/**.js', 'public/js/assets/phtpb.js', '!admin/js/assets/datetimepicker.js'
             ],
             options: {
                 expr: true,
@@ -80,20 +80,20 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'admin/js/phtpb-admin.min.js' : [
-                        'admin/js/datetimepicker.js',
-                        'admin/js/models/element.js',
-                        'admin/js/collections/elements.js',
-                        'admin/js/views/element-view.js',
-                        'admin/js/views/section-view.js',
-                        'admin/js/views/row-view.js',
-                        'admin/js/views/column-view.js',
-                        'admin/js/views/module-view.js',
-                        'admin/js/views/modal-view.js',
-                        'admin/js/views/modal-settings-view.js',
-                        'admin/js/views/modal-all-modules-view.js',
-                        'admin/js/views/modal-columns-layout-view.js',
-                        'admin/js/views/app-view.js',
-                        'admin/js/phtpb-admin.js'
+                        'admin/js/assets/datetimepicker.js',
+                        'admin/js/assets/models/element.js',
+                        'admin/js/assets/collections/elements.js',
+                        'admin/js/assets/views/element-view.js',
+                        'admin/js/assets/views/section-view.js',
+                        'admin/js/assets/views/row-view.js',
+                        'admin/js/assets/views/column-view.js',
+                        'admin/js/assets/views/module-view.js',
+                        'admin/js/assets/views/modal-view.js',
+                        'admin/js/assets/views/modal-settings-view.js',
+                        'admin/js/assets/views/modal-all-modules-view.js',
+                        'admin/js/assets/views/modal-columns-layout-view.js',
+                        'admin/js/assets/views/app-view.js',
+                        'admin/js/assets/phtpb-admin.js'
                     ]
                 }
             },
@@ -149,11 +149,11 @@ module.exports = function(grunt) {
                 tasks: ['sass:dev', 'sass:dist']
             },
             jsjshint: {
-                files: [ 'admin/js/phtpb-admin.js', 'public/js/assets/phtpb.js' ],
+                files: [ 'admin/js/assets/**.js', 'public/js/assets/phtpb.js' ],
                 tasks: ['jshint', 'jshint']
             },
             js: {
-                files: [ 'admin/js/phtpb-admin.js', 'public/js/assets/*.js' ],
+                files: [ 'admin/js/assets/**.js', 'public/js/assets/*.js' ],
                 tasks: ['uglify:dist', 'uglify:publicdist']
             }
         },

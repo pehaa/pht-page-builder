@@ -34,6 +34,4 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 		}
 		
 	});
-
-
 })( jQuery );
