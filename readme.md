@@ -23,6 +23,10 @@ Coming soon
 
 ## Changelog ##
 
+### 2.8.0 ###
+Fixed wrong admin js version
+Refactoring admin js files structure
+
 ### 2.7.1 ###
 Added compatibility with upcoming theme
 
