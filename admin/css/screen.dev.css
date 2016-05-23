@@ -206,7 +206,7 @@
 }
 
 .phtpb_modal__column, .phtpb_modal__row {
-  color: #007172;
+  color: #007272;
 }
 
 .phtpb_modal__all_modules, .phtpb_modal__module {
@@ -350,7 +350,7 @@
   background: darkcyan;
 }
 .phtpb_css-add-row:hover, .phtpb_settings-column:hover {
-  background: #007172;
+  background: #007272;
 }
 
 .phtpb_insert-module {
@@ -376,7 +376,7 @@
 }
 
 .phtpb_row, .phtpb_modal__columns_layout, .phtpb_insert-columns, .phtpb_insert-columns:hover {
-  color: #007172;
+  color: #007272;
 }
 
 .phtpb_column {
@@ -776,7 +776,7 @@ span.js-hidden {
 
 .phtpb-promo a {
   text-decoration: none;
-  color: #007172;
+  color: #007272;
 }
 
 .phtpb-promo__text, .phtpb-promo__button {
@@ -791,8 +791,8 @@ span.js-hidden {
   padding-right: 24px;
 }
 .phtpb-promo__button:hover {
-  background: #007172;
-  color: #007172;
+  background: #007272;
+  color: #007272;
 }
 
 .phtpb_table {
