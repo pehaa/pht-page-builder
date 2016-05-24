@@ -64,7 +64,7 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 	
 			if ( contentIsEmpty ) {
 				
-				content_raw = phtpb_get_content( 'content', true );
+				content_raw = peHaaThemesPageBuilder.phtpb_get_content( 'content', true );
 				if ( content_raw.indexOf( '[phtpb_section' ) === -1 ) {
 					if ( '' !== content_raw ) {
 					content = '[phtpb_row][phtpb_column layout="4_4"][phtpb_text phtpb_width="1"]' + content_raw + '[/phtpb_text][/phtpb_column][/phtpb_row]';
