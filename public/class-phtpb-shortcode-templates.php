@@ -145,8 +145,11 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	protected function phtpb_row() {
 
+
+
 		$layout_class = $this->gutter ? 'pht-layout ' : 'pht-layout--flush ';
 		$layout_class .= $this->equals ? 'pht-layout--equals ' : '';
+		$layout_class .= $this->module_class;
 
 		$wrapper = $this->select_attribute( 'wrapper' );
 		
@@ -170,6 +173,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$layout_class = $this->gutter ? 'pht-layout ' : 'pht-layout--flush ';
 		$layout_class .= $this->equals ? 'pht-layout--equals' : '';
+		$layout_class .= $this->module_class;
 
 		return sprintf( '<div %1$s class="%2$s"><!-- %3$s --></div>',
 			$this->module_id,
@@ -193,6 +197,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$margins = $this->is_checked( 'margins' );
 
 		$layout_class = isset( $this->atts['layout'] ) && in_array( $this->atts['layout'], array_keys( $class ) ) ? $class[ $this->atts['layout'] ] : '';
+		$layout_class .= ' ' . $this->module_class;
 		$matches = array();
 		preg_match( '/phtpb_row_inner[^\]]+equals="yes"[^\"]+"/i', $this->content, $matches );
 		if ( count( $matches ) ) {
