@@ -61,6 +61,18 @@ class PeHaa_Themes_Page_Builder_Admin {
 	private $meta_content = false;
 
 	/**
+	 * The options field slug for this plugin.
+	 *
+	 * @since    2.9.0
+	 * @access   private
+	 * @var      string    $gmaps_auth_transient
+	 */
+
+	private $gmaps_auth_transient = 'phtpb_gm_auth_failed';
+
+	private $gmaps_auth_action = 'save_gmaps_auth_failure_to_transient';
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -77,6 +89,8 @@ class PeHaa_Themes_Page_Builder_Admin {
 		$this->save_to_content = isset( PeHaa_Themes_Page_Builder::$settings['save_to_content'] ) && 'yes' === PeHaa_Themes_Page_Builder::$settings['save_to_content'];
 		$this->phtpb_post_types = PeHaa_Themes_Page_Builder::$phtpb_post_types;
 		add_filter( 'pht_meta_content_into_editor', array( $this, 'replace_preview_img_srcs' ) );
+
+		add_action( 'wp_ajax_' . $this->gmaps_auth_action, array( $this, 'save_gmaps_auth_failure_to_transient' ) );
 
 	}
 
@@ -226,14 +240,16 @@ class PeHaa_Themes_Page_Builder_Admin {
 		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 
-		$api_key_query = isset( $this->settings['gmaps_api_key'] ) && '' !== $this->settings['gmaps_api_key'] ? 'key=' . $this->settings['gmaps_api_key'] .'&' : '';
+		$api_key_query = isset( $this->settings['gmaps_api_key'] ) && !trim( $this->settings['gmaps_api_key'] ) ? 'key=' . $this->settings['gmaps_api_key'] .'&' : '';
 
 		$protocol = is_ssl() ? 'https' : 'http';
 		$gmaps_url = $protocol . '://maps.googleapis.com/maps/api/js?' . $api_key_query . 'callback=initialize';
+
 		wp_enqueue_script( $this->name, plugin_dir_url( __FILE__ ) . 'js/phtpb-admin.min.js', array( 'jquery', 'jquery-ui-core', 'underscore', 'jquery-ui-sortable', 'jquery-ui-droppable', 'backbone', 'wp-color-picker', 'jquery-ui-datepicker' ), $this->version, true );
 
 		$save_to = ( $this->save_to_content && !$this->meta_content ) ? 'content' : 'phtpb_secondeditor';
 		$save_to = apply_filters( 'phtpb_save_to', $save_to );
+
 		wp_localize_script(
 			'jquery',
 			'phtpb_data',
@@ -243,7 +259,12 @@ class PeHaa_Themes_Page_Builder_Admin {
 				'gmaps_url' => $gmaps_url,
 				'is_always_active' => ( boolean ) apply_filters( 'phtpb_is_always_active', false ),
 				'confirmation' => esc_html__( 'Your content will be modified. You have probably altered the shortcodes syntax.  We will reestablish it properly.', $this->name ),
-				'rmv_img' => esc_html__( 'Remove image', $this->name )
+				'rmv_img' => esc_html__( 'Remove image', $this->name ),
+				'gmaps_auth_nonce' => wp_create_nonce( $this->gmaps_auth_action ),
+				'gmaps_auth_action' => $this->gmaps_auth_action,
+				'gmaps_key_missing' => !$api_key_query,
+				'gmaps_auth_failed' => !$api_key_query && get_transient( $this->gmaps_auth_transient )
+
 			)
 		);
 
@@ -621,6 +642,13 @@ class PeHaa_Themes_Page_Builder_Admin {
 		
 		return $this->cleaned_content( $content );
 
+	}
+
+	public function save_gmaps_auth_failure_to_transient() {
+
+		check_ajax_referrer( $this->gmaps_auth_action, 'nonce' );
+		set_transient( $this->gmaps_auth_transient, 60*60 );
+	
 	}
 
 }

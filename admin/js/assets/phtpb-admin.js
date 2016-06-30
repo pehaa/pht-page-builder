@@ -46,6 +46,10 @@ var
 		}				
 	};
 
+	peHaaThemesPageBuilder.gmapsAuthFailed = phtpb_data.gmaps_auth_failed;
+
+	console.log( 'Auth failed ', peHaaThemesPageBuilder.gmapsAuthFailed );
+
 	$( document ).ready( function() {
 		
 		if ( typeof qTranslateConfig !== 'undefined' ) {
@@ -152,6 +156,21 @@ var
 } )(jQuery);
 
 function initialize() {}
+
+function gm_authFailure( error ) {
+
+	peHaaThemesPageBuilder.gmapsAuthFailed = true;
+
+	if ( !phtpb_data.gmaps_key_missing ) {
+		jQuery.post(
+			ajaxurl,
+			{
+				action : phtpb_data.gmaps_auth_action,
+				nonce : phtpb_data.gmaps_auth_nonce
+			}
+		);
+	}
+}
 
 function loadScript() {
 
