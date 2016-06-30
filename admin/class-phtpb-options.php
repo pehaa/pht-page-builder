@@ -431,8 +431,8 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 */
 	public function gmaps_section_display() { ?>
 
-		<p><?php esc_html_e( 'This settings is optional. You can still display google maps without an API key.', $this->name ); ?>
-			<a href="https://developers.google.com/maps/documentation/javascript/tutorial#api_key"><?php esc_html_e( 'Learn more about Google Maps JavaScript API', $this->name ); ?></a>
+		<p><?php esc_html_e( 'From June 22, 2016 the Google Maps Javascript API no longer supports keyless access (any request that doesn\'t include an API key). Don’t be afraid, getting an API key is really fast and simple.', $this->name ); ?>
+			<a href="https://developers.google.com/maps/documentation/javascript/get-api-key"><?php esc_html_e( 'Get a Key/Authentication', $this->name ); ?></a>
 		</p>
 
 	<?php }
