@@ -56,7 +56,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 * @access   private
 	 * @var      string    $menu_slug    The options page menu slug.
 	 */
-	private $menu_slug;
+	private static $menu_slug = 'phtpb-admin';
 
 	/**
 	 * The settings for user input sections for options page.
@@ -97,8 +97,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 
  		$this->name = $name;
  		$this->version = $version;
-		$this->option_name = $option_name;
-		$this->menu_slug = 'phtpb-admin'; 
+		$this->option_name = $option_name; 
 		$this ->option_group = 'phtpb_option_group';
 		$this->page_title = esc_html__( 'PeHaa Themes Page Builder', $this->name ); 
 		$this->menu_title = esc_html__( 'PHT Page Builder', $this->name );
@@ -155,11 +154,10 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 */
 	public function add_action_links( $links ) {
 
-		$admin_url = 'admin.php?page=' . $this->menu_slug;
 		$title_attr = esc_html__( 'View PeHaa Themes Page Builder Settings', $this->name );
 
 		$mylinks = array(
-			'<a href="' . esc_url( admin_url( $admin_url ) ) .'" title="' . esc_attr( $title_attr ) . '">' . esc_html__( 'Settings', $this->name ) . '</a>'
+			'<a href="' . esc_url( self::settings_url() ) .'" title="' . esc_attr( $title_attr ) . '">' . esc_html__( 'Settings', $this->name ) . '</a>'
 		);
 		return array_merge( $links, $mylinks );
 	}
@@ -175,7 +173,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
         	$this->page_title,
         	$this->menu_title,
         	'manage_options', 
-        	$this->menu_slug,
+        	self::$menu_slug,
         	array( $this, 'create_admin_page' )
     	);
 
@@ -220,7 +218,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 
 					<?php settings_fields( $this->option_group );
 
-					do_settings_sections( $this->menu_slug );
+					do_settings_sections( self::$menu_slug );
 
 					submit_button(); ?>
 
@@ -250,7 +248,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 				$fields['id'],
 				$fields['title'],
 				array( $this, $fields['callback'], ),
-				$this->menu_slug
+				self::$menu_slug
 			);
 		}
 
@@ -328,7 +326,7 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 				$key,
 				$field['title'],
 				array( $this, $field['callback'] ),
-				$this->menu_slug, // Page
+				self::$menu_slug, // Page
 				$field['section'], // Section
 				$args
 			);
@@ -429,13 +427,11 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 	 *
 	 * @since    1.0.0
 	 */
-	public function gmaps_section_display() { ?>
+	public function gmaps_section_display() { 
 
-		<p><?php esc_html_e( 'From June 22, 2016 the Google Maps Javascript API no longer supports keyless access (any request that doesn\'t include an API key). Don’t be afraid, getting an API key is really fast and simple.', $this->name ); ?>
-			<a href="https://developers.google.com/maps/documentation/javascript/get-api-key"><?php esc_html_e( 'Get a Key/Authentication', $this->name ); ?></a>
-		</p>
+		include_once 'partials/phtpb-gmaps-options-section-display.php';
 
-	<?php }
+	}
 
 
 	/**
@@ -527,6 +523,11 @@ class PeHaa_Themes_Page_Builder_Options_Page {
 		if ( isset( $args['description'] ) ) {
 			printf( '<div class="phtpb_description"><small>%s</small></div>', esc_html( $args['description'] ) );
 		}
+	}
+
+	public static function settings_url() {
+		 $admin_url = 'admin.php?page=' . self::$menu_slug;
+		 return esc_url( admin_url( $admin_url ) );
 	}
 
 }

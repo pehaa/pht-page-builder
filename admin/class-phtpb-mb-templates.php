@@ -31,7 +31,7 @@ class PeHaa_Themes_Page_Builder_MB_Templates {
 	private function generate_modal_template() {
 
 		$return_string = '<script type="text/template" id="phtpb_builder-modal-template">';
-		$return_string .= '<a href="#" class="phtpb_cancel-modal-action phtpb_transition phtpbcss_icon--large" title=' . esc_html__( 'Close modal window', 'phtpb' ) . '><i class= "fa fa-close"></i></a>';
+		$return_string .= '<a href="#" class="js-phtpb_cancel-modal-action phtpb_cancel-modal-action phtpb_transition phtpbcss_icon--large" title=' . esc_html__( 'Close modal window', 'phtpb' ) . '><i class= "fa fa-close"></i></a>';
 
 		$return_string .= "<% if ( typeof modal_window !== 'undefined' && ( modal_window === 'settings' ) ) { %>";
 		$return_string .= '<div class="phtpb_modal-bottom-container">';
@@ -43,7 +43,42 @@ class PeHaa_Themes_Page_Builder_MB_Templates {
 
 	}
 
+	private function generate_gmaps_send_to_settings_modal_template() {
+
+		$return_string = '<script type="text/template" id="phtpb_builder-gmaps-send-to-settings-modal-template">';
+		$return_string .= '<a href="#" class="js-phtpb_cancel-modal-action phtpb_cancel-modal-action phtpb_transition phtpbcss_icon--large" title=' . esc_html__( 'Close modal window', 'phtpb' ) . '><i class= "fa fa-close"></i></a>';
+
+		$return_string .= "<% if ( typeof modal_window !== 'undefined' && ( modal_window === 'settings' ) ) { %>";
+		$return_string .= '<div class="phtpb_modal-bottom-container">';
+		$return_string .= '<h3 class="phtpb_settings-heading phtpb_heading phtpb_truncate"><span> ' . esc_html__( 'Missing Google Maps API key', 'phtpb' ) . ' </span></h3>';
+		$return_string .= '<div class="phtpb_main-settings">';
+		$return_string .= '<div class="phtpb_main-settings__info">';
+		$return_string .= '<p>';
+		$return_string .= esc_html__( 'From June 22, 2016 the Google Maps Javascript API no longer supports keyless access (any request that doesn\'t include an API key).', 'phtpb' );
+		$return_string .= '</p>';
+		$return_string .= '<p>';
+		$return_string .= esc_html__( 'Don’t be afraid, getting an API key is really fast and simple.', 'phtpb' );
+		$return_string .= '</p>';
+		$return_string .= '<p>';
+		$return_string .= sprintf( __( 'To get started using the Google Maps JavaScript API follow <a href="" target="_blank">this link.</a>', 'phtpb' ), 'https://developers.google.com/maps/documentation/javascript/get-api-key' );
+		$return_string .= '</p>';
+		$return_string .= '<p>';
+		$return_string .= __( 'Once you have got your Google Maps JavaScript API key generated - all you have to do is to <strong>paste it into the "Google Maps Api Key" field in the page builder settings.</strong>', 'phtpb' );
+		$return_string .= '</p>';
+		$return_string .= '</div>';
+		$return_string .= '</div>';
+		$return_string .= sprintf( '<a href="%1$s" class="js-phtpb_cancel-modal-action_and_do_default phtpb_save-button phtpb_transition" target="_blank"><span>%2$s</span></a>',
+			esc_url( PeHaa_Themes_Page_Builder_Options_Page::settings_url() . '#phtpb-gmaps-auth' ),
+			esc_html__( 'Open Settings', 'phtpb' )
+		);
+		$return_string .= '</div>';
+		$return_string .= '	<% } %>';
+		$return_string .= '</script>';
+		return $return_string;
+	}
+
 	private function form_element( $key, $field, $custom_class = '' ) {
+		
 		if ( isset( $field['class'] ) ) {
 			$custom_class .= ' ' . $field['class'];
 		}
@@ -396,9 +431,11 @@ END;
 			if ( isset( $this->config_data[ $element ] ) ) {
 				echo $this->generate_modal_innertemplate( $this->config_data[ $element ] );
 			}
-
 		}
+	}
 
+	public function phtpb_gmaps_send_to_settings_modal_template() {
+		echo $this->generate_gmaps_send_to_settings_modal_template();
 	}
 
 }

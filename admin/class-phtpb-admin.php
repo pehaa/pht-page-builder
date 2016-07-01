@@ -240,7 +240,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 
-		$api_key_query = isset( $this->settings['gmaps_api_key'] ) && !trim( $this->settings['gmaps_api_key'] ) ? 'key=' . $this->settings['gmaps_api_key'] .'&' : '';
+		$api_key_query = isset( $this->settings['gmaps_api_key'] ) && trim( $this->settings['gmaps_api_key'] ) ? 'key=' . $this->settings['gmaps_api_key'] .'&' : '';
 
 		$protocol = is_ssl() ? 'https' : 'http';
 		$gmaps_url = $protocol . '://maps.googleapis.com/maps/api/js?' . $api_key_query . 'callback=initialize';
@@ -310,13 +310,27 @@ class PeHaa_Themes_Page_Builder_Admin {
 	}
 
 	public static function render_page_builder() {
-		$templates = new PeHaa_Themes_Page_Builder_MB_Templates();
+		
 		do_action( 'phtpb_before_page_builder' );
+
 		echo '<div class="phtpb_preloader phtpb_h-align--center pht-transition"><i class="fa fa-cog fa-spin"></i></div>';
+
 		echo '<div id="phtpb_hidden_editor" class="phtpb_hidden_editor">';
+
 		wp_editor( '', 'phtpb_content_new', array( 'media_buttons' => true ) );
+
 		echo '</div><!-- #phtpb_hidden_editor -->';
+
 		echo '<div id="phtpb_main_container" class="phtpb_main_container pht-transition"></div>';
+
+		self::add_templates();
+
+		do_action( 'phtpb_after_page_builder' );
+	}
+
+	private static function add_templates() {
+
+		$templates = new PeHaa_Themes_Page_Builder_MB_Templates();
 		$templates->phtpb_app_template();
 		$templates->phtpb_section_template();
 		$templates->phtpb_row_template();
@@ -326,7 +340,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 		$templates->phtpb_columns_modal_template();
 		$templates->phtpb_modal_templates();
 		$templates->phtpb_all_modules_modal_template();
-		do_action( 'phtpb_after_page_builder' );
+		$templates->phtpb_gmaps_send_to_settings_modal_template(); 
 	}
 
 	/**

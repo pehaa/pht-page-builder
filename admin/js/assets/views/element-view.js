@@ -31,19 +31,22 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 		
 		renameElement : function() {
 			
-			this.$el.children( '.phtpb_js-module-title' ).find('.phtpb_js-module-title__string').html( this.model.get( 'admin_label' ) );
+			this.$el
+				.children( '.phtpb_js-module-title' )
+				.find( '.phtpb_js-module-title__string')
+				.html( this.model.get( 'admin_label' ) );
 		},
 		
 		render : function() {
-
-			
 
 			if ( _.isUndefined( this.template ) ) {
 				this.template =  _.template( $( this.collection.generateTemplateName( this.model.get( 'phtpb_admin_type' ), false ) ).html() );
 
 			}
 
-			this.$el.addClass( this.elementClass ).html( this.template( this.model.toJSON() ) );
+			this.$el
+				.addClass( this.elementClass )
+				.html( this.template( this.model.toJSON() ) );
 			this.makeChildrenSortable();
 			return this;
 		},		

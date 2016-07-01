@@ -46,7 +46,7 @@ var
 		}				
 	};
 
-	peHaaThemesPageBuilder.gmapsAuthFailed = phtpb_data.gmaps_auth_failed;f
+	peHaaThemesPageBuilder.gmapsAuthFailed = phtpb_data.gmaps_auth_failed;
 
 	$( document ).ready( function() {
 		

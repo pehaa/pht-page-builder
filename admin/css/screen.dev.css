@@ -480,6 +480,15 @@
   bottom: 80px;
 }
 
+.phtpb_main-settings__info {
+  padding: 24px;
+  text-align: center;
+}
+.phtpb_main-settings__info p {
+  font-size: 18px;
+  line-height: 30px;
+}
+
 .phtpb_option--with-label {
   padding: 16px 24px;
   border-bottom: 1px dashed;

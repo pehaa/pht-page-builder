@@ -25,6 +25,22 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 			this.innerTemplateData = { phtpb_attributes: this.model.attributes };
 		},
 
+		render : function() {
+
+			if ( peHaaThemesPageBuilder.gmapsAuthFailed && "phtpb_google_map" === this.model.attributes.module_type ) {
+
+				this.template = _.template( $('#phtpb_builder-gmaps-send-to-settings-modal-template').html() );
+				this.$el
+					.addClass( 'phtpb_modal__' + this.options.modal_window )
+					.addClass( 'phtpb_modal__' + this.options.model.attributes.phtpb_admin_type )
+					.html( this.template( _.extend(this.model.toJSON(), {modal_window: this.options.modal_window} ) ) );
+				this.addOverlay();
+				return this;
+			}
+
+			return peHaaThemesPageBuilder.ModalView.prototype.render.call( this );
+		},
+
 		conditionalFields : function( event ) {
 			var $target = $(event.target), dataValue;
 			if ( $target.is(':checkbox') ) {

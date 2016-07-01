@@ -3,7 +3,7 @@ Contributors: pehaa
 Tags: WordPress, plugin, page builder, wordpress plugin, grid
 Requires at least: 3.8
 Tested up to: 4.6
-Stable tag: 2.7
+Stable tag: 2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,9 @@ Coming soon
 Coming soon
 
 == Changelog ==
+
+= 2.9 =
+* Google Maps Javascript API key access requirement
 
 = 2.8.1 =
 * Fixed row and column classes not displayed on front-end

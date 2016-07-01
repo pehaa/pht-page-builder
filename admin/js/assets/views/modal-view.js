@@ -7,7 +7,8 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 	peHaaThemesPageBuilder.ModalView = window.wp.Backbone.View.extend( {
 
 		events : {
-			'click .phtpb_cancel-modal-action' : 'cancelModalAction',
+			'click .js-phtpb_cancel-modal-action' : 'cancelModalAction',
+			'click .js-phtpb_cancel-modal-action_and_do_default' : 'cancelModalActionAndDoDefault',
 			'click .phtpb_do-modal-action' : 'doModalAction',
 			'click .phtpb_do-inner-modal-action' : 'doInnerModalAction',
 		},
@@ -64,7 +65,26 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 		},
 
 		cancelModalAction : function( event ) {
+			
 			event.preventDefault();
+
+			this.removeOverlay();			
+
+			this.resetFields();
+			
+			if ( 'parent' === this.model.attributes.phtpb_admin_mode && this.options.from !== 'create_settings' ) {
+				peHaaThemesPageBuilder_Events.trigger( 'phtpb_module:reInitialized' );
+			}	
+
+			if ( this.options.from === 'create_settings'|| ( !_.isUndefined( this.options.fromAction ) && 'addChild' === this.options.fromAction ) ) {
+				this.collection.removeViewAndModel( this.model );
+			}
+
+			this.remove();
+		},
+
+		cancelModalActionAndDoDefault : function( event ) {
+			
 			this.removeOverlay();			
 
 			this.resetFields();
