@@ -96,8 +96,7 @@ class PeHaa_Themes_Page_Builder {
 		add_action( 'init', array( $this, 'pehaathemes_theme_compability' ), 2 );
 		add_action( 'init', array( $this, 'config_data' ), 2 );
 		add_action( 'init', array( $this, 'get_forbidden_ids' ), 2 );
-		
-
+	
 	}
 
 	/**
@@ -163,6 +162,7 @@ class PeHaa_Themes_Page_Builder {
 	private function set_locale() {
 
 		$plugin_i18n = new PeHaa_Themes_Page_Builder_i18n();
+		
 		$plugin_i18n->set_domain( $this->get_plugin_name() );
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
@@ -203,14 +203,18 @@ class PeHaa_Themes_Page_Builder {
 		$this->loader->add_filter( '_wp_post_revision_field_' . self::$meta_field_name_content, $plugin_admin, 'phtpb_revision_field', 10, 3 );
 		$this->loader->add_filter( '_wp_post_revision_field_' . self::$meta_field_name_state, $plugin_admin, 'phtpb_revision_field_state', 10, 3 );
 
+		$this->define_options_hooks();	
+
+	}
+
+	private function define_options_hooks() {
+
 		$plugin_options = new PeHaa_Themes_Page_Builder_Options_Page( $this->get_plugin_name(), $this->get_version(), $this->get_option_name() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_options, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_options, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_options, 'add_plugin_options_page' );
 		$this->loader->add_action( 'admin_init', $plugin_options, 'page_init' );
-
-		
 
 	}
 
