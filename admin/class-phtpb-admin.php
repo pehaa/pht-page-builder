@@ -82,11 +82,17 @@ class PeHaa_Themes_Page_Builder_Admin {
 	public function __construct( $name, $version, $option_name ) {
 
 		$this->name = $name;
+
 		$this->version = $version;
+
 		$this->option_name = $option_name;
+
 		$this->post_id = NULL;
+
 		$this->settings = get_option( $this->option_name );
+
 		$this->save_to_content = isset( PeHaa_Themes_Page_Builder::$settings['save_to_content'] ) && 'yes' === PeHaa_Themes_Page_Builder::$settings['save_to_content'];
+
 		$this->phtpb_post_types = PeHaa_Themes_Page_Builder::$phtpb_post_types;
 
 		$this->gmaps_api_key = isset( $this->settings['gmaps_api_key'] ) && trim( $this->settings['gmaps_api_key'] ) ? $this->settings['gmaps_api_key'] :false;
@@ -153,6 +159,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 		}
 
 		$meta_content = get_metadata( 'post', $revision_id, PeHaa_Themes_Page_Builder::$meta_field_name_content, true );
+
 		if ( false !== $meta_content ) {
 			update_post_meta( $post_id, PeHaa_Themes_Page_Builder::$meta_field_name_content, $meta_content );
 		} else {
@@ -160,6 +167,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 		}
 
 		$meta_content_state = get_metadata( 'post', $revision_id, PeHaa_Themes_Page_Builder::$meta_field_name_state, true );
+
 		if ( false !== $meta_content_state ) {
 			update_post_meta( $post_id, PeHaa_Themes_Page_Builder::$meta_field_name_state, $meta_content_state );
 		} else {
@@ -175,8 +183,8 @@ class PeHaa_Themes_Page_Builder_Admin {
 			return $fields;
 		}
 
-		$fields[PeHaa_Themes_Page_Builder::$meta_field_name_content] = esc_html__( 'Page Builder Content', $this->name );
-		$fields[PeHaa_Themes_Page_Builder::$meta_field_name_state] = esc_html__( 'Page Builder Activated', $this->name );
+		$fields[ PeHaa_Themes_Page_Builder::$meta_field_name_content ] = esc_html__( 'Page Builder Content', $this->name );
+		$fields[ PeHaa_Themes_Page_Builder::$meta_field_name_state ] = esc_html__( 'Page Builder Activated', $this->name );
 		return $fields;
 
 	}
@@ -673,7 +681,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 	public function gmaps_auth_failed_warning( $output ) {
 
 		if ( current_user_can( 'manage_options' ) ) {
-			
+
 			if ( !$this->gmaps_api_key && get_transient( $this->gmaps_auth_transient ) ) {
 				$output .= '<div class="pht-box pht-underline-links pht-milli pht-white phtpb_admin-warning" style="position:absolute; top:12px; left:12px; max-width:480px; background:rgba(255,0,0,.85);">';
 				$output .= esc_html__( 'From June 22, 2016 the Google Maps Javascript API no longer supports keyless access (any request that doesn\'t include an API key).', 'phtpb' );

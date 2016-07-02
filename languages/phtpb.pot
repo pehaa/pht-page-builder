@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PeHaa Themes Page Builder 2.9.0\n"
 "Report-Msgid-Bugs-To: info@pehaa.com\n"
-"POT-Creation-Date: 2016-07-02 13:35:10+00:00\n"
+"POT-Creation-Date: 2016-07-02 13:45:54+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,97 +13,97 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.4.9\n"
 
-#: admin/class-phtpb-admin.php:178
+#: admin/class-phtpb-admin.php:186
 msgid "Page Builder Content"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:179
+#: admin/class-phtpb-admin.php:187
 msgid "Page Builder Activated"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:201
+#: admin/class-phtpb-admin.php:209
 msgid "Page Builder is activated"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:201
+#: admin/class-phtpb-admin.php:209
 msgid "Page Builder is not activated"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:266
+#: admin/class-phtpb-admin.php:274
 msgid ""
 "Your content will be modified. You have probably altered the shortcodes "
 "syntax.  We will reestablish it properly."
 msgstr ""
 
-#: admin/class-phtpb-admin.php:267
+#: admin/class-phtpb-admin.php:275
 msgid "Remove image"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:292
+#: admin/class-phtpb-admin.php:300
 msgid "Page Builder"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:302
+#: admin/class-phtpb-admin.php:310
 msgid "PeHaa Themes Page Builder state"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:363
+#: admin/class-phtpb-admin.php:371
 msgid "Not active"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:367
+#: admin/class-phtpb-admin.php:375
 msgid "Active"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:377
+#: admin/class-phtpb-admin.php:385
 msgid "Developed by "
 msgstr ""
 
-#: admin/class-phtpb-admin.php:378
+#: admin/class-phtpb-admin.php:386
 msgid "Version: "
 msgstr ""
 
-#: admin/class-phtpb-admin.php:425
+#: admin/class-phtpb-admin.php:433
 msgid "Hi! Let's restore the PHT Page Builder content."
 msgstr ""
 
-#: admin/class-phtpb-admin.php:425
+#: admin/class-phtpb-admin.php:433
 msgid "Hi! Let's use PeHaa Themes Page Builder"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:426 admin/class-phtpb-admin.php:441
+#: admin/class-phtpb-admin.php:434 admin/class-phtpb-admin.php:449
 msgid "Show me the default editor"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:427
+#: admin/class-phtpb-admin.php:435
 msgid "Take me back to the Page Builder"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:436
+#: admin/class-phtpb-admin.php:444
 msgid "or"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:440
+#: admin/class-phtpb-admin.php:448
 msgid "Hi! Let's start with your current content."
 msgstr ""
 
-#: admin/class-phtpb-admin.php:442
+#: admin/class-phtpb-admin.php:450
 msgid "Take me back to the PHT Page Builder"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:679 admin/class-phtpb-mb-templates.php:57
+#: admin/class-phtpb-admin.php:687 admin/class-phtpb-mb-templates.php:57
 msgid ""
 "From June 22, 2016 the Google Maps Javascript API no longer supports "
 "keyless access (any request that doesn't include an API key)."
 msgstr ""
 
-#: admin/class-phtpb-admin.php:681
+#: admin/class-phtpb-admin.php:689
 msgid ""
 "To get started using the Google Maps JavaScript API follow <a class=\"\" "
 "href=\"%s\" target=\"_blank\">this link.</a>"
 msgstr ""
 
-#: admin/class-phtpb-admin.php:683
+#: admin/class-phtpb-admin.php:691
 msgid ""
 "Once you have got your Google Maps JavaScript API key generated - all you "
 "have to do is to <a class=\"\" href=\"%s\"><strong>paste it into the "
@@ -327,11 +327,11 @@ msgstr ""
 msgid "Get a Key/Authentication"
 msgstr ""
 
-#: includes/class-phtpb.php:304
+#: includes/class-phtpb.php:308
 msgid "Posts"
 msgstr ""
 
-#: includes/class-phtpb.php:305
+#: includes/class-phtpb.php:309
 msgid "Pages"
 msgstr ""
 
