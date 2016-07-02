@@ -22,6 +22,7 @@ delete_option( $option_name );
 // For site options in multisite
 delete_site_option( $option_name ); 
 
+delete_transient( 'phtpb_gm_auth_failed' );
 
 delete_metadata( 'post', null, '_phtpb_state_meta_value_key', null, true );
 delete_metadata( 'post', null, '_phtpb_meta_content', null, true );
