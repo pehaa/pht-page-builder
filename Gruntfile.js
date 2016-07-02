@@ -8,6 +8,7 @@ module.exports = function(grunt) {
             'admin/css/**',
             'admin/js/**',
             'admin/**.php',
+            'admin/partials/*.php',
             'includes/**',
             'public/**',
             '!public/scss/**',
