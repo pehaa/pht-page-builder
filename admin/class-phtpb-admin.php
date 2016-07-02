@@ -88,9 +88,14 @@ class PeHaa_Themes_Page_Builder_Admin {
 		$this->settings = get_option( $this->option_name );
 		$this->save_to_content = isset( PeHaa_Themes_Page_Builder::$settings['save_to_content'] ) && 'yes' === PeHaa_Themes_Page_Builder::$settings['save_to_content'];
 		$this->phtpb_post_types = PeHaa_Themes_Page_Builder::$phtpb_post_types;
+
+		$this->gmaps_api_key = isset( $this->settings['gmaps_api_key'] ) && trim( $this->settings['gmaps_api_key'] ) ? $this->settings['gmaps_api_key'] :false;
+
 		add_filter( 'pht_meta_content_into_editor', array( $this, 'replace_preview_img_srcs' ) );
 
 		add_action( 'wp_ajax_' . $this->gmaps_auth_action, array( $this, 'save_gmaps_auth_failure_to_transient' ) );
+
+		add_filter( 'phtpb_google_map_inner', array( $this, 'gmaps_auth_failed_warning' ) );
 
 	}
 
@@ -240,7 +245,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 
-		$api_key_query = isset( $this->settings['gmaps_api_key'] ) && trim( $this->settings['gmaps_api_key'] ) ? 'key=' . $this->settings['gmaps_api_key'] .'&' : '';
+		$api_key_query = $this->gmaps_api_key ? 'key=' . $this->gmaps_api_key .'&' : '';
 
 		$protocol = is_ssl() ? 'https' : 'http';
 		$gmaps_url = $protocol . '://maps.googleapis.com/maps/api/js?' . $api_key_query . 'callback=initialize';
@@ -262,8 +267,8 @@ class PeHaa_Themes_Page_Builder_Admin {
 				'rmv_img' => esc_html__( 'Remove image', $this->name ),
 				'gmaps_auth_nonce' => wp_create_nonce( $this->gmaps_auth_action ),
 				'gmaps_auth_action' => $this->gmaps_auth_action,
-				'gmaps_key_missing' => !$api_key_query,
-				'gmaps_auth_failed' => !$api_key_query && get_transient( $this->gmaps_auth_transient )
+				'gmaps_key_missing' => !$this->gmaps_api_key,
+				'gmaps_auth_failed' => !$this->gmaps_api_key && get_transient( $this->gmaps_auth_transient )
 
 			)
 		);
@@ -661,8 +666,24 @@ class PeHaa_Themes_Page_Builder_Admin {
 	public function save_gmaps_auth_failure_to_transient() {
 
 		check_ajax_referer( $this->gmaps_auth_action, 'nonce' );
-		set_transient( $this->gmaps_auth_transient, true, 60*60 );
+		set_transient( $this->gmaps_auth_transient, true, 60*60*24 );
 	
+	}
+
+	public function gmaps_auth_failed_warning( $output ) {
+		if ( current_user_can( 'manage_options' ) ) {
+			if ( !$this->gmaps_api_key && get_transient( $this->gmaps_auth_transient ) ) {
+				$output .= '<div class="pht-box pht-underline-links pht-milli pht-white phtpb_admin-warning" style="position:absolute; top:12px; left:12px; max-width:480px; background:rgba(255,0,0,.85);">';
+				$output .= esc_html__( 'From June 22, 2016 the Google Maps Javascript API no longer supports keyless access (any request that doesn\'t include an API key).', 'phtpb' );
+				$output .= '</br>';
+				$output .= sprintf( __( 'To get started using the Google Maps JavaScript API follow <a class="" href="%s" target="_blank">this link.</a>', 'phtpb' ), 'https://developers.google.com/maps/documentation/javascript/get-api-key' );
+				$output .= '</br>';
+				$output .= sprintf( __( 'Once you have got your Google Maps JavaScript API key generated - all you have to do is to <a class="" href="%s"><strong>paste it into the "Google Maps Api Key" field in the page builder settings.</strong></a>', 'phtpb' ), esc_url( PeHaa_Themes_Page_Builder_Options_Page::settings_url() . '#phtpb-gmaps-auth' ) );
+				$output .= '</div>';
+			}
+		}
+		
+		return $output;
 	}
 
 }

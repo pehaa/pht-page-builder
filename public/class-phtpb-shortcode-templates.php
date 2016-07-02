@@ -1067,6 +1067,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	protected function container( $inner, $classes = '', $css = '', $itemtag = 'div', $args_array = array(), $colors_apply = true, $width_class = true  ) {
 
+		$inner = apply_filters( $this->name . '_inner', $inner, $this->atts, $this->content );
+
 		$classes .= $this->module_class;
 		if ( $this->is_checked( 'margin_b' ) ) {
 			$classes .= ' pht-mb';

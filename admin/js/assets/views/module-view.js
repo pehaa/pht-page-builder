@@ -19,6 +19,9 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 		addMoreClassesToEl : function() {
 
 			this.elementClass += ' ' + this.model.attributes.module_type;
+			if ( 'phtpb_google_map' === this.model.attributes.module_type ) {
+				this.elementClass += peHaaThemesPageBuilder.gmapsAuthFailed ? ' phtpb_gmaps_disabled' : ' phtpb_gmaps_enabled';	
+			}
 			if ( this.model.attributes.phtpb_admin_mode === 'parent' ) {
 				this.elementClass += ' phtpb_parent';
 				this.elementClass += ' phtpb_first-level';
@@ -44,6 +47,7 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 		addEventsAndListeners : function() {
 			//_.extend( this.events, { 'click .phtpb_add-child' : 'addChild' } );
 			this.listenTo( this.model, 'change:admin_label', this.renameElement );
+			this.listenTo( peHaaThemesPageBuilder_Events, 'gmapsAuth:failed', this.gmapsAuthFailed );
 		},
 
 		addChild : function( event ) {
@@ -62,6 +66,10 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 				from : 'create_settings',
 			};
 			this.collection.add( [ module_attributes ] );
+		},
+
+		gmapsAuthFailed : function() {
+			$( '.phtpb_gmaps_enabled' ).removeClass( 'phtpb_gmaps_enabled' ).addClass( 'phtpb_gmaps_disabled' );
 		}
 
 	});

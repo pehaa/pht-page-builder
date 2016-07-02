@@ -60,7 +60,7 @@ class PeHaa_Themes_Page_Builder_MB_Templates {
 		$return_string .= esc_html__( 'Don’t be afraid, getting an API key is really fast and simple.', 'phtpb' );
 		$return_string .= '</p>';
 		$return_string .= '<p>';
-		$return_string .= sprintf( __( 'To get started using the Google Maps JavaScript API follow <a href="" target="_blank">this link.</a>', 'phtpb' ), 'https://developers.google.com/maps/documentation/javascript/get-api-key' );
+		$return_string .= sprintf( __( 'To get started using the Google Maps JavaScript API follow <a href="%s" target="_blank">this link.</a>', 'phtpb' ), 'https://developers.google.com/maps/documentation/javascript/get-api-key' );
 		$return_string .= '</p>';
 		$return_string .= '<p>';
 		$return_string .= __( 'Once you have got your Google Maps JavaScript API key generated - all you have to do is to <strong>paste it into the "Google Maps Api Key" field in the page builder settings.</strong>', 'phtpb' );
