@@ -181,6 +181,10 @@ END;
 			$unactivated_modules = 0;
 			$disabled_modules = false;
 			foreach ( $this->config_data as $key => $values ) {
+				$class = '';
+				if ( 'phtpb_google_map' === $key ) {
+					$class = "<%= phtpb_modules_data.gmapsAuthFailed ? ' phtpb_gmaps_disabled' : ' phtpb_gmaps_enabled' %>";
+				}
 				if ( 'module' === $values['phtpb_admin_type'] && 'advanced_twin' !== $values['phtpb_admin_mode'] && 'advanced_child' !== $values['phtpb_admin_mode'] ) {
 					$disabled_string = '<li class="phtpb_border--none phtpb_disabled ' . $key . '" data-module_type="' . $key . '">';
 					$disabled_string .= '<span class="phtpbcss_icon--large ' . $values['icon'] . '"></span>';
@@ -193,7 +197,7 @@ END;
 						$return_string .= $disabled_string;
 						$disabled_modules = true;
 					} else {
-						$return_string .= '<li class="phtpb_do-modal-action phtpb_border--none phtpb_pointer phtpb_colorblock ' . $key . '" data-module_type="' . $key . '">';
+						$return_string .= '<li class="phtpb_do-modal-action phtpb_border--none phtpb_pointer phtpb_colorblock ' . $key . $class . '" data-module_type="' . $key . '">';
 						$return_string .= '<span class="phtpbcss_icon--large ' . $values['icon'] . '"></span>';
 						$return_string .= '<span class="phtpb_module_title phtpb_truncate">' . $values['title'] . '</span>';
 						$return_string .= '</li>';

@@ -157,8 +157,7 @@ function initialize() {}
 
 function gm_authFailure( error ) {
 
-	peHaaThemesPageBuilder.gmapsAuthFailed = true;
-
+	peHaaThemesPageBuilder_Events.trigger( 'gmapsAuth:failed' );
 	if ( phtpb_data.gmaps_key_missing ) {
 		jQuery.post(
 			ajaxurl,

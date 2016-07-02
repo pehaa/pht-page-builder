@@ -18,6 +18,7 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_module:cloned', this.onClone );
 			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_module:triggerUpdatePostContent', this.updatePostContent );
 			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_module:reInitialized', this.reInitialize );
+			this.listenTo( peHaaThemesPageBuilder_Events, 'gmapsAuth:failed', this.gmapsAuthFailed );
 			this.render();
 			this.reInitialize( false, this.options.start_data );
 		},
@@ -423,6 +424,10 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 					$('#phtpb .inside').css('min-height',0);
 					$('#phtpb_main_container').removeClass('event-inactive').find('.phtpb_block').removeClass('phtpb_drag_disabled');
 				}, 500 );
+		},
+
+		gmapsAuthFailed : function() {
+			peHaaThemesPageBuilder.gmapsAuthFailed = true;
 		}
 
 	});

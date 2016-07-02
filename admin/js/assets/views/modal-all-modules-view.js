@@ -10,8 +10,9 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 
 		initialize : function() {
 
+			this.listenTo( peHaaThemesPageBuilder_Events, 'gmapsAuth:failed', this.gmapsAuthFailed );
 			this.innerTemplate = _.template( $('#phtpb_builder-all-modules-modal-template').html() );
-
+			this.innerTemplateData = { phtpb_modules_data: { gmapsAuthFailed : peHaaThemesPageBuilder.gmapsAuthFailed } };
 		},
 
 		doModalAction : function( event ) {
@@ -36,6 +37,10 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 			}]);
 	
 		},
+
+		gmapsAuthFailed : function() {
+			$( '.phtpb_gmaps_enabled' ).removeClass( 'phtpb_gmaps_enabled' ).addClass( 'phtpb_gmaps_disabled' );
+		}
 
 	});
 

@@ -194,6 +194,23 @@ text-overflow: ellipsis;
 .phtpb_modal__all_modules, .phtpb_modal__module {
 	color:$module_color;
 }
+.phtpb_gmaps_disabled {
+	color:grey;
+	&:after {
+		content:"!";
+		position:absolute;
+		width:32px;
+		height:32px;
+		line-height:32px;
+		font-size:18px;
+		background:red;
+		color:#fff;
+		top:2px;
+		right:2px;
+		border-radius:2px;
+		z-index:1;
+	}
+}
 .phtpb_module_class-option, .phtpb_module_id-option {background: lighten(grey,40)}
 .phtpb_option--special {
 	position:relative;

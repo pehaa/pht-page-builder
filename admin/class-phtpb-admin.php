@@ -661,7 +661,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 	public function save_gmaps_auth_failure_to_transient() {
 
 		check_ajax_referer( $this->gmaps_auth_action, 'nonce' );
-		set_transient( $this->gmaps_auth_transient, 60*60 );
+		set_transient( $this->gmaps_auth_transient, true, 60*60 );
 	
 	}
 

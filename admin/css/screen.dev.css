@@ -213,6 +213,24 @@
   color: #cf6b2f;
 }
 
+.phtpb_gmaps_disabled {
+  color: grey;
+}
+.phtpb_gmaps_disabled:after {
+  content: "!";
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 18px;
+  background: red;
+  color: #fff;
+  top: 2px;
+  right: 2px;
+  border-radius: 2px;
+  z-index: 1;
+}
+
 .phtpb_module_class-option, .phtpb_module_id-option {
   background: #e6e6e6;
 }

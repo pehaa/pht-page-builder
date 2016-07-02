@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PeHaa Themes Page Builder 2.9.0\n"
 "Report-Msgid-Bugs-To: info@pehaa.com\n"
-"POT-Creation-Date: 2016-07-01 16:13:29+00:00\n"
+"POT-Creation-Date: 2016-07-02 08:15:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -150,82 +150,82 @@ msgstr ""
 msgid "Upload a video"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:208
+#: admin/class-phtpb-mb-templates.php:212
 msgid ""
 "Disabled modules: Posts Grid and Filtered Portfolio are available "
 "exlusively with <a href=\"%s\">Yaga - our Multipurpose Premium Theme</a>"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:210
+#: admin/class-phtpb-mb-templates.php:214
 msgid "Buy Yaga"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:217
+#: admin/class-phtpb-mb-templates.php:221
 msgid ""
 "To activate the disabled module Contact Form you have to install and "
 "activate the Contact Form 7 Plugin"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:229
+#: admin/class-phtpb-mb-templates.php:233
 msgid "One column"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:254 includes/phtpb-config.php:100
+#: admin/class-phtpb-mb-templates.php:258 includes/phtpb-config.php:100
 #: includes/phtpb-config.php:255 includes/phtpb-config.php:272
 #: includes/phtpb-config.php:430 includes/phtpb-config.php:717
 #: includes/phtpb-config.php:1140
 msgid "None"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:290
+#: admin/class-phtpb-mb-templates.php:294
 msgid "Add Submodule"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:342
+#: admin/class-phtpb-mb-templates.php:346
 msgid "Column settings"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:344 admin/class-phtpb-options.php:160
+#: admin/class-phtpb-mb-templates.php:348 admin/class-phtpb-options.php:160
 msgid "Settings"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:348
+#: admin/class-phtpb-mb-templates.php:352
 msgid "Edit"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:352
+#: admin/class-phtpb-mb-templates.php:356
 msgid "Clone"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:357
+#: admin/class-phtpb-mb-templates.php:361
 msgid "Delete"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:369
+#: admin/class-phtpb-mb-templates.php:373
 msgid "Open modal window to insert Module(s)"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:369
+#: admin/class-phtpb-mb-templates.php:373
 msgid "Add Module"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:383
+#: admin/class-phtpb-mb-templates.php:387
 msgid "Add Section"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:406
+#: admin/class-phtpb-mb-templates.php:410
 msgid "Add Row"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:412
+#: admin/class-phtpb-mb-templates.php:416
 msgid "Subdivision"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:423
+#: admin/class-phtpb-mb-templates.php:427
 msgid "All Modules"
 msgstr ""
 
-#: admin/class-phtpb-mb-templates.php:426
+#: admin/class-phtpb-mb-templates.php:430
 msgid "Columns Layout"
 msgstr ""
 
