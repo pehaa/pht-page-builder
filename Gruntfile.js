@@ -199,7 +199,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
  
     grunt.registerTask('default', [
-        'makepot',
+        //'makepot',
         'wp_readme_to_markdown',
         'sass:dist',
         'sass:dev',
