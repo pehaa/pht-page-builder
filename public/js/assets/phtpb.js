@@ -6,11 +6,12 @@
  * email: info@pehaa.com
  *
  **/
-jQuery(document).ready(function ($) {
+jQuery( document ).ready( function ($) {
 
 	"use strict";
 
 	var phtpb = {
+
 		smallScreenQuery: "only screen and (max-width: 799px)", 
 		palmDeviceScreen: Modernizr.mq("only screen and (max-device-width: 799px)"),		
 
@@ -20,7 +21,7 @@ jQuery(document).ready(function ($) {
 			
 			self.start();
 
-			$(window).bind("resize", function () {
+			$( window ).bind("resize", function () {
 				
 				self.resize();	
 				
@@ -39,8 +40,8 @@ jQuery(document).ready(function ($) {
 		start : function() {
 
 			var self = this;
-			self.smallScreen  = Modernizr.mq(self.smallScreenQuery);
-			self.setBackground('.phtpb_section .js-pht-bg-ctnr');
+			self.smallScreen  = Modernizr.mq( self.smallScreenQuery );
+			self.setBackground( '.phtpb_section .js-pht-bg-ctnr' );
 			self.addSliders();
 			self.openGallery();
 			self.activateWaypoints();
@@ -243,8 +244,10 @@ jQuery(document).ready(function ($) {
 
 			var count = function ( display ) {
 			
-				setTimeout(function () {
+				setTimeout( function () {
+					
 					requestAnimationFrame( function(){ count( display ); } );
+					
 					var now = new Date();
 
 					$( '.js-phtpb_timer--' + display ).each( function( index, element ) {
@@ -254,10 +257,8 @@ jQuery(document).ready(function ($) {
 						quit_condition = 'since' === display ? ( secondsDiff > 0 ) : ( secondsDiff < 0 ),
 						$container = $(element).parent();
 
-
-
 						if ( quit_condition ) {
-							$(element).removeClass( 'js-phtpb_timer--' + display );
+							$( element ).removeClass( 'js-phtpb_timer--' + display );
 							$container.removeClass( 'js-phtpb_countdown-activated' );
 							return;
 						}
@@ -324,14 +325,16 @@ jQuery(document).ready(function ($) {
 		}
 	}());
 
-	$( window ).load(function() {
+	$( window ).load( function() {
 
 		function loadScript() {
-			if ( !$('.phtpb_map-canvas').length ) return;
-			var script = document.createElement('script');
+			if ( !$( '.phtpb_map-canvas' ).length ) {
+				return;
+			}
+			var script = document.createElement( 'script' );
 			script.type = 'text/javascript';
 			script.src = phtpb_data.gmaps_url;
-			document.body.appendChild(script);
+			document.body.appendChild( script );
 		}
 
 		loadScript();
