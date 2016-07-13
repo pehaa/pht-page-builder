@@ -135,7 +135,9 @@ var
 				} else if ( false === currentState && true === isActivated ) {
 				
 					peHaaThemesPageBuilder_App.remove();
-					peHaaThemesPageBuilder_App.initialize();
+					peHaaThemesPageBuilder_App.initialize({
+						start_data : start_data
+					});
 					
 					$('.phtpb_use_default, .phtpb_use_pb').toggleClass('js-hidden');
 					$(this).toggleClass('button-primary');
