@@ -147,6 +147,7 @@ jQuery( document ).ready( function ($) {
 			var self = this;
 
 			$( '.phtpb_slicks--img' ).each( function( index, element ) {
+
 				var autoplay = true === $( element ).data( 'auto' );
 				
 				$( element ).slick( {
@@ -157,15 +158,22 @@ jQuery( document ).ready( function ($) {
 					infinite: true,
 					autoplaySpeed : $( element ).data( 'autoplayspeed' ) ? $( element ).data( 'autoplayspeed' ) : 3000,
 					speed : $( element ).data( 'speed' ) ? $( element ).data( 'speed' ) : 300,
-					slidesToShow: 1,
+					slidesToShow: 'fixed' === $( element ).data( 'variablewidth' ) ? 3 : 1,
 					centerMode: true,
-					variableWidth: true,
+					variableWidth: 'fixed' === $( element ).data( 'variablewidth' ) ? false : true,
 					centerPadding : 0,
 					lazyLoad: 'ondemand',
 					responsive: [
 						{
+							breakpoint: 800,
+							settings: {
+								slidesToShow: 1,
+							}
+						},
+						{
 							breakpoint: 480,
 							settings: {
+								slidesToShow: 1,
 								variableWidth: false,
 								centerMode: false,
 								adaptiveHeight: false,

@@ -936,6 +936,11 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		if ( 'fade' === $this->select_attribute( 'anim' ) ) {
 			$args_array['data-fade'] = "true";
 		}
+		if ( 'variable' !== $this->select_attribute( 'woption' ) ) {
+			$args_array['data-variablewidth'] = 'fixed';	
+		} else {
+			$args_array['data-variablewidth'] = 'variable';
+		}
 
 		$id = isset( $this->atts['module_id'] ) && '' !== trim( $this->atts['module_id'] ) ? trim( $this->atts['module_id'] ) : NULL;
 
@@ -943,21 +948,25 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$hoption = $this->select_attribute( 'hoption' );
 
+		$woption = $this->select_attribute( 'woption' );
+
 		$content = '';
 
 		if ( (int) $hoption ) {
 			$this->resizer = PHTPB_Resize_Image::get_instance();
 		}
 
+		$ratio = '3_2' === $woption ? 1.5 : ( '4_3' === $woption ? 1.334 : 0 );
+
 		foreach ( $srcs_array as $image_id ) {
-			$content .= $this-> _phtpb_img_carousel_slide( $image_id, (int) $hoption );
+			$content .= $this-> _phtpb_img_carousel_slide( $image_id, (int) $hoption, $ratio );
 		}	
 		
-		return $this->container( $content, "phtpb_slicks phtpb_slicks--img phtpb_slicks--img-$hoption phtpb_item", '', 'div', $args_array  );
+		return $this->container( $content, "phtpb_slicks phtpb_slicks--img phtpb_slicks--img-$hoption phtpb_slicks--img-$woption phtpb_item", '', 'div', $args_array  );
 
 	}
 
-	protected function _phtpb_img_carousel_slide( $image_id, $height ) {
+	protected function _phtpb_img_carousel_slide( $image_id, $height, $ratio = 0 ) {
 
 		if ( !$image_id ) {
 			return;
@@ -968,7 +977,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		}
 
 		if ( $height ) {
-			$display_image = $this->resizer->resize_image( $image_id, '' , 0, $height, true );			
+			$display_image = $this->resizer->resize_image( $image_id, '' , round( $height * $ratio ), $height, true );			
 		} else {
 			$display_image = wp_get_attachment_image_src( $image_id, apply_filters( 'phtpb_img_carousel', 'full' ) );
 		}
@@ -991,8 +1000,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$output .= '</div>';
 
 		return $output;
-		
-		
+	
 	}
 
 	protected function phtpb_tlist() {

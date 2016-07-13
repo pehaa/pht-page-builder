@@ -915,6 +915,16 @@ $phtpb_config_data['phtpb_img_carousel'] = array(
 				'600' => '600px',
 			),
 		),
+		'woption' =>  array(
+			'title' => esc_html__( 'Slides Width', $this->plugin_name ),
+			'type' => 'select',
+			'default' => 'variable',
+			'options' => array(
+				'variable' => esc_html__( 'Variable width, keep image aspect ration', $this->plugin_name ),
+				'3_2' => esc_html__( 'Fixed width, aspect ratio 3/2', $this->plugin_name ),
+				'4_3' => esc_html__( 'Fixed width, aspect ratio 4/3', $this->plugin_name ),
+			),
+		),
 		'auto' => array(
 			'title' => esc_html__( 'Auto slideshow', $this->plugin_name ),
 			'type' => 'checkbox',
