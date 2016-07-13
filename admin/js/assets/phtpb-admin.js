@@ -62,11 +62,11 @@ var
 		}
 		var peHaaThemesPageBuilder_App,
 			$builder_toggle_button = $( 'body' ).find( '#phtpb_toggle_builder-meta' ),
-			isActivated = $builder_toggle_button.is('.phtpb_builder_is_used'), 
+			isActivated = $builder_toggle_button.hasClass( 'phtpb_builder_is_used' ), 
 			currentState = isActivated,
-			$current_state_mb = $("#phtpb_state-yes"),
-			$page_builder_mb = $('#phtpb'),
-			$main_editor_wrap = $('#phtpb_main_editor_wrap'),
+			$current_state_mb = $( '#phtpb_state-yes' ),
+			$page_builder_mb = $( '#phtpb' ),
+			$main_editor_wrap = $( '#phtpb_main_editor_wrap' ),
 			$hidden_editor = $( '#phtpb_hidden_editor' );
 			
 		peHaaThemesPageBuilder.initial_content = $hidden_editor.html();	

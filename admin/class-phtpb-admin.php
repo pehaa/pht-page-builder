@@ -103,6 +103,8 @@ class PeHaa_Themes_Page_Builder_Admin {
 
 		add_filter( 'phtpb_google_map_inner', array( $this, 'gmaps_auth_failed_warning' ) );
 
+		add_filter('qtranslate_load_admin_page_config', array( $this, 'qvc_add_admin_page_config' ) );
+
 	}
 
 	public function check_post_for_pagebuilder( $post_type, $post ) {
@@ -695,5 +697,32 @@ class PeHaa_Themes_Page_Builder_Admin {
 		
 		return $output;
 	}
+
+	public function qvc_add_admin_page_config( $page_configs ) {
+
+		$page_config = array();
+		$page_config['pages'] = array( 'post.php' => '' );
+
+		/**
+		 * List of scripts to be executed before "new qTranslateX" in 'qtranslate-x/admin/js/common.js'.
+		 * It gives a chance to alter configuration variable qTranslateConfig.
+		 * File paths are relative to 'plugins' directory.
+		 */
+		//$page_config['js-conf'] = array();
+
+		/**
+		 * List of scripts to be executed after "new qTranslateX" in 'qtranslate-x/admin/js/common.js'.
+		 * It gives a chance to execute additional actions on qTranslateConfig.qtx.
+		 * File paths are relative to 'plugins' directory.
+		 */
+		$page_config['js-exec'] = array();
+		$js = &$page_config['js-exec']; // shorthand
+		$js[] = array( 'handle' => 'pht-js-exec', 'src' => dirname( __FILE__ ) . '/js/assets/pht-qtranslate.js', 'ver' => '1.0' );
+
+		$page_configs[] = $page_config;
+
+		return $page_configs;
+	}
+
 
 }
