@@ -6,7 +6,9 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 	
 	peHaaThemesPageBuilder.ModalColumnsLayoutView = peHaaThemesPageBuilder.ModalView.extend( {
 
-		initialize : function() {
+		initialize : function( options ) {
+
+			this.options = options;
 			this.innerTemplate = _.template( $('#phtpb_builder-columns-modal-template').html() );
 		},
 

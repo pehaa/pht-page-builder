@@ -76,14 +76,14 @@ var
 			isActivated = true;
 		}
 	
-		if ( true === isActivated ) {		
+		if ( true === isActivated ) {
 
 			peHaaThemesPageBuilder_App = new peHaaThemesPageBuilder.AppView( {
 				model : peHaaThemesPageBuilder.Element,
 				collection : new peHaaThemesPageBuilder.Elements(),
 				start_data : phtpb_data.save_to
 			});
-			
+
 			$page_builder_mb.addClass('phtpb_visible');
 			currentState = true;
 			isActivated = true;

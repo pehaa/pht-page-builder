@@ -8,11 +8,14 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 		peHaaThemesPageBuilder_shortcodes = _.keys( phtpb_data.elements ),
 		peHaaThemesPageBuilder_shortcodes_regex = peHaaThemesPageBuilder_shortcodes.join('|');
 
-		peHaaThemesPageBuilder.AppView = window.wp.Backbone.View.extend( {
+		peHaaThemesPageBuilder.AppView = Backbone.View.extend( {
 
 		template : _.template( $('#phtpb_builder-app-template').html() ),
 
-		initialize : function() {
+		initialize : function( options ) {
+
+			
+			this.options = options;
 
 			this.listenTo( this.collection, 'add', this.addModule );
 			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_module:cloned', this.onClone );

@@ -8,8 +8,10 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 
 		innerTemplateData : {},
 
-		initialize : function() {
+		initialize : function( options ) {
 
+			this.options = options;
+			
 			this.listenTo( peHaaThemesPageBuilder_Events, 'gmapsAuth:failed', this.gmapsAuthFailed );
 			this.innerTemplate = _.template( $('#phtpb_builder-all-modules-modal-template').html() );
 			this.innerTemplateData = { phtpb_modules_data: { gmapsAuthFailed : peHaaThemesPageBuilder.gmapsAuthFailed } };

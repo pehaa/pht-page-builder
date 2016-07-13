@@ -16,7 +16,9 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 			});
 		},		
 
-		initialize : function() {
+		initialize : function( options ) {
+
+			this.options = options;
 			
 			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_map-marker:modified', this.rerenderMap );
 			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_module:afterDelete', this.rerenderMap );

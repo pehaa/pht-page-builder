@@ -4,7 +4,7 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 
 	'use strict';
 
-	peHaaThemesPageBuilder.ModalView = window.wp.Backbone.View.extend( {
+	peHaaThemesPageBuilder.ModalView = Backbone.View.extend( {
 
 		events : {
 			'click .js-phtpb_cancel-modal-action' : 'cancelModalAction',
@@ -18,6 +18,10 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 		template : _.template( $('#phtpb_builder-modal-template').html() ),
 
 		innerTemplateData : {},
+
+		initialize : function ( options ) {
+			this.options = options;
+		},
 
 		render : function() {
 			
