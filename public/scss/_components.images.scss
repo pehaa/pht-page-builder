@@ -89,3 +89,13 @@
 	.phtpb_image--right {text-align:right;}
 		
 }
+
+.phtpb_img_text {
+	display:flex;
+}
+.phtpb_img_text--center {
+	align-items:center;
+}
+.phtpb_img_text--bottom {
+	align-items:flex-end;
+}
