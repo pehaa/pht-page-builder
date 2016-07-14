@@ -16,6 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }?>
 
 <p id="phtpb-gmaps-auth">
-	<?php esc_html_e( 'From June 22, 2016 the Google Maps Javascript API no longer supports keyless access (any request that doesn\'t include an API key). Don’t be afraid, getting an API key is really fast and simple.', 'phtpb' ); ?>
+	<?php esc_html_e( 'From June 22, 2016 the Google Maps Javascript API no longer supports keyless access (any request that doesn\'t include an API key). Don’t be afraid, getting an API key is fast and simple. Please note that you have to enable the Google Maps Geocoding API as well.', 'phtpb' ); ?>
 	<a href="https://developers.google.com/maps/documentation/javascript/get-api-key"><?php esc_html_e( 'Get a Key/Authentication', 'phtpb' ); ?></a>
 </p>

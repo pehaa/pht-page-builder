@@ -77,7 +77,7 @@ class PeHaa_Themes_Page_Builder {
 		}
 
 		$this->plugin_name = 'phtpb';
-		$this->version = '2.9.0';
+		$this->version = '2.9.1';
 
 		$this->load_dependencies();
 		$this->set_locale();	
@@ -399,6 +399,10 @@ class PeHaa_Themes_Page_Builder {
 		if ( 'Yaga' === PeHaaThemes_Theme_Start::$theme_name && version_compare( PeHaaThemes_Theme_Start::$theme_version, '2.0.4', '<' ) ) {
 			unset( $config_data['phtpb_inline_images'] );
 			unset( $config_data['phtpb_timetable'] );
+		}
+
+		if ( 'Yaga' === PeHaaThemes_Theme_Start::$theme_name && version_compare( PeHaaThemes_Theme_Start::$theme_version, '2.0.7', '<' ) ) {
+			unset( $config_data['phtpb_img_text'] );
 		}
 
 		if ( 'Coollab' === PeHaaThemes_Theme_Start::$theme_name ) {

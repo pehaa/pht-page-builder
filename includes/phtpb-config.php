@@ -256,7 +256,7 @@ $column_settings = array(
 			'box--tiny' => esc_html__( 'Third (8px)', $this->plugin_name ),
 			'box--small' => esc_html__( 'Half (12px)', $this->plugin_name ),
 			'box' => esc_html__( 'Normal (24px)', $this->plugin_name ),
-			'box--large' => esc_html__( 'Large (32px)', $this->plugin_name ),
+			'box--large' => esc_html__( 'Large (36px)', $this->plugin_name ),
 			'box--huge' => esc_html__( 'Huge (48px)', $this->plugin_name ),
 		),
 		'default' => 'none',
@@ -379,79 +379,7 @@ $phtpb_config_data['phtpb_text'] = array(
 	'create_with_settings' => true
 );
 
-$phtpb_config_data['phtpb_img_text'] = array(
-	'label' =>  'phtpb_img_text',
-	'title' => esc_html__( 'Image and Text', $this->plugin_name ),
-	'icon' => 'fa fa-file-text-o',
-	'phtpb_admin_type' => 'module',
-	'fields' => array(
-		'src' => array(
-			'title' => esc_html__( 'Image Source', $this->plugin_name ),
-			'type' => 'image',
-		),
-		'phtpb_id' => array(
-			'type' => 'image_id',
-		),
-		'r_w' => array(
-			'title' => esc_html__( 'Resize Width', $this->plugin_name ),
-			'description' => esc_html__( 'Resize width, auto (or leave empty) is recommended.', $this->plugin_name ),
-			'type' => 'text',
-			'default' => esc_html__( '96', $this->plugin_name ),
-		),
-		'r_h' => array(
-			'title' => esc_html__( 'Resize Height', $this->plugin_name ),
-			'description' => esc_html__( 'Resize height, auto (or leave empty) is recommended.', $this->plugin_name ),
-			'type' => 'text',
-			'default' => esc_html__( '96', $this->plugin_name ),
-		),
-		'd_w' => array(
-			'title' => esc_html__( 'Display Width', $this->plugin_name ),
-			'description' => esc_html__( 'You can change here the width that will be use to display the image. If left empty (recommended) the default value will be applied.', $this->plugin_name ),
-			'type' => 'text',
-			'default' => esc_html__( '48', $this->plugin_name ),
-		),
-		'rounded' => array(
-			'title' => esc_html__( 'Rounded Corners', $this->plugin_name ),
-			'description' => esc_html__( 'Use with care - make sure that your image is square.', $this->plugin_name ),
-			'type' => 'checkbox',
-			'default' => ''
-		),
-		'v_align' => array(
-			'title' => esc_html__( 'Image vertical alignment', $this->plugin_name ),
-			'type' => 'select',
-			'options' => array(
-				'top' => esc_html__( 'Top', $this->plugin_name ),
-				'center' => esc_html__( 'Center', $this->plugin_name ),
-				'bottom' => esc_html__( 'Bottom', $this->plugin_name ),
-			),
-			'default' => 'top',
-		),
-		'h_align' => array(
-			'title' => esc_html__( 'Image horizontal position', $this->plugin_name ),
-			'type' => 'select',
-			'options' => array(
-				'left' => esc_html__( 'Left', $this->plugin_name ),
-				'right' => esc_html__( 'Right', $this->plugin_name ),
-			),
-			'default' => 'left',
-		),
-		'link' => array(
-			'title' => esc_html__( 'Link URL', $this->plugin_name ),
-			'type' => 'text',
-			'default' => '',
-			'description' => esc_html__( '(Optional) If you would like your image to be a link, input your destination URL here.', $this->plugin_name )
-		),
-		'target' => $target_item,
-		'phtpb_content_new' => array(
-			'title' => esc_html__( 'Content', $this->plugin_name ),
-			'type' => 'wysiwyg',
-			'description' => esc_html__( 'This is the main content', $this->plugin_name ),
-		),
-		'margin_b' => $margin_b_item,
-	),
-	'phtpb_admin_mode' => 'simple',
-	'create_with_settings' => true
-);
+
 
 $phtpb_config_data['phtpb_image'] = array(
 	'label' =>  'phtpb_image',
@@ -552,6 +480,81 @@ $phtpb_config_data['phtpb_gallery'] = array(
 			'default' => '6',
 		),
 		'lightbox' => $lightbox_item,
+		'margin_b' => $margin_b_item,
+	),
+	'phtpb_admin_mode' => 'simple',
+	'create_with_settings' => true
+);
+
+$phtpb_config_data['phtpb_img_text'] = array(
+	'label' =>  'phtpb_img_text',
+	'title' => esc_html__( 'Image and Text', $this->plugin_name ),
+	'icon' => 'fa fa-file-text-o',
+	'phtpb_admin_type' => 'module',
+	'fields' => array(
+		'src' => array(
+			'title' => esc_html__( 'Image Source', $this->plugin_name ),
+			'type' => 'image',
+		),
+		'phtpb_id' => array(
+			'type' => 'image_id',
+		),
+		'r_w' => array(
+			'title' => esc_html__( 'Image Width', $this->plugin_name ),
+			'description' => esc_html__( 'The Image Width and Image Height values will be used to resize the image if necessary. Set 0 if you do not want to resize in this dimension.', $this->plugin_name ),
+			'type' => 'text',
+			'default' => esc_html__( '96', $this->plugin_name ),
+		),
+		'r_h' => array(
+			'title' => esc_html__( 'Image Height', $this->plugin_name ),
+			'description' => esc_html__( 'The Image Width and Image Height values will be used to resize the image if necessary. Set 0 if you do not want to resize in this dimension.', $this->plugin_name ),
+			'type' => 'text',
+			'default' => esc_html__( '96', $this->plugin_name ),
+		),
+		'd_w' => array(
+			'title' => esc_html__( 'Display Width', $this->plugin_name ),
+			'description' => esc_html__( 'You can change here the width that will be use to display the image.', $this->plugin_name ),
+			'type' => 'text',
+			'default' => esc_html__( '48', $this->plugin_name ),
+		),
+		'rounded' => array(
+			'title' => esc_html__( 'Rounded Corners', $this->plugin_name ),
+			'description' => esc_html__( 'Use with care - make sure that your image is square.', $this->plugin_name ),
+			'type' => 'checkbox',
+			'default' => ''
+		),
+		'v_align' => array(
+			'title' => esc_html__( 'Image and Text vertical alignment', $this->plugin_name ),
+			'type' => 'select',
+			'options' => array(
+				'top' => esc_html__( 'Top', $this->plugin_name ),
+				'center' => esc_html__( 'Center', $this->plugin_name ),
+				'bottom' => esc_html__( 'Bottom', $this->plugin_name ),
+			),
+			'default' => 'top',
+		),
+		'h_align' => array(
+			'title' => esc_html__( 'Image horizontal position', $this->plugin_name ),
+			'type' => 'select',
+			'options' => array(
+				'left' => esc_html__( 'Left', $this->plugin_name ),
+				'right' => esc_html__( 'Right', $this->plugin_name ),
+			),
+			'description' => esc_html__( 'Left means that the image is displayed first from left to right. Right means that the text will be displayed first.', $this->plugin_name ),
+			'default' => 'left',
+		),
+		'link' => array(
+			'title' => esc_html__( 'Link URL', $this->plugin_name ),
+			'type' => 'text',
+			'default' => '',
+			'description' => esc_html__( '(Optional) If you would like your image to be a link, input your destination URL here.', $this->plugin_name )
+		),
+		'target' => $target_item,
+		'phtpb_content_new' => array(
+			'title' => esc_html__( 'Content', $this->plugin_name ),
+			'type' => 'wysiwyg',
+			'description' => esc_html__( 'Put your text here.', $this->plugin_name ),
+		),
 		'margin_b' => $margin_b_item,
 	),
 	'phtpb_admin_mode' => 'simple',

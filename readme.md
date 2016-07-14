@@ -23,6 +23,12 @@ Coming soon
 
 ## Changelog ##
 
+### 2.9.1 ###
+* Google Maps Javascript API - added info about Geocoding API
+* Added Image and Text Module
+* Added More Flexibility to the Image Carousel Module
+* Admin: Fixed passing options to views
+
 ### 2.9 ###
 * Google Maps Javascript API key access requirement
 

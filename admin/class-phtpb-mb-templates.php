@@ -57,10 +57,10 @@ class PeHaa_Themes_Page_Builder_MB_Templates {
 		$return_string .= esc_html__( 'From June 22, 2016 the Google Maps Javascript API no longer supports keyless access (any request that doesn\'t include an API key).', 'phtpb' );
 		$return_string .= '</p>';
 		$return_string .= '<p>';
-		$return_string .= esc_html__( 'Don’t be afraid, getting an API key is really fast and simple.', 'phtpb' );
+		$return_string .= esc_html__( 'Don’t be afraid, getting an API key is fast and simple.', 'phtpb' );
 		$return_string .= '</p>';
 		$return_string .= '<p>';
-		$return_string .= sprintf( __( 'To get started using the Google Maps JavaScript API follow <a href="%s" target="_blank">this link.</a>', 'phtpb' ), 'https://developers.google.com/maps/documentation/javascript/get-api-key' );
+		$return_string .= sprintf( __( 'To get started using the Google Maps JavaScript API follow <a href="%s" target="_blank">this link.</a> Please note that you have to enable the Google Maps Geocoding API as well.', 'phtpb' ), 'https://developers.google.com/maps/documentation/javascript/get-api-key' );
 		$return_string .= '</p>';
 		$return_string .= '<p>';
 		$return_string .= __( 'Once you have got your Google Maps JavaScript API key generated - all you have to do is to <strong>paste it into the "Google Maps Api Key" field in the page builder settings.</strong>', 'phtpb' );
