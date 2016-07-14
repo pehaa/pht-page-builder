@@ -290,37 +290,45 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$width = $this->r_w ? $this->r_w : 0;
 		$height = $this->r_h ? $this->r_h : 0;
+
 		if ( $width || $height ) {
 			$resizer = PHTPB_Resize_Image::get_instance();
-			$skip_array = apply_filters( 'phtpb_do_not_resize_in_image', array( 'image/gif' ), $this->atts['module_id'] );
+			$skip_array = apply_filters( 'phtpb_do_not_resize_in_img_text', array( 'image/gif' ), $this->atts['module_id'] );
 			$display_image = $resizer->resize_image( $this->phtpb_id, '' , $width, $height, true, $skip_array );
 		} else {
 			$display_image = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
 			$display_image['url'] = $display_image[0];
 		}
 
-		$img_output = '<span class="pht-fig__inner">';
+		$img_output = '';
 
-		 $this->d_w = intval( $this->d_w ) ? intval( $this->d_w ) : 96; 
+		if ( $this->link ) {
+			$img_output .= "<a href='$this->link' $this->target>";
+		}
+		
+		$this->d_w = intval( $this->d_w ) ? intval( $this->d_w ) : 48; 
 
-		$rounded_class = $this->is_checked( 'rounded' ) ? ' pht-rounded' : '';
+		
 		$img_output .= sprintf( '<img src="%1$s" alt="%2$s" %3$s %4$s/>',
 			$display_image['url'],
 			self::image_alt(  $this->phtpb_id ), 
 			'width="' . $this->d_w .'"',
-			$rounded_class ? 'class="pht-mb0 ' . esc_attr( $rounded_class ) .'"' : 'class="pht-mb0"'
+			$this->is_checked( 'rounded' ) ? 'class="pht-mb0 pht-rounded' : 'class="pht-mb0"'
 		);
 		
 		if ( $this->link ) {
-			$img_output .= "<a href='$this->link' class='pht-fig__link--main $rounded_class' $this->target></a>";
+			$img_output .= "</a>";
 		}
-		
-		$img_output .= '</span>';
 
+		$output_1 = '<div class="phtpb_img_text__img">' . $img_output . '</div>';
+		$output_2 = '<div class="phtpb_img_text__text phtpb_text">' . do_shortcode( wpautop( $this->content ) ) . '</div>';
 
-		$output = '<div class="phtpb_img_text__img pht-mr">' . $img_output . '</div>';
-		$output .= '<div class="phtpb_img_text__text phtpb_text">' . do_shortcode( wpautop( $this->content ) ) . '</div>';
-		return $this->container( $output, 'phtpb_item phtpb_img_text phtpb_img_text--' . $this->select_attribute( 'v_align') );
+		if ( 'right' === $this->select_attribute( 'h_align') ) {
+			$output = $output_2 . $output_1;
+		} else {
+			$output = $output_1. $output_2;
+		}
+		return $this->container( $output, 'phtpb_item phtpb_img_text phtpb_img_text--' . $this->select_attribute( 'v_align' ) . ' phtpb_img_text--' . $this->select_attribute( 'h_align' ) );
 
 
 	}

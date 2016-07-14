@@ -2621,6 +2621,13 @@
 .phtpb_img_text {
   display: flex;
 }
+.phtpb_img_text > div:first-child {
+  margin-right: 24px;
+}
+
+.phtpb_img_text__text {
+  flex: 1;
+}
 
 .phtpb_img_text--center {
   align-items: center;

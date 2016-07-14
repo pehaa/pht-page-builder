@@ -396,19 +396,19 @@ $phtpb_config_data['phtpb_img_text'] = array(
 			'title' => esc_html__( 'Resize Width', $this->plugin_name ),
 			'description' => esc_html__( 'Resize width, auto (or leave empty) is recommended.', $this->plugin_name ),
 			'type' => 'text',
-			'default' => esc_html__( '192', $this->plugin_name ),
+			'default' => esc_html__( '96', $this->plugin_name ),
 		),
 		'r_h' => array(
 			'title' => esc_html__( 'Resize Height', $this->plugin_name ),
 			'description' => esc_html__( 'Resize height, auto (or leave empty) is recommended.', $this->plugin_name ),
 			'type' => 'text',
-			'default' => esc_html__( '192', $this->plugin_name ),
+			'default' => esc_html__( '96', $this->plugin_name ),
 		),
 		'd_w' => array(
 			'title' => esc_html__( 'Display Width', $this->plugin_name ),
 			'description' => esc_html__( 'You can change here the width that will be use to display the image. If left empty (recommended) the default value will be applied.', $this->plugin_name ),
 			'type' => 'text',
-			'default' => esc_html__( '96', $this->plugin_name ),
+			'default' => esc_html__( '48', $this->plugin_name ),
 		),
 		'rounded' => array(
 			'title' => esc_html__( 'Rounded Corners', $this->plugin_name ),
@@ -425,6 +425,15 @@ $phtpb_config_data['phtpb_img_text'] = array(
 				'bottom' => esc_html__( 'Bottom', $this->plugin_name ),
 			),
 			'default' => 'top',
+		),
+		'h_align' => array(
+			'title' => esc_html__( 'Image horizontal position', $this->plugin_name ),
+			'type' => 'select',
+			'options' => array(
+				'left' => esc_html__( 'Left', $this->plugin_name ),
+				'right' => esc_html__( 'Right', $this->plugin_name ),
+			),
+			'default' => 'left',
 		),
 		'link' => array(
 			'title' => esc_html__( 'Link URL', $this->plugin_name ),
