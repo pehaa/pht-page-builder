@@ -145,8 +145,6 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	protected function phtpb_row() {
 
-
-
 		$layout_class = $this->gutter ? 'pht-layout ' : 'pht-layout--flush ';
 		$layout_class .= $this->equals ? 'pht-layout--equals ' : '';
 		$layout_class .= $this->module_class;
@@ -303,17 +301,16 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$img_output = '';
 
 		if ( $this->link ) {
-			$img_output .= "<a href='$this->link' $this->target>";
+			$img_output .= '<a href="' . esc_url( $this->link ) . '"' . $this->target . '>';
 		}
 		
 		$this->d_w = intval( $this->d_w ) ? intval( $this->d_w ) : 48; 
 
-		
 		$img_output .= sprintf( '<img src="%1$s" alt="%2$s" %3$s %4$s/>',
-			$display_image['url'],
-			self::image_alt(  $this->phtpb_id ), 
+			esc_url( $display_image['url'] ),
+			esc_attr( self::image_alt(  $this->phtpb_id ) ), 
 			'width="' . $this->d_w .'"',
-			$this->is_checked( 'rounded' ) ? 'class="pht-mb0 pht-rounded' : 'class="pht-mb0"'
+			$this->is_checked( 'rounded' ) ? 'class="pht-mb0 pht-rounded"' : 'class="pht-mb0"'
 		);
 		
 		if ( $this->link ) {
@@ -323,10 +320,10 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$output_1 = '<div class="phtpb_img_text__img">' . $img_output . '</div>';
 		$output_2 = '<div class="phtpb_img_text__text phtpb_text">' . do_shortcode( wpautop( $this->content ) ) . '</div>';
 
-		if ( 'right' === $this->select_attribute( 'h_align') ) {
+		if ( 'right' === $this->select_attribute( 'h_align' ) ) {
 			$output = $output_2 . $output_1;
 		} else {
-			$output = $output_1. $output_2;
+			$output = $output_1 . $output_2;
 		}
 		return $this->container( $output, 'phtpb_item phtpb_img_text phtpb_img_text--' . $this->select_attribute( 'v_align' ) . ' phtpb_img_text--' . $this->select_attribute( 'h_align' ) );
 
