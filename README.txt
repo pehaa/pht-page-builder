@@ -25,6 +25,7 @@ Coming soon
 
 = 2.9.2 =
 * Fixed Image and Text Module bug with rounded images
+* Better link to the Google Maps API, plus a link to some explanation
 
 = 2.9.1 =
 * Google Maps Javascript API - added info about Geocoding API

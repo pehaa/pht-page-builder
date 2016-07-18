@@ -688,7 +688,7 @@ class PeHaa_Themes_Page_Builder_Admin {
 				$output .= '<div class="pht-box pht-underline-links pht-milli pht-white phtpb_admin-warning" style="position:absolute; top:12px; left:12px; max-width:480px; background:rgba(255,0,0,.85);">';
 				$output .= esc_html__( 'From June 22, 2016 the Google Maps Javascript API no longer supports keyless access (any request that doesn\'t include an API key).', 'phtpb' );
 				$output .= '</br>';
-				$output .= sprintf( __( 'To get started using the Google Maps JavaScript API follow <a class="" href="%s" target="_blank">this link.</a>', 'phtpb' ), 'https://developers.google.com/maps/documentation/javascript/get-api-key' );
+				$output .= sprintf( __( 'To get started using the Google Maps JavaScript API follow <a class="" href="%s" target="_blank">this link.</a>', 'phtpb' ), 'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend&keyType=CLIENT_SIDE&reusekey=true&pli=1' );
 				$output .= '</br>';
 				$output .= sprintf( __( 'Once you have got your Google Maps JavaScript API key generated - all you have to do is to <a class="" href="%s"><strong>paste it into the "Google Maps Api Key" field in the page builder settings.</strong></a>', 'phtpb' ), esc_url( PeHaa_Themes_Page_Builder_Options_Page::settings_url() . '#phtpb-gmaps-auth' ) );
 				$output .= '</div>';
