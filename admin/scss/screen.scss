@@ -693,15 +693,15 @@ span.phtpb_table--cell {
 
 $fa-font-path:        "../../font-awesome/fonts";
 @import "fonts/font-awesome";
+
 @font-face {
-	font-family: 'pht-elegantfont';
-	src:url('../../fonts/fonts/pht-elegantfont.eot?egjxj4');
-	src:url('../../fonts/fonts/pht-elegantfont.eot?egjxj4#iefix') format('embedded-opentype'),
-		url('../../fonts/fonts/pht-elegantfont.ttf?egjxj4') format('truetype'),
-		url('../../fonts/fonts/pht-elegantfont.woff?egjxj4') format('woff'),
-		url('../../fonts/fonts/pht-elegantfont.svg?egjxj4#pht-elegantfont') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'pht-elegantfont';
+  src:
+    url('../../fonts/pht-elegantfont.ttf?z6yr9p') format('truetype'),
+    url('../../fonts/pht-elegantfont.woff?z6yr9p') format('woff'),
+    url('../../fonts/pht-elegantfont.svg?z6yr9p#pht-elegantfont') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 [class^="pht-ic-"], [class*=" pht-ic-"], %pht-ic {
