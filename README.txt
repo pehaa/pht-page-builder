@@ -23,6 +23,11 @@ Coming soon
 
 == Changelog ==
 
+= 2.9.3 =
+* Updated Instagram Icon
+* Added new field for the Map Module (draggablility on small screens)
+* Expose phtpb object (public)
+
 = 2.9.2 =
 * Fixed Image and Text Module bug with rounded images
 * Better link to the Google Maps API, plus a link to some explanation

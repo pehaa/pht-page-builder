@@ -1,16 +1,19 @@
 /**
- * Yaga WP Template
+ *PeHaa THEMES Page Builder
  * -----------
  *
  * author: PeHaa THEMES
  * email: info@pehaa.com
  *
  **/
+
+var phtpb = phtpb || {};
+
 jQuery( document ).ready( function ($) {
 
 	"use strict";
 
-	var phtpb = {
+	phtpb = {
 
 		smallScreenQuery: "only screen and (max-width: 799px)", 
 		palmDeviceScreen: Modernizr.mq("only screen and (max-device-width: 799px)"),		
@@ -375,7 +378,8 @@ jQuery( document ).ready( function ($) {
 					center: new google.maps.LatLng( $map.data( 'lat' ), $map.data( 'lng' ) ),
 					mapTypeId: google.maps.MapTypeId.ROADMAP,
 					scrollwheel: false,
-					draggable: !Modernizr.hiddenscroll,
+					draggable: $map.data('alwaysdrag') && true === $map.data('alwaysdrag') ? true : !Modernizr.hiddenscroll && !self.palmDeviceScreen,
+
 				};
 				if ( 'default' !== $map.data( 'styles' ) ) {
 					myOptions[i].styles = styleSettings[ $map.data( 'styles' )];

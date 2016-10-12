@@ -9,7 +9,7 @@
  * Plugin Name:       PeHaa Themes Page Builder
  * Plugin URI:        http://github.com/pehaa/pht-page-builder
  * Description:       Back-end drag and drop page builder.
- * Version:           2.9.2
+ * Version:           2.9.3
  * Author:            PeHaa THEMES
  * Author URI:        http://wptemplates.pehaa.com/
  * License:           GPL-2.0+

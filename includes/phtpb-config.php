@@ -1152,6 +1152,12 @@ $phtpb_config_data['phtpb_google_map'] = array(
 			'type' => 'hidden',
 			'default' => '8'
 		),
+		'alwaysdrag' => array(
+			'type' => 'checkbox',
+			'title' => esc_html__( 'Drag on Small Screens' ),
+			'description' => esc_html__( 'Allow dragging the map on scrolling on small screens', $this->plugin_name  ),
+			'default' => ''
+		),
 		'styles' => array(
 			'title' => esc_html__( 'Map styling', $this->plugin_name ),
 			'type' => 'select',

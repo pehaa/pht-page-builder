@@ -937,7 +937,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		}
 		$zoom = isset( $this->atts['zoom'] ) ? ( int ) $this->atts['zoom'] : 8;
 		$styles = $this->select_attribute( 'styles' );
-		$output = "<div class='phtpb_map-canvas pht-map-canvas' data-lat='$this->lat' data-lng='$this->lng' data-zoom='$zoom' data-styles='$styles' $style></div>";
+		$alwaysdrag = $this->is_checked( 'alwaysdrag' ) ? 'data-alwaysdrag = "true"' : '';
+		$output = "<div class='phtpb_map-canvas pht-map-canvas' data-lat='$this->lat' data-lng='$this->lng' data-zoom='$zoom' data-styles='$styles' $style $alwaysdrag></div>";
 		$output .= do_shortcode( $this->content );
 		
 		return $this->container( $output, 'phtpb_item phtpb_map-container' );
