@@ -23,6 +23,9 @@ Coming soon
 
 == Changelog ==
 
+= 2.9.4 =
+* Fixed get_the_excerpt filter *
+
 = 2.9.3 =
 * Updated Instagram Icon
 * Added new field for the Map Module (draggablility on small screens)

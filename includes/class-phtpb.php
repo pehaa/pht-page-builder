@@ -77,7 +77,7 @@ class PeHaa_Themes_Page_Builder {
 		}
 
 		$this->plugin_name = 'phtpb';
-		$this->version = '2.9.3';
+		$this->version = '2.9.4';
 
 		$this->load_dependencies();
 		$this->set_locale();	
@@ -235,7 +235,7 @@ class PeHaa_Themes_Page_Builder {
 		$this->loader->add_action( 'init', $plugin_public, 'get_content_width' );
 		$this->loader->add_action( 'init', $plugin_public, 'add_shortcodes' );
 		$this->loader->add_filter( 'the_content', $plugin_public, 'get_phtpb_content', 1 );
-		$this->loader->add_filter( 'get_the_excerpt', $plugin_public, 'get_phtpb_excerpt' );
+		$this->loader->add_filter( 'get_the_excerpt', $plugin_public, 'get_phtpb_excerpt', 1 );
 		$this->loader->add_filter( 'pht-simple-widget-areas_widget_tag', $plugin_public, 'widget_tag' );
 	}
 

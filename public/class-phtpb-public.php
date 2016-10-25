@@ -265,19 +265,27 @@ class PeHaa_Themes_Page_Builder_Public {
 	public function get_phtpb_excerpt( $excerpt ) {
 		
 		global $post;
+		
+		remove_filter( 'get_the_excerpt', 'wp_trim_excerpt' );
+		
 		if ( !isset( $post->post_type ) || !isset( $post->ID ) ) {
+			add_filter( 'get_the_excerpt', 'wp_trim_excerpt');
 			return;
 		}
 		if ( !in_array( $post->post_type, PeHaa_Themes_Page_Builder::$phtpb_post_types ) ) {
+			add_filter( 'get_the_excerpt', 'wp_trim_excerpt');
 			return $excerpt;
 		}
 		if ( in_array( $post->ID, PeHaa_Themes_Page_Builder::$phtpb_forbidden_ids ) ) {
+			add_filter( 'get_the_excerpt', 'wp_trim_excerpt');
 			return $excerpt;
 		}
 		if ( 'yes' !== get_post_meta( $post->ID, PeHaa_Themes_Page_Builder::$meta_field_name_state, true ) ) {
+			add_filter( 'get_the_excerpt', 'wp_trim_excerpt');
 			return $excerpt;
 		}
-		return $post->post_excerpt;
+		
+		return $excerpt;
 
 	}
 
