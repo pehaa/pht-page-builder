@@ -280,55 +280,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 	
 	}
 
-	protected function phtpb_img_text() {
 
-		if ( !$this->phtpb_id  || !wp_attachment_is_image( $this->phtpb_id ) ) {
-			return $this->container( do_shortcode( wpautop( $this->content ) ), 'phtpb_item phtpb_text cf' );
-		}
-
-		$width = $this->r_w ? $this->r_w : 0;
-		$height = $this->r_h ? $this->r_h : 0;
-
-		if ( $width || $height ) {
-			$resizer = PHTPB_Resize_Image::get_instance();
-			$skip_array = apply_filters( 'phtpb_do_not_resize_in_img_text', array( 'image/gif' ), $this->atts['module_id'] );
-			$display_image = $resizer->resize_image( $this->phtpb_id, '' , $width, $height, true, $skip_array );
-		} else {
-			$display_image = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
-			$display_image['url'] = $display_image[0];
-		}
-
-		$img_output = '';
-
-		if ( $this->link ) {
-			$img_output .= '<a href="' . esc_url( $this->link ) . '"' . $this->target . '>';
-		}
-		
-		$this->d_w = intval( $this->d_w ) ? intval( $this->d_w ) : 48; 
-
-		$img_output .= sprintf( '<img src="%1$s" alt="%2$s" %3$s %4$s/>',
-			esc_url( $display_image['url'] ),
-			esc_attr( self::image_alt(  $this->phtpb_id ) ), 
-			'width="' . $this->d_w .'"',
-			$this->is_checked( 'rounded' ) ? 'class="pht-mb0 pht-rounded"' : 'class="pht-mb0"'
-		);
-		
-		if ( $this->link ) {
-			$img_output .= "</a>";
-		}
-
-		$output_1 = '<div class="phtpb_img_text__img">' . $img_output . '</div>';
-		$output_2 = '<div class="phtpb_img_text__text phtpb_text">' . do_shortcode( wpautop( $this->content ) ) . '</div>';
-
-		if ( 'right' === $this->select_attribute( 'h_align' ) ) {
-			$output = $output_2 . $output_1;
-		} else {
-			$output = $output_1 . $output_2;
-		}
-		return $this->container( $output, 'phtpb_item phtpb_img_text phtpb_img_text--' . $this->select_attribute( 'v_align' ) . ' phtpb_img_text--' . $this->select_attribute( 'h_align' ) );
-
-
-	}
 
 	protected function phtpb_gallery() {
 
@@ -539,25 +491,52 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		}
 
 		if ( $this->is_checked( 'resize' ) ) {
-			$width = $this->r_w ? $this->r_w : ( 24 + $this->content_width )*$this->phtpb_width - 24;
+
+			if ( $this->r_h && !$this->r_w ) {
+				$width = 0;
+			} else {
+				$width = $this->r_w ? $this->r_w : ( 24 + $this->content_width )*$this->phtpb_width - 24;
+			}
+			
 			$height = $this->r_h ? $this->r_h : 0;
 			$resizer = PHTPB_Resize_Image::get_instance();
 			$skip_array = apply_filters( 'phtpb_do_not_resize_in_image', array( 'image/gif' ), $this->atts['module_id'] );
-			$display_image = $resizer->resize_image( $this->phtpb_id, '' , $width, $height, true, $skip_array );
+			if ( $this->d_w ) {
+				$resize_width = $width ? $this->d_w : ( $height ? 0 : $this->d_w );
+				$resize_height = $width ? round( $this->d_w/$width * $height ) : $height;
+			} else {
+				$resize_width = $width;
+				$resize_height = $height;
+			}
+			$img_src = $resizer->resize_image_srcset( $this->phtpb_id , $resize_width, $resize_height, $skip_array );
 		} else {
-			$display_image = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
-			$display_image['url'] = $display_image[0];
+			$img_src['1x'] = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
+			$img_src['1x']['url'] = $img_src['1x'][0];
+			if ( $this->d_w ) {
+				$resize_width = $this->d_w;
+			}
 		}
 
 		$output = '<span class="pht-fig__inner">';
 
 		$rounded_class = $this->is_checked( 'rounded' ) ? ' pht-rounded' : '';
-		$output .= sprintf( '<img src="%1$s" alt="%2$s" %3$s %4$s/>',
-			$display_image['url'],
-			self::image_alt(  $this->phtpb_id ), 
-			$this->d_w ? 'width="' . $this->d_w .'"' : '',
-			$rounded_class ? 'class="' . esc_attr( $rounded_class ) .'"' : ''
-		);
+
+		if ( isset( $img_src['2x'] ) && isset( $img_src['2x']['url'] ) && $img_src['2x']['url'] ) {
+			$output .= sprintf( '<img %1$s %2$s src="%3$s" srcset="%3$s 1x, %4$s 2x" alt="%5$s"/>',
+				empty( $resize_width ) ? '' : 'width="' . $resize_width .'"',
+				$rounded_class ? 'class="' . esc_attr( $rounded_class ) .'"' : '',
+				esc_url( $img_src['1x']['url'] ),
+				esc_url( $img_src['2x']['url'] ),
+				esc_attr( self::image_alt( $this->phtpb_id ) )
+			);
+		} else {
+			$output .= sprintf( '<img %1$s class="pht-img--fill %2$s" src="%3$s" alt="%4$s"/>',
+				empty( $resize_width ) ? '' : 'width="' . $resize_width .'"',
+				$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
+				esc_url( $img_src['1x']['url'] ),
+				esc_attr( self::image_alt( $this->phtpb_id ) )
+			);
+		}
 		if ( isset( $this->atts['link_type'] ) ) {
 			if ( 'url' === $this->atts['link_type'] && $this->link ) {
 				$output .= "<a href='$this->link' class='pht-fig__link--hoverdir pht-fig__link pht-fig__link--main $rounded_class' $this->target></a>";
@@ -567,12 +546,86 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			}
 		}
 		
-
 		$output .= '</span>';
 		$h_align_class = $this->h_align ? "phtpb_image--$this->h_align" : '';
 
 		return $this->container( $output, "phtpb_item phtpb_item--module phtpb_image pht-fig $h_align_class", '', 'figure' );
 		
+	}
+
+	protected function phtpb_img_text() {
+
+		if ( !$this->phtpb_id  || !wp_attachment_is_image( $this->phtpb_id ) ) {
+			return $this->container( do_shortcode( wpautop( $this->content ) ), 'phtpb_item phtpb_text cf' );
+		}
+
+		$width = $this->r_w ? $this->r_w : 0;
+		$height = $this->r_h ? $this->r_h : 0;
+
+		if ( $this->r_h && !$this->r_w ) {
+			$width = 0;
+		} else {
+			$width = $this->r_w ? $this->r_w : 0;
+		}
+		
+		$height = $this->r_h ? $this->r_h : 0;
+
+		if ( $width || $height ) {
+			$resizer = PHTPB_Resize_Image::get_instance();
+			$skip_array = apply_filters( 'phtpb_do_not_resize_in_img_text', array( 'image/gif' ), $this->atts['module_id'] );
+			if ( $this->d_w ) {
+				$resize_width = $width ? $this->d_w : 0;
+				$resize_height = $width ? round( $this->d_w/$width * $height ) : $height;
+			} else {
+				$resize_width = $width;
+				$resize_height = $height;
+			}
+			$img_src = $resizer->resize_image_srcset( $this->phtpb_id , $resize_width, $resize_height, $skip_array );
+		} else {
+			$img_src['1x'] = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
+			$img_src['1x']['url'] = $img_src['1x'][0];
+		}
+
+		$img_output = '';
+
+		if ( $this->link ) {
+			$img_output .= '<a href="' . esc_url( $this->link ) . '"' . $this->target . '>';
+		}
+		
+		$display_width = intval( $this->d_w ) ? intval( $this->d_w ) : ( $width ? intval( $width) : 48 ); 
+
+		if ( isset( $img_src['2x'] ) && isset( $img_src['2x']['url'] ) && $img_src['2x']['url'] ) {
+			$img_output .= sprintf( '<img width="%1$s" class="pht-mb0 %2$s" src="%3$s" srcset="%3$s 1x, %4$s 2x" alt="%5$s"/>',
+				esc_attr( $display_width ),
+				$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
+				esc_url( $img_src['1x']['url'] ),
+				esc_url( $img_src['2x']['url'] ),
+				esc_attr( self::image_alt( $this->phtpb_id ) )
+			);
+		} else {
+			$img_output .= sprintf( '<img width="%1$s" class="pht-mb0 %2$s" src="%3$s" alt="%4$s"/>',
+				esc_attr( $display_width ),
+				$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
+				esc_url( $img_src['1x']['url'] ),
+				esc_attr( self::image_alt( $this->phtpb_id ) )
+			);
+		}
+		
+		if ( $this->link ) {
+			$img_output .= "</a>";
+		}
+
+		$output_1 = '<div class="phtpb_img_text__img">' . $img_output . '</div>';
+		$output_2 = '<div class="phtpb_img_text__text phtpb_text">' . do_shortcode( wpautop( $this->content ) ) . '</div>';
+
+		if ( 'right' === $this->select_attribute( 'h_align' ) ) {
+			$output = $output_2 . $output_1;
+		} else {
+			$output = $output_1 . $output_2;
+		}
+		return $this->container( $output, 'phtpb_item phtpb_img_text phtpb_img_text--' . $this->select_attribute( 'v_align' ) . ' phtpb_img_text--' . $this->select_attribute( 'h_align' ) );
+
+
 	}
 
 	protected function phtpb_inline_images() {
@@ -601,23 +654,45 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		}
 
 		if ( $this->is_checked( 'resize' ) ) {
-			$width = $this->r_w ? $this->r_w : ( 24 + $this->content_width )*$this->phtpb_width - 24;
+			if ( $this->r_h && !$this->r_w ) {
+				$width = 0;
+			} else {
+				$width = $this->r_w ? $this->r_w : ( 24 + $this->content_width )*$this->phtpb_width - 24;
+			}
 			$height = $this->r_h ? $this->r_h : 0;
 			$resizer = PHTPB_Resize_Image::get_instance();
 			$skip_array = apply_filters( 'phtpb_do_not_resize_in_image', array( 'image/gif' ), $this->atts['module_id'] );
-			$display_image = $resizer->resize_image( $this->phtpb_id, '' , $width, $height, true, $skip_array );
+			if ( $this->d_w ) {
+				$resize_width = $width ? $this->d_w : 0;
+				$resize_height = $width ? round( $this->d_w/$width * $height ) : $height;
+			} else {
+				$resize_width = $width;
+				$resize_height = $height;
+			}
+			$img_src = $resizer->resize_image_srcset( $this->phtpb_id , $resize_width, $resize_height, $skip_array );
 		} else {
-			$display_image = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
-			$display_image['url'] = $display_image[0];
+			$img_src['1x'] = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
+			$img_src['1x']['url'] = $img_src['1x'][0];
 		}
 
-		$output = sprintf( '<img src="%1$s" alt="%2$s" %3$s class="pht-mb0 %4$s" %5$s/>',
-			$display_image['url'],
-			self::image_alt(  $this->phtpb_id ), 
-			$this->d_w ? 'width="' . $this->d_w .'"' : '',
-			$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
-			$this->title ? 'title="' . esc_attr( $this->title ) . '"' : ''
-		);
+		if ( isset( $img_src['2x'] ) && isset( $img_src['2x']['url'] ) && $img_src['2x']['url'] ) {
+			$output = sprintf( '<img %1$s class="pht-mb0 %2$s" src="%3$s" srcset="%3$s 1x, %4$s 2x" alt="%5$s" %6$s/>',
+				empty( $resize_width ) ? '' : 'width="' . $resize_width .'"',
+				$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
+				esc_url( $img_src['1x']['url'] ),
+				esc_url( $img_src['2x']['url'] ),
+				esc_attr( self::image_alt( $this->phtpb_id ) ),
+				$this->title ? 'title="' . esc_attr( $this->title ) . '"' : ''
+			);
+		} else {
+			$output = sprintf( '<img %1$s class="pht-mb0 %2$s" src="%3$s" class="pht-img--fill" alt="%4$s" %5$s/>',
+				empty( $resize_width ) ? '' : 'width="' . $resize_width .'"',
+				$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
+				esc_url( $img_src['1x']['url'] ),
+				esc_attr( self::image_alt( $this->phtpb_id ) ),
+				$this->title ? 'title="' . esc_attr( $this->title ) . '"' : ''
+			);
+		}
 		
 		if ( $this->link ) {
 			$output .= "<a href='$this->link' class='pht-fig__link--main' $this->target></a>";
@@ -679,10 +754,6 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			
 		return $this->container( $output, 'phtpb_item pht-gallery pht-gallery--' . $this->select_attribute( 'border_width' ), $css );
 
-	}
-
-	protected function phtpb_showcase() {
-		return;
 	}
 
 	protected function phtpb_buttons() {
@@ -1025,7 +1096,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		}
 
 		if ( $height ) {
-			$display_image = $this->resizer->resize_image( $image_id, '' , round( $height * $ratio ), $height, true );			
+			$display_image = $this->resizer->phtpb_resize_image( $image_id, round( $height * $ratio ), $height );			
 		} else {
 			$display_image = wp_get_attachment_image_src( $image_id, apply_filters( 'phtpb_img_carousel', 'full' ) );
 		}
@@ -1076,6 +1147,248 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 	
 	}
 
+
+	protected function phtpb_showcase() {
+
+		if ( !isset( $this->phtpb_type ) ) {
+			return;
+		}
+
+		$query = explode( '::', $this->phtpb_type );
+
+
+		if ( 2 === count( $query ) ) {
+			$post_type = $query[0];
+			$taxonomy = '__' === $query[1] ? '' : $query[1];
+		}	
+		
+
+		if ( empty( $post_type ) && is_int( (int) $this->phtpb_type ) ) {
+			
+			//legacy phtpb_type
+			
+			$showcases_array = PeHaa_Themes_Page_Builder::$showcases_array;
+
+			if ( ! isset( $showcases_array[ $this->phtpb_type ]['item'] ) ) {
+				return;
+			}
+
+			$post_type = $showcases_array[ $this->phtpb_type ]['item'];
+
+			if ( ! isset( $showcases_array[ $this->phtpb_type ]['taxonomy'] ) ) {
+				$taxonomy = '';
+			} else {
+				$taxonomy = $showcases_array[ $this->phtpb_type ]['taxonomy'];
+			}
+
+		}
+
+		if ( empty( $post_type ) ) {
+			return;
+		}
+		
+		
+		$taxonomy_array = $taxonomy ? array( $taxonomy ) : array();
+		$taxonomy_array = apply_filters( 'phtpb_taxonomy_filter', $taxonomy_array, $this->atts['module_id'] );
+		
+		$query_args = array(
+			'post_type' => $post_type,
+			'meta_key' => '_thumbnail_id',
+			'ignore_sticky_posts' => 1
+		);
+
+		if ( $this->count ) {
+			$query_args['posts_per_page'] = $this->count;
+		}
+
+		$phtpb_query = isset( $this->atts['phtpb_query'] ) ? htmlspecialchars_decode( $this->atts['phtpb_query'] ) : '';
+		
+		$query_args_with_phtpb_query = wp_parse_args( $phtpb_query, $query_args );
+
+		$query_args_with_phtpb_query = $this->remove_unallowed_query_args( $query_args_with_phtpb_query );
+
+		$query_args_with_phtpb_query = apply_filters( 'phtpb_showcase_query', $query_args_with_phtpb_query, $this->atts['module_id'] );
+
+		ob_start();
+	
+		$showcase_query = new WP_Query( $query_args_with_phtpb_query );
+	
+		if ( $showcase_query -> have_posts() ) :
+
+			if ( count( $taxonomy_array ) ) {
+
+				$args = array(
+					'order' => apply_filters( 'phtpb_taxonomy_filter_order', 'ASC', $taxonomy_array, $this->atts['module_id'] ),
+					'orderby' => apply_filters( 'phtpb_taxonomy_filter_orderby', 'slug', $taxonomy_array, $this->atts['module_id'] )
+				);
+				
+				$args = apply_filters( 'phtpb_taxonomy_filter_args', $args, $taxonomy_array, $this->atts['module_id'] );
+
+				$terms = get_terms( $taxonomy_array, $args );
+
+				printf( '<p class="pht-showcase__filters pht-actionfont pht-zeta">');
+				printf( '<span class="pht-pointer js-pht-showcase-filter pht-showcase__filter pht-showcase__filter--active" data-filter="*">%s</span>', isset( $this->atts['all_label'] ) && '' !== trim( $this->atts['all_label'] ) ? esc_html( trim( $this->atts['all_label'] ) ) : esc_html__( 'All', 'phtpb' ) );
+				foreach ( $terms as $term ) {
+					echo "<span class='pht-pointer js-pht-showcase-filter pht-showcase__filter' data-filter='.$term->slug'>$term->name</span>"; // don't delete "."
+				} 
+				echo '</p>';
+			
+			}
+
+			$resizer = PHTPB_Resize_Image::get_instance();
+			
+
+			$layout_option =  $this->select_attribute( 'layout_option' );
+			$heights = array( 
+				'2c' => 384, 
+				'3c' => $this->phtpb_width > 1 ? 384 : 240, 
+				'4c' => $this->phtpb_width > 1 ? 384 : 192, 
+				'5c' => $this->phtpb_width > 1 ? 384 : 1140/5, 
+				'6c' => $this->phtpb_width > 1 ? 384 : 1140/6, 
+				'2' => 0 , 
+				'3' => 0, 
+				'4' => 0, 
+				'5' => 0, 
+				'6' => 0,
+				'1' => 0
+			);
+			$height =  isset( $heights[ $layout_option ] ) ? $heights[ $layout_option ] : 0;
+			$column_count = (int) str_replace( 'c', '', $layout_option );
+			$gutter = $this->select_attribute( 'gutter' );
+			$gutter_class = $article_layout_class = '';
+
+			if ( $this->phtpb_width > 1 ) {
+				$width = 570;
+				$article_layout_class = ' u-1-of-2 u-1-of-'  . $column_count . '-desk';
+			} elseif ( $this->phtpb_width >= .75 ) {
+				
+				if ( ! $column_count ) {
+					$column_count = 3;
+				}
+				$width = (int) 1140/$column_count;
+				$article_layout_class = ' u-1-of-2 pht-mctnr--2__item u-1-of-'  . $column_count. '-desk';
+			} elseif ( $this->phtpb_width >= .5 ) {
+				$width = (int) 1140/3;
+				$article_layout_class = ' u-1-of-2';
+			} else {
+				$width = (int) 1140/4;
+				$article_layout_class = ' u-1-of-1';
+			}
+
+			if ( 1 === $column_count ) {
+				$width = (int) 1140;
+				$article_layout_class = ' u-1-of-1';
+			}
+
+			if ( 'none' !== $gutter ) {
+				$gutter_class = ' pht-mctnr--gut' . $gutter;
+				$article_layout_class .= ' pht-mctnr--gut' . $gutter .'__item';
+			}
+
+			$skip_array = apply_filters( 'phtpb_dont_resize_in_filtrable_portfolio', array(), $layout_option, $this->atts['module_id'] );
+			?>
+			
+			<div class="js-showcase js-phtpb_showcase_ctnr pht-white cf <?php echo esc_attr( $gutter_class ); ?>">
+
+				<?php while ( $showcase_query -> have_posts() ) : $showcase_query -> the_post();
+
+					$terms_class = '';
+
+					if ( count( $taxonomy_array ) ) {
+
+						foreach ( $taxonomy_array as $tax ) {
+							$terms_array = get_the_terms( get_the_ID(), $tax  );
+							if ( $terms_array ) {
+								foreach ( $terms_array as $term ) {
+									$terms_class .= $term->slug.' ';
+								}
+							}
+						}
+
+					} ?>
+
+					<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint <?php echo esc_attr( $terms_class . ' ' . $article_layout_class ); ?>">
+
+						<?php $display_image_srcset = $resizer->resize_image_srcset( get_post_thumbnail_id( get_the_ID() ) , $width, $height, $skip_array );
+
+						$this->entry_image( $display_image_srcset, $this->lightbox, get_the_ID()  )
+						?>
+
+
+					</article>
+
+				<?php endwhile; ?>
+
+			</div><!-- .js-phtpb_showcase_ctnr -->
+
+		<?php endif;
+
+		wp_reset_postdata();
+
+		$output = ob_get_contents();
+
+		ob_end_clean();
+
+		return $this->container( $output, 'phtpb_item phtpb_item--showcase' );
+
+	}
+
+	public function entry_image( $img, $lightbox = true, $post_id = NULL ) {
+
+		if ( post_password_required() ) {
+			return;
+		}
+
+		if ( !isset( $img['1x'] ) ) {
+			return;
+		}
+
+		if ( !isset( $img['1x']['url'] ) || !isset( $img['1x']['width'] ) || !isset( $img['1x']['height'] ) ) {
+			return;
+		}
+
+		if ( !$post_id ) {
+			$post_id = get_the_ID();
+		}
+		
+		print( '<figure class="pht-fig">' );
+
+			$width = $img['1x']['width'];
+			$height = $img['1x']['height'];
+			$src = $img['1x']['url'];
+			if ( isset( $img['2x'] ) && isset( $img['2x']['url'] ) && $img['2x']['url'] ) {
+				printf( '<img %1$s src="%2$s" srcset="%2$s 1x, %4$s 2x" class="pht-img--fill" alt="%3$s" />',
+					image_hwstring( $width, $height ),
+					esc_url( $src ),
+					esc_attr( self::image_alt( get_post_thumbnail_id( $post_id ) ) ),
+					esc_url( $img['2x']['url'] )
+				);
+			} else {
+				printf( '<img src="%1$s" class="pht-img--fill" alt="%2$s" />',
+					esc_url( $src ),
+					esc_attr( self::image_alt( get_post_thumbnail_id( $post_id ) ) )
+				);
+			}
+			
+		
+		
+		echo '<div class="pht-fig__link--ctnr">';	
+		printf( '<a class="pht-fig__link pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s">',
+			esc_url( get_permalink( $post_id ) )
+		);
+		echo '<div class="pht-fig__titles pht-epsilon">';
+		the_title();
+		echo '</div>';
+		echo '</a>';
+		if ( $lightbox ) {
+			$full_image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
+			printf( '<a href="%s" class="pht-fig__link js-pht-magnific_popup pht-fig__link--secondary a-a a-a--no-h"><i class="pht-fig__link__string pht-ic-f1-arrow-expand-alt"></i></a>', esc_url( $full_image[0] ) );
+		}
+		echo '</div>';		
+		echo '</figure>';
+
+	} 
+
 	protected function phtpb_posts() {
 		return;
 	}
@@ -1109,7 +1422,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		}
 
 		$resizer = PHTPB_Resize_Image::get_instance();
-		$img = $resizer->resize_image( $id, '' , apply_filters( 'pht_palm_background_width', 800 ), 0, true );
+		$img = $resizer->phtpb_resize_image( $id, apply_filters( 'pht_palm_background_width', 800 ) );
 		if ( $img ) {
 			return $img['url'];
 		}

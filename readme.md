@@ -2,8 +2,8 @@
 **Contributors:** pehaa  
 **Tags:** WordPress, plugin, page builder, wordpress plugin, grid  
 **Requires at least:** 3.8  
-**Tested up to:** 4.6  
-**Stable tag:** 2.9  
+**Tested up to:** 4.7  
+**Stable tag:** 3.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -22,6 +22,14 @@ Coming soon
 Coming soon
 
 ## Changelog ##
+
+### 3.0.0 ###
+* Added Portfolio Module
+* Refactored Image Resizer
+* srcset attribute added for Gallery, Image, Inline Images, Image and Text modules
+* Available Contact Forms checked only in the backend
+* Fixed .phtpb_tlist__item css
+* Updated Plugin Update Checker
 
 ### 2.9.4 ###
 * Fixed get_the_excerpt filter *

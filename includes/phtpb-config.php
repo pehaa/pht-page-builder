@@ -413,9 +413,7 @@ $phtpb_config_data['phtpb_image'] = array(
 			'default' => esc_html__( 'Auto', $this->plugin_name ),
 		),
 		'd_w' => array(
-			'title' => esc_html__( 'Display Width', $this->plugin_name ),
-			'description' => esc_html__( 'You can change here the width that will be use to display the image. If left empty (recommended) the default value will be applied.', $this->plugin_name ),
-			'type' => 'text',
+			'type' => 'hidden',
 			'default' => esc_html__( '', $this->plugin_name ),
 		),
 		'rounded' => array(
@@ -512,10 +510,8 @@ $phtpb_config_data['phtpb_img_text'] = array(
 			'default' => esc_html__( '96', $this->plugin_name ),
 		),
 		'd_w' => array(
-			'title' => esc_html__( 'Display Width', $this->plugin_name ),
-			'description' => esc_html__( 'You can change here the width that will be use to display the image.', $this->plugin_name ),
-			'type' => 'text',
-			'default' => esc_html__( '48', $this->plugin_name ),
+			'type' => 'hidden',
+			'default' => esc_html__( '', $this->plugin_name ),
 		),
 		'rounded' => array(
 			'title' => esc_html__( 'Rounded Corners', $this->plugin_name ),
@@ -617,9 +613,7 @@ $phtpb_config_data['phtpb_inline_image'] = array(
 			'default' => esc_html__( 'Auto', $this->plugin_name ),
 		),
 		'd_w' => array(
-			'title' => esc_html__( 'Display Width', $this->plugin_name ),
-			'description' => esc_html__( 'You can change here the width that will be use to display the image. If left empty (recommended) the default value will be applied.', $this->plugin_name ),
-			'type' => 'text',
+			'type' => 'hidden',
 			'default' => esc_html__( '', $this->plugin_name ),
 		),
 		'rounded' => array(
@@ -1490,16 +1484,96 @@ $phtpb_config_data['phtpb_gallery_portfolio'] = array(
 	'create_with_settings' => true
 );
 
-$phtpb_config_data['phtpb_showcase'] = array(
-	'label' =>  'phtpb_showcase',
-	'title' => esc_html__( 'Filtered Portfolio', $this->plugin_name ),
-	'icon' => 'fa fa-th-large',
-	'phtpb_admin_type' => 'module',
-	'fields' => array(),
-	'phtpb_admin_mode' => 'simple',
-	'create_with_settings' => true,
-	'pht_themes_only' => true,
-);
+$options_array = $options_array_string = array();
+		$showcase_post_types = PeHaa_Themes_Page_Builder::$phtpb_available_post_types;
+		unset( $showcase_post_types['page'] );
+
+		if ( count( $showcase_post_types ) ) {
+
+			foreach ( $showcase_post_types as $showcase_post_type_key => $showcase_post_type_name ) {
+				$taxonomy_names = get_object_taxonomies( $showcase_post_type_key );
+				$options_array[] = $showcase_post_type_name . esc_html__( ' (no filtering)', $this->plugin_name );
+				$options_array_string[ $showcase_post_type_key.'::__' ] = $showcase_post_type_name . esc_html__( ' (no filtering)', $this->plugin_name );
+				self::$showcases_array[] = array( 'item' => $showcase_post_type_key, 'taxonomy' => '' );
+				if ( count( $taxonomy_names ) ) {
+					foreach ( $taxonomy_names as $taxonomy_name ) {
+						$options_array_string[ $showcase_post_type_key.'::'.$taxonomy_name ] = $showcase_post_type_name . ' :: ' . get_taxonomy( $taxonomy_name )->labels->name;
+						$options_array[] = $showcase_post_type_name . ' :: ' . get_taxonomy( $taxonomy_name )->labels->name;
+						self::$showcases_array[] = array( 'item' => $showcase_post_type_key, 'taxonomy' =>$taxonomy_name );
+					}
+				}
+
+			}
+			
+			if ( count( self::$showcases_array ) ) {
+				$phtpb_config_data['phtpb_showcase'] = array(
+					'label' =>  'phtpb_showcase',
+					'title' => esc_html__( 'Filtrable Portfolio', $this->plugin_name ),
+					'icon' => 'fa fa-th',
+					'phtpb_admin_type' => 'module',
+					'fields' => array(
+						'phtpb_type' => array(
+							'title' => esc_html__( 'Post type:: Filtered by', $this->plugin_name ),
+							'type' => 'select',
+							'options' => $options_array_string,
+							'description' => esc_html__( 'Choose the query.', $this->plugin_name ),
+						),
+						'phtpb_query' => array(
+							'title' => esc_html__( 'Custom query', $this->plugin_name ),
+							'type' => 'text',
+							'description' => esc_html__( 'You can modify the query here, e.g.', $this->plugin_name ) . '<em>orderby=title&order=ASC</em>',
+						),
+						'layout_option' => array(
+							'title' => esc_html__( 'Layout Option', $this->plugin_name ),
+							'type' => 'select',
+							'default' => '2c',
+							'options' => array(
+								'2c' => esc_html__( 'Classic 2 columns', $this->plugin_name ),
+								'3c' => esc_html__( 'Classic 3 columns', $this->plugin_name ),
+								'4c' => esc_html__( 'Classic 4 columns', $this->plugin_name ),
+								'5c' => esc_html__( 'Classic 5 columns', $this->plugin_name ),
+								'6c' => esc_html__( 'Classic 6 columns', $this->plugin_name ),
+								'2' => esc_html__( 'Masonry 2 columns', $this->plugin_name ),
+								'3' => esc_html__( 'Masonry 3 columns', $this->plugin_name ),
+								'4' => esc_html__( 'Masonry 4 columns', $this->plugin_name ),
+								'5' => esc_html__( 'Masonry 5 columns', $this->plugin_name ),
+								'6' => esc_html__( 'Masonry 6 columns', $this->plugin_name ),
+								'1' => esc_html__( 'One column', $this->plugin_name ),
+							),
+						),
+						'gutter' => array(
+							'title' => esc_html__( 'Gutter', $this->plugin_name ),
+							'type' => 'select',
+							'default' => '24',
+							'options' => array(
+								'24' => '24px',
+								'12' => '12px',
+								'6' => '6px',
+								'none' => esc_html__( 'None', $this->plugin_name )
+							),
+						),
+						'count' => array(
+							'title' => esc_html__( 'Posts count', $this->plugin_name ),
+							'type' => 'text',
+							'default' => -1,
+							'description' => esc_html__( 'Number of posts. Set -1 to display all posts.', $this->plugin_name ),
+						),
+						'all_label' => array(
+							'title' => esc_html__( 'All items label', $this->plugin_name ),
+							'type' => 'text',
+							'default' => esc_html__( 'All', $this->plugin_name ),
+							'description' => esc_html__( 'The label for all items - will be used for filtrable portfolios.', $this->plugin_name ),
+						),
+						'lightbox' => $lightbox_item,
+						'margin_b' => $margin_b_item,
+					),
+					'phtpb_admin_mode' => 'simple',
+					'create_with_settings' => true,
+				);
+
+			}
+
+		}
 
 $sidebars = array();
 global $wp_registered_sidebars;
@@ -1794,7 +1868,9 @@ $phtpb_config_data['phtpb_wp_categories'] = array(
 );
 
 $contact_forms = array();
-if ( class_exists( 'WPCF7_ContactForm' ) ) {
+
+if ( class_exists( 'WPCF7_ContactForm' ) && is_admin() ) {
+
 	global $wpdb;
 	$cf7 = $wpdb->get_results(
 		"

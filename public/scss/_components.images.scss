@@ -35,9 +35,14 @@
 	transition:.6s;
 	outline:none;
 	z-index: 2;
+	
 }
 .pht-fig__link--hoverdir {
 	background:rgba(black,.4);
+	
+	&, &:hover {
+		color:#fff;
+	}
 }
 
 .pht-fig__link--main {	
@@ -45,6 +50,9 @@
 	right:0;
 	top:0;
 	bottom:0;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
 		
 }
 
@@ -74,6 +82,7 @@
 	&,
 	&:hover {
 		border:none;
+		box-shadow:none;
 	}
 }
 

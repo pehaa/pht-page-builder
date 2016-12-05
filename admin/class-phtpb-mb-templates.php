@@ -88,7 +88,9 @@ class PeHaa_Themes_Page_Builder_MB_Templates {
 		if ( $with_label ) {
 			$label_string = sprintf( '<label for="%1$s">%2$s: </label>', $key, $field['title'] );
 		}
-		if ( ! isset( $field['type'] ) ) return;
+		if ( ! isset( $field['type'] ) ) {
+			return;
+		}
 
 		if ( isset( $field['default'] ) ) {
 			$default = $field['default'];
@@ -96,6 +98,13 @@ class PeHaa_Themes_Page_Builder_MB_Templates {
 
 		} else {
 			$value = "<%= typeof( phtpb_attributes['$key'] ) !== 'undefined' ? _.unescape( phtpb_attributes['$key'] ) : '' %>";
+		}
+		if ( 'r_w' === $key ) {
+			$value = "<%= typeof( phtpb_attributes['d_w'] ) !== 'undefined' && phtpb_attributes['d_w'] && typeof( phtpb_attributes['r_w'] ) !== 'undefined' && 2 == parseInt(phtpb_attributes['r_w']/ phtpb_attributes['d_w']) ? parseInt( phtpb_attributes['r_w']/2 ) : ( typeof( phtpb_attributes['r_w'] ) !== 'undefined' ? phtpb_attributes['r_w'] : '$default' ) %>";
+		} elseif ( 'r_h' === $key ) {
+			$value = "<%= typeof( phtpb_attributes['d_w'] ) !== 'undefined' && phtpb_attributes['d_w'] && typeof( phtpb_attributes['r_w'] ) !== 'undefined' && 2 == parseInt(phtpb_attributes['r_w']/ phtpb_attributes['d_w']) ? parseInt( phtpb_attributes['r_h']/2 ) : ( typeof( phtpb_attributes['r_h'] ) !== 'undefined' ? parseInt( phtpb_attributes['r_h'] ): '$default' ) %>";
+		} elseif ( 'd_w' === $key ) {
+			$value = '';
 		}
 		$return_string = '';
 		$data_default = isset( $default ) ? "data-default='$default'" : '';
@@ -115,6 +124,7 @@ END;
 			break;
 		case 'hidden' :
 			$return_string .= "<input id='$key' class='$key phtpb_shortcode-attribute' type='hidden' value='$value' $data_default/>";
+			
 			break;
 		case 'hidden_2_skip' :
 			$return_string .= "<input id='$key' class='$key' type='hidden' value='$value' />";
@@ -166,14 +176,23 @@ END;
 			$select_class .= "<% } %>";
 			$start_string = "<div class='phtpb_option phtpb_$key-option $custom_class $with_label select-$select_class'>";
 			$return_string .= sprintf( '<select name="%1$s" id="%1$s" class="phtpb_shortcode-attribute" %2$s>', $key, $data_default );
-			foreach ( $field['options'] as $option_key => $option_value ) {
-				$selected = "<% if ( typeof( phtpb_attributes['$key'] ) !== 'undefined' ) { %>";
-				$selected .= "<%= '$option_key' === phtpb_attributes['$key'] ?  'selected=selected' : '' %>";
-				$selected .= "<% } else { %>";
-				$selected .= "<%= '$option_key' === '$default_select' ?  'selected=selected' : '' %>";
-				$selected .= "<% } %>";
-				$return_string .= "<option value='$option_key' $selected>$option_value</option>";
-			}
+			if ( $key === 'phtpb_type' && "<%= NaN !== parseInt( phtpb_attributes['$key'] ) %>" ) {
+				$i = 0;
+				foreach ( $field['options'] as $option_key => $option_value ) {
+					$selected = "<%= '$i' == phtpb_attributes['$key'] ?  'selected=selected' : '' %>";
+					$return_string .= "<option value='$option_key' $selected>$option_value</option>";
+					$i++;
+				}
+			} else {
+				foreach ( $field['options'] as $option_key => $option_value ) {
+					$selected = "<% if ( typeof( phtpb_attributes['$key'] ) !== 'undefined' ) { %>";
+					$selected .= "<%= '$option_key' === phtpb_attributes['$key'] ?  'selected=selected' : '' %>";
+					$selected .= "<% } else { %>";
+					$selected .= "<%= '$option_key' === '$default_select' ?  'selected=selected' : '' %>";
+					$selected .= "<% } %>";
+					$return_string .= "<option value='$option_key' $selected>$option_value</option>";
+				}
+			}			
 			$return_string .= '</select>';
 			break;
 		case 'modules' :
@@ -202,7 +221,6 @@ END;
 						$return_string .= '<span class="phtpb_module_title phtpb_truncate">' . $values['title'] . '</span>';
 						$return_string .= '</li>';
 					}
-					
 				}
 			}
 			$return_string .= '</ul>';
@@ -280,7 +298,6 @@ END;
 		return $start_string.$label_string.$return_string;
 	}
 
-
 	private function generate_modal_innertemplate( $element ) {
 
 		$return_string = sprintf( '<script type="text/template" id="%s">', 'phtpb_builder-' . $element['label'] . '-modal-template' );
@@ -297,7 +314,6 @@ END;
 			$return_string .= '</div> <!-- .phtpb_option -->';
 		}
 
-
 		$return_string .= "\n";
 		//start with 'admin_label'
 		if ( isset( $element['fields'] ) && isset( $element['fields']['admin_label'] ) ) {
@@ -307,8 +323,10 @@ END;
 			$return_string .= '<div class="phtpb_js-map phtpb_google-map"></div>';
 		}
 		foreach ( $element['fields'] as $key => $field ) {
-			if ( 'admin_label' === $key ) continue;
-			$return_string .= $this->form_element( $key, $field );
+			if ( 'admin_label' === $key ) { 
+				continue;
+			}
+			$return_string .= $this->form_element( $key, $field );			
 		}
 		$return_string .= "\n";
 

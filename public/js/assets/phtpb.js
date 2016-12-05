@@ -51,6 +51,7 @@ jQuery( document ).ready( function ($) {
 			self.activateTabs();
 			self.activateAccordion();
 			self.doCountDown();
+			self.doIsotope();
 						
 		},
 
@@ -299,6 +300,51 @@ jQuery( document ).ready( function ($) {
 			count( 'until');
 
 		},
+
+		doIsotope: function() {
+			
+			var $showcase = $( '.js-phtpb_showcase_ctnr').isotope( {
+				itemSelector: 'article'
+			});
+			
+			$showcase.isotope( 'bindResize' );
+			$showcase.imagesLoaded( function() {
+				
+				$showcase.isotope( 'layout' );
+				
+			});
+			$showcase.isotope( 'on', 'layoutComplete', function() {
+					
+				if ( $.fn.waypoint ) {
+					setTimeout( function() {
+						Waypoint.refreshAll();
+					}, 500 );						
+				}
+			});
+
+			$( document ).on( 'click', '.js-pht-showcase-filter',  function ( event ) {
+
+				event.stopPropagation();
+				if ( !$( this ).hasClass( "pht-showcase__filter--active" ) ) {
+					
+					var selector = $(this).attr('data-filter');
+					
+					$( this ).parent().next()
+						.find( '.pht-fadesat' ).removeClass( 'pht-fadesat' )
+						.end()
+						.isotope( {
+							filter: selector
+						});
+					$( this )
+						.parent()
+						.find( ".pht-showcase__filter--active" )
+						.removeClass("pht-showcase__filter--active");
+					
+					$( this ).addClass("pht-showcase__filter--active");
+				}
+				return false;
+			});
+		}
 
 	};
 

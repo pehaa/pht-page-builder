@@ -189,14 +189,29 @@ class PHTPB_Tiled_Gallery {
 					$image_title = $image->post_title;
 					$orig_file = wp_get_attachment_url( $image->ID );
 					$link = $this->get_attachment_link( $image->ID, $orig_file );
- 					if ( $image->width < 400 ) {
-						$img_src = $this->resizer->resize_image(  $image->ID, '' , 2*$image->width, 2*$image->height, true, $skip_resize_array );
+
+					$img_src = $this->resizer->resize_image_srcset( $image->ID , $image->width, $image->height, $skip_resize_array );
+
+					if ( isset( $img_src['2x'] ) && isset( $img_src['2x']['url'] ) && $img_src['2x']['url'] ) {
+						$image_html = sprintf( '<img %1$s src="%2$s" srcset="%2$s 1x, %3$s 2x" alt="%4$s" title="%5$s"/>',
+							image_hwstring( $image->width, $image->height ),
+							esc_url( $img_src['1x']['url'] ),
+							esc_url( $img_src['2x']['url'] ),
+							esc_attr( PeHaa_Themes_Page_Builder_Shortcode_Template::image_alt( $image->ID ) ),
+							esc_attr( $image_title )
+						);
 					} else {
-						$img_src = $this->resizer->resize_image(  $image->ID, '' ,$image->width, $image->heigh, true, $skip_resize_array ); 
+						$image_html =  sprintf( '<img %1$s src="%2$s" class="pht-img--fill" alt="%3$s" title="%4$s"/>',
+							image_hwstring( $image->width, $image->height ),
+							esc_url( $img_src['1x']['url'] ),
+							esc_attr( PeHaa_Themes_Page_Builder_Shortcode_Template::image_alt( $image->ID ) ),
+							esc_attr( $image_title )
+						);
 					}
+
 					$original_image = wp_get_attachment_image_src( $image->ID, 'full' );
 					$original_image_url = $original_image[0];
-					$image_html = '<img src="' . esc_url( $img_src['url'] ) . '"  width="' . esc_attr( $image->width ) . '" height="' . esc_attr( $image->height ) . '" alt="' . PeHaa_Themes_Page_Builder_Shortcode_Template::image_alt( $image->ID ) . '" title="' . esc_attr( $image_title ) . '" />';
+
 					$figure_class = 'pht-gallery__item pht-gallery__item-' . esc_attr( $size ) . ' ' . $item_count_class;
 					$output .= "<figure class='pht-fig $figure_class js-pht-waypoint pht-waypoint pht-fadesat'>";
 

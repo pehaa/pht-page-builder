@@ -25,7 +25,6 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 			
 			this.innerTemplate = _.template( $( this.collection.generateTemplateName( this.model.get( 'module_type' ), true ) ).html() );
 			this.innerTemplateData = { phtpb_attributes: this.model.attributes };
-
 		},
 
 		render : function() {

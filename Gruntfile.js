@@ -109,6 +109,7 @@ module.exports = function(grunt) {
                         'public/js/assets/jquery.waypoints.js',
                         'public/js/assets/jquery.flexslider.js',
                         'public/js/assets/slick.js',
+                        'node_modules/isotope-layout/dist/isotope.pkgd.js',
                         'public/js/assets/phtpb.js',
                     ]
                 }
