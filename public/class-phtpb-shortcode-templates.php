@@ -490,7 +490,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			return;
 		}
 
-		if ( $this->is_checked( 'resize' ) ) {
+		if ( $this->is_checked( 'resize' ) || $this->d_w ) {
 
 			if ( $this->r_h && !$this->r_w ) {
 				$width = 0;
@@ -499,8 +499,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			}
 			
 			$height = $this->r_h ? $this->r_h : 0;
-			$resizer = PHTPB_Resize_Image::get_instance();
-			$skip_array = apply_filters( 'phtpb_do_not_resize_in_image', array( 'image/gif' ), $this->atts['module_id'] );
+			
 			if ( $this->d_w ) {
 				$resize_width = $width ? $this->d_w : ( $height ? 0 : $this->d_w );
 				$resize_height = $width ? round( $this->d_w/$width * $height ) : $height;
@@ -508,35 +507,33 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				$resize_width = $width;
 				$resize_height = $height;
 			}
-			$img_src = $resizer->resize_image_srcset( $this->phtpb_id , $resize_width, $resize_height, $skip_array );
+
+			$size = array( intval( $resize_width ), intval( $resize_height ) );
+			
 		} else {
-			$img_src['1x'] = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
-			$img_src['1x']['url'] = $img_src['1x'][0];
+			$size = 'full';
 			if ( $this->d_w ) {
 				$resize_width = $this->d_w;
 			}
 		}
 
-		$output = '<span class="pht-fig__inner">';
-
 		$rounded_class = $this->is_checked( 'rounded' ) ? ' pht-rounded' : '';
 
-		if ( isset( $img_src['2x'] ) && isset( $img_src['2x']['url'] ) && $img_src['2x']['url'] ) {
-			$output .= sprintf( '<img %1$s %2$s src="%3$s" srcset="%3$s 1x, %4$s 2x" alt="%5$s"/>',
-				empty( $resize_width ) ? '' : 'width="' . $resize_width .'"',
-				$rounded_class ? 'class="' . esc_attr( $rounded_class ) .'"' : '',
-				esc_url( $img_src['1x']['url'] ),
-				esc_url( $img_src['2x']['url'] ),
-				esc_attr( self::image_alt( $this->phtpb_id ) )
-			);
-		} else {
-			$output .= sprintf( '<img %1$s class="pht-img--fill %2$s" src="%3$s" alt="%4$s"/>',
-				empty( $resize_width ) ? '' : 'width="' . $resize_width .'"',
-				$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
-				esc_url( $img_src['1x']['url'] ),
-				esc_attr( self::image_alt( $this->phtpb_id ) )
-			);
+		$attr = array();
+
+		if ( !empty( $resize_width ) && $resize_width ) {
+			$attr['width'] = esc_attr( $resize_width );
 		}
+		if ( !empty( $resize_height ) && $resize_height ) {
+			$attr['height'] = esc_attr( $resize_height );
+		}
+
+		if ( $this->is_checked( 'rounded' ) ) {
+			$attr['class'] = ' pht-rounded';
+		}
+		$output = '<span class="pht-fig__inner">';
+		$output .= self::get_att_img( $this->phtpb_id, $size, false, $attr );
+
 		if ( isset( $this->atts['link_type'] ) ) {
 			if ( 'url' === $this->atts['link_type'] && $this->link ) {
 				$output .= "<a href='$this->link' class='pht-fig__link--hoverdir pht-fig__link pht-fig__link--main $rounded_class' $this->target></a>";
@@ -570,8 +567,10 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		
 		$height = $this->r_h ? $this->r_h : 0;
 
+		$skip_array = array();
+
 		if ( $width || $height ) {
-			$resizer = PHTPB_Resize_Image::get_instance();
+			
 			$skip_array = apply_filters( 'phtpb_do_not_resize_in_img_text', array( 'image/gif' ), $this->atts['module_id'] );
 			if ( $this->d_w ) {
 				$resize_width = $width ? $this->d_w : 0;
@@ -580,10 +579,10 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				$resize_width = $width;
 				$resize_height = $height;
 			}
-			$img_src = $resizer->resize_image_srcset( $this->phtpb_id , $resize_width, $resize_height, $skip_array );
+			$size = array( intval( $resize_width ), intval( $resize_height ) );
+
 		} else {
-			$img_src['1x'] = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
-			$img_src['1x']['url'] = $img_src['1x'][0];
+			$size = 'full';
 		}
 
 		$img_output = '';
@@ -592,24 +591,14 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			$img_output .= '<a href="' . esc_url( $this->link ) . '"' . $this->target . '>';
 		}
 		
-		$display_width = intval( $this->d_w ) ? intval( $this->d_w ) : ( $width ? intval( $width) : 48 ); 
-
-		if ( isset( $img_src['2x'] ) && isset( $img_src['2x']['url'] ) && $img_src['2x']['url'] ) {
-			$img_output .= sprintf( '<img width="%1$s" class="pht-mb0 %2$s" src="%3$s" srcset="%3$s 1x, %4$s 2x" alt="%5$s"/>',
-				esc_attr( $display_width ),
-				$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
-				esc_url( $img_src['1x']['url'] ),
-				esc_url( $img_src['2x']['url'] ),
-				esc_attr( self::image_alt( $this->phtpb_id ) )
-			);
-		} else {
-			$img_output .= sprintf( '<img width="%1$s" class="pht-mb0 %2$s" src="%3$s" alt="%4$s"/>',
-				esc_attr( $display_width ),
-				$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
-				esc_url( $img_src['1x']['url'] ),
-				esc_attr( self::image_alt( $this->phtpb_id ) )
-			);
+		$attr = array( 
+			'width' => intval( $this->d_w ) ? intval( $this->d_w ) : ( $width ? intval( $width) : 48 ), 
+			'class' => 'pht_mb0' 
+		);
+		if ( $this->is_checked( 'rounded' ) ) {
+			$attr['class'] .= ' pht-rounded';
 		}
+		$img_output = self::get_att_img( $this->phtpb_id, $size, $attr, $skip_array );
 		
 		if ( $this->link ) {
 			$img_output .= "</a>";
@@ -660,7 +649,6 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				$width = $this->r_w ? $this->r_w : ( 24 + $this->content_width )*$this->phtpb_width - 24;
 			}
 			$height = $this->r_h ? $this->r_h : 0;
-			$resizer = PHTPB_Resize_Image::get_instance();
 			$skip_array = apply_filters( 'phtpb_do_not_resize_in_image', array( 'image/gif' ), $this->atts['module_id'] );
 			if ( $this->d_w ) {
 				$resize_width = $width ? $this->d_w : 0;
@@ -669,30 +657,23 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				$resize_width = $width;
 				$resize_height = $height;
 			}
-			$img_src = $resizer->resize_image_srcset( $this->phtpb_id , $resize_width, $resize_height, $skip_array );
+			$size = array( intval( $resize_width ), intval( $resize_height ) );
 		} else {
-			$img_src['1x'] = wp_get_attachment_image_src( $this->phtpb_id, 'full' );
-			$img_src['1x']['url'] = $img_src['1x'][0];
+			$size = 'full';
 		}
-
-		if ( isset( $img_src['2x'] ) && isset( $img_src['2x']['url'] ) && $img_src['2x']['url'] ) {
-			$output = sprintf( '<img %1$s class="pht-mb0 %2$s" src="%3$s" srcset="%3$s 1x, %4$s 2x" alt="%5$s" %6$s/>',
-				empty( $resize_width ) ? '' : 'width="' . $resize_width .'"',
-				$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
-				esc_url( $img_src['1x']['url'] ),
-				esc_url( $img_src['2x']['url'] ),
-				esc_attr( self::image_alt( $this->phtpb_id ) ),
-				$this->title ? 'title="' . esc_attr( $this->title ) . '"' : ''
-			);
-		} else {
-			$output = sprintf( '<img %1$s class="pht-mb0 %2$s" src="%3$s" class="pht-img--fill" alt="%4$s" %5$s/>',
-				empty( $resize_width ) ? '' : 'width="' . $resize_width .'"',
-				$this->is_checked( 'rounded' ) ? 'pht-rounded' : '',
-				esc_url( $img_src['1x']['url'] ),
-				esc_attr( self::image_alt( $this->phtpb_id ) ),
-				$this->title ? 'title="' . esc_attr( $this->title ) . '"' : ''
-			);
+		$attr = array(
+			'class' => 'pht-mb0'
+		);
+		if ( $this->is_checked( 'rounded') ) {
+			$attr['class'] .= ' pht-rounded' ;
 		}
+		if ( $this->title ) {
+			$attr['title'] = esc_attr( $this->title );
+		}
+		if ( !empty( $resize_width ) && intval( $resize_width ) > 0 ) {
+			$attr['width'] = intval( $resize_width );
+		}
+		$output = self::get_att_img( $this->phtpb_id, $size, $attr, $skip_array );
 		
 		if ( $this->link ) {
 			$output .= "<a href='$this->link' class='pht-fig__link--main' $this->target></a>";
@@ -1235,8 +1216,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			
 			}
 
-			$resizer = PHTPB_Resize_Image::get_instance();
-			
+			$resizer = PHTPB_Resize_Image::get_instance();			
 
 			$layout_option =  $this->select_attribute( 'layout_option' );
 			$heights = array( 
@@ -1311,7 +1291,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 						<?php $display_image_srcset = $resizer->resize_image_srcset( get_post_thumbnail_id( get_the_ID() ) , $width, $height, $skip_array );
 
-						$this->entry_image( $display_image_srcset, $this->lightbox, get_the_ID()  )
+						$this->entry_image( get_the_ID(), get_post_thumbnail_id( get_the_ID() ), $width, $height, $skip_array, $this->lightbox );
 						?>
 
 
@@ -1333,61 +1313,41 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	}
 
-	public function entry_image( $img, $lightbox = true, $post_id = NULL ) {
+	public function entry_image( $post_id, $attachment_id, $width, $height, $skip_array, $lightbox ) {
 
 		if ( post_password_required() ) {
 			return;
 		}
-
-		if ( !isset( $img['1x'] ) ) {
-			return;
-		}
-
-		if ( !isset( $img['1x']['url'] ) || !isset( $img['1x']['width'] ) || !isset( $img['1x']['height'] ) ) {
-			return;
-		}
-
-		if ( !$post_id ) {
-			$post_id = get_the_ID();
-		}
 		
-		print( '<figure class="pht-fig">' );
+		printf( '<figure class="pht-fig ">' );
 
-			$width = $img['1x']['width'];
-			$height = $img['1x']['height'];
-			$src = $img['1x']['url'];
-			if ( isset( $img['2x'] ) && isset( $img['2x']['url'] ) && $img['2x']['url'] ) {
-				printf( '<img %1$s src="%2$s" srcset="%2$s 1x, %4$s 2x" class="pht-img--fill" alt="%3$s" />',
-					image_hwstring( $width, $height ),
-					esc_url( $src ),
-					esc_attr( self::image_alt( get_post_thumbnail_id( $post_id ) ) ),
-					esc_url( $img['2x']['url'] )
-				);
-			} else {
-				printf( '<img src="%1$s" class="pht-img--fill" alt="%2$s" />',
-					esc_url( $src ),
-					esc_attr( self::image_alt( get_post_thumbnail_id( $post_id ) ) )
-				);
-			}
-			
-		
+		echo self::get_att_img( $attachment_id, array( $width, $height), false, array( 'class' => 'pht-img--fill', 'width' => $width, 'height' => $height ), $skip_array );
 		
 		echo '<div class="pht-fig__link--ctnr">';	
 		printf( '<a class="pht-fig__link pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s">',
 			esc_url( get_permalink( $post_id ) )
 		);
-		echo '<div class="pht-fig__titles pht-epsilon">';
+		printf( '<%1$s class="%2$s">',
+			esc_attr( apply_filters( 'phtpb_showcase_title_tag', 'div' ) ),
+			esc_attr( apply_filters( 'phtpb_showcase_title_class', 'pht-fig__titles pht-epsilon' ) )
+		);
 		the_title();
-		echo '</div>';
+		printf( '</%s>',
+			esc_attr( apply_filters( 'phtpb_showcase_title_tag', 'div' ) )
+		);
 		echo '</a>';
 		if ( $lightbox ) {
+			$lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' );
 			$full_image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
-			printf( '<a href="%s" class="pht-fig__link js-pht-magnific_popup pht-fig__link--secondary a-a a-a--no-h"><i class="pht-fig__link__string pht-ic-f1-arrow-expand-alt"></i></a>', esc_url( $full_image[0] ) );
+			printf( '<a href="%s" class="pht-fig__link js-pht-magnific_popup pht-fig__link--secondary a-a a-a--no-h"><i class="pht-fig__link__string %s"></i></a>',
+				esc_url( $full_image[0] ),
+				esc_attr( $lightbox_icon_class ) );
 		}
 		echo '</div>';		
 		echo '</figure>';
 
-	} 
+	}
+
 
 	protected function phtpb_posts() {
 		return;
@@ -1536,6 +1496,48 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		return $alt;
 
+	}
+
+	public static function get_att_img( $attachment_id, $size, $attr = '', $skip_mime_types = array() ) {
+
+		if ( !is_array( $size ) ) {
+			
+			$resized = wp_get_attachment_image_src( $attachment_id, $size );
+
+			if ( !$resized ) {
+				return;
+			}
+			$img = array();
+			$img['1x']['url'] = $resized[0];
+			$img['1x']['width'] = $resized[1];
+			$img['1x']['height'] = $resized[2];
+		} else {
+			list( $width, $height ) = $size;
+			$resizer = PHTPB_Resize_Image::get_instance();
+			$img = $resizer->resize_image_srcset( $attachment_id, intval( $width ),  intval( $height ), $skip_mime_types );
+		}
+		
+		$html = '';
+
+		if ( isset( $img['1x']['url'] ) && isset( $img['1x']['width'] ) && isset( $img['1x']['height'] ) ) {
+			$default_attr = array(
+				'src'	=> $img['1x']['url'],
+				'class'	=> '',
+				'alt'	=> self::image_alt( $attachment_id )
+			);
+			if (  isset( $img['2x']['url'] ) && isset( $img['2x']['url'] ) && $img['2x']['url'] ) {
+				$default_attr['srcset'] = $img['1x']['url'] .' 1x, ' . $img['2x']['url'] . ' 2x';
+			}
+			$attr = wp_parse_args( $attr, $default_attr );
+			$attr = array_map( 'esc_attr', $attr );
+			$html = '<img ';
+			foreach ( $attr as $name => $value ) {
+				$html .= " $name=" . '"' . $value . '"';
+			}
+			$html .= ' />';
+		}
+
+		return $html;
 	}
 
 	protected function is_checked( $attr ) {

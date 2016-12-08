@@ -74,8 +74,8 @@ class PHTPB_Resize_Image {
 	
 		return array(
 			'url' => "{$this->url}/{$this->pathinfo['basename']}",
-			'width' => $this->meta['width'],
-			'height' => $this->meta['height']
+			'width' => isset( $this->meta['width'] ) ? $this->meta['width'] : 0,
+			'height' => isset( $this->meta['height'] ) ? $this->meta['height'] : 0
 		);
 	}
 
@@ -113,6 +113,10 @@ class PHTPB_Resize_Image {
 	}
 
 	public function do_resizing( $attachment_id, $width, $height ) {
+
+		if ( !isset( $this->meta['width'] ) || !isset( $this->meta['height'] ) ) {
+			return false;
+		}
 
 		if ( $this->meta['width'] >= $width && $this->meta['height'] >= $height ) {
 

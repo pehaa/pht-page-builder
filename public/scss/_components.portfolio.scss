@@ -1,0 +1,11 @@
+.pht-showcase__filter {
+	padding-left:6px;
+	padding-right:6px;
+	display:inline-block;
+}
+.pht-showcase__filter:first-child {
+	padding-left:0;
+}
+.pht-showcase__filter:last-child {
+	padding-right:0;
+}

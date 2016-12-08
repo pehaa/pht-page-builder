@@ -190,36 +190,21 @@ class PHTPB_Tiled_Gallery {
 					$orig_file = wp_get_attachment_url( $image->ID );
 					$link = $this->get_attachment_link( $image->ID, $orig_file );
 
-					$img_src = $this->resizer->resize_image_srcset( $image->ID , $image->width, $image->height, $skip_resize_array );
-
-					if ( isset( $img_src['2x'] ) && isset( $img_src['2x']['url'] ) && $img_src['2x']['url'] ) {
-						$image_html = sprintf( '<img %1$s src="%2$s" srcset="%2$s 1x, %3$s 2x" alt="%4$s" title="%5$s"/>',
-							image_hwstring( $image->width, $image->height ),
-							esc_url( $img_src['1x']['url'] ),
-							esc_url( $img_src['2x']['url'] ),
-							esc_attr( PeHaa_Themes_Page_Builder_Shortcode_Template::image_alt( $image->ID ) ),
-							esc_attr( $image_title )
-						);
-					} else {
-						$image_html =  sprintf( '<img %1$s src="%2$s" class="pht-img--fill" alt="%3$s" title="%4$s"/>',
-							image_hwstring( $image->width, $image->height ),
-							esc_url( $img_src['1x']['url'] ),
-							esc_attr( PeHaa_Themes_Page_Builder_Shortcode_Template::image_alt( $image->ID ) ),
-							esc_attr( $image_title )
-						);
-					}
-
 					$original_image = wp_get_attachment_image_src( $image->ID, 'full' );
 					$original_image_url = $original_image[0];
 
 					$figure_class = 'pht-gallery__item pht-gallery__item-' . esc_attr( $size ) . ' ' . $item_count_class;
 					$output .= "<figure class='pht-fig $figure_class js-pht-waypoint pht-waypoint pht-fadesat'>";
 
-					$output .= $image_html;
+					$output .= PeHaa_Themes_Page_Builder_Shortcode_Template::get_att_img( $image->ID, array( $image->width, $image->height ),  array( 'width' => intval( $image->width ), 'height' => intval( $image->height ) ), $skip_resize_array );
 					$link_class = $link_count_class . ' pht-fig__link--main pht-fig__link--hoverdir';
 					if ( $linked_to_posts ) {
 						$output .= "<a href='" . esc_url( get_permalink( $post_ids[ $i ] ) ) . "' class='pht-fig__link pht-fig__link--main pht-fig__link--main $link_class'></a>";
-						$output .= '<figcaption class="pht-gallery__caption pht-transition">' . esc_html( get_the_title( $post_ids[ $i ] ) ) . '</figcaption>';
+						$output .= sprintf( '<%1$s class="%2$s">%3$s</%1$s>',
+							esc_attr( apply_filters( 'phtpb_showcase_title_tag', 'div' ) ),
+							esc_attr( apply_filters( 'phtpb_showcase_title_class', 'pht-fig__titles pht-epsilon' ) ),
+							esc_html( get_the_title( $post_ids[ $i ] ) )
+						);
 						$link_class = 'pht-fig__link--secondary';
 						$i++;
 					} else {
@@ -227,9 +212,11 @@ class PHTPB_Tiled_Gallery {
 						$output .= '<figcaption class="pht-gallery__caption pht-transition">' . wptexturize( $image->post_excerpt ) . '</figcaption>';
 
 					}
-					if ( $fancybox ) { 	
+					if ( $fancybox ) { 
 
-						$output .= "<a href='$orig_file' class='pht-fig__link js-pht-magnific_popup $link_class $link_count_class a-a a-a--no-h'><i class='pht-fig__link__string pht-ic-f1-arrow-expand-alt'></i></a>";
+						$lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' );
+
+						$output .= "<a href='$orig_file' class='pht-fig__link js-pht-magnific_popup $link_class $link_count_class a-a a-a--no-h'><i class='pht-fig__link__string $lightbox_icon_class'></i></a>";
 					}
 					$output .= '</figure>';
 				}
@@ -386,7 +373,9 @@ class PHTPB_Tiled_Gallery_Grouper {
 		foreach ( $attachments as $image ) {
 			if ( !isset( $image->ID ) ) continue;
 			$meta  = wp_get_attachment_metadata( $image->ID );
-			if ( !$meta ) continue;
+			if ( !$meta || !isset( $meta['width'] ) || !isset( $meta['height'] ) ) {
+				continue;
+			}
 			$image->width_orig = ( $meta['width'] > 0 )? $meta['width'] : 1;
 			$image->height_orig = ( $meta['height'] > 0 )? $meta['height'] : 1;
 			$image->ratio = $image->width_orig / $image->height_orig;

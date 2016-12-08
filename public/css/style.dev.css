@@ -4029,8 +4029,8 @@ html[xmlns] .phtpb_flexslider .slides {
 }
 
 .pht-mctnr--gut6__item {
-  padding: 0 .1875rem;
-  margin-top: 0.375rem;
+  padding: 0 3px;
+  margin-top: 6px;
   margin-bottom: 0;
 }
 
@@ -4046,8 +4046,8 @@ html[xmlns] .phtpb_flexslider .slides {
   .pht-mctnr--gut24__item,
   .pht-mctnr--gut16,
   .pht-mctnr--gut12__item {
-    padding: 0 .1875rem;
-    margin-top: 0.375rem;
+    padding: 0 3px;
+    margin-top: 6px;
     margin-bottom: 0;
   }
 }
@@ -4059,7 +4059,7 @@ html[xmlns] .phtpb_flexslider .slides {
   }
 
   .pht-mctnr--gut24__item {
-    padding: 0 .75rem;
+    padding: 0 12px;
     margin-bottom: 0;
     margin-top: 24px;
   }
@@ -4071,7 +4071,7 @@ html[xmlns] .phtpb_flexslider .slides {
   }
 
   .pht-mctnr--gut16__item {
-    padding: 0 .5rem;
+    padding: 0 8px;
     margin-bottom: 0;
     margin-top: 16px;
   }
@@ -4083,11 +4083,25 @@ html[xmlns] .phtpb_flexslider .slides {
   }
 
   .pht-mctnr--gut12__item {
-    padding: 0 .375rem;
+    padding: 0 6px;
     margin-bottom: 0;
     margin-top: 12px;
   }
 }
+.pht-showcase__filter {
+  padding-left: 6px;
+  padding-right: 6px;
+  display: inline-block;
+}
+
+.pht-showcase__filter:first-child {
+  padding-left: 0;
+}
+
+.pht-showcase__filter:last-child {
+  padding-right: 0;
+}
+
 /* Magnific Popup CSS */
 .mfp-bg {
   top: 0;
