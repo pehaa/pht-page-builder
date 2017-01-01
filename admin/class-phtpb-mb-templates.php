@@ -77,7 +77,7 @@ class PeHaa_Themes_Page_Builder_MB_Templates {
 		return $return_string;
 	}
 
-	private function form_element( $key, $field, $custom_class = '' ) {
+	private function form_element( $key, $field, $custom_class = '', $element_label = '' ) {
 		
 		if ( isset( $field['class'] ) ) {
 			$custom_class .= ' ' . $field['class'];
@@ -100,9 +100,9 @@ class PeHaa_Themes_Page_Builder_MB_Templates {
 			$value = "<%= typeof( phtpb_attributes['$key'] ) !== 'undefined' ? _.unescape( phtpb_attributes['$key'] ) : '' %>";
 		}
 		if ( 'r_w' === $key ) {
-			$value = "<%= typeof( phtpb_attributes['d_w'] ) !== 'undefined' && phtpb_attributes['d_w'] && typeof( phtpb_attributes['r_w'] ) !== 'undefined' && 2 == parseInt(phtpb_attributes['r_w']/ phtpb_attributes['d_w']) ? parseInt( phtpb_attributes['r_w']/2 ) : ( typeof( phtpb_attributes['r_w'] ) !== 'undefined' ? phtpb_attributes['r_w'] : '$default' ) %>";
+			$value = "<%= typeof( phtpb_attributes['d_w'] ) !== 'undefined' && phtpb_attributes['d_w'] && typeof( phtpb_attributes['r_w'] ) !== 'undefined' && 2 == parseInt(phtpb_attributes['r_w']/ phtpb_attributes['d_w']) ? parseInt( phtpb_attributes['r_w']/2 ) : ( typeof( phtpb_attributes['r_w'] ) !== 'undefined' && parseInt( phtpb_attributes['r_w'] ) ? phtpb_attributes['r_w'] : '$default' ) %>";
 		} elseif ( 'r_h' === $key ) {
-			$value = "<%= typeof( phtpb_attributes['d_w'] ) !== 'undefined' && phtpb_attributes['d_w'] && typeof( phtpb_attributes['r_w'] ) !== 'undefined' && 2 == parseInt(phtpb_attributes['r_w']/ phtpb_attributes['d_w']) ? parseInt( phtpb_attributes['r_h']/2 ) : ( typeof( phtpb_attributes['r_h'] ) !== 'undefined' ? parseInt( phtpb_attributes['r_h'] ): '$default' ) %>";
+			$value = "<%= typeof( phtpb_attributes['d_w'] ) !== 'undefined' && phtpb_attributes['d_w'] && typeof( phtpb_attributes['r_w'] ) !== 'undefined' && 2 == parseInt(phtpb_attributes['r_w']/ phtpb_attributes['d_w']) ? parseInt( phtpb_attributes['r_h']/2 ) : ( typeof( phtpb_attributes['r_h'] ) !== 'undefined' && parseInt( phtpb_attributes['r_h'] ) ? parseInt( phtpb_attributes['r_h'] ) : '$default' ) %>";
 		} elseif ( 'd_w' === $key ) {
 			$value = '';
 		}
@@ -176,7 +176,7 @@ END;
 			$select_class .= "<% } %>";
 			$start_string = "<div class='phtpb_option phtpb_$key-option $custom_class $with_label select-$select_class'>";
 			$return_string .= sprintf( '<select name="%1$s" id="%1$s" class="phtpb_shortcode-attribute" %2$s>', $key, $data_default );
-			if ( $key === 'phtpb_type' && "<%= NaN !== parseInt( phtpb_attributes['$key'] ) %>" ) {
+			if ( $element_label === 'phtpb_showcase' && $key === 'phtpb_type' && "<%= NaN !== parseInt( phtpb_attributes['$key'] ) %>" ) {
 				$i = 0;
 				foreach ( $field['options'] as $option_key => $option_value ) {
 					$selected = "<%= '$i' == phtpb_attributes['$key'] ?  'selected=selected' : '' %>";
@@ -326,7 +326,7 @@ END;
 			if ( 'admin_label' === $key ) { 
 				continue;
 			}
-			$return_string .= $this->form_element( $key, $field );			
+			$return_string .= $this->form_element( $key, $field, '', $element['label'] );			
 		}
 		$return_string .= "\n";
 

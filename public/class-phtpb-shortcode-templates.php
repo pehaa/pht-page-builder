@@ -1313,7 +1313,110 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	}
 
-	public function entry_image( $post_id, $attachment_id, $width, $height, $skip_array, $lightbox ) {
+	protected function phtpb_posts() {
+		
+		$query_args = array(
+			'post_type' => 'post',
+		);
+
+		if ( $this->count ) {
+			$query_args['posts_per_page'] = $this->count;
+		}
+
+		$phtpb_query = isset( $this->atts['phtpb_query'] ) ? htmlspecialchars_decode( $this->atts['phtpb_query'] ) : '';
+		
+		$query_args_with_phtpb_query = wp_parse_args( $phtpb_query, $query_args );
+
+		$query_args_with_phtpb_query = $this->remove_unallowed_query_args( $query_args_with_phtpb_query );
+
+		$query_args_with_phtpb_query = apply_filters( 'phtpb_posts_query', $query_args_with_phtpb_query, $this->atts['module_id'] );
+
+		ob_start();
+	
+		$posts_query = new WP_Query( $query_args_with_phtpb_query );
+	
+		if ( $posts_query -> have_posts() ) :
+
+			$resizer = PHTPB_Resize_Image::get_instance();			
+
+			$layout_option =  $this->select_attribute( 'layout_option' );
+			$heights = array( 
+				'2c' => 384, 
+				'3c' => $this->phtpb_width > 1 ? 384 : 240, 
+				'4c' => $this->phtpb_width > 1 ? 384 : 192, 
+				'5c' => $this->phtpb_width > 1 ? 384 : 1140/5, 
+				'6c' => $this->phtpb_width > 1 ? 384 : 1140/6, 
+				'2' => 0 , 
+				'3' => 0, 
+				'4' => 0, 
+				'5' => 0, 
+				'6' => 0,
+				'1' => 0
+			);
+			$height =  isset( $heights[ $layout_option ] ) ? $heights[ $layout_option ] : 0;
+			$column_count = (int) str_replace( 'c', '', $layout_option );
+			$gutter = $this->select_attribute( 'gutter' );
+			$gutter_class = $article_layout_class = '';
+
+			if ( $this->phtpb_width > 1 ) {
+				$width = 570;
+				$article_layout_class = ' u-1-of-2 u-1-of-'  . $column_count . '-desk';
+			} elseif ( $this->phtpb_width >= .75 ) {
+				
+				if ( ! $column_count ) {
+					$column_count = 3;
+				}
+				$width = (int) 1140/$column_count;
+				$article_layout_class = ' u-1-of-2 pht-mctnr--2__item u-1-of-'  . $column_count. '-desk';
+			} elseif ( $this->phtpb_width >= .5 ) {
+				$width = (int) 1140/3;
+				$article_layout_class = ' u-1-of-2';
+			} else {
+				$width = (int) 1140/4;
+				$article_layout_class = ' u-1-of-1';
+			}
+
+			if ( 1 === $column_count ) {
+				$width = (int) 1140;
+				$article_layout_class = ' u-1-of-1';
+			}
+
+			$gutter_class = ' pht-mctnr--gut24';
+			$article_layout_class .= ' pht-mctnr--gut24__item';
+			
+
+			$skip_array = apply_filters( 'phtpb_dont_resize_in_posts_grid', array(), $layout_option, $this->atts['module_id'] );
+			?>
+			
+			<div class="js-showcase js-phtpb_showcase_ctnr cf <?php echo esc_attr( $gutter_class ); ?>">
+
+				<?php while ( $posts_query -> have_posts() ) : $posts_query -> the_post(); ?>
+
+					<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint <?php echo esc_attr( $article_layout_class ); ?>">
+
+						<?php $display_image_srcset = $resizer->resize_image_srcset( get_post_thumbnail_id( get_the_ID() ) , $width, $height, $skip_array );
+
+						$this->post_entry( get_the_ID(), get_post_thumbnail_id( get_the_ID() ), $width, $height, $skip_array ); ?>
+
+					</article>
+
+				<?php endwhile; ?>
+
+			</div><!-- .js-phtpb_showcase_ctnr -->
+
+		<?php endif;
+
+		wp_reset_postdata();
+
+		$output = ob_get_contents();
+
+		ob_end_clean();
+
+		return $this->container( $output, 'phtpb_item phtpb_item--posts-grid' );
+
+	}
+
+	protected function entry_image( $post_id, $attachment_id, $width, $height, $skip_array, $lightbox ) {
 
 		if ( post_password_required() ) {
 			return;
@@ -1339,18 +1442,53 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		if ( $lightbox ) {
 			$lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' );
 			$full_image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
-			printf( '<a href="%s" class="pht-fig__link js-pht-magnific_popup pht-fig__link--secondary a-a a-a--no-h"><i class="pht-fig__link__string %s"></i></a>',
+			printf( '<a href="%s" class="pht-fig__link js-pht-magnific_popup pht-fig__link--secondary a-a a-a--no-h %s"></a>',
 				esc_url( $full_image[0] ),
 				esc_attr( $lightbox_icon_class ) );
 		}
 		echo '</div>';		
 		echo '</figure>';
-
 	}
 
+	protected function post_entry( $post_id, $attachment_id, $width, $height, $skip_array ) {
 
-	protected function phtpb_posts() {
-		return;
+		if ( post_password_required() ) {
+			return;
+		}
+		if ( $attachment_id ) {
+			printf( '<figure class="pht-fig pht-mb">' );
+
+			echo self::get_att_img( $attachment_id, array( $width, $height), false, array( 'class' => 'pht-img--fill', 'width' => $width, 'height' => $height ), $skip_array );
+			
+			echo '<div class="pht-fig__link--ctnr">';	
+			printf( '<a class="pht-fig__link pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s">',
+				esc_url( get_permalink( $post_id ) )
+			);
+			echo '</a>';
+			echo '</div>';		
+			echo '</figure>';
+		}
+		echo '<div class="pht-parent">';
+		echo '<a class="phtpb-entry-date--a pht-micro" href="' . esc_url( get_permalink() ) . '">';
+		echo '<time class="phtpb-entry-date" datetime="' . esc_attr( get_the_date( 'c' ) ) . '">' . esc_html( get_the_date() ) . '</time>';
+		echo '</a>';
+		printf( '<a class="" href="%1$s">',
+			esc_url( get_permalink( $post_id ) )
+		);
+		printf( '<%1$s class="%2$s">',
+			esc_attr( apply_filters( 'phtpb_posts_grid_title_tag', 'h3' ) ),
+			esc_attr( apply_filters( 'phtpb_posts_grid_title_class', 'pht-epsilon' ) )
+		);
+		the_title();
+		printf( '</%s>',
+			esc_attr( apply_filters( 'phtpb_posts_grid_title_tag', 'h3' ) )
+		);
+		echo '</a>';
+		echo '<div class="entry-summary pht-zeta pht-entry-summary pht-mt cf">';
+		the_excerpt();
+		echo '</div>';
+		echo '</div>';
+
 	}
 
 	protected function image_src( $id, $size = 'thumbnail', $filter = 'phtpb_insert_thumbnail' ) {

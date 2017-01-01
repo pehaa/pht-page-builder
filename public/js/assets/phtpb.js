@@ -16,7 +16,8 @@ jQuery( document ).ready( function ($) {
 	phtpb = {
 
 		smallScreenQuery: "only screen and (max-width: 799px)", 
-		palmDeviceScreen: Modernizr.mq("only screen and (max-device-width: 799px)"),		
+		palmDeviceScreen: Modernizr.mq("only screen and (max-device-width: 799px)"),
+		cachedScriptGMapsPromise : '',	
 
 		init: function () {
 
@@ -52,6 +53,20 @@ jQuery( document ).ready( function ($) {
 			self.activateAccordion();
 			self.doCountDown();
 			self.doIsotope();
+
+			$.cachedGetScript = function() {
+
+				if ( !self.cachedScriptGMapsPromise ) {
+					self.cachedScriptGMapsPromise = $.Deferred(function( defer ) {
+						$.getScript( phtpb_data.gmaps_url ).then( defer.resolve, defer.reject );
+					}).promise();
+				}
+				return self.cachedScriptGMapsPromise;
+			};
+
+			$.cachedGetScript().done(function(){
+				window.phtpb_initialize();
+			});
 						
 		},
 
@@ -100,7 +115,16 @@ jQuery( document ).ready( function ($) {
 					type: 'image',
 					gallery: {
 						enabled:true
-					}
+					},
+					removalDelay: 500, //delay removal by X to allow out-animation
+					callbacks: {
+						beforeOpen: function() {
+							this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+							this.st.mainClass = 'mfp-zoom-in';
+						}
+					},
+					closeOnContentClick: true,
+					midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
 				});
 			});
 
@@ -108,7 +132,16 @@ jQuery( document ).ready( function ($) {
 				type: 'image',
 				gallery:{
 					enabled:true
-				}
+				},
+				removalDelay: 500, //delay removal by X to allow out-animation
+				callbacks: {
+					beforeOpen: function() {
+						this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+						this.st.mainClass = 'mfp-zoom-in';
+					}
+				},
+				closeOnContentClick: true,
+				midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
 			});
 		},
 		
@@ -381,22 +414,6 @@ jQuery( document ).ready( function ($) {
 			};
 		}
 	}());
-
-	$( window ).load( function() {
-
-		function loadScript() {
-			if ( !$( '.phtpb_map-canvas' ).length ) {
-				return;
-			}
-			var script = document.createElement( 'script' );
-			script.type = 'text/javascript';
-			script.src = phtpb_data.gmaps_url;
-			document.body.appendChild( script );
-		}
-
-		loadScript();
-
-	});
 
 	window.phtpb_initialize = function() {
 

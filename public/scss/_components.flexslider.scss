@@ -286,24 +286,11 @@ html[xmlns] .phtpb_flexslider .slides {
 		height:600px;
 	}
 	.phtpb_flexslider--full .phtpb_slides, .phtpb_flexslider--full .phtpb_flexslider__slide {
-		height:calc(100vh - 24px);
-	}
-	
-}
-@include media-query( 'desk-wide' ) {
-
-	.phtpb_flexslider--full .phtpb_slides, .phtpb_flexslider--full .phtpb_flexslider__slide {
-		height:calc(100vh - 64px);
+		height:100vh;
 	}
 	
 }
 
-
-
-@include media-query(desk-wide) {
-
-
-}
 
 .phtpb_flexslider__caption__inner {
 	transition:1s;

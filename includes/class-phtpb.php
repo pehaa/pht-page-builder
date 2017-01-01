@@ -77,7 +77,7 @@ class PeHaa_Themes_Page_Builder {
 		}
 
 		$this->plugin_name = 'phtpb';
-		$this->version = '3.0.0';
+		$this->version = '3.1.0';
 
 		$this->load_dependencies();
 		$this->set_locale();	
@@ -370,7 +370,6 @@ class PeHaa_Themes_Page_Builder {
 
 	}
 
-
 	public function pehaathemes_theme_compability() {
 
 		if ( !class_exists( 'PeHaaThemes_Theme_Start' ) ) {
@@ -403,10 +402,6 @@ class PeHaa_Themes_Page_Builder {
 
 		if ( 'Yaga' === PeHaaThemes_Theme_Start::$theme_name && version_compare( PeHaaThemes_Theme_Start::$theme_version, '2.0.7', '<' ) ) {
 			unset( $config_data['phtpb_img_text'] );
-		}
-
-		if ( 'Coollab' === PeHaaThemes_Theme_Start::$theme_name ) {
-			unset( $config_data['phtpb_showcase'] );
 		}
 
 		return $config_data;

@@ -23,6 +23,14 @@ Coming soon
 
 == Changelog ==
 
+= 3.1.0 =
+* Fixed switching back to default values for some attributes (admin)
+* Modified Google Maps scripts loading on front-end
+* Added Posts Grid Module
+* Fixed flexslider style
+* Updated public javascropt libraries slick.js, waypoints, magnific-popup
+* Added default Posts Grid Module 
+
 = 3.0.0 =
 * Added Portfolio Module
 * Refactored Image Resizer

@@ -1435,10 +1435,22 @@ $phtpb_config_data['phtpb_posts'] = array(
 	'title' => esc_html__( 'Posts Grid', $this->plugin_name ),
 	'icon' => 'fa fa-th-large',
 	'phtpb_admin_type' => 'module',
-	'fields' => array(),
+	'fields' => array(
+		'count' => array(
+			'title' => esc_html__( 'Posts count', 'yaga' ),
+			'type' => 'text',
+			'default' => '',
+			'description' => esc_html__( 'Number of posts. Set -1 to display all posts.', 'yaga' ),
+		),
+		'phtpb_query' => array(
+			'title' => esc_html__( 'Custom query', 'yaga' ),
+			'type' => 'text',
+			'description' => esc_html__( 'You can modify the query here, e.g. ', 'yaga' ) . '<em>orderby=title&order=ASC</em>',
+		),
+		'margin_b' => $margin_b_item,
+	),
 	'phtpb_admin_mode' => 'simple',
 	'create_with_settings' => true,
-	'pht_themes_only' => true,
 );
 
 $options_array = PeHaa_Themes_Page_Builder::$phtpb_available_post_types;
