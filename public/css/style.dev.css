@@ -2541,6 +2541,7 @@
 }
 .pht-fig img {
   margin: 0;
+  vertical-align: bottom;
 }
 
 .pht-fig__inner {
@@ -3616,6 +3617,38 @@ html[xmlns] .phtpb_flexslider .slides {
   opacity: 1;
 }
 
+@-webkit-keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 @-webkit-keyframes fadeLeft {
   0% {
     opacity: 0;
@@ -3776,6 +3809,14 @@ html[xmlns] .phtpb_flexslider .slides {
     transform: translateX(0);
   }
 }
+.pht-animated.pht-fade {
+  opacity: 1;
+  -webkit-animation: fade 1s 1 cubic-bezier(0.77, 0, 0.175, 1);
+  -moz-animation: fade 1s 1 cubic-bezier(0.77, 0, 0.175, 1);
+  -o-animation: fade 1s 1 cubic-bezier(0.77, 0, 0.175, 1);
+  animation: fade 1s 1 cubic-bezier(0.77, 0, 0.175, 1);
+}
+
 .pht-animated.pht-l2r {
   opacity: 1;
   -webkit-animation: fadeLeft 1s 1 cubic-bezier(0.77, 0, 0.175, 1);
