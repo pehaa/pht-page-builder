@@ -1381,18 +1381,13 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				$article_layout_class = ' u-1-of-1';
 			}
 
-			$gutter_class = ' pht-mctnr--gut24';
-			$article_layout_class .= ' pht-mctnr--gut24__item';
+			$skip_array = apply_filters( 'phtpb_dont_resize_in_posts_grid', array(), $layout_option, $this->atts['module_id'] ); ?>
 			
-
-			$skip_array = apply_filters( 'phtpb_dont_resize_in_posts_grid', array(), $layout_option, $this->atts['module_id'] );
-			?>
-			
-			<div class="js-showcase js-phtpb_showcase_ctnr cf <?php echo esc_attr( $gutter_class ); ?>">
+			<div class="js-showcase js-phtpb_showcase_ctnr pht-mctnr--gut24 cf">
 
 				<?php while ( $posts_query -> have_posts() ) : $posts_query -> the_post(); ?>
 
-					<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint <?php echo esc_attr( $article_layout_class ); ?>">
+					<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-mctnr--gut24__item <?php echo esc_attr( $article_layout_class ); ?>">
 
 						<?php $display_image_srcset = $resizer->resize_image_srcset( get_post_thumbnail_id( get_the_ID() ) , $width, $height, $skip_array );
 
