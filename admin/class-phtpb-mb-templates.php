@@ -176,11 +176,11 @@ END;
 			$select_class .= "<% } %>";
 			$start_string = "<div class='phtpb_option phtpb_$key-option $custom_class $with_label select-$select_class'>";
 			$return_string .= sprintf( '<select name="%1$s" id="%1$s" class="phtpb_shortcode-attribute" %2$s>', $key, $data_default );
-			if ( $element_label === 'phtpb_showcase' && $key === 'phtpb_type' && "<%= NaN !== parseInt( phtpb_attributes['$key'] ) %>" ) {
+			if ( $element_label === 'phtpb_showcase' && $key === 'phtpb_type' && "true" == "<%= phtpb_attributes['$key'] === parseInt(phtpb_attributes['$key'], 10) %>" ) {
 				$i = 0;
 				foreach ( $field['options'] as $option_key => $option_value ) {
 					$selected = "<%= '$i' == phtpb_attributes['$key'] ?  'selected=selected' : '' %>";
-					$return_string .= "<option value='$option_key' $selected>$option_value</option>";
+					$return_string .= "<option <%= phtpb_attributes['$key'] === parseInt(phtpb_attributes['$key'], 10) %> value='$option_key' $selected>$option_value</option>";
 					$i++;
 				}
 			} else {

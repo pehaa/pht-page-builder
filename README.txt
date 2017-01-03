@@ -23,6 +23,10 @@ Coming soon
 
 == Changelog ==
 
+= 3.1.1 =
+* Fixed porfolio module selected value
+* Missing fade transition
+
 = 3.1.0 =
 * Fixed switching back to default values for some attributes (admin)
 * Modified Google Maps scripts loading on front-end
