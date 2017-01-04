@@ -199,12 +199,13 @@ class PHTPB_Tiled_Gallery {
 					$output .= PeHaa_Themes_Page_Builder_Shortcode_Template::get_att_img( $image->ID, array( $image->width, $image->height ),  array( 'width' => intval( $image->width ), 'height' => intval( $image->height ) ), $skip_resize_array );
 					$link_class = $link_count_class . ' pht-fig__link--main pht-fig__link--hoverdir';
 					if ( $linked_to_posts ) {
-						$output .= "<a href='" . esc_url( get_permalink( $post_ids[ $i ] ) ) . "' class='pht-fig__link pht-fig__link--main pht-fig__link--main $link_class'></a>";
+						$output .= "<a href='" . esc_url( get_permalink( $post_ids[ $i ] ) ) . "' class='pht-fig__link pht-fig__link--main pht-fig__link--main $link_class'>";
 						$output .= sprintf( '<%1$s class="%2$s">%3$s</%1$s>',
 							esc_attr( apply_filters( 'phtpb_showcase_title_tag', 'div' ) ),
 							esc_attr( apply_filters( 'phtpb_showcase_title_class', 'pht-fig__titles pht-epsilon' ) ),
 							esc_html( get_the_title( $post_ids[ $i ] ) )
 						);
+						$output .= '</a>';
 						$link_class = 'pht-fig__link--secondary';
 						$i++;
 					} else {

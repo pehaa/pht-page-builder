@@ -1631,7 +1631,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	}
 
-	public static function get_att_img( $attachment_id, $size, $attr = '', $skip_mime_types = array() ) {
+	public static function get_att_img( $attachment_id, $size, $icon = false, $attr = '', $skip_mime_types = array() ) {
 
 		if ( !is_array( $size ) ) {
 			
