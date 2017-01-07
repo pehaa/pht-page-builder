@@ -40,7 +40,13 @@ $inuit-enable-layout--rev:      true;
   }
 }
 @include media-query( palm ) {
- 
+  .pht-layout {
+    margin-left:0;
+  }
+ .pht-layout__item {
+    display:block;
+    padding-left:0;
+ }
   .pht-layout__item:empty {display:none}
 }
 .pht-layout > .pht-layout, .pht-layout--rev > .pht-layout, .pht-layout > .pht-layout--rev, .pht-layout--rev > .pht-layout--rev {

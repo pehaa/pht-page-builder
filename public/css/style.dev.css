@@ -2136,6 +2136,15 @@
 }
 
 @media screen and (max-width: 799px) {
+  .pht-layout {
+    margin-left: 0;
+  }
+
+  .pht-layout__item {
+    display: block;
+    padding-left: 0;
+  }
+
   .pht-layout__item:empty {
     display: none;
   }
@@ -2556,6 +2565,7 @@
 }
 
 .pht-fig__link {
+  text-decoration: none;
   position: absolute;
   opacity: 0;
   transition: .6s;
@@ -2593,15 +2603,18 @@
   right: 0;
   top: 0;
   bottom: 0;
+  z-index: 1;
 }
 
 .pht-fig a.pht-fig__link--secondary {
   background: transparent;
-  right: 16px;
-  top: 16px;
+  right: 8px;
+  top: 8px;
   height: 32px;
   width: 32px;
   transition: ease-in-out .5s;
+  text-align: center;
+  line-height: 32px;
 }
 .pht-fig a.pht-fig__link--secondary, .pht-fig a.pht-fig__link--secondary:hover {
   border: none;

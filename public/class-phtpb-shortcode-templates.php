@@ -195,8 +195,9 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$margins = $this->is_checked( 'margins' );
 
 		$layout_class = isset( $this->atts['layout'] ) && in_array( $this->atts['layout'], array_keys( $class ) ) ? $class[ $this->atts['layout'] ] : '';
-		$layout_class .= ' ' . $this->module_class;
+
 		$matches = array();
+
 		preg_match( '/phtpb_row_inner[^\]]+equals="yes"[^\"]+"/i', $this->content, $matches );
 		if ( count( $matches ) ) {
 			$layout_class .= ' pht-layout__item--wequals';
@@ -284,14 +285,76 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	protected function phtpb_gallery() {
 
-		$tiled_gallery = new phtpb_Tiled_Gallery();
-		$output = $tiled_gallery->rectangular_talavera( $this->atts['phtpb_ids'], $this->phtpb_width, false, $this->lightbox );
-		if ( $output ) {
-			$css = $this->herited_color ? 'color:' . $this->herited_color : '';
-			$class = 'phtpb_item pht-gallery phtpb_gallery pht-gallery--' . $this->select_attribute( 'border_width' );
-			return $this->container( $output, $class, $css );
+		$layout_option =  $this->select_attribute( 'layout_option' );
+
+		if ( 'default' === $layout_option ) {
+
+			$tiled_gallery = new phtpb_Tiled_Gallery();
+			$output = $tiled_gallery->rectangular_talavera( $this->atts['phtpb_ids'], $this->phtpb_width, false, $this->lightbox );
+			if ( $output ) {
+				$css = $this->herited_color ? 'color:' . $this->herited_color : '';
+				$class = 'phtpb_item pht-gallery phtpb_gallery pht-gallery--' . $this->select_attribute( 'border_width' );
+				return $this->container( $output, $class, $css );
+			}
+			return;
+		}		
+
+		$layout_option =  $this->select_attribute( 'layout_option' );
+
+		$column_count = (int) str_replace( 'c', '', $layout_option );
+
+		$dimensions = $this->dimensions( $layout_option );
+
+		$article_layout_class = 'u-1-of-'  . $column_count . '-desk u-1-of-'  . $column_count . '-lap';
+
+		if ( 1 !== $column_count ) {
+			$article_layout_class .= ' u-1-of-2';
+		} else {
+			$article_layout_class .= ' u-1-of-1';
 		}
-		return;
+
+		$skip_array = apply_filters( 'phtpb_dont_resize_in_gallery', array( 'image/gif' ), $layout_option, $this->atts['module_id'] ); 
+		$gutter = $this->select_attribute( 'border_width' );
+		$gutter_class = '';
+		
+		if ( 'none' !== $gutter ) {
+			$gutter_class = ' pht-mctnr--gut' . $gutter;
+			$article_layout_class .= ' pht-mctnr--gut' . $gutter .'__item';
+		}
+		
+		ob_start(); ?>
+
+		<div class="js-showcase js-phtpb_showcase_ctnr pht-white cf <?php echo esc_attr( $gutter_class ); ?>">
+			<?php 
+			foreach( explode( ',', $this->atts['phtpb_ids'] ) as $id ) { ?>
+				<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-fadesat <?php echo esc_attr( $article_layout_class ); ?>">
+					<figure class="pht-fig pht-fig--filter">
+						<?php 
+						echo pehaathemes_get_att_img(  $id, array( $dimensions['width'], $dimensions['height'] ), false, array( 'class' => 'pht-img--fill', 'width' => $dimensions['width'] ), $skip_array );
+						if ( $this->lightbox ) { ?>
+							<div class="pht-fig__link--ctnr">
+								<?php printf( '<a class="pht-fig__link js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s">', esc_url( wp_get_attachment_url( $id ) )
+								); ?>
+									<div class="pht-fig__titles">
+										<?php $lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' ); ?>
+										<i class="pht-fig__link__string <?php echo esc_attr( $lightbox_icon_class ); ?> pht-gamma"></i>
+									</div>
+								</a>
+							</div>
+						<?php }	?>
+					</figure>
+				</article>
+
+			<?php } ?>
+		</div>
+
+
+		<?php $output = ob_get_contents();
+
+		ob_end_clean();
+
+		return $this->container( $output, 'phtpb_item' );
+		
 		
 	}
 
@@ -1214,51 +1277,24 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				} 
 				echo '</p>';
 			
-			}
-
-			$resizer = PHTPB_Resize_Image::get_instance();			
+			}		
 
 			$layout_option =  $this->select_attribute( 'layout_option' );
-			$heights = array( 
-				'2c' => 384, 
-				'3c' => $this->phtpb_width > 1 ? 384 : 240, 
-				'4c' => $this->phtpb_width > 1 ? 384 : 192, 
-				'5c' => $this->phtpb_width > 1 ? 384 : 1140/5, 
-				'6c' => $this->phtpb_width > 1 ? 384 : 1140/6, 
-				'2' => 0 , 
-				'3' => 0, 
-				'4' => 0, 
-				'5' => 0, 
-				'6' => 0,
-				'1' => 0
-			);
-			$height =  isset( $heights[ $layout_option ] ) ? $heights[ $layout_option ] : 0;
+
 			$column_count = (int) str_replace( 'c', '', $layout_option );
-			$gutter = $this->select_attribute( 'gutter' );
-			$gutter_class = $article_layout_class = '';
 
-			if ( $this->phtpb_width > 1 ) {
-				$width = 570;
-				$article_layout_class = ' u-1-of-2 u-1-of-'  . $column_count . '-desk';
-			} elseif ( $this->phtpb_width >= .75 ) {
-				
-				if ( ! $column_count ) {
-					$column_count = 3;
-				}
-				$width = (int) 1140/$column_count;
-				$article_layout_class = ' u-1-of-2 pht-mctnr--2__item u-1-of-'  . $column_count. '-desk';
-			} elseif ( $this->phtpb_width >= .5 ) {
-				$width = (int) 1140/3;
-				$article_layout_class = ' u-1-of-2';
+			$dimensions = $this->dimensions( $layout_option );
+
+			$article_layout_class = 'u-1-of-'  . $column_count . '-desk u-1-of-'  . $column_count . '-lap';
+
+			if ( 1 !== $column_count ) {
+				$article_layout_class .= ' u-1-of-2';
 			} else {
-				$width = (int) 1140/4;
-				$article_layout_class = ' u-1-of-1';
+				$article_layout_class .= ' u-1-of-1';
 			}
 
-			if ( 1 === $column_count ) {
-				$width = (int) 1140;
-				$article_layout_class = ' u-1-of-1';
-			}
+			$gutter = $this->select_attribute( 'gutter' );
+			$gutter_class = '';
 
 			if ( 'none' !== $gutter ) {
 				$gutter_class = ' pht-mctnr--gut' . $gutter;
@@ -1289,9 +1325,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 					<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint <?php echo esc_attr( $terms_class . ' ' . $article_layout_class ); ?>">
 
-						<?php $display_image_srcset = $resizer->resize_image_srcset( get_post_thumbnail_id( get_the_ID() ) , $width, $height, $skip_array );
-
-						$this->entry_image( get_the_ID(), get_post_thumbnail_id( get_the_ID() ), $width, $height, $skip_array, $this->lightbox );
+						<?php $this->entry_image( get_the_ID(), get_post_thumbnail_id( get_the_ID() ), $dimensions['width'], $dimensions['height'], $skip_array, $this->lightbox );
 						?>
 
 
@@ -1335,49 +1369,19 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 	
 		$posts_query = new WP_Query( $query_args_with_phtpb_query );
 	
-		if ( $posts_query -> have_posts() ) :
-
-			$resizer = PHTPB_Resize_Image::get_instance();			
+		if ( $posts_query -> have_posts() ) :		
 
 			$layout_option =  $this->select_attribute( 'layout_option' );
-			$heights = array( 
-				'2c' => 384, 
-				'3c' => $this->phtpb_width > 1 ? 384 : 240, 
-				'4c' => $this->phtpb_width > 1 ? 384 : 192, 
-				'5c' => $this->phtpb_width > 1 ? 384 : 1140/5, 
-				'6c' => $this->phtpb_width > 1 ? 384 : 1140/6, 
-				'2' => 0 , 
-				'3' => 0, 
-				'4' => 0, 
-				'5' => 0, 
-				'6' => 0,
-				'1' => 0
-			);
-			$height =  isset( $heights[ $layout_option ] ) ? $heights[ $layout_option ] : 0;
+
 			$column_count = (int) str_replace( 'c', '', $layout_option );
-			$gutter = $this->select_attribute( 'gutter' );
-			$gutter_class = $article_layout_class = '';
 
-			if ( $this->phtpb_width > 1 ) {
-				$width = 570;
-				$article_layout_class = ' u-1-of-2 u-1-of-'  . $column_count . '-desk';
-			} elseif ( $this->phtpb_width >= .75 ) {
-				
-				if ( ! $column_count ) {
-					$column_count = 3;
-				}
-				$width = (int) 1140/$column_count;
-				$article_layout_class = ' u-1-of-2 pht-mctnr--2__item u-1-of-'  . $column_count. '-desk';
-			} elseif ( $this->phtpb_width >= .5 ) {
-				$width = (int) 1140/3;
-				$article_layout_class = ' u-1-of-2';
+			$dimensions = $this->dimensions( $layout_option );
+
+			$article_layout_class = 'u-1-of-'  . $column_count . '-desk u-1-of-'  . $column_count . '-lap';
+
+			if ( 1 !== $column_count ) {
+				$article_layout_class .= ' u-1-of-2';
 			} else {
-				$width = (int) 1140/4;
-				$article_layout_class = ' u-1-of-1';
-			}
-
-			if ( 1 === $column_count ) {
-				$width = (int) 1140;
 				$article_layout_class = ' u-1-of-1';
 			}
 
@@ -1389,9 +1393,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 					<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-mctnr--gut24__item <?php echo esc_attr( $article_layout_class ); ?>">
 
-						<?php $display_image_srcset = $resizer->resize_image_srcset( get_post_thumbnail_id( get_the_ID() ) , $width, $height, $skip_array );
-
-						$this->post_entry( get_the_ID(), get_post_thumbnail_id( get_the_ID() ), $width, $height, $skip_array ); ?>
+						<?php $this->post_entry( get_the_ID(), get_post_thumbnail_id( get_the_ID() ), $dimensions['width'], $dimensions['height'], $skip_array ); ?>
 
 					</article>
 
@@ -1574,7 +1576,45 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	}
 
-	
+	protected function dimensions( $layout_option ) {
+
+		switch ( $layout_option ) {
+			case '2c':
+				return array( 'width'=> 570, 'height' => 384 );
+			break;
+			case '3c' :
+				return array( 'width' => 388, 'height' => 264 );
+			break;
+			case '4c' :
+				return array( 'width' => 267, 'height' => 192 );
+			break;
+			case '5c' :
+				return array( 'width' => 288, 'height' => 264 );
+			break;
+			case '6c' :
+				return  array( 'width' => 288, 'height' => 264 );
+			break;
+			case '2'  :
+				return array( 'width'=> 570, 'height' => 0 );
+			break;
+			case '3' :
+				return array( 'width' => 388, 'height' => 0 );
+			break;
+			case '4' :
+				return array( 'width' => 267, 'height' => 0 );
+			break;
+			case '5' :
+				return array( 'width' => 388, 'height' => 0 );
+			break;
+			case '6' :
+				return array( 'width' => 388, 'height' => 0 );
+			break;
+			default :
+				return array( 'width' => 1140, 'height' => 0 );
+			break;
+		}
+
+	}
 
 	protected function container_colors( $apply = true ) {
 
