@@ -746,41 +746,69 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	}
 
+	protected function base_query( $post_type, $thumbnail ) {
 
-	protected function phtpb_gallery_portfolio() {
-
-		if ( !$this->phtpb_type ) {
+		if ( !$post_type ) {
 			return;
 		}
 
 		$query_args = array(
-			'post_type' => $this->phtpb_type,
-			'meta_key' => '_thumbnail_id',
+			'post_type' => $post_type,
 			'ignore_sticky_posts' => 1
 		);
+
+		if ( $thumbnail ) {
+			$query_args['meta_key'] = '_thumbnail_id';
+		}
 
 		if ( $this->count ) {
 			$query_args['posts_per_page'] = $this->count;
 		}
+		return $query_args;
+	}
+
+	protected function phtpb_query( $post_type, $filter, $thumbnail = true ) {
+
+		$query_args = $this->base_query( $post_type, $thumbnail );
+
+		if ( empty( $query_args ) ) {
+			return;
+		}
 
 		$phtpb_query = isset( $this->atts['phtpb_query'] ) ? htmlspecialchars_decode( $this->atts['phtpb_query'] ) : '';
+
+		$phtpb_query = wp_parse_args( $phtpb_query );
+
+		$phtpb_query = $this->remove_unallowed_query_args( $phtpb_query );
+
 		$query_args_with_phtpb_query = wp_parse_args( $phtpb_query, $query_args );
 
-		$query_args_with_phtpb_query = $this->remove_unallowed_query_args( $query_args_with_phtpb_query );
+		$query_args_with_phtpb_query = apply_filters( $filter, $query_args_with_phtpb_query, $this->atts['module_id'] );
 
-		$query_args_with_phtpb_query['paged'] = is_front_page() ? get_query_var( 'page' ) : get_query_var( 'paged' );
+		return get_posts( $query_args_with_phtpb_query );
 
-		ob_start();
+	}
 
-		$custom_query = new WP_Query( $query_args_with_phtpb_query );
+	protected function phtpb_gallery_query() {
 
-		if ( $custom_query -> have_posts() ) :
+
+		return phtpb_query( $this->phtpb_type, 'phtpb_gallery_portfolio_query' );
+
+	}
+
+
+	protected function phtpb_gallery_portfolio() {
+
+		$posts = $this->phtpb_posts_query();
+
+		ob_start();		
+	
+		if ( count( $posts ) ) :
 
 			$post_ids = array();
-			while ( $custom_query -> have_posts() ) : $custom_query ->the_post();
-				$post_ids[] = get_the_id();
-			endwhile;
-
+			foreach ( $posts as $gallery_post ) {
+				$post_ids[] = $gallery_post->ID;
+			}
 			$tiled_gallery = new PHTPB_Tiled_Gallery();
 			echo $tiled_gallery->rectangular_talavera_of_posts( $post_ids, $this->phtpb_width, false, $this->lightbox  );
 
@@ -1191,10 +1219,14 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 	
 	}
 
+	protected function phtpb_showcase_query( $post_type ) {
+		return $this->phtpb_query( $post_type, 'phtpb_showcase_query' );
+	}
+
 
 	protected function phtpb_showcase() {
 
-		if ( !isset( $this->phtpb_type ) ) {
+		if ( !( $this->phtpb_type ) ) {
 			return;
 		}
 
@@ -1205,7 +1237,6 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			$post_type = $query[0];
 			$taxonomy = '__' === $query[1] ? '' : $query[1];
 		}	
-		
 
 		if ( empty( $post_type ) && is_int( (int) $this->phtpb_type ) ) {
 			
@@ -1234,30 +1265,12 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		
 		$taxonomy_array = $taxonomy ? array( $taxonomy ) : array();
 		$taxonomy_array = apply_filters( 'phtpb_taxonomy_filter', $taxonomy_array, $this->atts['module_id'] );
-		
-		$query_args = array(
-			'post_type' => $post_type,
-			'meta_key' => '_thumbnail_id',
-			'ignore_sticky_posts' => 1
-		);
 
-		if ( $this->count ) {
-			$query_args['posts_per_page'] = $this->count;
-		}
+		$showcase_posts = $this->phtpb_showcase_query( $post_type );
 
-		$phtpb_query = isset( $this->atts['phtpb_query'] ) ? htmlspecialchars_decode( $this->atts['phtpb_query'] ) : '';
-		
-		$query_args_with_phtpb_query = wp_parse_args( $phtpb_query, $query_args );
-
-		$query_args_with_phtpb_query = $this->remove_unallowed_query_args( $query_args_with_phtpb_query );
-
-		$query_args_with_phtpb_query = apply_filters( 'phtpb_showcase_query', $query_args_with_phtpb_query, $this->atts['module_id'] );
-
-		ob_start();
+		ob_start();	
 	
-		$showcase_query = new WP_Query( $query_args_with_phtpb_query );
-	
-		if ( $showcase_query -> have_posts() ) :
+		if ( count ( $showcase_posts ) ) :
 
 			if ( count( $taxonomy_array ) ) {
 
@@ -1306,7 +1319,11 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			
 			<div class="js-showcase js-phtpb_showcase_ctnr pht-white cf <?php echo esc_attr( $gutter_class ); ?>">
 
-				<?php while ( $showcase_query -> have_posts() ) : $showcase_query -> the_post();
+				<?php 
+
+				global $post; 
+
+				foreach ( (array) $showcase_posts as $query_post ) : $post = $query_post; setup_postdata( $post );
 
 					$terms_class = '';
 
@@ -1331,7 +1348,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 					</article>
 
-				<?php endwhile; ?>
+				<?php endforeach; ?>
 
 			</div><!-- .js-phtpb_showcase_ctnr -->
 
@@ -1347,29 +1364,19 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	}
 
+	protected function phtpb_posts_query() {
+
+		return $this->phtpb_query( 'post', 'phtpb_posts_portfolio_query', false );
+
+	}
+
 	protected function phtpb_posts() {
 		
-		$query_args = array(
-			'post_type' => 'post',
-		);
+		$posts = $this->phtpb_posts_query();
 
-		if ( $this->count ) {
-			$query_args['posts_per_page'] = $this->count;
-		}
-
-		$phtpb_query = isset( $this->atts['phtpb_query'] ) ? htmlspecialchars_decode( $this->atts['phtpb_query'] ) : '';
-		
-		$query_args_with_phtpb_query = wp_parse_args( $phtpb_query, $query_args );
-
-		$query_args_with_phtpb_query = $this->remove_unallowed_query_args( $query_args_with_phtpb_query );
-
-		$query_args_with_phtpb_query = apply_filters( 'phtpb_posts_query', $query_args_with_phtpb_query, $this->atts['module_id'] );
-
-		ob_start();
+		ob_start();		
 	
-		$posts_query = new WP_Query( $query_args_with_phtpb_query );
-	
-		if ( $posts_query -> have_posts() ) :		
+		if ( count( $posts ) ) :		
 
 			$layout_option =  $this->select_attribute( 'layout_option' );
 
@@ -1389,15 +1396,19 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			
 			<div class="js-showcase js-phtpb_showcase_ctnr pht-mctnr--gut24 cf">
 
-				<?php while ( $posts_query -> have_posts() ) : $posts_query -> the_post(); ?>
+				<?php 
+
+				global $post; 
+
+				foreach ( (array) $posts as $query_post ) : $post = $query_post; setup_postdata( $post ); ?>
 
 					<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-mctnr--gut24__item <?php echo esc_attr( $article_layout_class ); ?>">
 
-						<?php $this->post_entry( get_the_ID(), get_post_thumbnail_id( get_the_ID() ), $dimensions['width'], $dimensions['height'], $skip_array ); ?>
+						<?php $this->post_entry( get_the_ID(), get_post_thumbnail_id(  get_the_ID() ), $dimensions['width'], $dimensions['height'], $skip_array ); ?>
 
 					</article>
 
-				<?php endwhile; ?>
+				<?php endforeach; ?>
 
 			</div><!-- .js-phtpb_showcase_ctnr -->
 
@@ -1586,13 +1597,13 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				return array( 'width' => 388, 'height' => 264 );
 			break;
 			case '4c' :
-				return array( 'width' => 267, 'height' => 192 );
+				return array( 'width' => 288, 'height' => 192 );
 			break;
 			case '5c' :
-				return array( 'width' => 288, 'height' => 264 );
+				return array( 'width' => 388, 'height' => 264 );
 			break;
 			case '6c' :
-				return  array( 'width' => 288, 'height' => 264 );
+				return  array( 'width' => 388, 'height' => 264 );
 			break;
 			case '2'  :
 				return array( 'width'=> 570, 'height' => 0 );
@@ -1601,7 +1612,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				return array( 'width' => 388, 'height' => 0 );
 			break;
 			case '4' :
-				return array( 'width' => 267, 'height' => 0 );
+				return array( 'width' => 288, 'height' => 0 );
 			break;
 			case '5' :
 				return array( 'width' => 388, 'height' => 0 );
