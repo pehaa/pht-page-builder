@@ -791,7 +791,6 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	protected function phtpb_gallery_query() {
 
-
 		return $this->phtpb_query( $this->phtpb_type, 'phtpb_gallery_portfolio_query' );
 
 	}
