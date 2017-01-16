@@ -124,11 +124,33 @@ jQuery( document ).ready( function ($) {
 						}
 					},
 					closeOnContentClick: true,
-					midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+					midClick: true
 				});
 			});
 
-			$('.js-pht-magnific_popup').magnificPopup( {
+			$( '.js-pht-lightboxgallery, .phtpb_image, .js-showcase, .pht-gallery' ).each( function() {
+				if ( $( this ).parents( '.js-pht-lightboxgallery' ).length ) {
+					return;
+				}
+				$( this ).magnificPopup( {
+					delegate: '.js-pht-magnific_popup',
+					type: 'image',
+					gallery: {
+						enabled:true
+					},
+					removalDelay: 500, //delay removal by X to allow out-animation
+					callbacks: {
+						beforeOpen: function() {
+							this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+							this.st.mainClass = 'mfp-zoom-in';
+						}
+					},
+					closeOnContentClick: true,
+					midClick: true
+				});
+			});
+
+			/*$('.js-pht-magnific_popup').magnificPopup( {
 				type: 'image',
 				gallery:{
 					enabled:true
@@ -142,7 +164,7 @@ jQuery( document ).ready( function ($) {
 				},
 				closeOnContentClick: true,
 				midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-			});
+			});*/
 		},
 		
 		setBackground: function( selector ) {

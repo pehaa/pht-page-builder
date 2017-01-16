@@ -602,7 +602,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				$output .= "<a href='$this->link' class='pht-fig__link--hoverdir pht-fig__link pht-fig__link--main $rounded_class' $this->target></a>";
 			} elseif ( 'lightbox' === $this->atts['link_type'] ) {
 				$full_image = wp_get_attachment_image_src( $this->phtpb_id, apply_filters( 'phtpb_lightbox_image', 'full' ) );
-				$output .= "<a href='$full_image[0]' class='pht-fig__link--hoverdir pht-fig__link js-pht-magnific_popup pht-fig__link--main $rounded_class'></a>";
+				$lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' );
+				$output .= "<a href='$full_image[0]' class='pht-fig__link--hoverdir pht-fig__link js-pht-magnific_popup pht-fig__link--main $rounded_class'><i class='pht-fig__link__string $lightbox_icon_class'></i></a>";
 			}
 		}
 		
