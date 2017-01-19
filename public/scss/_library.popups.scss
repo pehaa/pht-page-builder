@@ -359,7 +359,7 @@ img.mfp-img {
    // transform: scale(0.9); 
   }
   
-  &.mfp-bg {
+  &.mfp-bg, .mfp-container {
     opacity: 0;
     transition: all 0.5s ease-out;
   }
@@ -373,6 +373,9 @@ img.mfp-img {
     &.mfp-bg {
       opacity: 0.8;
     }
+    .mfp-container {
+      opacity:1;
+    }
   }
   
   /* animate out */
@@ -384,6 +387,9 @@ img.mfp-img {
     }
     &.mfp-bg {
       opacity: 0;
+    }
+    .mfp-container {
+      opacity:0;
     }
     
   }

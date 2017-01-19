@@ -29,7 +29,12 @@
   margin-left:auto;
   margin-right:auto;
 }
-
+.pht-wrapper-none-12,
+.pht-wrapper-none-24,
+.pht-wrapper-none-48,
+.pht-wrapper-none-96 {
+  width:calc(100% - 24px);
+}
     
 @include media-query(very-wide) {
   .pht-wrapper-none-12 {

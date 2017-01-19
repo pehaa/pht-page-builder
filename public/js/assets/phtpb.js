@@ -30,7 +30,6 @@ jQuery( document ).ready( function ($) {
 				self.resize();	
 				
 			});
-
 		},
 
 		resize : function() {
@@ -104,7 +103,6 @@ jQuery( document ).ready( function ($) {
 					icons: { "header": "pht-ic-f1-arrow-expand", "activeHeader": "pht-ic-f1-arrow-condense" }
 				});
 			});
-
 		},
 		
 		openGallery: function () {
@@ -121,7 +119,7 @@ jQuery( document ).ready( function ($) {
 						beforeOpen: function() {
 							this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
 							this.st.mainClass = 'mfp-zoom-in';
-						}
+						},
 					},
 					closeOnContentClick: true,
 					midClick: true
@@ -143,28 +141,12 @@ jQuery( document ).ready( function ($) {
 						beforeOpen: function() {
 							this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
 							this.st.mainClass = 'mfp-zoom-in';
-						}
+						},
 					},
 					closeOnContentClick: true,
 					midClick: true
 				});
 			});
-
-			/*$('.js-pht-magnific_popup').magnificPopup( {
-				type: 'image',
-				gallery:{
-					enabled:true
-				},
-				removalDelay: 500, //delay removal by X to allow out-animation
-				callbacks: {
-					beforeOpen: function() {
-						this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
-						this.st.mainClass = 'mfp-zoom-in';
-					}
-				},
-				closeOnContentClick: true,
-				midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-			});*/
 		},
 		
 		setBackground: function( selector ) {
@@ -196,9 +178,8 @@ jQuery( document ).ready( function ($) {
 				.done( function( instance ){						
 					$( elem ).css( 'background-image', 'url('+src+')').removeClass( 'js-initial-hidden' );
 					$( elem ).data( 'bgimage', 'loaded' );
-				} ); 
-			} );
-			
+				}); 
+			});			
 		},
 
 		addSliders: function () {
@@ -217,7 +198,7 @@ jQuery( document ).ready( function ($) {
 					infinite: true,
 					autoplaySpeed : $( element ).data( 'autoplayspeed' ) ? $( element ).data( 'autoplayspeed' ) : 3000,
 					speed : $( element ).data( 'speed' ) ? $( element ).data( 'speed' ) : 300,
-					slidesToShow: 'fixed' === $( element ).data( 'variablewidth' ) ? 3 : 1,
+					slidesToShow: 'fixed' === $( element ).data( 'variablewidth' ) ? 1 : 3,
 					centerMode: true,
 					variableWidth: 'fixed' === $( element ).data( 'variablewidth' ) ? false : true,
 					centerPadding : 0,
@@ -305,6 +286,7 @@ jQuery( document ).ready( function ($) {
 				});
 			});
 		},
+
 		doCountDown: function () {
 
 			var self = this;
@@ -352,8 +334,7 @@ jQuery( document ).ready( function ($) {
 			};
 
 			count( 'since' );
-			count( 'until');
-
+			count( 'until' );
 		},
 
 		doIsotope: function() {
@@ -393,14 +374,13 @@ jQuery( document ).ready( function ($) {
 					$( this )
 						.parent()
 						.find( ".pht-showcase__filter--active" )
-						.removeClass("pht-showcase__filter--active");
+						.removeClass( "pht-showcase__filter--active" );
 					
-					$( this ).addClass("pht-showcase__filter--active");
+					$( this ).addClass( "pht-showcase__filter--active" );
 				}
 				return false;
 			});
 		}
-
 	};
 
 	phtpb.init();
@@ -495,9 +475,6 @@ jQuery( document ).ready( function ($) {
 					markers[index] = new google.maps.Marker( args );
 				});
 			}
-
 		});
-
 	};
-
 });

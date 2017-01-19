@@ -60,7 +60,6 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$this->name = $name;
 		$this->content_width = PeHaa_Themes_Page_Builder_Public::$content_width;
-
 	}
 
 	public function getTemplate( $name, $atts, $content = null ) {
@@ -75,7 +74,6 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		} else {
 			return apply_filters( $name, do_shortcode( $content ), $atts, $content );
 		}
-
 	}
 
 	/**
@@ -1282,10 +1280,23 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 				$terms = get_terms( $taxonomy_array, $args );
 
-				printf( '<p class="pht-showcase__filters pht-actionfont pht-zeta">');
-				printf( '<span class="pht-pointer js-pht-showcase-filter pht-showcase__filter pht-showcase__filter--active" data-filter="*">%s</span>', isset( $this->atts['all_label'] ) && '' !== trim( $this->atts['all_label'] ) ? esc_html( trim( $this->atts['all_label'] ) ) : esc_html__( 'All', 'phtpb' ) );
+				$p_classes = apply_filters( 'phtpb_showcase_filter_container_classes', 'pht-showcase__filters pht-actionfont pht-zeta' );
+
+				$filter_custom_classes = apply_filters( 'phtpb_showcase_filter_custom_classes', 'pht-showcase__filter' );
+
+				printf( '<p class="%s">' , esc_attr( $p_classes ) );
+
+				printf( '<a href="#" class="js-pht-showcase-filter pht-showcase__filter--active %s" data-filter="*">%s</a>',
+					esc_attr( $filter_custom_classes ),
+					isset( $this->atts['all_label'] ) && '' !== trim( $this->atts['all_label'] ) ? esc_html( trim( $this->atts['all_label'] ) ) : esc_html__( 'All', 'phtpb' ) 
+				);
 				foreach ( $terms as $term ) {
-					echo "<span class='pht-pointer js-pht-showcase-filter pht-showcase__filter' data-filter='.$term->slug'>$term->name</span>"; // don't delete "."
+
+					printf( '<a href="#" class="js-pht-showcase-filter %s" data-filter=".%s">%s</a>',
+						esc_attr( $filter_custom_classes ),
+						esc_attr( $term->slug ),
+						esc_html( $term->name )
+					);
 				} 
 				echo '</p>';
 			
@@ -1325,14 +1336,25 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				foreach ( (array) $showcase_posts as $query_post ) : $post = $query_post; setup_postdata( $post );
 
 					$terms_class = '';
+					$terms = '';
+
+					 
 
 					if ( count( $taxonomy_array ) ) {
-
 						foreach ( $taxonomy_array as $tax ) {
 							$terms_array = get_the_terms( get_the_ID(), $tax  );
 							if ( $terms_array ) {
+								$count = count( $terms_array );
+								$i = 0;
 								foreach ( $terms_array as $term ) {
-									$terms_class .= $term->slug.' ';
+									$terms_class .= $term->slug . ' ';
+									$terms .= $term->name;
+									$i++;
+									if ( $i < $count ) {
+										$terms .= ', ';
+									}
+
+
 								}
 							}
 						}
@@ -1341,7 +1363,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 					<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint <?php echo esc_attr( $terms_class . ' ' . $article_layout_class ); ?>">
 
-						<?php $this->entry_image( get_the_ID(), get_post_thumbnail_id( get_the_ID() ), $dimensions['width'], $dimensions['height'], $skip_array, $this->lightbox );
+						<?php $this->entry_image( get_the_ID(), get_post_thumbnail_id( get_the_ID() ), $dimensions['width'], $dimensions['height'], $skip_array, $this->lightbox, $terms );
 						?>
 
 
@@ -1423,7 +1445,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	}
 
-	protected function entry_image( $post_id, $attachment_id, $width, $height, $skip_array, $lightbox ) {
+	protected function entry_image( $post_id, $attachment_id, $width, $height, $skip_array, $lightbox, $terms = '' ) {
 
 		if ( post_password_required() ) {
 			return;
@@ -1442,10 +1464,15 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			esc_attr( apply_filters( 'phtpb_showcase_title_class', 'pht-fig__titles pht-epsilon' ) )
 		);
 		the_title();
+		
 		printf( '</%s>',
 			esc_attr( apply_filters( 'phtpb_showcase_title_tag', 'div' ) )
 		);
+		echo '<span class="pht-fig__subtitles pht-zeta">';
+		esc_html_e( $terms );
+		echo '</span>';
 		echo '</a>';
+
 		if ( $lightbox ) {
 			$lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' );
 			$full_image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
