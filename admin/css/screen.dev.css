@@ -697,8 +697,17 @@
   background-color: currentColor;
 }
 
-.phtpb_modal__column-inner .phtpb_use_as_slider-option {
-  display: none;
+.phtpb_main-settings--phtpb_row_inner .phtpb_use_bg_color-option,
+.phtpb_main-settings--phtpb_row_inner .phtpb_bg_color-option,
+.phtpb_main-settings--phtpb_row_inner .phtpb_use_color-option,
+.phtpb_main-settings--phtpb_row_inner .phtpb_color-option,
+.phtpb_main-settings--phtpb_row_inner .phtpb_background_image-option,
+.phtpb_main-settings--phtpb_row_inner .phtpb_opacity-option,
+.phtpb_main-settings--phtpb_row_inner .phtpb_r_w-option,
+.phtpb_main-settings--phtpb_row_inner .phtpb_r_h-option,
+.phtpb_main-settings--phtpb_row_inner .phtpb_clip-option,
+.phtpb_main-settings--phtpb_row_inner .phtpb_phtpb_type-option {
+  display: none !important;
 }
 
 .phtpb_option-advanced-module-settings {

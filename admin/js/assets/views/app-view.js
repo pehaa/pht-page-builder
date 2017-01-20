@@ -20,6 +20,7 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 			this.listenTo( this.collection, 'add', this.addModule );
 			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_module:cloned', this.onClone );
 			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_module:triggerUpdatePostContent', this.updatePostContent );
+			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_module:triggerRefreshLayout', this.refreshLayout );
 			this.listenTo( peHaaThemesPageBuilder_Events, 'phtpb_module:reInitialized', this.reInitialize );
 			this.listenTo( peHaaThemesPageBuilder_Events, 'gmapsAuth:failed', this.gmapsAuthFailed );
 			this.render();
@@ -101,6 +102,15 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 			}
 		},
 
+		refreshLayout : function() {
+
+			var content = this.updatePostContent();
+
+			this.removeAllSections();
+
+			this.createLayoutFromContent( content );
+
+		},
 
 		pageBuilderIsActive : function() {
 			return this.$builder_toggle_button.hasClass( 'phtpb_builder_is_used' );

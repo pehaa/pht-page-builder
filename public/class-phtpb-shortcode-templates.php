@@ -148,21 +148,100 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$layout_class .= $this->module_class;
 
 		$wrapper = $this->select_attribute( 'wrapper' );
+
+		$img_to_be_loaded = $this->img_to_be_loaded( $this->phtpb_id, 'force' === $this->phtpb_type );
+
+		$output = '';
+
+		if ( $img_to_be_loaded ) {
+				
+			$style_bg_size = '';
+			if ( $this->r_w || $this->r_h ) {
+				
+				$bg_size = $this->r_w ? $this->r_w . 'px' : 'auto';
+				$bg_size .= $this->r_h ? ' ' . $this->r_w . 'px' : '';
+				
+				$style_bg_size = "background-size: $bg_size;";
+			}
+			$opacity = isset( $this->atts['opacity'] ) && ''!== trim( $this->atts['opacity'] ) ? 'opacity:' . esc_attr( $this->atts['opacity'] ) . ';' : '';
+			$style = $style_bg_size || $opacity ? "style='$style_bg_size $opacity'" : '';
+			$palm_class = 'force' === $this->phtpb_type ? 'js-force-palm' : 'hidden--palm';
+			$row_class = 'force' === $this->phtpb_type ? ' phtpb_section--bg-force-palm' : ' phtpb_section--bg-hidden-palm';			
+
+			$output .= "<div class='js-pht-bg-ctnr js-pht-bg-ctnr-img pht-bg-ctnr js-pht-bg-ctnr--row pht-bg-ctnr--row $palm_class js-initial-hidden' $style>";
+			$output .= $img_to_be_loaded;
+			$output .= '</div><!-- .pht-bg-ctnr -->';
+
+		}
+
+		if ( !$output && !$this->bg_color && !$this->color ) {
+
+			if ( 'none' === $wrapper ) {
+
+				return sprintf( '<div class="%1$s"><!-- %2$s --></div>',
+					esc_attr( $layout_class ),
+					do_shortcode( $this->content )
+				);
+
+			} else {
+
+				return sprintf( '<div %1$s class="%2$s pht-parent"><div class="%3$s"><!-- %4$s --></div></div>',
+					$this->module_id,
+					'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper,
+					esc_attr( $layout_class ),
+					do_shortcode( $this->content )
+				);
+
+			}
+		}
+		
+		if ( $this->bg_color && !$this->phtpb_id ) {
+
+ 			$this->content= preg_replace( '/\[phtpb_gallery([^\]]+)/i', '${0} herited_color="' . esc_attr( $this->bg_color ). '"', $this->content );
+ 			
+ 		}
 		
 		if ( 'none' === $wrapper ) {
 
-			return sprintf( '<div class="%1$s"><!-- %2$s --></div>',
+			$output .= sprintf( '<div class="%1$s"><!-- %2$s --></div>',
 				esc_attr( $layout_class ),
 				do_shortcode( $this->content )
 			);
+
+			return $this->container( $output, 'pht-parent', '', 'div', array(), true, false  );
 		}
 
-		return sprintf( '<div %1$s class="%2$s pht-parent"><div class="%3$s"><!-- %4$s --></div></div>',
+		if ( $this->is_checked( 'clip' ) ) {
+
+			$output .= sprintf( '<div class="%1$s"><!-- %2$s --></div>',
+				esc_attr( $layout_class ),
+				do_shortcode( $this->content )
+			);
+
+			$wrapper_class = 'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper;
+			$attrs = array();
+
+			if ( trim( $this->atts['module_id'] ) ) {
+				$attrs['id'] = trim( $this->atts['module_id'] );
+			}
+
+			return $this->container( $output, 'pht-parent ' . esc_attr( $wrapper_class ), '', 'div', $attrs, true, false  );
+		}
+
+
+
+		$output .= sprintf( '<div %1$s class="%2$s pht-parent"><div class="%3$s"><!-- %4$s --></div></div>',
 			$this->module_id,
 			'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper,
 			esc_attr( $layout_class ),
 			do_shortcode( $this->content )
 		);
+
+		return $this->container( $output, 'pht-parent', '', 'div', array(), true, false  );
+
+
+
+		
 	}
 
 	protected function phtpb_row_inner() {
@@ -301,7 +380,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$column_count = (int) str_replace( 'c', '', $layout_option );
 
-		$dimensions = $this->dimensions( $layout_option );
+		$dimensions = self::dimensions( $layout_option );
 
 		$article_layout_class = 'u-1-of-'  . $column_count . '-desk u-1-of-'  . $column_count . '-lap';
 
@@ -328,7 +407,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-fadesat <?php echo esc_attr( $article_layout_class ); ?>">
 					<figure class="pht-fig pht-fig--filter">
 						<?php 
-						echo pehaathemes_get_att_img(  $id, array( $dimensions['width'], $dimensions['height'] ), false, array( 'class' => 'pht-img--fill', 'width' => $dimensions['width'] ), $skip_array );
+						echo self::get_att_img(  $id, array( $dimensions['width'], $dimensions['height'] ), false, array( 'class' => 'pht-img--fill', 'width' => $dimensions['width'] ), $skip_array );
 						if ( $this->lightbox ) { ?>
 							<div class="pht-fig__link--ctnr">
 								<?php printf( '<a class="pht-fig__link js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s">', esc_url( wp_get_attachment_url( $id ) )
@@ -766,7 +845,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		return $query_args;
 	}
 
-	protected function phtpb_query( $post_type, $filter, $thumbnail = true ) {
+	protected function phtpb_query( $post_type, $filter, $thumbnail = true, $return_posts = true ) {
 
 		$query_args = $this->base_query( $post_type, $thumbnail );
 
@@ -784,7 +863,11 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$query_args_with_phtpb_query = apply_filters( $filter, $query_args_with_phtpb_query, $this->atts['module_id'] );
 
-		return get_posts( $query_args_with_phtpb_query );
+		if ( $return_posts ) {
+			return get_posts( $query_args_with_phtpb_query );
+		}
+
+		return $query_args_with_phtpb_query;
 
 	}
 
@@ -1306,7 +1389,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 			$column_count = (int) str_replace( 'c', '', $layout_option );
 
-			$dimensions = $this->dimensions( $layout_option );
+			$dimensions = self::dimensions( $layout_option );
 
 			$article_layout_class = 'u-1-of-'  . $column_count . '-desk u-1-of-'  . $column_count . '-lap';
 
@@ -1399,19 +1482,11 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 	
 		if ( count( $posts ) ) :		
 
-			$layout_option =  $this->select_attribute( 'layout_option' );
+			$layout_option =  $this->select_attribute( 'layout_option' );			
 
-			$column_count = (int) str_replace( 'c', '', $layout_option );
+			$dimensions = self::dimensions( $layout_option );
 
-			$dimensions = $this->dimensions( $layout_option );
-
-			$article_layout_class = 'u-1-of-'  . $column_count . '-desk u-1-of-'  . $column_count . '-lap';
-
-			if ( 1 !== $column_count ) {
-				$article_layout_class .= ' u-1-of-2';
-			} else {
-				$article_layout_class = ' u-1-of-1';
-			}
+			$article_layout_class = self::layout_classes( $layout_option);
 
 			$skip_array = apply_filters( 'phtpb_dont_resize_in_posts_grid', array(), $layout_option, $this->atts['module_id'] ); ?>
 			
@@ -1425,13 +1500,13 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 					<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-mctnr--gut24__item <?php echo esc_attr( $article_layout_class ); ?>">
 
-						<?php $this->post_entry( get_the_ID(), get_post_thumbnail_id(  get_the_ID() ), $dimensions['width'], $dimensions['height'], $skip_array ); ?>
+						<?php $this->post_entry( $skip_array ); ?>
 
 					</article>
 
 				<?php endforeach; ?>
 
-			</div><!-- .js-phtpb_showcase_ctnr -->
+			</div>
 
 		<?php endif;
 
@@ -1484,15 +1559,17 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		echo '</figure>';
 	}
 
-	protected function post_entry( $post_id, $attachment_id, $width, $height, $skip_array ) {
+	protected function post_entry( $skip_array = array() ) {
 
-		if ( post_password_required() ) {
-			return;
-		}
-		if ( $attachment_id ) {
+		$attachment_id = get_post_thumbnail_id( get_the_ID() );
+
+		if ( $attachment_id && !post_password_required() ) {
+
 			printf( '<figure class="pht-fig pht-mb">' );
 
-			echo self::get_att_img( $attachment_id, array( $width, $height), false, array( 'class' => 'pht-img--fill', 'width' => $width, 'height' => $height ), $skip_array );
+			$dimensions = self::dimensions(  $this->select_attribute( 'layout_option' ) );
+
+			echo self::get_att_img( $attachment_id,  array( $dimensions['width'], $dimensions['height'] ), false, array( 'class' => 'pht-img--fill', 'width' => $dimensions['width'], 'height' => $dimensions['height'] ), $skip_array );
 			
 			echo '<div class="pht-fig__link--ctnr">';	
 			printf( '<a class="pht-fig__link pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s">',
@@ -1507,7 +1584,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		echo '<time class="phtpb-entry-date" datetime="' . esc_attr( get_the_date( 'c' ) ) . '">' . esc_html( get_the_date() ) . '</time>';
 		echo '</a>';
 		printf( '<a class="" href="%1$s">',
-			esc_url( get_permalink( $post_id ) )
+			esc_url( get_permalink( get_the_ID() ) )
 		);
 		printf( '<%1$s class="%2$s">',
 			esc_attr( apply_filters( 'phtpb_posts_grid_title_tag', 'h3' ) ),
@@ -1613,7 +1690,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	}
 
-	protected function dimensions( $layout_option ) {
+	public static function dimensions( $layout_option ) {
 
 		switch ( $layout_option ) {
 			case '2c':
@@ -1650,7 +1727,21 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				return array( 'width' => 1140, 'height' => 0 );
 			break;
 		}
+	}
 
+	public static function layout_classes( $layout_option ) {
+
+		$column_count = (int) str_replace( 'c', '', $layout_option );
+
+		$article_layout_class = 'u-1-of-'  . $column_count . '-desk u-1-of-'  . $column_count . '-lap';
+
+		if ( 1 !== $column_count ) {
+			$article_layout_class .= ' u-1-of-2';
+		} else {
+			$article_layout_class = ' u-1-of-1';
+		}
+
+		return $article_layout_class;
 	}
 
 	protected function container_colors( $apply = true ) {
@@ -1792,13 +1883,13 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		if ( PeHaa_Themes_Page_Builder_Public::$is_mobile ) {
 
-			return sprintf( '<div class="js-image-container js-pht-img-loader" data-imgurl="%1$s" %2$s></div>',
+			return sprintf( '<div class="js-image-container js-pht-img-loader" data-imgurl="%1$s" %2$s style="display:none;"></div>',
 				esc_url( $img ), 
 				$force_on_palm ? 'data-imgurl-palm="' . esc_url( $this->image_src_palm( $id ) ) . '"' : '' 
 				);
 
 		} else {
-			return sprintf( '<img class="js-image-container js-pht-img-loader" src="%1$s" data-imgurl="%2$s" alt="%3$s" >',
+			return sprintf( '<img class="js-image-container js-pht-img-loader" src="%1$s" data-imgurl="%2$s" alt="%3$s" style="display:none;">',
 				esc_url( $img ), 
 				esc_url( $img ),
 				self::image_alt(  $this->phtpb_id ) 

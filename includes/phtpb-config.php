@@ -79,6 +79,56 @@ $phtpb_module_id = array(
 	'default' => '',
 );
 
+$image_opacity_item = array(
+	'title' => esc_html__( 'Image Opacity', $this->plugin_name ),
+	'type' => 'select',
+	'options' => array(
+		'1' => '100%',
+		'0.95' => '95%',
+		'0.9' => '90%',
+		'0.85' => '85%',
+		'0.80' => '80%',
+		'0.75' => '75%',
+		'0.7' => '70%',
+		'0.6' => '60%',
+		'0.5' => '50%',
+		'0.4' => '40%',
+		'0.3' => '30%',
+		'0.25' => '25%',
+		'0.2' => '20%',
+		'0.15' => '15%',
+		'0.1' => '10%',
+		'0.05' => '5%',
+	),
+	'default' => 1,
+);
+
+$image_r_w_item = array(
+	'title' => esc_html__( 'Background Width', $this->plugin_name ),
+	'description' => esc_html__( 'Resize width, auto is recommended.', $this->plugin_name ),
+	'type' => 'text',
+	'default' => esc_html__( 'Auto (cover)', $this->plugin_name ),
+);
+
+$image_r_h_item = array(
+	'title' => esc_html__( 'Background Height', $this->plugin_name ),
+	'description' => esc_html__( 'Resize height, auto is recommended.', $this->plugin_name ),
+	'type' => 'text',
+	'default' => esc_html__( 'Auto (cover)', $this->plugin_name ),
+);
+
+$image_small_screens_item = array(
+	'title' => esc_html__( 'Small screens', $this->plugin_name ),
+	'type' => 'select',
+	'options' => array(
+		'colors' => esc_html__( 'Keep the custom background and text colors', $this->plugin_name ),
+		'inherit' => esc_html__( 'Use the default colors', $this->plugin_name ),
+		'force' => esc_html__(  'Force the background image to be displayed', $this->plugin_name ),
+	),
+	'description' => esc_html__( 'Define how this section is displayed on small screens (<800px).', $this->plugin_name ),
+	'default' => 'colors',
+);
+
 $phtpb_config_data['phtpb_section'] = array(
 	'label' => 'phtpb_section',
 	'title' => esc_html__( 'Section', $this->plugin_name ),
@@ -114,52 +164,10 @@ $phtpb_config_data['phtpb_section'] = array(
 			'type' => 'image_id',
 			'default' => '',
 		),
-		'opacity' => array(
-			'title' => esc_html__( 'Image Opacity', $this->plugin_name ),
-			'type' => 'select',
-			'options' => array(
-				'1' => '100%',
-				'0.95' => '95%',
-				'0.9' => '90%',
-				'0.85' => '85%',
-				'0.80' => '80%',
-				'0.75' => '75%',
-				'0.7' => '70%',
-				'0.6' => '60%',
-				'0.5' => '50%',
-				'0.4' => '40%',
-				'0.3' => '30%',
-				'0.25' => '25%',
-				'0.2' => '20%',
-				'0.15' => '15%',
-				'0.1' => '10%',
-				'0.05' => '5%',
-			),
-			'default' => 1,
-		),
-		'r_w' => array(
-			'title' => esc_html__( 'Background Width', $this->plugin_name ),
-			'description' => esc_html__( 'Resize width, auto is recommended.', $this->plugin_name ),
-			'type' => 'text',
-			'default' => esc_html__( 'Auto (cover)', $this->plugin_name ),
-		),
-		'r_h' => array(
-			'title' => esc_html__( 'Background Height', $this->plugin_name ),
-			'description' => esc_html__( 'Resize height, auto is recommended.', $this->plugin_name ),
-			'type' => 'text',
-			'default' => esc_html__( 'Auto (cover)', $this->plugin_name ),
-		),
-		'phtpb_type' => array(
-			'title' => esc_html__( 'Small screens', $this->plugin_name ),
-			'type' => 'select',
-			'options' => array(
-				'colors' => esc_html__( 'Keep the custom background and text colors', $this->plugin_name ),
-				'inherit' => esc_html__( 'Use the default colors', $this->plugin_name ),
-				'force' => esc_html__(  'Force the background image to be displayed', $this->plugin_name ),
-			),
-			'description' => esc_html__( 'Define how this section is displayed on small screens (<800px).', $this->plugin_name ),
-			'default' => 'colors',
-		),
+		'opacity' => $image_opacity_item,
+		'r_w' => $image_r_w_item,
+		'r_h' => $image_r_h_item,
+		'phtpb_type' => $image_small_screens_item
 	),
 	'phtpb_admin_mode' => 'simple',
 	'create_with_settings' => false
@@ -326,7 +334,32 @@ $row_settings = array(
 		),
 		'description' => esc_html__( 'You can switch between boxed and stretched layout of each row. The margin values correspond to the left and right margins.', $this->plugin_name ),
 	),
+	'use_bg_color' => $use_bg_color_item,
+	'bg_color' => $bg_color_item,
+	'use_color' => $use_color_item,
+	'color' => $color_item,
+	'background_image' => array(
+		'title' => esc_html__( 'Background Image', $this->plugin_name ),
+		'type' => 'image',
+		'description' => esc_html__( 'Upload the background image.', $this->plugin_name ),
+		'default' => '',
+	),
+	'phtpb_id' => array(
+		'type' => 'image_id',
+		'default' => '',
+	),
+	'opacity' => $image_opacity_item,
+	'r_w' => $image_r_w_item,
+	'r_h' => $image_r_h_item,
+	'clip' => array(
+		'title' => esc_html__( 'Clip', $this->plugin_name ),
+		'description' => esc_html__( 'Clip background to the wrapper.', $this->plugin_name ),
+		'type' => 'checkbox',
+		'default' => ''
+	),
+	'phtpb_type' => $image_small_screens_item
 );
+		
 
 $phtpb_config_data['phtpb_row'] = array(
 	'label' => 'phtpb_row',

@@ -44,7 +44,7 @@ jQuery( document ).ready( function ($) {
 
 			var self = this;
 			self.smallScreen  = Modernizr.mq( self.smallScreenQuery );
-			self.setBackground( '.phtpb_section .js-pht-bg-ctnr' );
+			self.setBackground( '.phtpb_section .js-pht-bg-ctnr, .js-pht-bg-ctnr--row' );
 			self.addSliders();
 			self.openGallery();
 			self.activateWaypoints();

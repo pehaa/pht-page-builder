@@ -81,13 +81,15 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 					}
 				},
 				stop : function( event, ui ) {
-					$("#phtpb").removeClass("phtpb_disable-section-module").removeClass("phtpb_disable-row-row-row").removeClass("phtpb_disable-row-row");
 					
+					$("#phtpb").removeClass( "phtpb_disable-section-module phtpb_disable-row-row-row phtpb_disable-row-row");
+
 					if ( window.hasToUpdateContent ) {
 
 						that.collection.setNewParentID( ui.item.data( 'phtpb_cid' ), window.newParentId );
 						if ( ! $(that.sortableElement).parent().is( '.phtpb_option-advanced-module-settings' ) ) {
-							peHaaThemesPageBuilder_Events.trigger( 'phtpb_module:triggerUpdatePostContent' );
+							peHaaThemesPageBuilder_Events.trigger( 'phtpb_module:triggerRefreshLayout' );
+							
 						}
 					}
 					window.hasToUpdateContent = false;
