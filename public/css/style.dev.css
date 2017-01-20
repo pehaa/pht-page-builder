@@ -4059,6 +4059,9 @@ html[xmlns] .phtpb_flexslider .slides {
     margin-top: -6px;
   }
 
+  .pht-mctnr--gut24 .pht-showcase__item,
+  .pht-mctnr--gut16 .pht-showcase__item,
+  .pht-mctnr--gut12 .pht-showcase__item,
   .pht-mctnr--gut24__item,
   .pht-mctnr--gut16,
   .pht-mctnr--gut12__item {
@@ -4074,6 +4077,7 @@ html[xmlns] .phtpb_flexslider .slides {
     margin-top: -24px;
   }
 
+  .pht-mctnr--gut24 .pht-showcase__item,
   .pht-mctnr--gut24__item {
     padding: 0 12px;
     margin-bottom: 0;
@@ -4086,6 +4090,7 @@ html[xmlns] .phtpb_flexslider .slides {
     margin-top: -16px;
   }
 
+  .pht-mctnr--gut16 .pht-showcase__item,
   .pht-mctnr--gut16__item {
     padding: 0 8px;
     margin-bottom: 0;
@@ -4098,6 +4103,7 @@ html[xmlns] .phtpb_flexslider .slides {
     margin-top: -12px;
   }
 
+  .pht-mctnr--gut12 .pht-showcase__item,
   .pht-mctnr--gut12__item {
     padding: 0 6px;
     margin-bottom: 0;
