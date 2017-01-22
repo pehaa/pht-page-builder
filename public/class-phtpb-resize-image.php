@@ -79,11 +79,12 @@ class PHTPB_Resize_Image {
 		);
 	}
 
+
 	private function skip_resizing( $skip_mime_types ) {
 
 		if ( !empty( $skip_mime_types ) ) {
-			$filetype = wp_check_filetype( $this->url );
-			if ( in_array( $filetype, $skip_mime_types ) ) {
+			$filetype = wp_check_filetype( $this->pathinfo['basename'] );
+			if ( in_array( $filetype['type'], ( array ) $skip_mime_types ) ) {
 				return true;
 			}
 		}
