@@ -1520,7 +1520,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	}
 
-	protected function entry_image( $post_id, $attachment_id, $width, $height, $skip_array, $lightbox, $terms = '' ) {
+	public static function entry_image( $post_id, $attachment_id, $width, $height, $skip_array, $lightbox, $terms = '' ) {
 
 		if ( post_password_required() ) {
 			return;
