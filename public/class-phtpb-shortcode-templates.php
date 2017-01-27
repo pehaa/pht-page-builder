@@ -410,7 +410,9 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 						echo self::get_att_img(  $id, array( $dimensions['width'], $dimensions['height'] ), false, array( 'class' => 'pht-img--fill', 'width' => $dimensions['width'] ), $skip_array );
 						if ( $this->lightbox ) { ?>
 							<div class="pht-fig__link--ctnr">
-								<?php printf( '<a class="pht-fig__link js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s">', esc_url( wp_get_attachment_url( $id ) )
+								<?php 
+								$im = get_post( $id );
+								printf( '<a class="pht-fig__link js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s" title="%2$s">', esc_url( $im->guid ), $im->post_excerpt
 								); ?>
 									<div class="pht-fig__titles">
 										<?php $lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' ); ?>
