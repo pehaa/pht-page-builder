@@ -140,16 +140,16 @@ class PHTPB_Tiled_Gallery {
 
 	}
 
-	public function rectangular_talavera_of_posts( $post_ids, $width = 1, $container = true, $fancybox = true  ) {
+	public function rectangular_talavera_of_posts( $post_ids, $width = 1, $container = true, $lightbox = true  ) {
 		$srcs = array();
 		foreach( $post_ids as $post_id ) {
 			if ( has_post_thumbnail( $post_id ) )
 				$srcs[] = get_post_thumbnail_id( $post_id ); 
 		}
-		return $this->rectangular_talavera( $srcs, $width, $container, $fancybox, $post_ids );
+		return $this->rectangular_talavera( $srcs, $width, $container, $lightbox, $post_ids );
 	}
 
-	public function rectangular_talavera( $srcs, $width = 1, $container = true, $fancybox = true, $post_ids = array() ) {
+	public function rectangular_talavera( $srcs, $width = 1, $container = true, $lightbox = true, $post_ids = array() ) {
 
 		$linked_to_posts = count( $post_ids );
 		$grouper = $this->pht_talavera( $srcs, $width );
@@ -208,12 +208,13 @@ class PHTPB_Tiled_Gallery {
 						$output .= '</a>';
 						$link_class = 'pht-fig__link--secondary';
 						$i++;
-					} else {
-						if ( trim( $image->post_excerpt ) )
-						$output .= '<figcaption class="pht-gallery__caption pht-transition">' . wptexturize( $image->post_excerpt ) . '</figcaption>';
-
+					} elseif ( trim( $image->post_excerpt ) ) {
+						$output .= sprintf( '<figcaption class="pht-gallery__caption %1$s pht-transition">%2$s</figcaption>',
+							$lightbox ? 'pht-gallery__caption--ll' : 'pht-gallery__caption--nl',
+							wptexturize( $image->post_excerpt )
+						);					
 					}
-					if ( $fancybox ) { 
+					if ( $lightbox ) { 
 
 						$lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' );
 

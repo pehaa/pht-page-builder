@@ -403,16 +403,24 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		<div class="js-showcase js-phtpb_showcase_ctnr pht-white cf <?php echo esc_attr( $gutter_class ); ?>">
 			<?php 
-			foreach( explode( ',', $this->atts['phtpb_ids'] ) as $id ) { ?>
+			foreach( explode( ',', $this->atts['phtpb_ids'] ) as $id ) { 
+				$im = get_post( $id ); ?>
 				<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-fadesat <?php echo esc_attr( $article_layout_class ); ?>">
 					<figure class="pht-fig pht-fig--filter">
 						<?php 
 						echo self::get_att_img(  $id, array( $dimensions['width'], $dimensions['height'] ), false, array( 'class' => 'pht-img--fill', 'width' => $dimensions['width'] ), $skip_array );
+						if ( trim( $im->post_excerpt ) ) {
+							printf( '<figcaption class="pht-gallery__caption %1$s pht-transition">%2$s</figcaption>',
+								$this->lightbox ? 'pht-gallery__caption--ll' : 'pht-gallery__caption--nl',
+								wptexturize( $im->post_excerpt )
+							);	
+						}
+
 						if ( $this->lightbox ) { ?>
 							<div class="pht-fig__link--ctnr">
 								<?php 
 								$im = get_post( $id );
-								printf( '<a class="pht-fig__link js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s" title="%2$s">', esc_url( $im->guid ), $im->post_excerpt
+								printf( '<a class="pht-fig__link js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s" title="%2$s">', esc_url( $im->guid ), esc_attr( $im->post_excerpt ) 
 								); ?>
 									<div class="pht-fig__titles">
 										<?php $lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' ); ?>
