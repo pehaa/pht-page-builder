@@ -1221,7 +1221,7 @@ $phtpb_config_data['phtpb_google_map'] = array(
 			'title' => esc_html__( 'Height', $this->plugin_name ),
 			'type' => 'text',
 			'description' => esc_html__( 'Set the height of map (in pixels)', $this->plugin_name ),
-			'default' => '400'
+			'default' => '360'
 		),
 		'margin_b' => $margin_b_item,
 	),
