@@ -228,8 +228,6 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			return $this->container( $output, 'pht-parent ' . esc_attr( $wrapper_class ), '', 'div', $attrs, true, false  );
 		}
 
-
-
 		$output .= sprintf( '<div %1$s class="%2$s pht-parent"><div class="%3$s"><!-- %4$s --></div></div>',
 			$this->module_id,
 			'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper,
@@ -237,11 +235,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			do_shortcode( $this->content )
 		);
 
-		return $this->container( $output, 'pht-parent', '', 'div', array(), true, false  );
-
-
-
-		
+		return $this->container( $output, 'pht-parent', '', 'div', array(), true, false  );	
 	}
 
 	protected function phtpb_row_inner() {
@@ -376,8 +370,6 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			return;
 		}		
 
-		$layout_option =  $this->select_attribute( 'layout_option' );
-
 		$column_count = (int) str_replace( 'c', '', $layout_option );
 
 		$dimensions = self::dimensions( $layout_option );
@@ -430,9 +422,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		ob_end_clean();
 
-		return $this->container( $output, 'phtpb_item' );
-		
-		
+		return $this->container( $output, 'phtpb_item' );	
 	}
 
 	protected function phtpb_contact_form7() {
@@ -1544,7 +1534,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			esc_attr( apply_filters( 'phtpb_showcase_title_tag', 'div' ) )
 		);
 		echo '<span class="pht-fig__subtitles pht-zeta">';
-		esc_html_e( $terms );
+		echo esc_html( $terms );
 		echo '</span>';
 		echo '</a>';
 
