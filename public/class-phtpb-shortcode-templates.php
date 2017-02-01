@@ -1723,7 +1723,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$column_count = (int) str_replace( 'c', '', $layout_option );
 
-		$article_layout_class = 'u-1-of-'  . $column_count . '-desk u-1-of-'  . $column_count . '-lap';
+		$article_layout_class = 'u-1-of-1-small u-1-of-'  . $column_count . '-desk u-1-of-'  . $column_count . '-lap';
 
 		if ( 1 !== $column_count ) {
 			$article_layout_class .= ' u-1-of-2';

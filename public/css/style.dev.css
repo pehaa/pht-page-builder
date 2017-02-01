@@ -4051,7 +4051,6 @@ html[xmlns] .phtpb_flexslider .slides {
 }
 
 @media screen and (max-width: 799px) {
-  .pht-mctnr--gut24,
   .pht-mctnr--gut16,
   .pht-mctnr--gut12 {
     width: calc(100% + 6px);
@@ -4059,14 +4058,25 @@ html[xmlns] .phtpb_flexslider .slides {
     margin-top: -6px;
   }
 
-  .pht-mctnr--gut24 .pht-showcase__item,
   .pht-mctnr--gut16 .pht-showcase__item,
   .pht-mctnr--gut12 .pht-showcase__item,
-  .pht-mctnr--gut24__item,
   .pht-mctnr--gut16,
   .pht-mctnr--gut12__item {
     padding: 0 3px;
     margin-top: 6px;
+    margin-bottom: 0;
+  }
+
+  .pht-mctnr--gut24 {
+    width: calc(100% + 24px);
+    margin-left: -12px;
+    margin-top: -24px;
+  }
+
+  .pht-mctnr--gut24 .pht-showcase__item,
+  .pht-mctnr--gut24__item {
+    padding: 0 12px;
+    margin-top: 24px;
     margin-bottom: 0;
   }
 }
