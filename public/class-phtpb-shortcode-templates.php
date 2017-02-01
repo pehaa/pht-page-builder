@@ -729,7 +729,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		if ( $this->is_checked( 'rounded' ) ) {
 			$attr['class'] .= ' pht-rounded';
 		}
-		$img_output = self::get_att_img( $this->phtpb_id, $size, $attr, $skip_array );
+		$img_output = self::get_att_img( $this->phtpb_id, $size, false, $attr, $skip_array );
 		
 		if ( $this->link ) {
 			$img_output .= "</a>";
@@ -804,7 +804,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		if ( !empty( $resize_width ) && intval( $resize_width ) > 0 ) {
 			$attr['width'] = intval( $resize_width );
 		}
-		$output = self::get_att_img( $this->phtpb_id, $size, $attr, $skip_array );
+		$output = self::get_att_img( $this->phtpb_id, $size, false, $attr, $skip_array );
 		
 		if ( $this->link ) {
 			$output .= "<a href='$this->link' class='pht-fig__link--main' $this->target></a>";
@@ -1525,13 +1525,13 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			esc_url( get_permalink( $post_id ) )
 		);
 		printf( '<%1$s class="%2$s">',
-			esc_attr( apply_filters( 'phtpb_showcase_title_tag', 'div' ) ),
-			esc_attr( apply_filters( 'phtpb_showcase_title_class', 'pht-fig__titles pht-epsilon' ) )
+			esc_attr( apply_filters( 'phtpb_showcase_title_tag', 'h4' ) ),
+			esc_attr( apply_filters( 'phtpb_showcase_title_class', 'pht-fig__titles pht-epsilon pht-mb0' ) )
 		);
 		the_title();
 		
 		printf( '</%s>',
-			esc_attr( apply_filters( 'phtpb_showcase_title_tag', 'div' ) )
+			esc_attr( apply_filters( 'phtpb_showcase_title_tag', 'h4' ) )
 		);
 		echo '<span class="pht-fig__subtitles pht-zeta">';
 		echo esc_html( $terms );

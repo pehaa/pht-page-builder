@@ -184,8 +184,7 @@ class PHTPB_Tiled_Gallery {
 					if ( $image->width < 250 ) {
 						$size = 'small';
 					}
-					
-
+				
 					$image_title = $image->post_title;
 					$orig_file = wp_get_attachment_url( $image->ID );
 					$link = $this->get_attachment_link( $image->ID, $orig_file );
@@ -196,7 +195,7 @@ class PHTPB_Tiled_Gallery {
 					$figure_class = 'pht-gallery__item pht-gallery__item-' . esc_attr( $size ) . ' ' . $item_count_class;
 					$output .= "<figure class='pht-fig $figure_class js-pht-waypoint pht-waypoint pht-fadesat'>";
 
-					$output .= PeHaa_Themes_Page_Builder_Shortcode_Template::get_att_img( $image->ID, array( $image->width, $image->height ),  array( 'width' => intval( $image->width ), 'height' => intval( $image->height ) ), $skip_resize_array );
+					$output .= PeHaa_Themes_Page_Builder_Shortcode_Template::get_att_img( $image->ID, array( $image->width, $image->height ), false, array( 'width' => intval( $image->width ), 'height' => intval( $image->height ) ), $skip_resize_array );
 					$link_class = $link_count_class . ' pht-fig__link--main pht-fig__link--hoverdir';
 					if ( $linked_to_posts ) {
 						$output .= "<a href='" . esc_url( get_permalink( $post_ids[ $i ] ) ) . "' class='pht-fig__link pht-fig__link--main pht-fig__link--main $link_class'>";
