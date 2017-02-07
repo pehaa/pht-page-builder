@@ -183,6 +183,15 @@ END;
 					$return_string .= "<option <%= phtpb_attributes['$key'] === parseInt(phtpb_attributes['$key'], 10) %> value='$option_key' $selected>$option_value</option>";
 					$i++;
 				}
+			} elseif ( in_array( $element_label, array( 'phtpb_row', 'phtpb_row_inner' ) ) && $key === 'gutter' ) {
+				foreach ( $field['options'] as $option_key => $option_value ) {
+					$selected = "<% if ( typeof( phtpb_attributes['$key'] ) !== 'undefined' ) { %>";
+					$selected .= "<%= '$option_key' === phtpb_attributes['$key'] || '$option_key' === 'flush' && phtpb_attributes['$key'] === '' ?  'selected=selected' : '' %>";
+					$selected .= "<% } else { %>";
+					$selected .= "<%= '$option_key' === '$default_select' ?  'selected=selected' : '' %>";
+					$selected .= "<% } %>";
+					$return_string .= "<option value='$option_key' $selected>$option_value</option>";
+				}
 			} else {
 				foreach ( $field['options'] as $option_key => $option_value ) {
 					$selected = "<% if ( typeof( phtpb_attributes['$key'] ) !== 'undefined' ) { %>";

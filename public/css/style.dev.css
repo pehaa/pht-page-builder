@@ -2109,6 +2109,36 @@
 }
 
 /**
+ * Layouts with small gutters.
+ */
+.pht-layout--small {
+  margin-left: -12px;
+}
+.pht-layout--small > .pht-layout__item {
+  padding-left: 12px;
+}
+
+/**
+ * Layouts with large gutters.
+ */
+.pht-layout--large {
+  margin-left: -48px;
+}
+.pht-layout--large > .pht-layout__item {
+  padding-left: 48px;
+}
+
+/**
+ * Layouts with huge gutters.
+ */
+.pht-layout--huge {
+  margin-left: -96px;
+}
+.pht-layout--huge > .pht-layout__item {
+  padding-left: 96px;
+}
+
+/**
  * Layouts with no gutters.
  */
 .pht-layout--flush {

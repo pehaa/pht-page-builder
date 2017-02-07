@@ -143,8 +143,12 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	protected function phtpb_row() {
 
-		$layout_class = $this->gutter ? 'pht-layout ' : 'pht-layout--flush ';
-		$layout_class .= $this->equals ? 'pht-layout--equals ' : '';
+		$layout_class = 'pht-layout';
+
+		if ( 'default' !== $this->select_attribute( 'gutter' ) ) {
+			$layout_class .= '--' . $this->select_attribute( 'gutter' );
+		} 
+		$layout_class .= $this->equals ? ' pht-layout--equals ' : ' ';
 		$layout_class .= $this->module_class;
 
 		$wrapper = $this->select_attribute( 'wrapper' );
@@ -240,8 +244,12 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 	protected function phtpb_row_inner() {
 
-		$layout_class = $this->gutter ? 'pht-layout ' : 'pht-layout--flush ';
-		$layout_class .= $this->equals ? 'pht-layout--equals' : '';
+		$layout_class = 'pht-layout';
+
+		if ( 'default' !== $this->select_attribute( 'gutter' ) ) {
+			$layout_class .= '--' . $this->select_attribute( 'gutter' );
+		} 
+		$layout_class .= $this->equals ? ' pht-layout--equals ' : ' ';
 		$layout_class .= $this->module_class;
 
 		return sprintf( '<div %1$s class="%2$s"><!-- %3$s --></div>',
@@ -1892,7 +1900,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$this->phtpb_width = isset( $this->atts['phtpb_width'] ) && 'NaN' !== trim( $this->atts['phtpb_width'] ) ? $this->atts['phtpb_width'] : 1;
 
-		$this->gutter = $this->is_checked( 'gutter' );
+		$this->gutter = isset( $this->atts['gutter'] ) && $this->atts['gutter'] && 'flush' !== $this->atts['gutter'];
 
 		$this->equals = $this->is_checked( 'equals' );
 

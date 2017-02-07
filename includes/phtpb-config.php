@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /**
  * Set the configuration data.
@@ -308,10 +308,22 @@ $row_settings = array(
 		'type' => 'hidden',
 		'default' => false
 	),
-	'gutter' => array(
+/*	'gutter' => array(
 		'title' => esc_html__( 'Gutters', $this->plugin_name ),
 		'type' => 'checkbox',
 		'default' => 'yes',
+		'description' => esc_html__( 'If checked, columns are separated by vertical whitespaces.', $this->plugin_name ),
+	),*/
+	'gutter' => array(
+		'title' => esc_html__( 'Gutters', $this->plugin_name ),
+		'type' => 'select',
+		'default' => 'default',
+		'options' => array(
+			'flush' =>  esc_html__( 'None', $this->plugin_name ),
+			'small' =>  esc_html__( 'Small, 12px', $this->plugin_name ),
+			'default' =>  esc_html__( 'Default, 24px', $this->plugin_name ),
+			'large' =>  esc_html__( 'Large, 48px', $this->plugin_name ),
+		),
 		'description' => esc_html__( 'If checked, columns are separated by vertical whitespaces.', $this->plugin_name ),
 	),
 	'equals' => array(
