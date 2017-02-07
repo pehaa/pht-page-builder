@@ -151,12 +151,12 @@ module.exports = function(grunt) {
                 tasks: ['sass:dev', 'sass:dist']
             },
             jsjshint: {
-                files: [ 'admin/js/assets/**.js', 'public/js/assets/phtpb.js' ],
-                tasks: ['jshint', 'jshint']
+                files: [ 'admin/js/assets/*/*.js',  'admin/js/assets/phtpb-admin.js', 'public/js/assets/phtpb.js' ],
+                tasks: ['jshint', 'jshint', 'jshint']
             },
             js: {
-                files: [ 'admin/js/assets/**.js', 'public/js/assets/*.js' ],
-                tasks: ['uglify:dist', 'uglify:publicdist']
+                files: [ 'admin/js/assets/*/*.js',  'admin/js/assets/phtpb-admin.js', 'public/js/assets/*.js' ],
+                tasks: ['uglify:dist', 'uglify:dist', 'uglify:publicdist']
             }
         },
         "json-replace": {
