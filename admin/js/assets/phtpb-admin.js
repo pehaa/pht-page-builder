@@ -6,6 +6,8 @@ var
 
 	'use strict';
 
+	peHaaThemesPageBuilder.$page_builder_mb = $( '#phtpb' );
+
 	peHaaThemesPageBuilder.phtpb_get_content = function( textarea_id, fix_shortcodes ) {
 		
 		var content;
@@ -64,10 +66,10 @@ var
 			$builder_toggle_button = $( 'body' ).find( '#phtpb_toggle_builder-meta' ),
 			isActivated = $builder_toggle_button.hasClass( 'phtpb_builder_is_used' ), 
 			currentState = isActivated,
-			$current_state_mb = $( '#phtpb_state-yes' ),
-			$page_builder_mb = $( '#phtpb' ),
+			$current_state_mb = $( '#phtpb_state-yes' ),			
 			$main_editor_wrap = $( '#phtpb_main_editor_wrap' ),
 			$hidden_editor = $( '#phtpb_hidden_editor' );
+			
 			
 		peHaaThemesPageBuilder.initial_content = $hidden_editor.html();	
 		$hidden_editor.remove();
@@ -84,12 +86,12 @@ var
 				start_data : phtpb_data.save_to
 			});
 
-			$page_builder_mb.addClass('phtpb_visible');
+			peHaaThemesPageBuilder.$page_builder_mb.addClass('phtpb_visible');
 			currentState = true;
 			isActivated = true;
 			
 		} else {
-			$page_builder_mb.addClass('phtpb_hidden');
+			peHaaThemesPageBuilder.$page_builder_mb.addClass('phtpb_hidden');
 		}
 
 		$( document ).on( 'click', '.js-phtpb_toggle_builder', function( event ) {
@@ -147,7 +149,7 @@ var
 				}
 			} 
 
-			$page_builder_mb.toggleClass('phtpb_hidden').toggleClass('phtpb_visible');
+			peHaaThemesPageBuilder.$page_builder_mb.toggleClass('phtpb_hidden, phtpb_visible');
 				
 		});
 

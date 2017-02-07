@@ -106,9 +106,13 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 
 			var content = this.updatePostContent();
 
+			var height = peHaaThemesPageBuilder.$page_builder_mb.css('height');
+
+			peHaaThemesPageBuilder.$page_builder_mb.css('height',height);
 			this.removeAllSections();
 
 			this.createLayoutFromContent( content );
+			$( '#phtpb').css('height','auto');
 
 		},
 
