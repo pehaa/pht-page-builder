@@ -145,9 +145,12 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$layout_class = 'pht-layout';
 
-		if ( 'default' !== $this->select_attribute( 'gutter' ) ) {
+		if ( !$this->gutter ) {
+			$layout_class .= '--flush';
+		} elseif ( 'yes' !== $this->gutter && 'default' !== $this->gutter ) {
 			$layout_class .= '--' . $this->select_attribute( 'gutter' );
-		} 
+		}
+
 		$layout_class .= $this->equals ? ' pht-layout--equals ' : ' ';
 		$layout_class .= $this->module_class;
 
@@ -246,9 +249,12 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$layout_class = 'pht-layout';
 
-		if ( 'default' !== $this->select_attribute( 'gutter' ) ) {
+		if ( !$this->gutter ) {
+			$layout_class .= '--flush';
+		} elseif ( 'yes' !== $this->gutter && 'default' !== $this->gutter ) {
 			$layout_class .= '--' . $this->select_attribute( 'gutter' );
-		} 
+		}
+
 		$layout_class .= $this->equals ? ' pht-layout--equals ' : ' ';
 		$layout_class .= $this->module_class;
 
