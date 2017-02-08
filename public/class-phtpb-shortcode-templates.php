@@ -148,7 +148,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		if ( !$this->gutter ) {
 			$layout_class .= '--flush';
 		} elseif ( 'yes' !== $this->gutter && 'default' !== $this->gutter ) {
-			$layout_class .= '--' . $this->select_attribute( 'gutter' );
+			$layout_class .= '--' . $this->gutter;
 		}
 
 		$layout_class .= $this->equals ? ' pht-layout--equals ' : ' ';
@@ -1906,7 +1906,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$this->phtpb_width = isset( $this->atts['phtpb_width'] ) && 'NaN' !== trim( $this->atts['phtpb_width'] ) ? $this->atts['phtpb_width'] : 1;
 
-		$this->gutter = isset( $this->atts['gutter'] ) && $this->atts['gutter'] && 'flush' !== $this->atts['gutter'];
+		$this->gutter = isset( $this->atts['gutter'] ) && $this->atts['gutter'] && 'flush' !== $this->atts['gutter'] ? $this->atts['gutter'] : false;
 
 		$this->equals = $this->is_checked( 'equals' );
 
