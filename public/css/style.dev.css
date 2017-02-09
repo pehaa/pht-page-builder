@@ -2122,20 +2122,20 @@
  * Layouts with large gutters.
  */
 .pht-layout--large {
-  margin-left: -48px;
+  margin-left: -32px;
 }
 .pht-layout--large > .pht-layout__item {
-  padding-left: 48px;
+  padding-left: 32px;
 }
 
 /**
  * Layouts with huge gutters.
  */
 .pht-layout--huge {
-  margin-left: -96px;
+  margin-left: -48px;
 }
 .pht-layout--huge > .pht-layout__item {
-  padding-left: 96px;
+  padding-left: 48px;
 }
 
 /**
