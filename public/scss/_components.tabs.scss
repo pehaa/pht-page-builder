@@ -20,8 +20,8 @@
 	padding:0;
 	display:flex;
 	li {
-		float:left;
-		padding:10px 1*16px 11px;
+		
+		flex: 1 0;
 		border-right: 1px solid;
 		
 
@@ -37,6 +37,10 @@
 	.ui-state-active {
 		background:#fff;
 	
+	}
+	a {
+		padding:10px 8px 11px;
+		display: block;
 	}
 }
 .phtpb_tabs .phtpb_tab {

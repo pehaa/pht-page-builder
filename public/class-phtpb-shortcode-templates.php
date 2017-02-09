@@ -664,17 +664,15 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$rounded_class = $this->is_checked( 'rounded' ) ? ' pht-rounded' : '';
 
 		$attr = array();
+		$attr['class'] = $rounded_class;
 
 		if ( !empty( $resize_width ) && $resize_width ) {
-			$attr['width'] = esc_attr( $resize_width );
+			$attr['width'] = intval( $resize_width );
 		}
 		if ( !empty( $resize_height ) && $resize_height ) {
-			$attr['height'] = esc_attr( $resize_height );
+			$attr['height'] = intval( $resize_height );
 		}
-
-		if ( $this->is_checked( 'rounded' ) ) {
-			$attr['class'] = ' pht-rounded';
-		}
+				
 		$output = '<span class="pht-fig__inner">';
 		$output .= self::get_att_img( $this->phtpb_id, $size, false, $attr );
 
