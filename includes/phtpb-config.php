@@ -1041,6 +1041,32 @@ $phtpb_config_data['phtpb_img_carousel'] = array(
 			'title' => esc_html__( 'Image Source', $this->plugin_name ),
 			'type' => 'gallery',
 		),
+		'woption' =>  array(
+			'title' => esc_html__( 'Slider option', $this->plugin_name ),
+			'type' => 'select',
+			'default' => 'variable',
+			'options' => array(
+				'variable' => esc_html__( 'Variable width, keep image aspect ration', $this->plugin_name ),
+				'3_2' => esc_html__( 'Fixed width, aspect ratio 3/2', $this->plugin_name ),
+				'4_3' => esc_html__( 'Fixed width, aspect ratio 4/3', $this->plugin_name ),
+			),
+		),
+		'count' => array(
+			'title' => esc_html__( 'Number of slides to show', $this->plugin_name ),
+			'type' => 'select',
+			'default' => '1',
+			'options' => array(
+				'1' => '1',
+				'2' => '2',
+				'3' => '3',
+				'4' => '4',
+				'5' => '5',
+				'6' => '6',
+				'7' => '7',
+				'8' => '8',
+				'9' => '9',
+			),
+		),
 		'hoption' => array(
 			'title' => esc_html__( 'Slides Height', $this->plugin_name ),
 			'type' => 'select',
@@ -1051,16 +1077,7 @@ $phtpb_config_data['phtpb_img_carousel'] = array(
 				'600' => '600px',
 			),
 		),
-		'woption' =>  array(
-			'title' => esc_html__( 'Slides Width', $this->plugin_name ),
-			'type' => 'select',
-			'default' => 'variable',
-			'options' => array(
-				'variable' => esc_html__( 'Variable width, keep image aspect ration', $this->plugin_name ),
-				'3_2' => esc_html__( 'Fixed width, aspect ratio 3/2', $this->plugin_name ),
-				'4_3' => esc_html__( 'Fixed width, aspect ratio 4/3', $this->plugin_name ),
-			),
-		),
+		
 		'auto' => array(
 			'title' => esc_html__( 'Auto slideshow', $this->plugin_name ),
 			'type' => 'checkbox',
@@ -1528,6 +1545,16 @@ $phtpb_config_data['phtpb_posts'] = array(
 				'5' => esc_html__( 'Masonry 5 columns', $this->plugin_name ),
 				'6' => esc_html__( 'Masonry 6 columns', $this->plugin_name ),
 				'1' => esc_html__( 'One column', $this->plugin_name ),
+			),
+		),
+		'gutter' => array(
+			'title' => esc_html__( 'Gutter', $this->plugin_name ),
+			'type' => 'select',
+			'default' => '24',
+			'options' => array(
+				'24' => '24px',
+				'32' => '32px',
+				'48' => '48px'
 			),
 		),
 		'margin_b' => $margin_b_item,

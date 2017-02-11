@@ -198,20 +198,14 @@ jQuery( document ).ready( function ($) {
 					infinite: true,
 					autoplaySpeed : $( element ).data( 'autoplayspeed' ) ? $( element ).data( 'autoplayspeed' ) : 3000,
 					speed : $( element ).data( 'speed' ) ? $( element ).data( 'speed' ) : 300,
-					slidesToShow: 'fixed' === $( element ).data( 'variablewidth' ) ? 1 : 3,
+					slidesToShow: 'fixed' === $( element ).data( 'variablewidth' ) ? $( element ).data( 'slidestoshow' ) : 1,
 					centerMode: true,
 					variableWidth: 'fixed' === $( element ).data( 'variablewidth' ) ? false : true,
 					centerPadding : 0,
 					lazyLoad: 'ondemand',
 					responsive: [
 						{
-							breakpoint: 800,
-							settings: {
-								slidesToShow: 1,
-							}
-						},
-						{
-							breakpoint: 480,
+							breakpoint: 500,
 							settings: {
 								slidesToShow: 1,
 								variableWidth: false,

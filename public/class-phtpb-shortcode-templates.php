@@ -293,7 +293,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$colorbox_class .= $v_align ? ' pht-box--valign-' . $v_align : ' pht-box--valign-top';
 		$box_class = '';
 		$animation = $this->select_attribute( 'animation' );
-		$colorbox_class .= 'none' === $animation ? '' : " js-pht-waypoint pht-waypoint pht-$animation";
+		$colorbox_class .= 'none' === $animation ? '' : apply_filters( 'phtpb_animation_class', " js-pht-waypoint pht-waypoint pht-$animation", $animation );
 
 		$colorbox_style = $this->bg_color ? 'background:' . esc_attr( $this->bg_color ) .';' : '';
 		$colorbox_style .= $this->color ? 'color:' . esc_attr( $this->color ) .';' : '';
@@ -1214,6 +1214,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		} else {
 			$args_array['data-variablewidth'] = 'variable';
 		}
+		$args_array['data-slidestoshow'] = $this->select_attribute( 'count' );
 
 		$id = isset( $this->atts['module_id'] ) && '' !== trim( $this->atts['module_id'] ) ? trim( $this->atts['module_id'] ) : NULL;
 
@@ -1233,9 +1234,13 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		foreach ( $srcs_array as $image_id ) {
 			$content .= $this-> _phtpb_img_carousel_slide( $image_id, (int) $hoption, $ratio );
-		}	
+		}
+
+		$woption_class = 'variable' === $woption ? 'variable' : 'fixed';
+
+
 		
-		return $this->container( $content, "phtpb_slicks phtpb_slicks--img phtpb_slicks--img-$hoption phtpb_slicks--img-$woption phtpb_item", '', 'div', $args_array  );
+		return $this->container( $content, "phtpb_slicks phtpb_slicks--img phtpb_slicks--img-$hoption phtpb_slicks--img-$woption_class phtpb_slicks--img-$woption phtpb_item", '', 'div', $args_array  );
 
 	}
 
@@ -1248,8 +1253,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		if ( !wp_attachment_is_image( $image_id ) ) {
 			return;
 		}
-
-		if ( $height ) {
+		
+		if (  $height ) {
 			$display_image = $this->resizer->phtpb_resize_image( $image_id, round( $height * $ratio ), $height );			
 		} else {
 			$display_image = wp_get_attachment_image_src( $image_id, apply_filters( 'phtpb_img_carousel', 'full' ) );
@@ -1257,7 +1262,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$width_index =  $height ? 'width' : 1;
 		$url_index =  $height ? 'url' : 0;
 		
-		$output = '<div>';
+		$output = '<div class="">';
 		$output .= '<figure class="pht-fig pht-white" style="width:'. $display_image[ $width_index ] . 'px">';
 		$output .= sprintf( '<img src="" data-lazy="%1$s" alt="%2$s" %3$s/>',
 			$display_image[ $url_index ],
@@ -1490,9 +1495,11 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 			$article_layout_class = self::layout_classes( $layout_option);
 
-			$skip_array = apply_filters( 'phtpb_dont_resize_in_posts_grid', array(), $layout_option, $this->atts['module_id'] ); ?>
+			$skip_array = apply_filters( 'phtpb_dont_resize_in_posts_grid', array(), $layout_option, $this->atts['module_id'] ); 
+
+			$gutter_class = 'pht-mctnr--gut24 pht-mctnr--gut-deskwide-' . $this->select_attribute( 'gutter' ); ?>
 			
-			<div class="js-showcase js-phtpb_showcase_ctnr pht-mctnr--gut24 cf">
+			<div class="js-showcase js-phtpb_showcase_ctnr <?php echo esc_attr( $gutter_class ); ?> cf">
 
 				<?php 
 
@@ -1575,7 +1582,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			
 			echo '<div class="pht-fig__link--ctnr">';	
 			printf( '<a class="pht-fig__link pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s">',
-				esc_url( get_permalink( $post_id ) )
+				esc_url( get_permalink() )
 			);
 			echo '</a>';
 			echo '</div>';		

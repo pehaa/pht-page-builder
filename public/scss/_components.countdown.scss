@@ -4,10 +4,11 @@
 	transition: .5s;
 	overflow:hidden;
 	max-height:0;
+	    will-change: visibility, opacity;
 }
 .js-phtpb_countdown-activated {
 	opacity:1;
-	visibility: visible;
+	visibility: inherit;
 	max-height:320px;
 }
 .phtpb_timer {
