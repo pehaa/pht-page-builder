@@ -198,7 +198,7 @@ jQuery( document ).ready( function ($) {
 					infinite: true,
 					autoplaySpeed : $( element ).data( 'autoplayspeed' ) ? $( element ).data( 'autoplayspeed' ) : 3000,
 					speed : $( element ).data( 'speed' ) ? $( element ).data( 'speed' ) : 300,
-					slidesToShow: 'fixed' === $( element ).data( 'variablewidth' ) ? $( element ).data( 'slidestoshow' ) : 1,
+					slidesToShow:  $( element ).data( 'slidestoshow' ),
 					centerMode: true,
 					variableWidth: 'fixed' === $( element ).data( 'variablewidth' ) ? false : true,
 					centerPadding : 0,

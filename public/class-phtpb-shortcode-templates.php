@@ -1211,45 +1211,91 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		
 		$args_array = array();
 
+		$woption = $this->select_attribute( 'woption' );
+
+		$hoption = $this->select_attribute( 'hoption' );
+
 		if ( $this->is_checked( 'auto' ) ) {
 			$args_array['data-auto'] = "true";
 		}
 		if ( 'fade' === $this->select_attribute( 'anim' ) ) {
 			$args_array['data-fade'] = "true";
 		}
-		if ( 'variable' !== $this->select_attribute( 'woption' ) ) {
+		if ( 'variable' !== $woption ) {
 			$args_array['data-variablewidth'] = 'fixed';	
 		} else {
 			$args_array['data-variablewidth'] = 'variable';
 		}
-		$args_array['data-slidestoshow'] = $this->select_attribute( 'count' );
-
+		//if ( 'flexible' === $this->select_attribute( 'woption' ) ) {
+			$args_array['data-slidestoshow'] = $this->select_attribute( 'count' );
+		//}
+		
 		$id = isset( $this->atts['module_id'] ) && '' !== trim( $this->atts['module_id'] ) ? trim( $this->atts['module_id'] ) : NULL;
 
-		$args_array = apply_filters( 'phtpb_img_carousel_data_attributes', $args_array, $id );
-
-		$hoption = $this->select_attribute( 'hoption' );
-
-		$woption = $this->select_attribute( 'woption' );
+		$args_array = apply_filters( 'phtpb_img_carousel_data_attributes', $args_array, $id );	
 
 		$content = '';
 
-		if ( (int) $hoption ) {
-			$this->resizer = PHTPB_Resize_Image::get_instance();
-		}
-
 		$ratio = '3_2' === $woption ? 1.5 : ( '4_3' === $woption ? 1.334 : 0 );
 
-		foreach ( $srcs_array as $image_id ) {
-			$content .= $this-> _phtpb_img_carousel_slide( $image_id, (int) $hoption, $ratio );
+		
+		if ( 'variable' === $woption ) {
+			$this->resizer = PHTPB_Resize_Image::get_instance();
+			foreach ( $srcs_array as $image_id ) {
+				$content .= $this-> _phtpb_img_carousel_slide( $image_id, $hoption );
+			}
+		} else {
+			foreach ( $srcs_array as $image_id ) {
+				$content .= $this-> phtpb_img_carousel_slide( $image_id, $ratio );
+			}
 		}
+		
 
 		$woption_class = 'variable' === $woption ? 'variable' : 'fixed';
-
 
 		
 		return $this->container( $content, "phtpb_slicks phtpb_slicks--img phtpb_slicks--img-$hoption phtpb_slicks--img-$woption_class phtpb_slicks--img-$woption phtpb_item", '', 'div', $args_array  );
 
+	}
+
+	protected function phtpb_img_carousel_slide( $image_id,  $ratio ) {
+
+		if ( !$image_id ) {
+			return;
+		}
+
+		if ( !wp_attachment_is_image( $image_id ) ) {
+			return;
+		}
+		$width_index =  'width';
+		$url_index = 'url';
+		if (  $ratio ) {
+			$display_image = self::get_att_img_lazy( $image_id, array( round( $this->select_attribute( 'hoption' ) * $ratio ),  $this->select_attribute( 'hoption' ) ), false, array( 'height' => $this->select_attribute( 'hoption' ) ) );			
+		} else if ( 'flexible' === $this->select_attribute( 'woption' ) ) {
+			$display_image = self::get_att_img_lazy( $image_id, array( $this->select_attribute( 'woption1' ), $this->select_attribute( 'hoption1' ) ) );
+		} else {
+			$display_image = self::get_att_img_lazy( $image_id, 'full', false, array( 'height' => $this->select_attribute( 'hoption' ) ) );
+		}
+		
+		$width = $this->select_attribute( 'woption1' ) ? $this->select_attribute( 'woption1' ) : $this->select_attribute( 'hoption' ) * $ratio;
+		
+		$output = '<div class="slick-slide">';
+		$output .= '<figure class="pht-fig pht-white">';
+		$output .= $display_image; /*[sprintf( '<img src="" data-lazy="%1$s" alt="%2$s" %3$s/>',
+			$display_image[ $url_index ],
+			self::image_alt(  $this->phtpb_id ), 
+			$this->select_attribute( 'woption1' ) ? 'width="' . $this->select_attribute( 'woption1' ) .'"' : ''
+		);*/
+		
+		if ( $this->lightbox ) {
+			$full_image = wp_get_attachment_image_src( $image_id, apply_filters( 'phtpb_lightbox_image', 'full' ) );
+			$output .= "<a href='$full_image[0]' class='pht-fig__link--hoverdir pht-fig__link pht-fig__link--main a-a a-a--no-h'><i class='pht-fig__link__string pht-ic-f1-arrow-expand-alt pht-gamma'></i></a>";
+		}
+		$output .= '</figure>';
+		$output .= '</div>';
+
+		return $output;
+	
 	}
 
 	protected function _phtpb_img_carousel_slide( $image_id, $height, $ratio = 0 ) {
@@ -1840,6 +1886,49 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		if ( isset( $img['1x']['url'] ) && isset( $img['1x']['width'] ) && isset( $img['1x']['height'] ) ) {
 			$default_attr = array(
 				'src'	=> $img['1x']['url'],
+				'class'	=> '',
+				'alt'	=> self::image_alt( $attachment_id )
+			);
+			if (  isset( $img['2x']['url'] ) && isset( $img['2x']['url'] ) && $img['2x']['url'] ) {
+				$default_attr['srcset'] = $img['1x']['url'] .' 1x, ' . $img['2x']['url'] . ' 2x';
+			}
+			$attr = wp_parse_args( $attr, $default_attr );
+			$attr = array_map( 'esc_attr', $attr );
+			$html = '<img ';
+			foreach ( $attr as $name => $value ) {
+				$html .= " $name=" . '"' . $value . '"';
+			}
+			$html .= ' />';
+		}
+
+		return $html;
+	}
+
+	public static function get_att_img_lazy( $attachment_id, $size, $icon = false, $attr = '', $skip_mime_types = array() ) {
+
+		if ( !is_array( $size ) ) {
+			
+			$resized = wp_get_attachment_image_src( $attachment_id, $size );
+
+			if ( !$resized ) {
+				return;
+			}
+			$img = array();
+			$img['1x']['url'] = $resized[0];
+			$img['1x']['width'] = $resized[1];
+			$img['1x']['height'] = $resized[2];
+		} else {
+			list( $width, $height ) = $size;
+			$resizer = PHTPB_Resize_Image::get_instance();
+			$img = $resizer->resize_image_srcset( $attachment_id, intval( $width ),  intval( $height ), $skip_mime_types );
+		}
+		
+		$html = '';
+
+		if ( isset( $img['1x']['url'] ) && isset( $img['1x']['width'] ) && isset( $img['1x']['height'] ) ) {
+			$default_attr = array(
+				'src'	=> '',
+				'data-lazy' => $img['1x']['url'],
 				'class'	=> '',
 				'alt'	=> self::image_alt( $attachment_id )
 			);

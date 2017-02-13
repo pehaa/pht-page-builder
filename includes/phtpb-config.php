@@ -1059,22 +1059,7 @@ $phtpb_config_data['phtpb_img_carousel'] = array(
 				'variable' => esc_html__( 'Variable width, keep image aspect ration', $this->plugin_name ),
 				'3_2' => esc_html__( 'Fixed width, aspect ratio 3/2', $this->plugin_name ),
 				'4_3' => esc_html__( 'Fixed width, aspect ratio 4/3', $this->plugin_name ),
-			),
-		),
-		'count' => array(
-			'title' => esc_html__( 'Number of slides to show', $this->plugin_name ),
-			'type' => 'select',
-			'default' => '1',
-			'options' => array(
-				'1' => '1',
-				'2' => '2',
-				'3' => '3',
-				'4' => '4',
-				'5' => '5',
-				'6' => '6',
-				'7' => '7',
-				'8' => '8',
-				'9' => '9',
+				'flexible' => esc_html__( 'Choose number of slides and image size', $this->plugin_name ),
 			),
 		),
 		'hoption' => array(
@@ -1087,7 +1072,32 @@ $phtpb_config_data['phtpb_img_carousel'] = array(
 				'600' => '600px',
 			),
 		),
-		
+		'count' => array(
+			'title' => esc_html__( 'Number of slides to show', $this->plugin_name ),
+			'type' => 'select',
+			'default' => '3',
+			'options' => array(
+				'1' => '1',
+				'2' => '2',
+				'3' => '3',
+				'4' => '4',
+				'5' => '5',
+				'6' => '6',
+				'7' => '7',
+				'8' => '8',
+				'9' => '9',
+			),
+		),
+		'woption1' => array(
+			'title' => esc_html__( 'Slides Width', $this->plugin_name ),
+			'type' => 'text',
+			'default' => '',
+		),
+		'hoption1' => array(
+			'title' => esc_html__( 'Slides Height', $this->plugin_name ),
+			'type' => 'text',
+			'default' => '',
+		),
 		'auto' => array(
 			'title' => esc_html__( 'Auto slideshow', $this->plugin_name ),
 			'type' => 'checkbox',
