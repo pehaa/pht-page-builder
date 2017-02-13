@@ -219,13 +219,16 @@ jQuery( document ).ready( function ($) {
 
 			$( '.phtpb_slicks--c' ).each( function( index, element ) {
 				var autoplay = true === $( element ).data( 'auto' ),
-					fade = true === $( element ).data( 'fade' );
+					fade = true === $( element ).data( 'fade' ),
+					dots = true === $( element ).data( 'dots' ),
+					prevArrow = false === $( element ).data( 'arrows' ) ? false : '<button type="button" data-role="none" class="phtpb_slicks--c__btn pht-gamma phtpb_slicks__btn phtpb_slicks__btn--prev pht-pointer " aria-label="previous"></button>',
+					nextArrow = false === $( element ).data( 'arrows' ) ? false : '<button type="button" data-role="none" class="phtpb_slicks--c__btn pht-gamma phtpb_slicks__btn phtpb_slicks__btn--next pht-pointer" aria-label="next"></button>';
 				
 				$( element ).slick( {
-					prevArrow: '<button type="button" data-role="none" class="phtpb_slicks--c__btn pht-gamma phtpb_slicks__btn phtpb_slicks__btn--prev pht-pointer " aria-label="previous"></button>',
-					nextArrow: '<button type="button" data-role="none" class="phtpb_slicks--c__btn pht-gamma phtpb_slicks__btn phtpb_slicks__btn--next pht-pointer" aria-label="next"></button>',
+					prevArrow: prevArrow,
+					nextArrow: nextArrow,
 					autoplay: autoplay,
-					dots: false,
+					dots: dots,
 					fade : fade,
 					autoplaySpeed : $( element ).data( 'autoplayspeed' ) ? $( element ).data( 'autoplayspeed' ) : 3000,
 					speed : $( element ).data( 'speed' ) ? $( element ).data( 'speed' ) : 500

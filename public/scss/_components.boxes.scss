@@ -33,6 +33,7 @@
 		}
 	}
 }
+
 @include media-query( 'lap-and-up') {
 	.pht-box .phtpb_text > p:last-child {margin-bottom:0}
 }

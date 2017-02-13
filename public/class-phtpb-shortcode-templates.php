@@ -553,6 +553,14 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		if ( 'fade' === $this->select_attribute( 'anim' ) ) {
 			$args_array['data-fade'] = "true";
 		}
+		if ( 'arrows' === $this->select_attribute( 'nav' ) ) {
+			$args_array['data-dots'] = "false";
+		} else {
+			$args_array['data-dots'] = "true";
+			if ( 'dots' === $this->select_attribute( 'nav' ) ) {
+				$args_array['data-arrows'] = "false";
+			}
+		}
 
 		$id = isset( $this->atts['module_id'] ) && '' !== trim( $this->atts['module_id'] ) ? trim( $this->atts['module_id'] ) : NULL;
 
