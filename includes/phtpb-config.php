@@ -129,6 +129,17 @@ $image_small_screens_item = array(
 	'default' => 'colors',
 );
 
+$slick_nav_item = array(
+	'title' => esc_html__( 'Navigation type', $this->plugin_name ),
+	'type' => 'select',
+	'options' => array(
+		'arrows' => esc_html__( 'Arrows', $this->plugin_name ),
+		'dots' => esc_html__( 'Dots', $this->plugin_name ),
+		'both' => esc_html__( 'Both', $this->plugin_name ),
+	),
+	'default' => 'arrows',
+);
+
 $phtpb_config_data['phtpb_section'] = array(
 	'label' => 'phtpb_section',
 	'title' => esc_html__( 'Section', $this->plugin_name ),
@@ -918,16 +929,7 @@ $phtpb_config_data['phtpb_cslider'] = array(
 			),
 			'default' => 'fade',
 		),
-		'nav' => array(
-			'title' => esc_html__( 'Navigation type', $this->plugin_name ),
-			'type' => 'select',
-			'options' => array(
-				'arrows' => esc_html__( 'Arrows', $this->plugin_name ),
-				'dots' => esc_html__( 'Dots', $this->plugin_name ),
-				'both' => esc_html__( 'Both', $this->plugin_name ),
-			),
-			'default' => 'arrows',
-		),
+		'nav' => $slick_nav_item,
 	),
 	'create_with_settings' => true,
 	'add_submodule' => esc_html__( 'Add Slide', $this->plugin_name ),
@@ -1083,9 +1085,6 @@ $phtpb_config_data['phtpb_img_carousel'] = array(
 				'4' => '4',
 				'5' => '5',
 				'6' => '6',
-				'7' => '7',
-				'8' => '8',
-				'9' => '9',
 			),
 		),
 		'woption1' => array(
@@ -1104,15 +1103,19 @@ $phtpb_config_data['phtpb_img_carousel'] = array(
 			'default' => '',
 			'description' => esc_html__( 'Animate slider automatically.', $this->plugin_name )
 		),
-		'nav' => array(
-			'title' => esc_html__( 'Navigation type', $this->plugin_name ),
+		'nav' => $slick_nav_item,
+		'scroll' => array(
+			'title' => esc_html__( 'Number of slides to scroll', $this->plugin_name ),
 			'type' => 'select',
+			'default' => '1',
 			'options' => array(
-				'arrows' => esc_html__( 'Arrows', $this->plugin_name ),
-				'dots' => esc_html__( 'Dots', $this->plugin_name ),
-				'both' => esc_html__( 'Both', $this->plugin_name ),
+				'1' => '1',
+				'2' => '2',
+				'3' => '3',
+				'4' => '4',
+				'5' => '5',
+				'6' => '6',
 			),
-			'default' => 'arrows',
 		),
 		'lightbox' => $lightbox_item,
 		'margin_b' => $margin_b_item,

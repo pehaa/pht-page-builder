@@ -2978,6 +2978,12 @@
 }
 .phtpb_slicks--img .slick-slide {
   padding: 0 12px;
+  text-align: center;
+}
+.phtpb_slicks--img .slick-slide .pht-fig {
+  text-align: left;
+  display: inline-block;
+  vertical-align: bottom;
 }
 
 .phtpb_slicks--img img {

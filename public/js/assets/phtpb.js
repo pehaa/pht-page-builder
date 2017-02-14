@@ -109,7 +109,7 @@ jQuery( document ).ready( function ($) {
 
 			$('.phtpb_slicks--img').each(function() { // the containers for all your galleries
 				$(this).magnificPopup({
-					delegate: '.slick-slide a', // the selector for gallery item
+					delegate: '.slick-slide:not(.slick-cloned) a', // the selector for gallery item
 					type: 'image',
 					gallery: {
 						enabled:true
@@ -202,8 +202,9 @@ jQuery( document ).ready( function ($) {
 					autoplaySpeed : $( element ).data( 'autoplayspeed' ) ? $( element ).data( 'autoplayspeed' ) : 3000,
 					speed : $( element ).data( 'speed' ) ? $( element ).data( 'speed' ) : 300,
 					slidesToShow:  $( element ).data( 'slidestoshow' ),
-					centerMode: true,
-					variableWidth: 'fixed' === $( element ).data( 'variablewidth' ) ? false : true,
+					slidesToScroll:  $( element ).data( 'slidestoscroll' ) ? $( element ).data( 'slidestoscroll' ) : 1,
+					centerMode: 'variable' === $( element ).data( 'variablewidth' ),
+					variableWidth: 'fixed' !== $( element ).data( 'variablewidth' ),
 					centerPadding : 0,
 					lazyLoad: 'ondemand',
 					responsive: [
@@ -211,6 +212,7 @@ jQuery( document ).ready( function ($) {
 							breakpoint: 500,
 							settings: {
 								slidesToShow: 1,
+								slidesToScroll:1,
 								variableWidth: false,
 								centerMode: false,
 								adaptiveHeight: false,

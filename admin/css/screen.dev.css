@@ -720,7 +720,15 @@
 .phtpb_img_type-option.select-icon ~ .phtpb_src-option, .phtpb_img_type-option.select-icon ~ .phtpb_alt-option,
 .phtpb_img_type-option.select-img ~ .phtpb_icon-option,
 .phtpb_link_type-option.select-none ~ .phtpb_link-option, .phtpb_link_type-option.select-lightbox ~ .phtpb_link-option,
-.phtpb_link_type-option.select-none ~ .phtpb_target-option, .phtpb_link_type-option.select-lightbox ~ .phtpb_target-option {
+.phtpb_link_type-option.select-none ~ .phtpb_target-option, .phtpb_link_type-option.select-lightbox ~ .phtpb_target-option,
+.phtpb_main-settings--phtpb_img_carousel .phtpb_woption-option.select-variable ~ .phtpb_woption1-option,
+.phtpb_main-settings--phtpb_img_carousel .phtpb_woption-option.select-variable ~ .phtpb_hoption1-option,
+.phtpb_main-settings--phtpb_img_carousel .phtpb_woption-option.select-3_2 ~ .phtpb_woption1-option,
+.phtpb_main-settings--phtpb_img_carousel .phtpb_woption-option.select-3_2 ~ .phtpb_hoption1-option,
+.phtpb_main-settings--phtpb_img_carousel .phtpb_woption-option.select-4_3 ~ .phtpb_woption1-option,
+.phtpb_main-settings--phtpb_img_carousel .phtpb_woption-option.select-4_3 ~ .phtpb_hoption1-option,
+.phtpb_main-settings--phtpb_img_carousel .phtpb_woption-option.select-variable ~ .phtpb_scroll-option,
+.phtpb_main-settings--phtpb_img_carousel .phtpb_woption-option.select-flexible ~ .phtpb_hoption-option {
   display: none;
 }
 
