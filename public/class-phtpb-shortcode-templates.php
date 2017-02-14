@@ -290,10 +290,10 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		
 		$colorbox_class = $this->module_class;
 		$v_align = $this->select_attribute( 'valign' );
-		$colorbox_class .= $v_align ? ' pht-box--valign-' . $v_align : ' pht-box--valign-top';
+		$colorbox_class .= $v_align ? ' pht-box--valign-' . $v_align . ' ' : ' pht-box--valign-top ';
 		$box_class = '';
 		$animation = $this->select_attribute( 'animation' );
-		$colorbox_class .= 'none' === $animation ? '' : apply_filters( 'phtpb_animation_class', " js-pht-waypoint pht-waypoint pht-$animation ", $animation );
+		$colorbox_class .= 'none' === $animation ? '' : apply_filters( 'phtpb_animation_class', "js-pht-waypoint pht-waypoint pht-$animation", $animation );
 
 		$colorbox_style = $this->bg_color ? 'background:' . esc_attr( $this->bg_color ) .';' : '';
 		$colorbox_style .= $this->color ? 'color:' . esc_attr( $this->color ) .';' : '';
