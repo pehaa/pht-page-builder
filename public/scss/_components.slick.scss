@@ -41,7 +41,7 @@
  	}
 
  	.phtpb_slicks--img-fixed {
- 		overflow:hidden;
+ 		//overflow:hidden;
  		.slick-list {
  			margin-left:-12px;
  			margin-right:-12px;
@@ -158,7 +158,7 @@ $slick-opacity-not-active: 0.25 !default;
 /* Dots */
 
 .slick-dotted.slick-slider {
-    padding-bottom: 24px;
+    padding-bottom: 48px;
 }
 
 .slick-dots {
@@ -175,7 +175,7 @@ $slick-opacity-not-active: 0.25 !default;
         position: relative;
         display: inline-block;
         vertical-align:bottom;
-        height: 24px;
+        height: 48px;
         width: 24px;
         margin: 0 2px;
         padding: 0;
@@ -206,7 +206,7 @@ $slick-opacity-not-active: 0.25 !default;
                 left: 0;
                 //content: $slick-dot-character;
                 font-size: $slick-dot-size;
-                line-height: 24px;
+                line-height: 48px;
                 width:24px;
                 text-align: center;
                 color: inherit;

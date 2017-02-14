@@ -1226,6 +1226,14 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		} else {
 			$args_array['data-variablewidth'] = 'variable';
 		}
+		if ( 'arrows' === $this->select_attribute( 'nav' ) ) {
+			$args_array['data-dots'] = "false";
+		} else {
+			$args_array['data-dots'] = "true";
+			if ( 'dots' === $this->select_attribute( 'nav' ) ) {
+				$args_array['data-arrows'] = "false";
+			}
+		}
 		//if ( 'flexible' === $this->select_attribute( 'woption' ) ) {
 			$args_array['data-slidestoshow'] = $this->select_attribute( 'count' );
 		//}

@@ -2997,9 +2997,6 @@
 }
 
 @media screen and (min-width: 800px) {
-  .phtpb_slicks--img-fixed {
-    overflow: hidden;
-  }
   .phtpb_slicks--img-fixed .slick-list {
     margin-left: -12px;
     margin-right: -12px;
@@ -3082,7 +3079,7 @@
 
 /* Dots */
 .slick-dotted.slick-slider {
-  padding-bottom: 24px;
+  padding-bottom: 48px;
 }
 
 .slick-dots {
@@ -3100,7 +3097,7 @@
   position: relative;
   display: inline-block;
   vertical-align: bottom;
-  height: 24px;
+  height: 48px;
   width: 24px;
   margin: 0 2px;
   padding: 0;
@@ -3129,7 +3126,7 @@
   top: 0;
   left: 0;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 48px;
   width: 24px;
   text-align: center;
   color: inherit;

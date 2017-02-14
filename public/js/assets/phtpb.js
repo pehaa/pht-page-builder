@@ -188,13 +188,16 @@ jQuery( document ).ready( function ($) {
 
 			$( '.phtpb_slicks--img' ).each( function( index, element ) {
 
-				var autoplay = true === $( element ).data( 'auto' );
+				var autoplay = true === $( element ).data( 'auto' ),
+					dots = true === $( element ).data( 'dots' ),
+					prevArrow = false === $( element ).data( 'arrows' ) ? false : '<div data-role="none" class="phtpb_slicks--img__btn phtpb_slicks__btn phtpb_slicks__btn--prev pht-pointer" aria-label="previous"></div>',
+					nextArrow = false === $( element ).data( 'arrows' ) ? false : '<div data-role="none" class="phtpb_slicks--img__btn phtpb_slicks__btn phtpb_slicks__btn--next pht-pointer" aria-label="next"></div>';
 				
 				$( element ).slick( {
 					autoplay: autoplay,
-					dots: false,
-					prevArrow: '<div data-role="none" class="phtpb_slicks--img__btn phtpb_slicks__btn phtpb_slicks__btn--prev pht-pointer" aria-label="previous"></div>',
-					nextArrow: '<div data-role="none" class="phtpb_slicks--img__btn phtpb_slicks__btn phtpb_slicks__btn--next pht-pointer" aria-label="next"></div>',
+					dots: dots,
+					prevArrow: prevArrow,
+					nextArrow: nextArrow,
 					infinite: true,
 					autoplaySpeed : $( element ).data( 'autoplayspeed' ) ? $( element ).data( 'autoplayspeed' ) : 3000,
 					speed : $( element ).data( 'speed' ) ? $( element ).data( 'speed' ) : 300,

@@ -1104,6 +1104,16 @@ $phtpb_config_data['phtpb_img_carousel'] = array(
 			'default' => '',
 			'description' => esc_html__( 'Animate slider automatically.', $this->plugin_name )
 		),
+		'nav' => array(
+			'title' => esc_html__( 'Navigation type', $this->plugin_name ),
+			'type' => 'select',
+			'options' => array(
+				'arrows' => esc_html__( 'Arrows', $this->plugin_name ),
+				'dots' => esc_html__( 'Dots', $this->plugin_name ),
+				'both' => esc_html__( 'Both', $this->plugin_name ),
+			),
+			'default' => 'arrows',
+		),
 		'lightbox' => $lightbox_item,
 		'margin_b' => $margin_b_item,
 	),
