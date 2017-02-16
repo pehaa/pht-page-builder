@@ -159,7 +159,7 @@ class PHTPB_Resize_Image {
 		
 		$img = $this->check_meta( $width, $height );
 		
-		if ( !$img ) {
+		if ( !$img || !file_exists( str_replace( $this->upload['baseurl'], $this->upload['basedir'], $img['url'] ) ) ) {
 
 			$img = $this->do_resizing( $attachment_id, $width, $height );
 
@@ -185,6 +185,7 @@ class PHTPB_Resize_Image {
 			return false;
 		}
 		$this->url = $this->get_attachment_url();
+
 		if ( $this->url ) {
 			$this->meta = wp_get_attachment_metadata( $attachment_id );
 			
@@ -222,7 +223,7 @@ class PHTPB_Resize_Image {
 		
 		if ( $this->url ) {
 			$this->meta = wp_get_attachment_metadata( $attachment_id );
-			
+
 			if ( !$this->skip_resizing( $skip_mime_types ) ) {
 
 				$this->img['1x'] = $this->find_size_array( $attachment_id, $width, $height );
