@@ -156,93 +156,24 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 		$wrapper = $this->select_attribute( 'wrapper' );
 
-		$img_to_be_loaded = $this->img_to_be_loaded( $this->phtpb_id, 'force' === $this->phtpb_type );
-
 		$output = '';
-
-		if ( $img_to_be_loaded ) {
-				
-			$style_bg_size = '';
-			if ( $this->r_w || $this->r_h ) {
-				
-				$bg_size = $this->r_w ? $this->r_w . 'px' : 'auto';
-				$bg_size .= $this->r_h ? ' ' . $this->r_w . 'px' : '';
-				
-				$style_bg_size = "background-size: $bg_size;";
-			}
-			$opacity = isset( $this->atts['opacity'] ) && ''!== trim( $this->atts['opacity'] ) ? 'opacity:' . esc_attr( $this->atts['opacity'] ) . ';' : '';
-			$style = $style_bg_size || $opacity ? "style='$style_bg_size $opacity'" : '';
-			$palm_class = 'force' === $this->phtpb_type ? 'js-force-palm' : 'hidden--palm';
-			$row_class = 'force' === $this->phtpb_type ? ' phtpb_section--bg-force-palm' : ' phtpb_section--bg-hidden-palm';			
-
-			$output .= "<div class='js-pht-bg-ctnr js-pht-bg-ctnr-img pht-bg-ctnr js-pht-bg-ctnr--row pht-bg-ctnr--row $palm_class js-initial-hidden' $style>";
-			$output .= $img_to_be_loaded;
-			$output .= '</div><!-- .pht-bg-ctnr -->';
-
-		}
-
-		if ( !$output && !$this->bg_color && !$this->color ) {
-
-			if ( 'none' === $wrapper ) {
-
-				return sprintf( '<div class="%1$s"><!-- %2$s --></div>',
-					esc_attr( $layout_class ),
-					do_shortcode( $this->content )
-				);
-
-			} else {
-
-				return sprintf( '<div %1$s class="%2$s pht-parent"><div class="%3$s"><!-- %4$s --></div></div>',
-					$this->module_id,
-					'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper,
-					esc_attr( $layout_class ),
-					do_shortcode( $this->content )
-				);
-
-			}
-		}
-		
-		if ( $this->bg_color && !$this->phtpb_id ) {
-
- 			$this->content= preg_replace( '/\[phtpb_gallery([^\]]+)/i', '${0} herited_color="' . esc_attr( $this->bg_color ). '"', $this->content );
- 			
- 		}
 		
 		if ( 'none' === $wrapper ) {
 
-			$output .= sprintf( '<div class="%1$s"><!-- %2$s --></div>',
+			return sprintf( '<div class="%1$s"><!-- %2$s --></div>',
 				esc_attr( $layout_class ),
 				do_shortcode( $this->content )
 			);
 
-			return $this->container( $output, 'pht-parent', '', 'div', array(), true, false  );
-		}
+		} else {
 
-		if ( $this->is_checked( 'clip' ) ) {
-
-			$output .= sprintf( '<div class="%1$s"><!-- %2$s --></div>',
+			return sprintf( '<div %1$s class="%2$s pht-parent"><div class="%3$s"><!-- %4$s --></div></div>',
+				$this->module_id,
+				'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper,
 				esc_attr( $layout_class ),
 				do_shortcode( $this->content )
 			);
-
-			$wrapper_class = 'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper;
-			$attrs = array();
-
-			if ( trim( $this->atts['module_id'] ) ) {
-				$attrs['id'] = trim( $this->atts['module_id'] );
-			}
-
-			return $this->container( $output, 'pht-parent ' . esc_attr( $wrapper_class ), '', 'div', $attrs, true, false  );
-		}
-
-		$output .= sprintf( '<div %1$s class="%2$s pht-parent"><div class="%3$s"><!-- %4$s --></div></div>',
-			$this->module_id,
-			'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper,
-			esc_attr( $layout_class ),
-			do_shortcode( $this->content )
-		);
-
-		return $this->container( $output, 'pht-parent', '', 'div', array(), true, false  );	
+		}		
 	}
 
 	protected function phtpb_row_inner() {

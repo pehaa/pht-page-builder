@@ -358,29 +358,6 @@ $row_settings = array(
 		),
 		'description' => esc_html__( 'You can switch between boxed and stretched layout of each row. The margin values correspond to the left and right margins.', $this->plugin_name ),
 	),
-	'use_bg_color' => $use_bg_color_item,
-	'bg_color' => $bg_color_item,
-	'use_color' => $use_color_item,
-	'color' => $color_item,
-	'background_image' => array(
-		'title' => esc_html__( 'Background Image', $this->plugin_name ),
-		'type' => 'image',
-		'description' => esc_html__( 'Upload the background image.', $this->plugin_name ),
-		'default' => '',
-	),
-	'phtpb_id' => array(
-		'type' => 'image_id',
-		'default' => '',
-	),
-	'opacity' => $image_opacity_item,
-	'r_w' => $image_r_w_item,
-	'r_h' => $image_r_h_item,
-	'clip' => array(
-		'title' => esc_html__( 'Clip', $this->plugin_name ),
-		'description' => esc_html__( 'Clip background to the wrapper.', $this->plugin_name ),
-		'type' => 'checkbox',
-		'default' => ''
-	),
 	'phtpb_type' => $image_small_screens_item
 );
 		
