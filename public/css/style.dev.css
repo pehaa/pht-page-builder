@@ -2077,7 +2077,9 @@
 /**
  * Begin a layout group.
  */
-.pht-layout {
+.pht-layout,
+.pht-layout--large,
+.pht-layout--huge {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -2121,23 +2123,25 @@
 /**
  * Layouts with large gutters.
  */
-.pht-layout--large {
-  margin-left: -32px;
+@media screen and (min-width: 1280px) {
+  .pht-layout--large {
+    margin-left: -32px;
+  }
+  .pht-layout--large > .pht-layout__item {
+    padding-left: 32px;
+  }
 }
-.pht-layout--large > .pht-layout__item {
-  padding-left: 32px;
-}
-
 /**
  * Layouts with huge gutters.
  */
-.pht-layout--huge {
-  margin-left: -48px;
+@media screen and (min-width: 1280px) {
+  .pht-layout--huge {
+    margin-left: -48px;
+  }
+  .pht-layout--huge > .pht-layout__item {
+    padding-left: 48px;
+  }
 }
-.pht-layout--huge > .pht-layout__item {
-  padding-left: 48px;
-}
-
 /**
  * Layouts with no gutters.
  */
@@ -3079,10 +3083,11 @@
 }
 
 /* Slider */
-.slick-loading .slick-list {
-  background: #fff slick-image-url("ajax-loader.gif") center center no-repeat;
-}
-
+/* .slick-list {
+    .slick-loading & {
+        background: #fff slick-image-url("ajax-loader.gif") center center no-repeat;
+    }
+} */
 /* Dots */
 .slick-dotted.slick-slider {
   padding-bottom: 48px;

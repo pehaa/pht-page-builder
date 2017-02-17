@@ -33,7 +33,7 @@ $inuit-enable-layout--small:    true;
 $inuit-enable-layout--large:    true;
 $inuit-enable-layout--huge:    true;
 $inuit-enable-layout--rev:      true;
-@import "bower_components/inuit-layout/objects.layout";
+@import "objects.layout";
 .pht-layout {
   position:relative;
 }
