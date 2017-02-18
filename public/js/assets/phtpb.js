@@ -17,7 +17,8 @@ jQuery( document ).ready( function ($) {
 
 		smallScreenQuery: "only screen and (max-width: 799px)", 
 		palmDeviceScreen: Modernizr.mq("only screen and (max-device-width: 799px)"),
-		cachedScriptGMapsPromise : '',	
+		cachedScriptGMapsPromise : '',
+		clickevent : 'click',	
 
 		init: function () {
 
@@ -36,13 +37,14 @@ jQuery( document ).ready( function ($) {
 
 			var self = this;
 
-			self.smallScreen  = Modernizr.mq(self.smallScreenQuery);
+			self.smallScreen = Modernizr.mq(self.smallScreenQuery);
 			self.setBackground('.js-pht-bg-ctnr');
 		},
 	
 		start : function() {
 
 			var self = this;
+			self.clickevent = self.touch ? 'touchstart' : 'click';
 			self.smallScreen  = Modernizr.mq( self.smallScreenQuery );
 			self.setBackground( '.phtpb_section .js-pht-bg-ctnr, .js-pht-bg-ctnr--row' );
 			self.addSliders();
@@ -341,9 +343,10 @@ jQuery( document ).ready( function ($) {
 
 		doIsotope: function() {
 			
-			var $showcase = $( '.js-phtpb_showcase_ctnr').isotope( {
-				itemSelector: 'article'
-			});
+			var self = this,
+				$showcase = $( '.js-phtpb_showcase_ctnr').isotope( {
+					itemSelector: 'article'
+				});
 			
 			$showcase.isotope( 'bindResize' );
 			$showcase.imagesLoaded( function() {
@@ -363,6 +366,7 @@ jQuery( document ).ready( function ($) {
 			$( document ).on( 'click', '.js-pht-showcase-filter',  function ( event ) {
 
 				event.stopPropagation();
+
 				if ( !$( this ).hasClass( "pht-showcase__filter--active" ) ) {
 					
 					var selector = $(this).attr('data-filter');
@@ -445,7 +449,7 @@ jQuery( document ).ready( function ($) {
 					center: new google.maps.LatLng( $map.data( 'lat' ), $map.data( 'lng' ) ),
 					mapTypeId: google.maps.MapTypeId.ROADMAP,
 					scrollwheel: false,
-					draggable: $map.data('alwaysdrag') && true === $map.data('alwaysdrag') ? true : !Modernizr.hiddenscroll && !self.palmDeviceScreen,
+					draggable: $map.data('alwaysdrag') && true === $map.data('alwaysdrag') ? true : !self.palmDeviceScreen,
 
 				};
 				if ( 'default' !== $map.data( 'styles' ) ) {

@@ -2177,7 +2177,10 @@
 }
 
 @media screen and (max-width: 799px) {
-  .pht-layout {
+  .pht-layout,
+  .pht-layout--small,
+  .pht-layout--large,
+  .pht-layout--huge {
     margin-left: 0;
   }
 
