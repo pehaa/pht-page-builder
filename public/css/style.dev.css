@@ -2603,6 +2603,7 @@
 .pht-fig__inner {
   display: inline-block;
   vertical-align: bottom;
+  max-width: 100%;
   position: relative;
   overflow: hidden;
 }
@@ -3112,7 +3113,7 @@
   display: inline-block;
   vertical-align: bottom;
   height: 48px;
-  width: 24px;
+  width: 12px;
   margin: 0 2px;
   padding: 0;
   cursor: pointer;
