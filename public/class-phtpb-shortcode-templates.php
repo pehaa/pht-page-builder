@@ -341,7 +341,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		<div class="js-showcase js-phtpb_showcase_ctnr pht-white cf <?php echo esc_attr( $gutter_class ); ?>">
 			<?php 
 			foreach( explode( ',', $this->atts['phtpb_ids'] ) as $id ) { ?>
-				<article class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-fadesat <?php echo esc_attr( $article_layout_class ); ?>">
+				<div class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-fadesat <?php echo esc_attr( $article_layout_class ); ?>">
 					<figure class="pht-fig pht-fig--filter">
 						<?php 
 						echo self::get_att_img(  $id, array( $dimensions['width'], $dimensions['height'] ), false, array( 'class' => 'pht-img--fill', 'width' => $dimensions['width'] ), $skip_array );
@@ -357,7 +357,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 							</div>
 						<?php }	?>
 					</figure>
-				</article>
+				</div>
 
 			<?php } ?>
 		</div>
@@ -1170,6 +1170,12 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		
 		$id = isset( $this->atts['module_id'] ) && '' !== trim( $this->atts['module_id'] ) ? trim( $this->atts['module_id'] ) : NULL;
 
+		$this->lazy_load = apply_filters( 'phtpb_img_carousel_lazyload', true, $id );
+
+		if ( $this->lazy_load ) {
+			$args_array['data-lazyload'] = 'ondemand';
+		}
+
 		$args_array = apply_filters( 'phtpb_img_carousel_data_attributes', $args_array, $id );	
 
 		$content = '';
@@ -1198,12 +1204,13 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		}
 		$width_index =  'width';
 		$url_index = 'url';
+		$method_name = $this->lazy_load ? 'get_att_img_lazy' : 'get_att_img';
 		if (  $ratio ) {
-			$display_image = self::get_att_img_lazy( $image_id, array( round( $this->select_attribute( 'hoption' ) * $ratio ),  $this->select_attribute( 'hoption' ) ), false, array( 'height' => $this->select_attribute( 'hoption' ) ) );			
+			$display_image = self::$method_name( $image_id, array( round( $this->select_attribute( 'hoption' ) * $ratio ),  $this->select_attribute( 'hoption' ) ), false, array( 'height' => $this->select_attribute( 'hoption' ) ) );			
 		} else if ( 'flexible' === $this->select_attribute( 'woption' ) ) {
-			$display_image = self::get_att_img_lazy( $image_id, array( $this->select_attribute( 'woption1' ), $this->select_attribute( 'hoption1' ) ) );
+			$display_image = self::$method_name( $image_id, array( $this->select_attribute( 'woption1' ), $this->select_attribute( 'hoption1' ) ) );
 		} else {
-			$display_image = self::get_att_img_lazy( $image_id, array( 0, $this->select_attribute( 'hoption' ) ) );
+			$display_image = self::$method_name( $image_id, array( 0, $this->select_attribute( 'hoption' ) ) );
 		}
 		
 		$width = $this->select_attribute( 'woption1' ) ? $this->select_attribute( 'woption1' ) : $this->select_attribute( 'hoption' ) * $ratio;
@@ -1404,9 +1411,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				foreach ( (array) $showcase_posts as $query_post ) : $post = $query_post; setup_postdata( $post );
 
 					$terms_class = '';
-					$terms = '';
-
-					 
+					$terms = '';					 
 
 					if ( count( $taxonomy_array ) ) {
 						foreach ( $taxonomy_array as $tax ) {

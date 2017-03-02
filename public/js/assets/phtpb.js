@@ -193,7 +193,8 @@ jQuery( document ).ready( function ($) {
 				var autoplay = true === $( element ).data( 'auto' ),
 					dots = true === $( element ).data( 'dots' ),
 					prevArrow = false === $( element ).data( 'arrows' ) ? false : '<div data-role="none" class="phtpb_slicks--img__btn phtpb_slicks__btn phtpb_slicks__btn--prev pht-pointer" aria-label="previous"></div>',
-					nextArrow = false === $( element ).data( 'arrows' ) ? false : '<div data-role="none" class="phtpb_slicks--img__btn phtpb_slicks__btn phtpb_slicks__btn--next pht-pointer" aria-label="next"></div>';
+					nextArrow = false === $( element ).data( 'arrows' ) ? false : '<div data-role="none" class="phtpb_slicks--img__btn phtpb_slicks__btn phtpb_slicks__btn--next pht-pointer" aria-label="next"></div>',
+					lazyLoad = 'ondemand' === $( element ).data( 'lazyload' ) ? 'ondemand' : false;
 				
 				$( element ).slick( {
 					autoplay: autoplay,
@@ -208,7 +209,7 @@ jQuery( document ).ready( function ($) {
 					centerMode: 'variable' === $( element ).data( 'variablewidth' ),
 					variableWidth: 'fixed' !== $( element ).data( 'variablewidth' ),
 					centerPadding : 0,
-					lazyLoad: 'ondemand',
+					lazyLoad: lazyLoad,
 					responsive: [
 						{
 							breakpoint: 500,
