@@ -346,7 +346,7 @@ jQuery( document ).ready( function ($) {
 			
 			var self = this,
 				$showcase = $( '.js-phtpb_showcase_ctnr').isotope( {
-					itemSelector: 'article'
+					itemSelector: 'article, .pht-showcase__item'
 				});
 			
 			$showcase.isotope( 'bindResize' );
