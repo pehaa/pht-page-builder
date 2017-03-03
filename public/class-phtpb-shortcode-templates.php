@@ -613,11 +613,12 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		}
 				
 		$output = '<span class="pht-fig__inner">';
+		
 		$output .= self::get_att_img( $this->phtpb_id, $size, false, $attr );
 
 		if ( isset( $this->atts['link_type'] ) ) {
 			if ( 'url' === $this->atts['link_type'] && $this->link ) {
-				$output .= "<a href='$this->link' class='pht-fig__link--hoverdir pht-fig__link pht-fig__link--main $rounded_class' $this->target></a>";
+				$output .= "<a href='$this->link' class='pht-fig__link pht-fig__link--main' $this->target></a>";
 			} elseif ( 'lightbox' === $this->atts['link_type'] ) {
 				$full_image = wp_get_attachment_image_src( $this->phtpb_id, apply_filters( 'phtpb_lightbox_image', 'full' ) );
 				$lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' );
