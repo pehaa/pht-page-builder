@@ -2493,7 +2493,7 @@
   display: flex;
 }
 .phtpb_tabs .phtpb_tabs__nav li {
-  flex: 1 0;
+  flex: 0 1 25%;
   border-right: 1px solid;
 }
 .phtpb_tabs .phtpb_tabs__nav li:last-child {
@@ -2504,11 +2504,18 @@
   background: #fafafa;
 }
 .phtpb_tabs .phtpb_tabs__nav .ui-state-active {
+  flex: 1 0 50%;
   background: #fff;
 }
 .phtpb_tabs .phtpb_tabs__nav a {
-  padding: 10px 16px 11px;
+  padding: 10px 8px 11px;
   display: block;
+}
+@media screen and (min-width: 800px) {
+  .phtpb_tabs .phtpb_tabs__nav a {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 .phtpb_tabs .phtpb_tab {
@@ -2988,6 +2995,11 @@
   padding: 0 12px;
   text-align: center;
 }
+@media screen and (max-width: 480px) {
+  .phtpb_slicks--img .slick-slide {
+    padding: 0;
+  }
+}
 .phtpb_slicks--img .slick-slide .pht-fig {
   text-align: left;
   display: inline-block;
@@ -3049,6 +3061,9 @@
   bottom: 0;
   color: inherit;
 }
+.phtpb_slicks__btn:before {
+  line-height: 32px;
+}
 
 .phtpb_slicks--img__btn {
   background: white;
@@ -3094,7 +3109,7 @@
 } */
 /* Dots */
 .slick-dotted.slick-slider {
-  padding-bottom: 48px;
+  padding-bottom: 32px;
 }
 
 .slick-dots {
@@ -3112,7 +3127,7 @@
   position: relative;
   display: inline-block;
   vertical-align: bottom;
-  height: 48px;
+  height: 32px;
   width: 12px;
   margin: 0 2px;
   padding: 0;
@@ -3141,7 +3156,7 @@
   top: 0;
   left: 0;
   font-size: 16px;
-  line-height: 48px;
+  line-height: 32px;
   width: 24px;
   text-align: center;
   color: inherit;

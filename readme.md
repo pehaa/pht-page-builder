@@ -23,6 +23,16 @@ Coming soon
 
 ## Changelog ##
 
+### 3.2 ###
+* More Options for Images Carousel
+* More Options for Columns Gutters
+* Modified Portfolio and Posts Grid
+* Added filter for lightbox link icon
+* Fade in when opening lightbox images
+* Fixed default map height
+* Fixed link over Image and no hover overlay on image with external link
+* Fixed resize image if deleted from disk
+
 ### 3.1.1 ###
 * Fixed porfolio module selected value
 * Missing fade transition

@@ -21,7 +21,7 @@
 	display:flex;
 	li {
 		
-		flex: 1 0;
+		flex: 0 1 25%;
 		border-right: 1px solid;
 		
 
@@ -35,13 +35,20 @@
 		background:#fafafa;
 	}
 	.ui-state-active {
+		flex: 1 0 50%;
 		background:#fff;
 	
 	}
 	a {
-		padding:10px 16px 11px;
+		padding:10px 8px 11px;
 		display: block;
+		@include media-query( 'lap-and-up') {
+			padding-left: 16px;
+			padding-right: 16px;
+		}
 	}
+
+
 }
 .phtpb_tabs .phtpb_tab {
 	font-size: 14px;

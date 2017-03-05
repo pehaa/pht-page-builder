@@ -212,7 +212,7 @@ jQuery( document ).ready( function ($) {
 					lazyLoad: lazyLoad,
 					responsive: [
 						{
-							breakpoint: 500,
+							breakpoint: 480,
 							settings: {
 								slidesToShow: 1,
 								slidesToScroll:1,

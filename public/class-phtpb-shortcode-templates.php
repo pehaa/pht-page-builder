@@ -418,7 +418,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			$output .= '<ul class="phtpb_tabs__nav pht-hider cf">';
 
 			foreach ( $tab_titles as $tab ) {
-				$output .= '<li class="phtpb_tabs__nav__item"><a class="pht-actionfont" href="#phtpb_tab-'. sanitize_title( $tab[0] ) .'">' . $tab[0] . '</a></li>';
+				$output .= '<li class="phtpb_tabs__nav__item pht-hider"><a class="pht-actionfont pht-truncate" href="#phtpb_tab-'. sanitize_title( $tab[0] ) .'">' . $tab[0] . '</a></li>';
 			}
 
 			$output .= '</ul>';
@@ -1221,44 +1221,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$output .= $display_image;
 		if ( $this->lightbox ) {
 			$full_image = wp_get_attachment_image_src( $image_id, apply_filters( 'phtpb_lightbox_image', 'full' ) );
-			$output .= "<a href='$full_image[0]' class='pht-fig__link--hoverdir pht-fig__link pht-fig__link--main a-a a-a--no-h'><i class='pht-fig__link__string pht-ic-f1-arrow-expand-alt pht-gamma'></i></a>";
-		}
-		$output .= '</figure>';
-		$output .= '</div>';
-
-		return $output;
-	
-	}
-
-	protected function _phtpb_img_carousel_slide( $image_id, $height, $ratio = 0 ) {
-
-		if ( !$image_id ) {
-			return;
-		}
-
-		if ( !wp_attachment_is_image( $image_id ) ) {
-			return;
-		}
-		
-		if (  $height ) {
-			$display_image = $this->resizer->phtpb_resize_image( $image_id, round( $height * $ratio ), $height );			
-		} else {
-			$display_image = wp_get_attachment_image_src( $image_id, apply_filters( 'phtpb_img_carousel', 'full' ) );
-		}
-		$width_index =  $height ? 'width' : 1;
-		$url_index =  $height ? 'url' : 0;
-		
-		$output = '<div class="">';
-		$output .= '<figure class="pht-fig pht-white">';
-		$output .= sprintf( '<img src="" data-lazy="%1$s" alt="%2$s" %3$s/>',
-			$display_image[ $url_index ],
-			self::image_alt(  $this->phtpb_id ), 
-			'width="' . $display_image[ $width_index ] .'"'
-		);
-		
-		if ( $this->lightbox ) {
-			$full_image = wp_get_attachment_image_src( $image_id, apply_filters( 'phtpb_lightbox_image', 'full' ) );
-			$output .= "<a href='$full_image[0]' class='pht-fig__link--hoverdir pht-fig__link pht-fig__link--main a-a a-a--no-h'><i class='pht-fig__link__string pht-ic-f1-arrow-expand-alt pht-gamma'></i></a>";
+			$output .= '<a href="' . $full_image[0] .'" class="pht-fig__link--hoverdir pht-fig__link pht-fig__link--main a-a a-a--no-h"><i class="pht-fig__link__string pht-ic-f1-arrow-expand-alt pht-gamma"></i></a>';
 		}
 		$output .= '</figure>';
 		$output .= '</div>';
