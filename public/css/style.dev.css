@@ -2752,6 +2752,10 @@
   margin: 0;
 }
 
+.pht-gallery img {
+  transform: translateZ(-1px);
+}
+
 .pht-gallery__group-container, .pht-gallery__item:after, .pht-gallery__caption {
   position: absolute;
   left: 0;
