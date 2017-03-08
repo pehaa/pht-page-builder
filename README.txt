@@ -3,7 +3,7 @@ Contributors: pehaa
 Tags: WordPress, plugin, page builder, wordpress plugin, grid
 Requires at least: 3.8
 Tested up to: 4.7
-Stable tag: 3.0
+Stable tag: 3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,7 +23,11 @@ Coming soon
 
 == Changelog ==
 
-= 3.2 =
+= 3.2.1 =
+* Removed trailing space causing Headers already sent error
+
+
+= 3.2.0 =
 * More Options for Images Carousel
 * More Options for Columns Gutters
 * Modified Portfolio and Posts Grid
