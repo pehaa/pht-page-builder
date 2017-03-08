@@ -619,6 +619,8 @@
   margin-top: 8px;
   height: auto;
   max-width: 200px;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////39/fw9u35gAAAB1JREFUeNpiYEADjGiAYVTBiFIwGjCjCpAAQIABACRcAgHNzYibAAAAAElFTkSuQmCC");
+  background-size: 16px 16px;
 }
 
 .phtpb_main-settings--phtpb_marker .phtpb_upload-preview img {

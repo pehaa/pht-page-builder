@@ -515,7 +515,13 @@ height:36px;
 	border-radius:50%;
 }
 .phtpb_description {margin-top:8px; font-style: italic; font-size:12px}
-.phtpb_upload-preview img { margin-top:8px; height:auto; max-width:200px}
+.phtpb_upload-preview img { 
+	margin-top:8px;
+	height:auto;
+	max-width:200px;
+	background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////39/fw9u35gAAAB1JREFUeNpiYEADjGiAYVTBiFIwGjCjCpAAQIABACRcAgHNzYibAAAAAElFTkSuQmCC');
+	background-size:16px 16px;
+}
 .phtpb_main-settings--phtpb_marker .phtpb_upload-preview img {
 	-webkit-transform: scale(0.5);
 	transform: scale(0.5);
