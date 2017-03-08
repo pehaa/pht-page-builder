@@ -32,6 +32,8 @@ Coming soon
 * Fixed default map height
 * Fixed link over Image and no hover overlay on image with external link
 * Fixed resize image if deleted from disk
+* Added checkered background on image fields
+* Updated Plugin Update Checker
 
 = 3.1.1 =
 * Fixed porfolio module selected value

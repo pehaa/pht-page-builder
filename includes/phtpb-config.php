@@ -1,4 +1,4 @@
- <?php
+<?php
 
 /**
  * Set the configuration data.

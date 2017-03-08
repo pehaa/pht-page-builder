@@ -68,7 +68,8 @@ function run_phtpb() {
 run_phtpb();
 
 require 'plugin-update-checker/plugin-update-checker.php';
-$myUpdateChecker = PucFactory::buildUpdateChecker(
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
     'http://wp-plugins.pehaa.com/pht-page-builder/metadata.json',
-    __FILE__
+    __FILE__,
+    'phtpb'
 );
