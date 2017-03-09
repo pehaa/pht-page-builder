@@ -319,12 +319,6 @@ $row_settings = array(
 		'type' => 'hidden',
 		'default' => false
 	),
-/*	'gutter' => array(
-		'title' => esc_html__( 'Gutters', $this->plugin_name ),
-		'type' => 'checkbox',
-		'default' => 'yes',
-		'description' => esc_html__( 'If checked, columns are separated by vertical whitespaces.', $this->plugin_name ),
-	),*/
 	'gutter' => array(
 		'title' => esc_html__( 'Gutters', $this->plugin_name ),
 		'type' => 'select',
@@ -357,8 +351,7 @@ $row_settings = array(
 			'none-96' => esc_html__( 'Full width with 96px margins', $this->plugin_name ),
 		),
 		'description' => esc_html__( 'You can switch between boxed and stretched layout of each row. The margin values correspond to the left and right margins.', $this->plugin_name ),
-	),
-	'phtpb_type' => $image_small_screens_item
+	)
 );
 		
 
