@@ -218,6 +218,7 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 				view_settings.nested = true;
 			}
 			if ( !_.isUndefined( modal_window ) ) {
+				
 				switch ( modal_window ) {
 					case "all_modules":
 						modal_view = new peHaaThemesPageBuilder.ModalAllModulesView( view_settings );
@@ -230,6 +231,11 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 						if ( !_.isUndefined(phtpb_data.elements[this.model.attributes.module_type].pht_themes_only) && phtpb_data.elements[this.model.attributes.module_type].pht_themes_only ) {
 							return;
 						}
+						
+						if ( view_settings.model.attributes.module_type  === "phtpb_row" && $( this.el.parentElement ).hasClass( 'phtpb_column-content' ) ) {
+							view_settings.model.attributes.module_type  = "phtpb_row_inner";
+						}
+						
 						modal_view = new peHaaThemesPageBuilder.ModalSettingsView( view_settings );		
 					break;
 				}

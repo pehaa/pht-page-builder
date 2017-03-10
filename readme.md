@@ -23,9 +23,11 @@ Coming soon
 
 ## Changelog ##
 
+### 3.3.0 ###
+* Background and text color settings for rows
+
 ### 3.2.1 ###
 * Removed trailing space causing Headers already sent error
-
 
 ### 3.2.0 ###
 * More Options for Images Carousel

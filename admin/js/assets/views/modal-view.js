@@ -32,7 +32,7 @@ var peHaaThemesPageBuilder = peHaaThemesPageBuilder || {};
 				column_class = !_.isUndefined( this.options.nested ) && this.options.nested ? ' phtpb_modal__column-inner' : '';
 				
 			}
-			this.$el.addClass( 'phtpb_modal__' + this.options.modal_window ).addClass( 'phtpb_modal__' + this.options.model.attributes.phtpb_admin_type + column_class ).html( this.template( _.extend(this.model.toJSON(), {modal_window: this.options.modal_window} ) ) );
+			this.$el.addClass( 'phtpb_modal__' + this.options.modal_window ).addClass( 'phtpb_modal__' + this.options.model.attributes.module_type ).addClass( 'phtpb_modal__' + this.options.model.attributes.phtpb_admin_type + column_class ).html( this.template( _.extend(this.model.toJSON(), {modal_window: this.options.modal_window} ) ) );
 
 			if ( !_.isUndefined( this.innerTemplate ) )	{
 				this.container = this.$('.phtpb_modal-container');

@@ -363,6 +363,35 @@ $phtpb_config_data['phtpb_row'] = array(
 	'create_with_settings' => false,
 	'fields' => $row_settings
 );
+$phtpb_config_data['phtpb_row']['fields']['use_bg_color'] = $use_bg_color_item;
+$phtpb_config_data['phtpb_row']['fields']['bg_color'] = $bg_color_item;
+$phtpb_config_data['phtpb_row']['fields']['bg_opacity'] = array(
+	'title' => esc_html__( 'Background Opacity', $this->plugin_name ),
+	'type' => 'select',
+	'options' => array(
+		'1' => '100%',
+		'0.95' => '95%',
+		'0.9' => '90%',
+		'0.85' => '85%',
+		'0.80' => '80%',
+		'0.75' => '75%',
+		'0.7' => '70%',
+		'0.6' => '60%',
+		'0.5' => '50%',
+		'0.4' => '40%',
+		'0.3' => '30%',
+		'0.25' => '25%',
+		'0.2' => '20%',
+		'0.15' => '15%',
+		'0.1' => '10%',
+		'0.05' => '5%',
+	),
+	'default' => 1,
+);
+$phtpb_config_data['phtpb_row']['fields']['use_color'] = $use_color_item;
+$phtpb_config_data['phtpb_row']['fields']['color'] = $color_item;
+
+
 $phtpb_config_data['phtpb_row_inner'] = array(
 	'label' => 'phtpb_row_inner',
 	'title' => esc_html__( 'Row', $this->plugin_name ),

@@ -157,23 +157,44 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$wrapper = $this->select_attribute( 'wrapper' );
 
 		$output = '';
+
+		if ( !$this->bg_color && !$this->color ) {
+			if ( 'none' === $wrapper ) {
+				return sprintf( '<div class="%1$s"><!-- %2$s --></div>',
+					esc_attr( $layout_class ),
+					do_shortcode( $this->content )
+				);
+			} else {
+				return sprintf( '<div %1$s class="%2$s pht-parent"><div class="%3$s"><!-- %4$s --></div></div>',
+					$this->module_id,
+					'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper,
+					esc_attr( $layout_class ),
+					do_shortcode( $this->content )
+				);
+			}
+		}
+	
+		if ( $this->bg_color ) {
+		
+ 			$this->content= preg_replace( '/\[phtpb_gallery([^\]]+)/i', '${0} herited_color="' . esc_attr( $this->bg_color ). '"', $this->content );
+ 			
+ 		}
 		
 		if ( 'none' === $wrapper ) {
-
-			return sprintf( '<div class="%1$s"><!-- %2$s --></div>',
+			$output .= sprintf( '<div class="%1$s"><!-- %2$s --></div>',
 				esc_attr( $layout_class ),
 				do_shortcode( $this->content )
 			);
-
-		} else {
-
-			return sprintf( '<div %1$s class="%2$s pht-parent"><div class="%3$s"><!-- %4$s --></div></div>',
-				$this->module_id,
-				'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper,
-				esc_attr( $layout_class ),
-				do_shortcode( $this->content )
-			);
-		}		
+			return $this->container( $output, 'pht-parent', '', 'div', array(), true, false  );
+		}
+		
+		$output .= sprintf( '<div %1$s class="%2$s pht-parent"><div class="%3$s"><!-- %4$s --></div></div>',
+			$this->module_id,
+			'normal' === $wrapper ? 'pht-wrapper' : 'pht-wrapper-none pht-wrapper-' . $wrapper,
+			esc_attr( $layout_class ),
+			do_shortcode( $this->content )
+		);
+		return $this->container( $output, 'pht-parent', '', 'div', array(), true, false  );	
 	}
 
 	protected function phtpb_row_inner() {
