@@ -559,6 +559,90 @@ $phtpb_config_data['phtpb_gallery'] = array(
 	'create_with_settings' => true
 );
 
+$phtpb_config_data['phtpb_mixed_gallery'] = array(
+	'label' => 'phtpb_mixed_gallery',
+	'title' => esc_html__( 'Mixed Gallery', $this->plugin_name ),
+	'icon' => 'fa fa-ellipsis-h',
+	'phtpb_admin_type' => 'module',
+	'phtpb_admin_mode' => 'parent',
+	'child' => 'phtpb_mixed_gallery_item',
+	'fields' => array(
+		'layout_option' => array(
+			'title' => esc_html__( 'Layout Option', $this->plugin_name ),
+			'type' => 'select',
+			'default' => '2c',
+			'options' => array(
+				'2c' => esc_html__( 'Classic 2 columns', $this->plugin_name ),
+				'3c' => esc_html__( 'Classic 3 columns', $this->plugin_name ),
+				'4c' => esc_html__( 'Classic 4 columns', $this->plugin_name ),
+				'5c' => esc_html__( 'Classic 5 columns', $this->plugin_name ),
+				'6c' => esc_html__( 'Classic 6 columns', $this->plugin_name ),
+				'2' => esc_html__( 'Masonry 2 columns', $this->plugin_name ),
+				'3' => esc_html__( 'Masonry 3 columns', $this->plugin_name ),
+				'4' => esc_html__( 'Masonry 4 columns', $this->plugin_name ),
+				'5' => esc_html__( 'Masonry 5 columns', $this->plugin_name ),
+				'6' => esc_html__( 'Masonry 6 columns', $this->plugin_name ),
+				'1' => esc_html__( 'One column', $this->plugin_name ),
+			),
+		),
+		'gutter' => array(
+			'title' => esc_html__( 'Gutter', $this->plugin_name ),
+			'type' => 'select',
+			'default' => '24',
+			'options' => array(
+				'24' => '24px',
+				'12' => '12px',
+				'6' => '6px',
+				'none' => esc_html__( 'None', $this->plugin_name )
+			),
+		),
+		'margin_b' => $margin_b_item,
+	),
+	'create_with_settings' => true,
+	'add_submodule' => esc_html__( 'Add Image', $this->plugin_name ),
+);
+
+$phtpb_config_data['phtpb_mixed_gallery_item'] = array(
+	'label' =>  'phtpb_mixed_gallery_item',
+	'title' => esc_html__( 'Mixed Gallery Item', $this->plugin_name ),
+	'phtpb_admin_type' => 'module',
+	'fields' => array(
+		'src' => array(
+			'title' => esc_html__( 'Image Source', $this->plugin_name ),
+			'type' => 'image',
+		),
+		'phtpb_id' => array(
+			'type' => 'image_id',
+		),
+		'title' => array(
+			'title' => esc_html__( 'Image Title', $this->plugin_name ),
+			'description' => esc_html__( 'This one will not be displayed directly, it will be added as a title attribute to your image.', $this->plugin_name ),
+			'type' => 'text',
+		),
+		'link_type' => array(
+			'title' => esc_html__( 'Link Type', $this->plugin_name ),
+			'type' => 'select',
+			'default' => 'none',
+			'options' => array(
+				'none' => esc_html__( 'None', $this->plugin_name ),
+				'lightbox' => esc_html__( 'Lightbox', $this->plugin_name ),
+				'lightbox_video' => esc_html__( 'Video (Youtube, Vimeo)', $this->plugin_name ),
+				'url' => esc_html__( 'URL', $this->plugin_name ),
+			),
+			'description' => esc_html__( '', $this->plugin_name )
+		),
+		'link' => array(
+			'title' => esc_html__( 'Link URL', $this->plugin_name ),
+			'type' => 'text',
+			'default' => '',
+			'description' => esc_html__( '(Optional) If you would like your image to be a link, input your destination URL here.', $this->plugin_name )
+		),
+		'target' => $target_item,
+	),
+	'phtpb_admin_mode' => 'advanced_twin',
+	'create_with_settings' => true
+);
+
 $phtpb_config_data['phtpb_img_text'] = array(
 	'label' =>  'phtpb_img_text',
 	'title' => esc_html__( 'Image and Text', $this->plugin_name ),

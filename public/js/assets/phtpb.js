@@ -127,14 +127,18 @@ jQuery( document ).ready( function ($) {
 					midClick: true
 				});
 			});
+			/*$( '.js-pht-magnific_popup-video' ).magnificPopup( {
+				//delegate: '.js-pht-magnific_popup',
 
+				type: 'iframe'
+			});*/
 			$( '.js-pht-lightboxgallery, .phtpb_image, .js-showcase, .pht-gallery' ).each( function() {
 				if ( $( this ).parents( '.js-pht-lightboxgallery' ).length ) {
 					return;
 				}
 				$( this ).magnificPopup( {
 					delegate: '.js-pht-magnific_popup',
-					type: 'image',
+					type: 'iframe',
 					gallery: {
 						enabled:true
 					},
