@@ -4765,6 +4765,10 @@ img.mfp-img {
   opacity: 0;
 }
 
+.mfp-iframe + .mfp-bottom-bar {
+  margin-top: 4px;
+}
+
 /*------------------------------------*\
     HELPERS
 \*------------------------------------*/
