@@ -3,7 +3,7 @@ Contributors: pehaa
 Tags: WordPress, plugin, page builder, wordpress plugin, grid
 Requires at least: 3.8
 Tested up to: 4.7
-Stable tag: 3.1
+Stable tag: 3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,9 @@ Coming soon
 Coming soon
 
 == Changelog ==
+
+= 3.3.1 =
+* Fixed loading google maps script
 
 = 3.3.0 =
 * Background and text color settings for rows

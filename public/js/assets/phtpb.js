@@ -18,7 +18,7 @@ jQuery( document ).ready( function ($) {
 		smallScreenQuery: "only screen and (max-width: 799px)", 
 		palmDeviceScreen: Modernizr.mq("only screen and (max-device-width: 799px)"),
 		cachedScriptGMapsPromise : '',
-		clickevent : 'click',	
+		clickevent : 'click',
 
 		init: function () {
 
@@ -56,19 +56,30 @@ jQuery( document ).ready( function ($) {
 			self.doIsotope();
 
 			$.cachedGetScript = function() {
-
 				if ( !self.cachedScriptGMapsPromise ) {
 					self.cachedScriptGMapsPromise = $.Deferred(function( defer ) {
-						$.getScript( phtpb_data.gmaps_url ).then( defer.resolve, defer.reject );
+						if (  $( "body" ).find( ".phtpb_map-canvas" ).length ) {
+							$.getScript( phtpb_data.gmaps_url )
+								.then( defer.resolve, defer.reject );
+						} else {
+							defer.reject( "reset" );
+						}						
 					}).promise();
+				} else {
+					console.log( self.cachedScriptGMapsPromise );
 				}
 				return self.cachedScriptGMapsPromise;
 			};
 
-			$.cachedGetScript().done(function(){
-				window.phtpb_initialize();
-			});
-						
+			$.cachedGetScript()
+				.done( function() {
+					window.phtpb_initialize();
+				})
+				.fail( function( reject ) {
+					if ( "reset" === reject ) {
+						self.cachedScriptGMapsPromise = '';
+					}
+				});						
 		},
 
 		/************************************************************/
