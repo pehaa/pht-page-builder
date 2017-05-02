@@ -43,5 +43,3 @@ admin/js/min
 
 node_modules
 secret.php
-
-plugin-update-checker
