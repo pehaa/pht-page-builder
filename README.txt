@@ -15,7 +15,7 @@ Coming soon
 
 == Installation ==
 
-1. Upload the [zip-file](http://wptemplates.pehaa.com/wp-plugins/pht-page-builder/pht-page-builder.zip) to your `/wp-content/plugins/` directory
+1. Upload the [zip file](http://wptemplates.pehaa.com/wp-plugins/pht-page-builder/pht-page-builder.zip) to your `/wp-content/plugins/` directory
 
 == Frequently Asked Questions ==
 
