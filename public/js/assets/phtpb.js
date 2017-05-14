@@ -1,5 +1,5 @@
 /**
- *PeHaa THEMES Page Builder
+ * PeHaa THEMES Page Builder
  * -----------
  *
  * author: PeHaa THEMES
@@ -65,8 +65,6 @@ jQuery( document ).ready( function ($) {
 							defer.reject( "reset" );
 						}						
 					}).promise();
-				} else {
-					console.log( self.cachedScriptGMapsPromise );
 				}
 				return self.cachedScriptGMapsPromise;
 			};
