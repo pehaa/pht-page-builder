@@ -344,7 +344,7 @@ jQuery( document ).ready( function ($) {
 							$container.addClass( 'js-phtpb_countdown-activated' );
 						}
 					});
-				}, 1000);
+				}, 1000 );
 			};
 
 			count( 'since' );

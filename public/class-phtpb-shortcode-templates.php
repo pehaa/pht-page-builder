@@ -318,8 +318,6 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 	
 	}
 
-
-
 	protected function phtpb_gallery() {
 
 		$layout_option =  $this->select_attribute( 'layout_option' );
@@ -356,6 +354,8 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			$gutter_class = ' pht-mctnr--gut' . $gutter;
 			$article_layout_class .= ' pht-mctnr--gut' . $gutter .'__item';
 		}
+
+		$lightbox_class = $this->lightbox ? 'pht-fig--withlightbox' : 'pht-fig--nolightbox';
 		
 		ob_start(); ?>
 
@@ -363,9 +363,13 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			<?php 
 			foreach( explode( ',', $this->atts['phtpb_ids'] ) as $id ) { ?>
 				<div class="pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-fadesat <?php echo esc_attr( $article_layout_class ); ?>">
-					<figure class="pht-fig pht-fig--filter">
+					<figure class="pht-fig pht-fig--filter <?php echo esc_attr( $lightbox_class ); ?>">
 						<?php 
 						echo self::get_att_img(  $id, array( $dimensions['width'], $dimensions['height'] ), false, array( 'class' => 'pht-img--fill', 'width' => $dimensions['width'] ), $skip_array );
+						$image_as_post = get_post( $id );
+						if ( trim( $image_as_post->post_excerpt ) ) { 
+							echo '<figcaption class="pht-gallery__caption pht-transition">' . wptexturize( $image_as_post->post_excerpt ) . '</figcaption>';
+						}
 						if ( $this->lightbox ) { ?>
 							<div class="pht-fig__link--ctnr">
 								<?php printf( '<a class="pht-fig__link js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s">', esc_url( wp_get_attachment_url( $id ) )

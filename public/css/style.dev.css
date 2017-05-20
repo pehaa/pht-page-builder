@@ -2680,6 +2680,16 @@
   opacity: 1;
 }
 
+.pht-fig__link:focus {
+  outline: none;
+}
+.pht-fig__link:focus:after {
+  content: none;
+}
+.pht-fig__link:focus div {
+  display: none;
+}
+
 .phtpb_image {
   text-align: center;
 }
@@ -2886,7 +2896,7 @@
     margin-top: 24px;
   }
 }
-.pht-gallery__item:hover .pht-gallery__caption {
+.pht-fig:hover .pht-gallery__caption {
   /* Captions */
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);

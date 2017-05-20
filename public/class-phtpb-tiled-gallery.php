@@ -193,6 +193,7 @@ class PHTPB_Tiled_Gallery {
 					$original_image_url = $original_image[0];
 
 					$figure_class = 'pht-gallery__item pht-gallery__item-' . esc_attr( $size ) . ' ' . $item_count_class;
+					$figure_class .= $fancybox ? ' pht-fig--withlightbox' : ' pht-fig--nolightbox';
 					$output .= "<figure class='pht-fig $figure_class js-pht-waypoint pht-waypoint pht-fadesat'>";
 
 					$output .= PeHaa_Themes_Page_Builder_Shortcode_Template::get_att_img( $image->ID, array( $image->width, $image->height ), false, array( 'width' => intval( $image->width ), 'height' => intval( $image->height ) ), $skip_resize_array );
@@ -207,10 +208,8 @@ class PHTPB_Tiled_Gallery {
 						$output .= '</a>';
 						$link_class = 'pht-fig__link--secondary';
 						$i++;
-					} else {
-						if ( trim( $image->post_excerpt ) )
+					} elseif ( trim( $image->post_excerpt ) ) { 
 						$output .= '<figcaption class="pht-gallery__caption pht-transition">' . wptexturize( $image->post_excerpt ) . '</figcaption>';
-
 					}
 					if ( $fancybox ) { 
 

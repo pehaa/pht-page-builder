@@ -94,6 +94,13 @@
 .pht-fig:hover .pht-fig__link, .pht-fig__link:focus  {
 	opacity:1;
 }
+.pht-fig__link:focus {
+	outline:none;
+	&:after {
+		content:none;
+	}
+	div {display:none}
+}
 .phtpb_image {
 	text-align:center;
 }
