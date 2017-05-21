@@ -136,7 +136,6 @@ jQuery( document ).ready( function ($) {
 					midClick: true
 				});
 			});
-
 			$( '.js-pht-lightboxgallery, .phtpb_image, .js-showcase, .pht-gallery' ).each( function() {
 				if ( $( this ).parents( '.js-pht-lightboxgallery' ).length ) {
 					return;
@@ -152,10 +151,46 @@ jQuery( document ).ready( function ($) {
 						beforeOpen: function() {
 							this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
 							this.st.mainClass = 'mfp-zoom-in';
-						},
+						},						
+						markupParse: function(template, values, item) {
+							values.title = item.el.attr('title');
+						}						
 					},
 					closeOnContentClick: true,
-					midClick: true
+					midClick: true,
+					iframe: {
+						markup: '<div class="mfp-iframe-scaler">'+
+									'<div class="mfp-close"></div>'+
+									'<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+									'<div class="mfp-bottom-bar">'+
+										'<div class="mfp-title"></div>'+
+										'<div class="mfp-counter"></div>'+
+									'</div>'+
+								'</div>',
+						patterns: {
+							youtube: {
+								index: 'youtube.com/',
+								id: 'v=',
+								src: '//www.youtube.com/embed/%id%?autoplay=1' 
+							},
+							youtube1: {
+								index: 'youtu.be/',
+								id: '/', 
+								src: '//www.youtube.com/embed/%id%?autoplay=1' 
+							},
+							vimeo: {
+								index: 'vimeo.com/',
+								id: '/',
+								src: '//player.vimeo.com/video/%id%?autoplay=1'
+							},
+							gmaps: {
+								index: '//maps.google.',
+								src: '%id%&output=embed'
+							}
+						// you may add here more sources
+						},
+						srcAction: 'iframe_src', // Templating object key. First part defines CSS selector, second attribute. "iframe_src" means: find "iframe" and set attribute "src".
+					}
 				});
 			});
 		},
