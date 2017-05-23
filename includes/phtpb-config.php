@@ -607,6 +607,12 @@ $phtpb_config_data['phtpb_mixed_gallery_item'] = array(
 	'title' => esc_html__( 'Mixed Gallery Item', $this->plugin_name ),
 	'phtpb_admin_type' => 'module',
 	'fields' => array(
+		'layout_option' => array(
+			'type' => 'hidden'
+		),
+		'gutter' => array(
+			'type' => 'hidden'
+		),
 		'src' => array(
 			'title' => esc_html__( 'Image Source', $this->plugin_name ),
 			'type' => 'image',
