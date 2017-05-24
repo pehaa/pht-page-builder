@@ -159,8 +159,6 @@ button::-moz-focus-inner {
   top: 0;
   right: 0;
   color: #CCC;
-  font-size: 12px;
-  line-height: 18px;
   white-space: nowrap; }
 
 .mfp-arrow {
@@ -277,6 +275,8 @@ img.mfp-img {
     margin: 0; }
 
 .mfp-bottom-bar {
+  font-size: 12px;
+  line-height: 18px;
   margin-top: -36px;
   position: absolute;
   top: 100%;
