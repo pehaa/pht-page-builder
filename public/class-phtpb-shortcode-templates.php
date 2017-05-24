@@ -364,9 +364,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			$article_layout_class .= ' pht-mctnr--gut' . $gutter .'__item';
 		}
 
-		$skip_array = apply_filters( 'phtpb_dont_resize_in_gallery', array( 'image/gif' ), $layout_option, $this->atts['module_id'] );
-		 
-		
+		$skip_array = apply_filters( 'phtpb_dont_resize_in_gallery', array( 'image/gif' ), $layout_option, $this->atts['module_id'] );		
 
 		$output = '<figure class="pht-fig pht-fig--filter">';
 		$output .= self::get_att_img(   $this->phtpb_id, array( $dimensions['width'], $dimensions['height'] ), false, array( 'class' => 'pht-img--fill', 'width' => $dimensions['width'] ), $skip_array );
@@ -380,7 +378,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 			} elseif ( 'lightbox' === $link_type ) {
 
 				$output .= 	'<div class="pht-fig__link--ctnr">';
-				$output .= sprintf( '<a class="pht-fig__link pht-fig__link--main mfp-image js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" title="%1$s" href="%2$s">',
+				$output .= sprintf( '<a class="pht-fig__link pht-fig__link--main mfp-image js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" data-pht-mfp-title="%1$s" href="%2$s">',
 						esc_attr( $this->atts['title'] ),
 						esc_url( wp_get_attachment_url( $this->phtpb_id ) )
 					); 
@@ -392,7 +390,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 				
 			} elseif ( 'lightbox_video' === $link_type &&  $this->link ) {
 				$output .= 	'<div class="pht-fig__link--ctnr">';
-				$output .= sprintf( '<a class="pht-fig__link pht-fig__link--main mfp-iframe js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" title="%1$s" href="%2$s">',
+				$output .= sprintf( '<a class="pht-fig__link pht-fig__link--main mfp-iframe js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" data-pht-mfp-title="%1$s" href="%2$s">',
 					esc_attr( $this->atts['title'] ),
 					esc_url( $this->link )
 				); 
@@ -464,7 +462,9 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 						}
 						if ( $this->lightbox ) { ?>
 							<div class="pht-fig__link--ctnr">
-								<?php printf( '<a class="pht-fig__link js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s">', esc_url( wp_get_attachment_url( $id ) )
+								<?php printf( '<a class="pht-fig__link js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" href="%1$s" data-pht-mfp-title="%2$s">', 
+									esc_url( wp_get_attachment_url( $id ) ),
+									trim( $image_as_post->post_excerpt ) ? wptexturize( $image_as_post->post_excerpt ) : ''
 								); ?>
 									<div class="pht-fig__titles">
 										<?php $lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' ); ?>
