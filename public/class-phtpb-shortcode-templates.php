@@ -337,7 +337,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$output .= do_shortcode( $this->content );
 		$output .= '</div>';
 
-		return $this->container( $output, 'phtpb_item' );	
+		return $this->container( $output, 'phtpb_item phtpb_mixed_gallery' );	
 
 	}
 
