@@ -153,7 +153,7 @@ jQuery( document ).ready( function ($) {
 							this.st.mainClass = 'mfp-zoom-in';
 						},						
 						markupParse: function(template, values, item) {
-							values.title = item.el.attr('title');
+							values.title = item.el.attr('data-pht-mfp-title') ? item.el.attr('data-pht-mfp-title') : item.el.attr('title');
 						}						
 					},
 					closeOnContentClick: true,

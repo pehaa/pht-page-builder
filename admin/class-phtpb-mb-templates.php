@@ -245,7 +245,7 @@ END;
 			if ( $disabled_modules ) {
 				$unactivated_string = '<div class="phtpb-promo phtpb_border--small">';
 				$unactivated_string .= '<p class="phtpb-promo__text">';
-				$unactivated_string .= sprintf( esc_html__(  'To activate the disabled module Contact Form you have to install and activate the Contact Form 7 Plugin', 'phtpb' ), 'http://wptemplates.pehaa.com/yaga' );
+				$unactivated_string .= sprintf( esc_html__(  'To activate the disabled module(s) you have to install and/or activate the corresponding plugin', 'phtpb' ) );
 				$unactivated_string .= '</p>';
 				$unactivated_string .= '</div>';
 				$return_string =  $return_string . $unactivated_string;
