@@ -62,3 +62,9 @@
 .pht-img--fill {
 	width:100%;
 }
+
+@include media-query( small ){
+	.hidden--small {
+		display:none!important;
+	}
+}

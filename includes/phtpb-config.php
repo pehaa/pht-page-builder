@@ -596,6 +596,12 @@ $phtpb_config_data['phtpb_mixed_gallery'] = array(
 				'none' => esc_html__( 'None', $this->plugin_name )
 			),
 		),
+		'notitles' => array(
+			'title' => esc_html__( 'Hide Titles', $this->plugin_name ),
+			'description' => esc_html__( 'Do not display titles in the gallery view (they will be displayed in lightbox view).', $this->plugin_name ),
+			'type' => 'checkbox',
+			'default' => ''
+		),
 		'margin_b' => $margin_b_item,
 	),
 	'create_with_settings' => true,

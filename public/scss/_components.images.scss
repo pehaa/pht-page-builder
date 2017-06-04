@@ -57,10 +57,14 @@
 	flex-direction: column;
 	justify-content: center;		
 }
-
-.pht-fig__link__string {	
+.pht-fig__link__str,
+.pht-fig__link__string {
 	color:#fff;
-	font-size:24px; 
+	font-size:24px;
+	z-index:1;
+}
+.pht-fig__link__string {	
+
 	text-align: center; 
 	position:absolute; 
 	display:block; 
@@ -71,10 +75,11 @@
 	right:0; 
 	top:0; 
 	bottom:0;
-	z-index:1;
-
+	
 }
-
+.phtpb_mixed_gallery--notitles .pht-fig__link__str__span {
+	display:none;
+}
 .pht-fig a.pht-fig__link--secondary {
 	background:transparent;
 	right:1*8px;

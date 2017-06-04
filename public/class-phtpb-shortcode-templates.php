@@ -337,7 +337,9 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$output .= do_shortcode( $this->content );
 		$output .= '</div>';
 
-		return $this->container( $output, 'phtpb_item phtpb_mixed_gallery' );	
+		$gallery_class = $this->is_checked( 'notitles' ) ? 'phtpb_mixed_gallery--notitles' : '';
+
+		return $this->container( $output, 'phtpb_item phtpb_mixed_gallery ' . $gallery_class );	
 
 	}
 
@@ -370,40 +372,35 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 		$link_type = $this->select_attribute( 'link_type' );
 
 			if ( 'url' === $link_type && $this->link ) {
-				$output .= 	'<div class="pht-fig__link--ctnr">';
-				$output .= "<a href='$this->link' class='pht-fig__link pht-fig__link--main pht-fig__link--hoverdir pht-fig__link--main' $this->target></a>";
-				$output .= '</div>';
-				$output .= '</a>';
+				$output .= "<a href='$this->link' class='pht-fig__link pht-fig__link--main pht-fig__link--hoverdir pht-text-center a-a a-a--no-h' $this->target>";
+				$output .= '<i class="pht-fig__link__str pht-parent pht-ic-f1-link pht-gamma"></i>';
 			} elseif ( 'lightbox' === $link_type ) {
-
-				$output .= 	'<div class="pht-fig__link--ctnr">';
-				$output .= sprintf( '<a class="pht-fig__link pht-fig__link--main mfp-image js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" data-pht-mfp-title="%1$s" href="%2$s">',
+				$output .= sprintf( '<a class="pht-fig__link pht-fig__link--main mfp-image js-pht-magnific_popup pht-fig__link--hoverdir pht-text-center a-a a-a--no-h" data-pht-mfp-title="%1$s" href="%2$s">',
 						esc_attr( $this->atts['title'] ),
 						esc_url( wp_get_attachment_url( $this->phtpb_id ) )
 					); 
 				$lightbox_icon_class = apply_filters( 'phtpb_lightbox_icon_class', 'pht-ic-f1-arrow-expand-alt' ); 
-				$output .= '<i class="pht-fig__link__string ' . esc_attr( $lightbox_icon_class ) . ' pht-gamma"></i>';
-				$output .= '</a>';
-				$output .= '</div>';
-
-				
+				$output .= '<i class="pht-fig__link__str pht-parent ' . esc_attr( $lightbox_icon_class ) . ' pht-gamma"></i>';			
 			} elseif ( 'lightbox_video' === $link_type &&  $this->link ) {
-				$output .= 	'<div class="pht-fig__link--ctnr">';
 				$output .= sprintf( '<a class="pht-fig__link pht-fig__link--main mfp-iframe js-pht-magnific_popup pht-fig__link--hoverdir pht-fig__link--main pht-text-center a-a a-a--no-h" data-pht-mfp-title="%1$s" href="%2$s">',
 					esc_attr( $this->atts['title'] ),
 					esc_url( $this->link )
 				); 
 				$lightbox_video_icon_class = apply_filters( 'phtpb_lightbox_video_icon_class', 'pht-ic-f1-triangle-right-alt' ); 
-				$output .= '<i class="pht-fig__link__string ' . esc_attr( $lightbox_video_icon_class ) . ' pht-gamma"></i>';
-				$output .= '</a>';
-				$output .= '</div>';
+				$output .= '<i class="pht-fig__link__str pht-parent ' . esc_attr( $lightbox_video_icon_class ) . ' pht-gamma"></i>';
 
 			}
+			$title_class =  apply_filters( 'phtpb_mixed_gallery_title_class', '' );
+			$output .= sprintf( '<span class="pht-fig__link__str pht-fig__link__str__span pht-parent pht-milli hidden--small%s">%s</span>',
+					esc_attr( esc_attr( $title_class ) ),
+					esc_html( $this->atts['title'] ) 
+				);
+			$output .= '</a>';
 		
 		$output .= '</figure>';
 
 
-		return $this->container( $output, 'pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-fadesat ' . esc_attr( $article_layout_class ) );	
+		return $this->container( $output, 'pht-showcase__item pht-parent pht-hider js-pht-waypoint pht-waypoint pht-fadesat ' . esc_attr( $article_layout_class ), '', 'div', array(), true, false );
 
 	}
 
