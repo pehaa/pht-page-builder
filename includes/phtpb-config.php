@@ -678,7 +678,7 @@ $phtpb_config_data['phtpb_img_text'] = array(
 			'title' => esc_html__( 'Image Height', $this->plugin_name ),
 			'description' => esc_html__( 'The Image Width and Image Height values will be used to resize the image if necessary. Set 0 if you do not want to resize in this dimension.', $this->plugin_name ),
 			'type' => 'text',
-			'default' => esc_html__( '96', $this->plugin_name ),
+			'default' => '96',
 		),
 		'd_w' => array(
 			'type' => 'hidden',
@@ -1859,7 +1859,7 @@ $phtpb_config_data['phtpb_wp_calendar'] = array(
 				'title' => esc_html__( 'Title', $this->plugin_name ),
 				'type' => 'text',
 				'default' => '',
-				'description' => esc_html__( 'What text use as a widget title. Leave blank to use default widget title.', $this->plugin_name )
+				'description' => esc_html__( 'Widget title. Leave blank to use default widget title.', $this->plugin_name )
 			),
 			'margin_b' => $margin_b_item,
 		),
@@ -1879,7 +1879,7 @@ $phtpb_config_data['phtpb_wp_pages'] = array(
 			'title' => esc_html__( 'Title', $this->plugin_name ),
 			'type' => 'text',
 			'default' => '',
-			'description' => esc_html__( 'What text use as a widget title. Leave blank to use default widget title.', $this->plugin_name )
+			'description' => esc_html__( 'Widget title. Leave blank to use default widget title.', $this->plugin_name )
 		),
 		'sortby' => array(
 			'title' => esc_html__( 'Sort by', $this->plugin_name ),
@@ -1915,7 +1915,7 @@ $phtpb_config_data['phtpb_wp_search'] = array(
 			'title' => esc_html__( 'Title', $this->plugin_name ),
 			'type' => 'text',
 			'default' => '',
-			'description' => esc_html__( 'What text use as a widget title. Leave blank to use default widget title.', $this->plugin_name )
+			'description' => esc_html__( 'Widget title. Leave blank to use default widget title.', $this->plugin_name )
 		),
 		'margin_b' => $margin_b_item,
 	),
@@ -1934,7 +1934,7 @@ $phtpb_config_data['phtpb_wp_meta'] = array(
 			'title' => esc_html__( 'Title', $this->plugin_name ),
 			'type' => 'text',
 			'default' => '',
-			'description' => esc_html__( 'What text use as a widget title. Leave blank to use default widget title.', $this->plugin_name )
+			'description' => esc_html__( 'Widget title. Leave blank to use default widget title.', $this->plugin_name )
 		),
 		'margin_b' => $margin_b_item,
 	),
@@ -1953,7 +1953,7 @@ $phtpb_config_data['phtpb_wp_recent_comments'] = array(
 			'title' => esc_html__( 'Title', $this->plugin_name ),
 			'type' => 'text',
 			'default' => '',
-			'description' => esc_html__( 'What text use as a widget title. Leave blank to use default widget title.', $this->plugin_name )
+			'description' => esc_html__( 'Widget title. Leave blank to use default widget title.', $this->plugin_name )
 		),
 		'number' => array(
 			'title' => esc_html__( 'Number of comments to show', $this->plugin_name ),
@@ -1977,7 +1977,7 @@ $phtpb_config_data['phtpb_wp_recent_posts'] = array(
 			'title' => esc_html__( 'Title', $this->plugin_name ),
 			'type' => 'text',
 			'default' => '',
-			'description' => esc_html__( 'What text use as a widget title. Leave blank to use default widget title.', $this->plugin_name )
+			'description' => esc_html__( 'Widget title. Leave blank to use default widget title.', $this->plugin_name )
 		),
 		'number' => array(
 			'title' => esc_html__( 'Number of posts to show', $this->plugin_name ),
@@ -2014,7 +2014,7 @@ $phtpb_config_data['phtpb_wp_tagcloud'] = array(
 			'title' => esc_html__( 'Title', $this->plugin_name ),
 			'type' => 'text',
 			'default' => '',
-			'description' => esc_html__( 'What text use as a widget title. Leave blank to use default widget title.', $this->plugin_name )
+			'description' => esc_html__( 'Widget title. Leave blank to use default widget title.', $this->plugin_name )
 		),
 		'taxonomy' => array(
 			'title' => esc_html__( 'Taxonomy', $this->plugin_name ),
@@ -2046,7 +2046,7 @@ $phtpb_config_data['phtpb_wp_custom_menu'] = array(
 			'title' => esc_html__( 'Title', $this->plugin_name ),
 			'type' => 'text',
 			'default' => '',
-			'description' => esc_html__( 'What text use as a widget title. Leave blank to use default widget title.', $this->plugin_name )
+			'description' => esc_html__( 'Widget title. Leave blank to use default widget title.', $this->plugin_name )
 		),
 		'nav_menu' => array(
 			'title' => esc_html__( 'Select menu', $this->plugin_name ),
@@ -2070,7 +2070,7 @@ $phtpb_config_data['phtpb_wp_archives'] = array(
 			'title' => esc_html__( 'Title', $this->plugin_name ),
 			'type' => 'text',
 			'default' => '',
-			'description' => esc_html__( 'What text use as a widget title. Leave blank to use default widget title.', $this->plugin_name )
+			'description' => esc_html__( 'Widget title. Leave blank to use default widget title.', $this->plugin_name )
 		),
 		'dropdown' => array(
 			'title' => esc_html__( 'Display as dropdown', $this->plugin_name ),
@@ -2097,7 +2097,7 @@ $phtpb_config_data['phtpb_wp_categories'] = array(
 			'title' => esc_html__( 'Title', $this->plugin_name ),
 			'type' => 'text',
 			'default' => '',
-			'description' => esc_html__( 'What text use as a widget title. Leave blank to use default widget title.', $this->plugin_name )
+			'description' => esc_html__( 'Widget title. Leave blank to use default widget title.', $this->plugin_name )
 		),
 		'dropdown' => array(
 			'title' => esc_html__( 'Display as dropdown', $this->plugin_name ),
