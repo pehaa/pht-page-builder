@@ -18,6 +18,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.pht-ic-f1-vk:before {
+  content: "\e903";
+}
+
+.pht-ic-f1-vk-alt2:before {
+  content: "\e904";
+}
+
+.pht-ic-f1-vk-alt:before {
+  content: "\e905";
+}
+
 .pht-ic-f1-behance-alt2:before {
   content: "\e900";
 }
