@@ -391,7 +391,7 @@ class PeHaa_Themes_Page_Builder_Shortcode_Template {
 
 			}
 			$title_class =  apply_filters( 'phtpb_mixed_gallery_title_class', '' );
-			$output .= sprintf( '<span class="pht-fig__link__str pht-fig__link__str__span pht-parent pht-milli hidden--small%s">%s</span>',
+			$output .= sprintf( '<span class="pht-fig__link__str pht-fig__link__str--text pht-parent pht-milli hidden--small%s">%s</span>',
 					esc_attr( esc_attr( $title_class ) ),
 					esc_html( $this->atts['title'] ) 
 				);
