@@ -23,6 +23,10 @@ Coming soon
 
 == Changelog ==
 
+= 3.3.2 =
+* Added vk icon
+* Added Mixed Gallery Module
+
 = 3.3.1 =
 * Fixed loading google maps script
 
