@@ -2648,7 +2648,6 @@
 .pht-fig__link__str,
 .pht-fig__link__string {
   color: #fff;
-  font-size: 24px;
   z-index: 1;
 }
 
@@ -2665,7 +2664,7 @@
   bottom: 0;
 }
 
-.phtpb_mixed_gallery--notitles .pht-fig__link__str__span {
+.phtpb_mixed_gallery--notitles .pht-fig__link__str--text {
   display: none;
 }
 
