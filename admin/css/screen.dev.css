@@ -445,7 +445,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.75);
-  z-index: 99998;
+  z-index: 9998;
 }
 
 .phtpb_modal_settings_container {
@@ -456,7 +456,7 @@
   width: 960px;
   margin: 0 0 0 -480px;
   background: #fff;
-  z-index: 99999;
+  z-index: 9999;
 }
 
 .phtpb_cancel-modal-action {
