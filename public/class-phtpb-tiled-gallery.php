@@ -199,7 +199,7 @@ class PHTPB_Tiled_Gallery {
 					$output .= PeHaa_Themes_Page_Builder_Shortcode_Template::get_att_img( $image->ID, array( $image->width, $image->height ), false, array( 'width' => intval( $image->width ), 'height' => intval( $image->height ) ), $skip_resize_array );
 					$link_class = $link_count_class . ' pht-fig__link--main pht-fig__link--hoverdir';
 					if ( $linked_to_posts ) {
-						$output .=  sprintf( '<a href="%$1s" class="pht-fig__link pht-fig__link--main pht-fig__link--main %$2s" data-pht-mfp-title="%$3s">',
+						$output .=  sprintf( '<a href="%1$s" class="pht-fig__link pht-fig__link--main pht-fig__link--main %2$s" data-pht-mfp-title="%3$s">',
 							esc_url( get_permalink( $post_ids[ $i ] ) ),
 							esc_attr( $link_class ),
 							trim( $image->post_excerpt ) ?  wptexturize( $image->post_excerpt ) : ''

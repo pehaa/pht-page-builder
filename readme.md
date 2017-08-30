@@ -2,7 +2,7 @@
 **Contributors:** pehaa  
 **Tags:** WordPress, plugin, page builder, wordpress plugin, grid  
 **Requires at least:** 3.8  
-**Tested up to:** 4.7  
+**Tested up to:** 4.8  
 **Stable tag:** 3.3  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -22,6 +22,12 @@ Coming soon
 Coming soon
 
 ## Changelog ##
+
+### 3.3.4 ###
+Fixed bug in Portfolio Gallery
+
+### 3.3.3 ###
+Fixed editor bug in WordPress 4.8
 
 ### 3.3.2 ###
 * Added vk icon
