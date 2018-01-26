@@ -77,7 +77,7 @@ class PeHaa_Themes_Page_Builder {
 		}
 
 		$this->plugin_name = 'phtpb';
-		$this->version = '3.3.4';
+		$this->version = '3.3.5';
 
 		$this->load_dependencies();
 		$this->set_locale();	

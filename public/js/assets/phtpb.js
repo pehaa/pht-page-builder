@@ -123,7 +123,8 @@ jQuery( document ).ready( function ($) {
 					delegate: '.slick-slide:not(.slick-cloned) a', // the selector for gallery item
 					type: 'image',
 					gallery: {
-						enabled:true
+						enabled:true,
+						tCounter: phtpb_data.mp_tCounter
 					},
 					removalDelay: 500, //delay removal by X to allow out-animation
 					callbacks: {
@@ -144,7 +145,8 @@ jQuery( document ).ready( function ($) {
 					delegate: '.js-pht-magnific_popup',
 					type: 'image',
 					gallery: {
-						enabled:true
+						enabled:true,
+						tCounter: phtpb_data.mp_tCounter
 					},
 					removalDelay: 500, //delay removal by X to allow out-animation
 					callbacks: {
